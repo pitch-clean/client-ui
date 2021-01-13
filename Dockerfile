@@ -1,0 +1,27 @@
+FROM node:current-alpine3.12
+ENV NPM_CONFIG_LOGLEVEL warn
+ARG app_env
+ENV APP_ENV $app_env
+
+# create frontend app dir
+RUN mkdir -p /frontend
+WORKDIR /frontend
+
+# install deps
+COPY package*.json ./
+RUN npm ci
+
+# Bundle app source
+COPY ./public ./public
+
+CMD if [ ${APP_ENV} = production ]; \
+    then \
+    npm ci -g http-server && \
+    npm run build && \
+    cd build && \
+    hs -p 3000; \
+    else \
+    npm run start; \
+    fi
+
+EXPOSE 3000
