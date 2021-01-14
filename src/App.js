@@ -1,4 +1,3 @@
-// react
 // styling
 import './App.css';
 
