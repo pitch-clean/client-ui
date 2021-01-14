@@ -1,5 +1,7 @@
 FROM node:current-alpine3.12
 ENV NPM_CONFIG_LOGLEVEL warn
+ENV CHOKIDAR_USEPOLLING=true
+ENV SKIP_PREFLIGHT_CHECK=true
 ARG app_env
 ENV APP_ENV $app_env
 
