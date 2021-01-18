@@ -1,8 +1,10 @@
 // react
 import React, {useRef, useEffect} from 'react';
 import {Link} from 'react-router-dom';
+// components
+import ProfileLoginRegister from './ProfileLoginRegister';
 // utils
-import { fixedWidth, fixedHeight } from '../utils/styles';
+import { fixedWidth, fixedHeight } from '../utils/styleFxns';
 
 // main
 const MainNavBar = () => {
@@ -25,9 +27,13 @@ const MainNavBar = () => {
     const homeLinkStyle = {
         position: `absolute`,
         left: 0,
-        ...fixedWidth(40, 'px'),
+        // ...fixedWidth(40, 'px'),
+        padding: `10px`,
         ...fixedHeight(100, '%'),
         backgroundColor: `green`,
+        color: `white`,
+        textDecoration: 'none',
+        font: `helvetica`,
     };
 
     // effects
@@ -36,8 +42,8 @@ const MainNavBar = () => {
     }, [ref1])
     return (
         <div style={style} >
-            <Link to={{pathname: "/"}} style={homeLinkStyle} ref={ref1} ></Link>
-            Envest
+            <Link to={{pathname: "/"}} style={homeLinkStyle} ref={ref1} >Envest</Link>
+            <ProfileLoginRegister />
         </div>
     )
 };

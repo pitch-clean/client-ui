@@ -1,5 +1,8 @@
 * {
   position: relative;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 300;
+  box-sizing: border-box;
 }
 .App {
   text-align: center;
@@ -14,7 +17,18 @@
   max-height: 100%;
   min-height: 100%;
 }
-
+.flexcol {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+.flexrow {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
 .level-0 {
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.411);
 }
@@ -35,4 +49,8 @@
 }
 .level-6 {
   box-shadow: 0px 0px 30px 18px rgba(0, 0, 0, 0.411);
+}
+
+.ctnr {
+  border-radius: 5px;
 }
