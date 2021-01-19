@@ -5,10 +5,14 @@ import React from 'react';
 const NotFound = () => {
   // style
   /**@type {React.CSSProperties} */
-  const style = {};
+  const style = {
+    fontWeight: `900`,
+    color: `white`,
+    flex: `start`,
+  };
 
   return (
-    <div style={style} >NOT FOUND</div>
+    <div style={style} className="w100 h100" >NOT FOUND</div>
   )
 };
 

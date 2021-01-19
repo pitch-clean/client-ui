@@ -1,7 +1,9 @@
 // react
 import React from 'react';
 // constants
-const style = {};
+const style = {
+    flex: `1`,
+};
 
 // main
 const Home = () => {

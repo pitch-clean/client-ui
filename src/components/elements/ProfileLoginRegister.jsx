@@ -12,18 +12,12 @@ const ProfileLoginRegister = () => {
     // style
     /**@type {React.CSSProperties} */
     const style = {
-        position: `absolute`,
-        right: 0,
-        margin: `0 20px`,
-        display: `flex`,
-        flexFlow: `row`,
-        justifyContent: `center`,
-        alignItems: `center`,
         border: `1px solid grey`,
+        margin: `0 50px`,
         color: `black`,
     };
     return (
-        <div className="h100 ctnr" style={style} >
+        <div className="h100 ctnr flexrow" style={style} >
             {isAuthenticated ? <ProfileDropDown /> : <LoginRegister />}
         </div>
     )

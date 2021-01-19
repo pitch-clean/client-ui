@@ -33,6 +33,7 @@ const LoginForm = () => {
   const style = {
     ...fixedWidth(30, '%'),
     justifyContent: `start`,
+    flex: `1`,
   };
   /**@type {React.CSSProperties} */
   const ctnrStyle = {
@@ -88,7 +89,7 @@ const LoginForm = () => {
     
   }, [submitStatus]);
   return (
-    <div style={style} className="flexcol h100" >
+    <div style={style} className="flexcol" >
       <div style={ctnrStyle} className="flexcol ctnr w100" >
         <div style={titleStyle} >
           Sign in to Envest

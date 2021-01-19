@@ -68,6 +68,7 @@ const RegisterForm = () => {
     ...fixedWidth(60, '%'),
     justifyContent: `start`,
     boxShadow: `0px 0px 20px 8px rgba(0, 0, 0, 0.200)`,
+    flex: `1`,
   };
   /**@type {React.CSSProperties} */
   const ctnrStyle = {
@@ -101,7 +102,7 @@ const RegisterForm = () => {
   return (
     <div
       style={style}
-      className="flexcol h100 ctnr"
+      className="flexcol ctnr"
       onKeyDown={e => {
         if (e.key === 'Enter') {
           e.preventDefault();

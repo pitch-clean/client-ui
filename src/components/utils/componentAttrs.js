@@ -1,6 +1,4 @@
-export const elementSize = (e) => {
-    return {
-        width: e.currentTarget.offsetWidth,
-        height: e.currentTarget.offsetHeight,
-    }
+export const componentSize = (ref) => {
+    const currentComponentInfoObj = ref.current.getBoundingClientRect()
+    return currentComponentInfoObj;
 }

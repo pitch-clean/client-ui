@@ -3,8 +3,9 @@ import React, {useRef, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 // components
 import ProfileLoginRegister from './ProfileLoginRegister';
+import InfoGroup from './InfoGroup';
 // utils
-import { fixedWidth, fixedHeight } from '../utils/styleFxns';
+import { fixedHeight } from '../utils/styleFxns';
 
 // main
 const MainNavBar = () => {
@@ -13,27 +14,21 @@ const MainNavBar = () => {
     // style
     /**@type {React.CSSProperties} */
     const style = {
-        position: `relative`,
-        ...fixedWidth(100, '%'),
         ...fixedHeight(40, 'px'),
         backgroundColor: `black`,
-        display: `flex`,
-        flexFlow: `row`,
-        justifyContent: `center`,
-        alignItems: `center`,
+        justifyContent: `space-between`,
+        padding: `0 5px`,
         color: `white`,
     };
     /**@type {React.CSSProperties} */
     const homeLinkStyle = {
-        position: `absolute`,
-        left: 0,
-        // ...fixedWidth(40, 'px'),
-        padding: `10px`,
         ...fixedHeight(100, '%'),
+        padding: `10px`,
+        margin: `0 30px`,
         backgroundColor: `green`,
         color: `white`,
-        textDecoration: 'none',
         font: `helvetica`,
+        textDecoration: 'none',
     };
 
     // effects
@@ -41,8 +36,9 @@ const MainNavBar = () => {
         console.log(ref1.current.getBoundingClientRect())
     }, [ref1])
     return (
-        <div style={style} >
-            <Link to={{pathname: "/"}} style={homeLinkStyle} ref={ref1} >Envest</Link>
+        <div style={style} className="w100 flexrow" >
+            <Link to={{pathname: "/"}} style={homeLinkStyle} ref={ref1} className="ctnr" >Envest</Link>
+            <InfoGroup />
             <ProfileLoginRegister />
         </div>
     )
