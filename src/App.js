@@ -1,8 +1,10 @@
 // react
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 // components
 import Home from './components/pages/home/Home';
 import MainNavBar from './components/elements/MainNavBar';
+import NotFound from './components/pages/home/NotFound';
+import LoginForm from './components/pages/home/LoginForm';
 // utils
 import {onKeyDownBlurAll} from './utils/keybinds';
 // styling
@@ -14,15 +16,16 @@ const App = () => {
   // style
   /**@type {React.CSSProperties} */
   const style = {
-    display: `flex`,
-    flexFlow: `column`,
+    justifyContent: `space-between`,
   };
 
   return (
-    <div className="App h100 w100" style={style} >
+    <div className="App h100 w100 flexcol" style={style} >
       <MainNavBar />
       <Switch>
+        <Route exact path="/login" render={p => <LoginForm props={p} />} />
         <Route exact path="/" render={p => <Home props={p} />} />
+        <Route path="/" render={p => <NotFound props={p} />} />
       </Switch>
     </div>
   );
