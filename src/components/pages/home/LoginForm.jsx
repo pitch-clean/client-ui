@@ -1,14 +1,11 @@
 // react
-import React, {useState} from 'react';
-import {fixedWidth, fixedHeight} from '../../utils/styleFxns';
+import React, {useState, useEffect} from 'react';
 // utils
+import {fixedWidth, fixedHeight} from '../../utils/styleFxns';
 import {login} from '../../../utils/requests';
+import {updateInputField} from '../../utils/formFxns';
 // event handlers
-const updateInputField = (e, stateUpdateFxn) => {
-  e.preventDefault();
-  stateUpdateFxn(e.currentTarget.value);
-};
-const submitLogin = async (username, password) => {
+const submitLogin = async (username, password, submitStatus) => {
   console.log('submitting', username)
   const loginUrl = 'http://localhost:8000/login';
   const body = {username, password};
@@ -28,8 +25,9 @@ const keyDownHandler = (e, username, password) => {
 // main
 const LoginForm = () => {
   // state
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [submitStatus, setSubmitStatus] = useState('');
   // style
   /**@type {React.CSSProperties} */
   const style = {
@@ -38,10 +36,8 @@ const LoginForm = () => {
   };
   /**@type {React.CSSProperties} */
   const ctnrStyle = {
-    marginTop: `10%`,
-    border: `1px solid grey`,
-    color: `whitesmoke`,
     boxShadow: `0px 0px 20px 8px rgba(0, 0, 0, 0.200)`,
+    marginTop: `10%`,
     flex: `unset`,
   };
   /**@type {React.CSSProperties} */
@@ -76,14 +72,28 @@ const LoginForm = () => {
     borderTopLeftRadius: `0`,
     cursor: `pointer`,
   };
-
+  // effects
+  useEffect(() => {
+    switch (submitStatus) {
+      // TODO: logic to display a notification thru a notifications system
+      case 'submitted':
+        break;
+      case 'unsuccessful':
+        break;
+      case 'successful':
+        break;
+      default:
+        break;
+    }
+    
+  }, [submitStatus]);
   return (
     <div style={style} className="flexcol h100" >
       <div style={ctnrStyle} className="flexcol ctnr w100" >
         <div style={titleStyle} >
           Sign in to Envest
         </div>
-        <div className="InputCtnr flexcol ctnr w100" style={inputCtnrStyle} >
+        <div className="InputCtnr flexcol w100" style={inputCtnrStyle} >
           <div className="w100 flexcol" style={inputTitleStyle} >
             <div>Username</div>
             <input
@@ -110,7 +120,7 @@ const LoginForm = () => {
             />
           </div>
         </div>
-        <div className="w100 ctnr flexcol noselect" style={submitStyle} onClick={() => submitLogin(username, password)} >
+        <div className="w100 flexcol noselect" style={submitStyle} onClick={() => submitLogin(username, password, submitStatus)} >
           Submit
         </div>
       </div>

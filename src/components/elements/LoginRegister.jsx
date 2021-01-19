@@ -27,22 +27,9 @@ const LoginRegister = () => {
   }
 
   return (
-    <div className="ctnr h100 flexrow" style={style} >
-      {
-        true ? (
-          <>
-            <Link to={`/login`} className="ctnr flexrow" style={linkStyle} >Login</Link>
-            <Link to={`/register`} className="ctnr flexrow" style={linkStyle} >Register</Link>
-            {/* <NavBarItem title="Login" link="/login" /> */}
-          </>
-        ) :
-        (
-          <>
-            <div style={subStyle} >Login</div>
-            <div style={subStyle} >Register</div>
-          </>
-        )
-      }
+    <div className="h100 flexrow" style={style} >
+      <Link to={`/login`} className="ctnr flexrow" style={linkStyle} >Login</Link>
+      <Link to={`/register`} className="ctnr flexrow" style={linkStyle} >Register</Link>
     </div>
   )
 };

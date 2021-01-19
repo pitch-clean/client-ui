@@ -27,11 +27,16 @@ export const Post = async (url, body, additionalHeaders={}, isReturnJson=false) 
   }
 }
 
+export const register = async (url, body) => {
+  const res = await Post(url, body)
+  console.log('the register res', res);
+};
+
 export const login = async (url, body) => {
   const headers = {
     // Authorization: `JWT ${JWT}`,
     // 'X-CSRFToken': `${getCookieByKey("csrftoken")}`,
   };
   const res = await Post(url, body)
-  console.log('the res', res);
+  console.log('the login res', res);
 };
