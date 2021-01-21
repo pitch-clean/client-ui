@@ -1,9 +1,11 @@
 // react
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
+// components
 // utils
 import {fixedWidth, fixedHeight} from '../../utils/styleFxns';
 import {login} from '../../../utils/requests';
 import {updateInputField} from '../../utils/formFxns';
+import { pageTransition } from '../../utils/styleObjs';
 // event handlers
 const submitLogin = async (username, password, submitStatus) => {
   console.log('submitting', username)
@@ -24,6 +26,8 @@ const keyDownHandler = (e, username, password) => {
 };
 // main
 const LoginForm = () => {
+  // init hooks
+  const pageRef = useRef(null);
   // state
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +37,7 @@ const LoginForm = () => {
   const style = {
     ...fixedWidth(30, '%'),
     justifyContent: `start`,
-    flex: `1`,
+    ...pageTransition,
   };
   /**@type {React.CSSProperties} */
   const ctnrStyle = {
@@ -86,10 +90,17 @@ const LoginForm = () => {
       default:
         break;
     }
-    
   }, [submitStatus]);
+  useEffect(() => {
+    pageRef.current.style.opacity = 1;
+    return () => {
+      if (pageRef.current) {
+        pageRef.current.style.opacity = 0;
+      }
+    }
+  }, []);
   return (
-    <div style={style} className="flexcol" >
+    <div style={style} className="flexcol f1" ref={pageRef} >
       <div style={ctnrStyle} className="flexcol ctnr w100" >
         <div style={titleStyle} >
           Sign in to Envest

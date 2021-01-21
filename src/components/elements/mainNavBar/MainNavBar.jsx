@@ -5,7 +5,8 @@ import {Link} from 'react-router-dom';
 import ProfileLoginRegister from './ProfileLoginRegister';
 import InfoGroup from './InfoGroup';
 // utils
-import { fixedHeight } from '../utils/styleFxns';
+
+import { fixedHeight } from '../../utils/styleFxns';
 
 // main
 const MainNavBar = () => {
@@ -18,17 +19,17 @@ const MainNavBar = () => {
         backgroundColor: `black`,
         justifyContent: `space-between`,
         padding: `0 5px`,
-        color: `white`,
+        color: `rgb(213, 220, 213)`,
+        textDecoration: 'none',
     };
     /**@type {React.CSSProperties} */
     const homeLinkStyle = {
         ...fixedHeight(100, '%'),
         padding: `10px`,
         margin: `0 30px`,
-        backgroundColor: `green`,
-        color: `white`,
-        font: `helvetica`,
-        textDecoration: 'none',
+        backgroundColor: `rgb(64, 78, 64)`,
+        textDecoration: 'inherit',
+        border: `none`,
     };
 
     // effects
@@ -37,7 +38,7 @@ const MainNavBar = () => {
     }, [ref1])
     return (
         <div style={style} className="w100 flexrow" >
-            <Link to={{pathname: "/"}} style={homeLinkStyle} ref={ref1} className="ctnr" >Envest</Link>
+            <Link to={{pathname: "/"}} style={homeLinkStyle} ref={ref1} className="ctnr navBarLink" >Envest</Link>
             <InfoGroup />
             <ProfileLoginRegister />
         </div>

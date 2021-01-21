@@ -19,7 +19,6 @@ const FormTextField = ({title, value, stateUpdateFxn, isPassword, validateFxn}) 
   };
   /**@type {React.CSSProperties} */
   const textInputStyle = {
-    flex: 0,
     ...fixedHeight(30, 'px'),
     fontSize: `15px`,
     padding: `10px 5px`,
@@ -31,7 +30,7 @@ const FormTextField = ({title, value, stateUpdateFxn, isPassword, validateFxn}) 
       <div style={titleStyle} >{title}</div>
       <input
         style={textInputStyle}
-        className="w100"
+        className="w100 f1"
         type={isPassword ? 'password' : 'text'}
         placeholder="..."
         value={value}

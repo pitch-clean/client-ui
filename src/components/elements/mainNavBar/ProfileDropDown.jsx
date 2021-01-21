@@ -2,7 +2,7 @@
 import React, {useRef} from 'react';
 import { useSelector } from 'react-redux';
 // utils
-import { fixedHeight, fixedWidth } from '../utils/styleFxns';
+import { fixedHeight, fixedWidth } from '../../utils/styleFxns';
 // callbacks
 const showHideDropdown = (dropDownRef, isFocused) => {
   dropDownRef.current.style.display = isFocused ? `flex` : `none`;

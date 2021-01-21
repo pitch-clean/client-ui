@@ -1,11 +1,12 @@
 // react
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import FormTextField from '../../elements/FormTextField';
 // utils
 import {fixedWidth, fixedHeight} from '../../utils/styleFxns';
 import {register} from '../../../utils/requests';
 import {updateInputField} from '../../utils/formFxns';
 import {validateUsername} from './validationFxns';
+import { pageTransition } from '../../utils/styleObjs';
 // constants
 const formData = {};
 const validationObj = {
@@ -54,6 +55,9 @@ const keyDownHandler = (e, formData) => {
 
 // main
 const RegisterForm = () => {
+  // init hooks
+  const pageRef = useRef(null);
+  // state
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -68,7 +72,7 @@ const RegisterForm = () => {
     ...fixedWidth(60, '%'),
     justifyContent: `start`,
     boxShadow: `0px 0px 20px 8px rgba(0, 0, 0, 0.200)`,
-    flex: `1`,
+    ...pageTransition
   };
   /**@type {React.CSSProperties} */
   const ctnrStyle = {
@@ -79,7 +83,6 @@ const RegisterForm = () => {
   const titleStyle = {
     padding: `10px 0`,
     fontSize: `22px`,
-    flex: `0`,
     backgroundColor: `rgb(32, 32, 32)`,
     border: `none`,
   };
@@ -98,11 +101,19 @@ const RegisterForm = () => {
   useEffect(() => {
 
   }, [isSubmitting]);
-
+  useEffect(() => {
+    pageRef.current.style.opacity = 1;
+    return () => {
+      if (pageRef.current) {
+        pageRef.current.style.opacity = 0;
+      }
+    }
+  }, []);
   return (
     <div
+      ref={pageRef}
       style={style}
-      className="flexcol ctnr"
+      className="flexcol ctnr f1"
       onKeyDown={e => {
         if (e.key === 'Enter') {
           e.preventDefault();
@@ -116,7 +127,7 @@ const RegisterForm = () => {
       }}
     >
       <div style={ctnrStyle} className="flexcol h100" >
-        <div style={titleStyle} className="ctnr w100" >
+        <div style={titleStyle} className="ctnr w100 f0" >
           Create your account
         </div>
         <FormTextField title='Username' value={username} stateUpdateFxn={setUsername} isPassword={false} validateFxn={validateUsername} />
