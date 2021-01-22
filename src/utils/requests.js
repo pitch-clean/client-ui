@@ -1,9 +1,9 @@
 export const Post = async (url, body, additionalHeaders={}, isReturnJson=false) => {
   const headers = {
-    Accept: 'application/json',
+    accept: 'application/json',
     'content-type': 'application/json',
     ...additionalHeaders,
-  }
+  };
 
   // make request
   try {
@@ -25,7 +25,31 @@ export const Post = async (url, body, additionalHeaders={}, isReturnJson=false) 
     console.log('body: ', body);
     console.error(error);
   }
-}
+};
+
+export const Get = async (url, body, additionalHeaders={}, isReturnJson=false) => {
+  const headers = {
+    accept: 'application/json',
+    'content-type': 'application/json',
+    ...additionalHeaders,
+  };
+
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: 'GET',
+        mode: 'cors',
+        headers: headers,
+        body: JSON.stringify(body),
+      },
+    );
+    return isReturnJson ? await response.json(): response;
+  } catch (err) {
+    console.log('Error: GET request');
+    console.error(err);
+  }
+};
 
 export const register = async (url, body) => {
   const res = await Post(url, body)

@@ -11,6 +11,8 @@ const InvestorDeveloperDashboard = ({contentStyle}) => {
   /**@type {React.CSSProperties} */
   const titleStyle = {
     fontSize: `30px`,
+    padding: `10px`,
+    cursor: "pointer",
   };
   /**@type {React.CSSProperties} */
   const infoCardStyle = {
@@ -30,6 +32,7 @@ const InvestorDeveloperDashboard = ({contentStyle}) => {
         className="title"
         style={{
           fontSize: `30px`,
+          padding: `10px`,
         }}
       >
         Why Ecofunded?
@@ -38,13 +41,14 @@ const InvestorDeveloperDashboard = ({contentStyle}) => {
         className="flexrow"
         style={{
           alignItems: `start`,
+          padding: `20px`,
         }}
       >
         <div
           className="infoCard flexcol h100"
           style={infoCardStyle}
         >
-          <div className="header">{`Speed & Security`}</div>
+          <div className="header" style={{padding: `10px`,}} >{`Speed & Security`}</div>
           <div
             className="paragraph"
             style={paragraphStyle}
@@ -54,7 +58,7 @@ const InvestorDeveloperDashboard = ({contentStyle}) => {
           </div>
         </div>
         <div className="infoCard flexcol h100" style={infoCardStyle} >
-          <div className="header">{`Convenience`}</div>
+          <div className="header" style={{padding: `10px`,}}>{`Convenience`}</div>
           <div className="paragraph" style={paragraphStyle} >
             Envest does the hard work for you: <br/>
             We vet thousands of opportunities and<br/>
@@ -62,7 +66,7 @@ const InvestorDeveloperDashboard = ({contentStyle}) => {
           </div>
         </div>
         <div className="infoCard flexcol h100" style={infoCardStyle} >
-          <div className="header">{`Access`}</div>
+          <div className="header" style={{padding: `10px`,}}>{`Access`}</div>
           <div className="paragraph" style={paragraphStyle} >
             Envest's relationships with smaller<br/>
             developers means that our users get<br/>
@@ -74,7 +78,7 @@ const InvestorDeveloperDashboard = ({contentStyle}) => {
   );
   const devContent = (
     <div>
-      <div className="title" style={{fontSize: `30px`, padding: `20px`}} >Leverage the power of blockchain for public and private offerings</div>
+      <div className="title" style={{fontSize: `30px`, padding: `20px`, marginTop: `20px`,}} >Leverage the power of blockchain for public and private offerings</div>
       <div className="flexrow">
 
       </div>
@@ -92,7 +96,8 @@ const InvestorDeveloperDashboard = ({contentStyle}) => {
       <div className="nav flexrow" style={{
         justifyContent: `space-evenly`,
         border: `1px solid black`,
-        padding: `10px`,
+        padding: `20px`,
+        marginBottom: `10px`,
       }}>
         <div style={titleStyle} className={`contentSelector f1 ${isInvTab ? 'active' : ' '}`} onClick={() => setIsInvTab(true)} >Investors</div>
         <div style={titleStyle} className={`contentSelector f1 ${!isInvTab ? 'active' : ' '}`} onClick={() => setIsInvTab(false)} >Developers</div>

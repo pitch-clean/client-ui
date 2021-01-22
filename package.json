@@ -1,6 +1,7 @@
 {
-  "name": "client-ui",
+  "name": "envest-client-ui",
   "version": "0.1.0",
+  "homepage": "https://envest.pro",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -20,7 +21,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "move": "rm -rf ./static ./assets; mv -f ./build/* ./ && rm -rf ./build",
+    "git-add": "git add .",
+    "git-commit": "git commit -m '(re)building and deploying'",
+    "git-push": "git push origin gh-pages",
+    "git-deploy": "npm run git-add && npm run git-commit && npm run git-push",
+    "deploy": "npm run build && npm run move && npm run git-deploy"
   },
   "eslintConfig": {
     "extends": [

@@ -1,15 +1,11 @@
 // react
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import { fixedWidth, fixedHeight } from '../../utils/styleFxns';
 // components
 import InvestorDeveloperDashboard from './InvestorDeveloperDashboard';
-// utils
-import { pageTransition } from '../../utils/styleObjs';
 
 // main
 const Home = () => {
-  // init hooks
-  const pageRef = useRef(null);
   // style
   /**@type {React.CSSProperties} */
   const contentStyle = {
@@ -102,25 +98,14 @@ const Home = () => {
       </div>
     </div>
   )
-  // effects
-  useEffect(() => {
-    pageRef.current.style.opacity = 1;
-    return () => {
-      if (pageRef.current) {
-        pageRef.current.style.opacity = 0;
-      }
-    }
-  }, []);
   
   return (
     <div
-      className="w100 flexcol darkmode"
+      className="w100 flexcol page"
       style={{
-        ...pageTransition,
         justifyContent: `space-between`,
         padding: `10px 0`,
       }}
-      ref={pageRef}
     >
       {content1}
       {borderHorizElem}

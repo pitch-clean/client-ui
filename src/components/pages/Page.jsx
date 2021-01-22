@@ -21,7 +21,7 @@ const Page = ({children}) => {
     }
   }, []);
   return (
-    <div style={style} ref={pageRef} className="PAGE w100 flexcol" >{children}</div>
+    <children />
   )
 };
 

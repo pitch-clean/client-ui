@@ -23,6 +23,9 @@ body {
 } 
 .App {
   text-align: center;
+  animation-name: appOpen;
+  animation-duration: 0.23s;
+  animation-timing-function: ease-out;
 }
 .w100 {
   width: 100%;
@@ -109,8 +112,10 @@ body {
   text-align: start;
 }
 .page {
-  opacity: 0;
-  transition: opacity 0.3s ease-out;
+  opacity: 1;
+  animation-name: pageOpen;
+  animation-duration: 0.125s;
+  animation-timing-function: ease-out;
 }
 .contentSelector {
   transition-property: border-color, color, background-color, box-shadow;
@@ -125,4 +130,31 @@ body {
 }
 .contentSelector:hover {
   color: whitesmoke;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  min-width: 120%;
+  padding: 10px 5px;
+  background: rgb(52, 53, 53);
+}
+.hide-scrollbar::-webkit-scrollbar {
+  width: none;
+  height: none;
+}
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+@keyframes pageOpen {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+@keyframes appOpen {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }

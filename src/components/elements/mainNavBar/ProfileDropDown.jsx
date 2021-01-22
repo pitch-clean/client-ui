@@ -3,10 +3,7 @@ import React, {useRef} from 'react';
 import { useSelector } from 'react-redux';
 // utils
 import { fixedHeight, fixedWidth } from '../../utils/styleFxns';
-// callbacks
-const showHideDropdown = (dropDownRef, isFocused) => {
-  dropDownRef.current.style.display = isFocused ? `flex` : `none`;
-};
+import {mouseDownFocusBlur, showHideDropdown} from '../../utils/eventHandlers';
 
 // main
 const ProfileDropDown = () => {
@@ -16,15 +13,6 @@ const ProfileDropDown = () => {
   // state
   const profileName = useSelector(s => s.auth.activeProfile.profileName);
   // style
-  /**@type {React.CSSProperties} */
-  const style = {
-    padding: `10px 25px`,
-    cursor: `default`,
-    position: `relative`,
-    margin: `0`,
-    border: 0,
-    outline: 0,
-  };
   /**@type {React.CSSProperties} */
   const dropDownStyle = {
     ...fixedWidth(300, 'px'),
@@ -45,14 +33,22 @@ const ProfileDropDown = () => {
   return (
     <div
       className="flexcol"
-      style={style}
       onMouseMove={() => {parentRef.current.focus()}}
-      onClick={() => {parentRef.current.focus()}}
+      // onClick={() => {parentRef.current.focus()}}
+      onMouseDown={e => mouseDownFocusBlur(e, parentRef, dropDownRef)}
       onFocus={() => showHideDropdown(dropDownRef, true)}
       onBlur={() => showHideDropdown(dropDownRef, false)}
       onMouseOut={() => {parentRef.current.blur()}}
       tabIndex='0'
       ref={parentRef}
+      style={{
+        padding: `10px 25px`,
+        cursor: `default`,
+        position: `relative`,
+        margin: `0`,
+        border: 0,
+        outline: 0,
+      }}
     >
         {profileName}
         <div
