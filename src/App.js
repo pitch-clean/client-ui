@@ -19,7 +19,6 @@ const App = () => {
   };
   const appRef = useRef(null);
 
-
   return (
     <div
       className="App w100 flexcol darkmode"
@@ -31,7 +30,16 @@ const App = () => {
       ref={appRef}
     >
       <MainNavBar />
-      <PageRouter />
+      <div
+        className="w100 flexcol f1"
+        style={{
+          justifyContent: `start`,
+          overflowY: `scroll`,
+        }}
+      >
+        <PageRouter />
+        <div className="footer w100" style={{padding: `10px 20px`, backgroundColor: `black`}} >Footer</div>
+      </div>
     </div>
   );
 }

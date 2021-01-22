@@ -10,3 +10,12 @@ export const mouseDownFocusBlur = (e, parentRef, childRef) => {
 export const showHideDropdown = (dropDownRef, isFocused) => {
   dropDownRef.current.style.display = isFocused ? `flex` : `none`;
 };
+
+export const activateFavorite = () => {
+  console.log('activating favorite'); 
+  try {
+    
+  } catch (err) {
+    console.error(err);
+  }
+};

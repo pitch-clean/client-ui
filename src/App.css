@@ -149,6 +149,11 @@ body {
 .hide-scrollbar {
   scrollbar-width: none;
 }
+.nowrap {
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
 
 @keyframes pageOpen {
   from {opacity: 0;}

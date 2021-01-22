@@ -14,3 +14,11 @@ export const formKeyDownHandler = (e) => {
     }
   }
 };
+
+export const searchKeyDownHandler = e => {
+  // const filteredStr = `${e.currentTarget.value}`.replace(/\W/g, '');
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    console.log('submitting GET request for filtered info: ', e.target.value)
+  }
+}
