@@ -1,3 +1,78 @@
 .OfferingDetail {
-  
 }
+
+.OfferingDetail .MainInfo {
+  display: grid;
+  background-color: #242222;
+  grid-template-columns: minmax(1fr, auto) minmax(1fr, auto) minmax(1fr, auto) minmax(1fr, auto) minmax(1fr, auto);
+  grid-template-rows: auto auto auto minmax(20px, auto);
+  grid-template-areas: 
+    'topRow topRow topRow topRow topRow'
+    'border1 border1 border1 border1 border1'
+    'progress progress progress progress progress'
+    'border2 border2 border2 border2 border2'
+    'about about about about about'
+  ;
+  padding: 35px 10%;
+}
+  .MainInfo .topRow {
+    justify-content: space-between;
+    grid-area: topRow;
+  }
+    .MainInfo .OfferingTitle {
+      align-items: start;
+      justify-content: start;
+      text-align: start;
+      padding-right: 50px;
+    }
+      .MainInfo .OfferingTitle .offeringName {
+        font-size: 40px;
+        font-weight: 500;
+      }
+      .MainInfo .OfferingTitle .subtitle {
+        justify-content: space-between;
+        padding: 15px 0;
+      }
+        .MainInfo .OfferingTitle .subtitle .offeringSponsor {
+          text-decoration: unset;
+          color: inherit;
+          font-size: 20px;
+          text-align: center;
+          padding-left: 10px;
+        }
+        .MainInfo .OfferingTitle .subtitle .assetClass {
+          background-color: #4b9b4b63;
+          font-weight: 500;
+          padding: 2px 10px;
+        }
+      .MainInfo .OfferingTitle .returnStats {
+        background: black;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+        
+        .MainInfo .OfferingTitle .returnStats .divider {
+          background-color: rgb(91, 97, 91);
+          min-width: 1px;
+          max-width: 1px;
+          width: 1px;
+          /* height: 70%; */
+          padding: 4% 0;
+        }
+        .MainInfo .OfferingTitle .returnStats .annualInterest {
+        }
+        .MainInfo .OfferingTitle .returnStats .termLength {
+        }
+        .MainInfo .OfferingTitle .returnStats .offeringSize {
+        }
+    .MainInfo .OfferingImage {
+      width: 75vh;
+      overflow: hidden;
+    }
+      .MainInfo .OfferingImage img {
+        position: absolute;
+        max-height: 100%;
+        min-width: 100%;
+        left: 0;
+        top: 0;
+      }

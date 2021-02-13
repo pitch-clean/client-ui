@@ -22,6 +22,7 @@ export const offeringsArr = [
       ppaPriceUSD: 100,
     },
     financials: {
+      investmentClass: 'Common Stock',
       expectedReturn: 1800000,
       fundTarget: 1500000,
       amtFunded: 500000,
@@ -51,7 +52,7 @@ export const offeringsArr = [
       },
     },
     images: {
-      large: ``,
+      get large() {return this.card},
       card: getImgPath(`extern4l-content.duckduckgo.com.jpg`),
     },
   },
@@ -68,9 +69,9 @@ export const offeringsArr = [
       ppaPriceUSD: 97,
     },
     financials: {
-      debtClass: 'Common Stock',
+      investmentClass: 'Common Stock',
       expectedReturn: 1100000,
-      fundTarget: 900000,
+      fundTarget: 921742,
       amtFunded: 880000,
       principalOutstanding: 0.081,
       interestAccrued: 0.078,
@@ -98,7 +99,7 @@ export const offeringsArr = [
       }
     },
     images: {
-      large: ``,
+      get large() {return this.card},
       card: getImgPath(`e3xternal-content.duckduckgo.com.jpg`),
     },
   },
@@ -115,7 +116,7 @@ export const offeringsArr = [
       ppaPriceUSD: 212,
     },
     financials: {
-      debtClass: 'Preferred Stock',
+      investmentClass: 'Preferred Stock',
       expectedReturn: 26300000,
       fundTarget: 22300000,
       amtFunded: 1000000,
@@ -145,7 +146,7 @@ export const offeringsArr = [
       }
     },
     images: {
-      large: ``,
+      get large() {return this.card},
       card: getImgPath(`1980_schwinn_air_dyne_ergometric_exerciser.png`),
     },
   },
@@ -162,7 +163,7 @@ export const offeringsArr = [
       ppaPriceUSD: 73,
     },
     financials: {
-      debtClass: 'Subordinate Debt',
+      investmentClass: 'Subordinate Debt',
       expectedReturn: 53330000,
       fundTarget: 33330000,
       amtFunded: 33330000,
@@ -192,7 +193,7 @@ export const offeringsArr = [
       }
     },
     images: {
-      large: ``,
+      get large() {return this.card},
       card: getImgPath(`external-content.duckduckgo.com.jpg`),
     },
   },
@@ -209,7 +210,7 @@ export const offeringsArr = [
       ppaPriceUSD: 1232,
     },
     financials: {
-      debtClass: 'Common Stock',
+      investmentClass: 'Common Stock',
       expectedReturn: 1900000,
       fundTarget: 1500000,
       amtFunded: 1200000,
@@ -239,7 +240,7 @@ export const offeringsArr = [
       }
     },
     images: {
-      large: ``,
+      get large() {return this.card},
       card: getImgPath(`external-content2.duckduckgo.com.jpg`),
     },
   },
@@ -256,7 +257,7 @@ export const offeringsArr = [
       ppaPriceUSD: 192,
     },
     financials: {
-      debtClass: 'Preferred Stock',
+      investmentClass: 'Preferred Stock',
       expectedReturn: 970000,
       fundTarget: 900000,
       amtFunded: 200000,
@@ -286,7 +287,7 @@ export const offeringsArr = [
       }
     },
     images: {
-      large: ``,
+      get large() {return this.card},
       card: getImgPath(`external-content5.duckduckgo.com.jpg`),
     },
   },
@@ -303,7 +304,7 @@ export const offeringsArr = [
       ppaPriceUSD: 500,
     },
     financials: {
-      debtClass: 'Common Stock',
+      investmentClass: 'Common Stock',
       energyOutputKWh: 33,
       expectedReturn: 24300000,
       fundTarget: 22300000,
@@ -334,7 +335,7 @@ export const offeringsArr = [
       }
     },
     images: {
-      large: ``,
+      get large() {return this.card},
       card: getImgPath(`e3xternal-content.duckduckgo.com.jpg`),
     },
   },
@@ -356,7 +357,7 @@ export const offeringsArr = [
       amtFunded: 33130000,
       principalOutstanding: 0.00941,
       interestAccrued: 0.0124,
-      debtClass: 'Subordinate Debt',
+      investmentClass: 'Subordinate Debt',
       ppaCounterparty: 'counterparty 7',
     },
     documents: {
@@ -381,7 +382,7 @@ export const offeringsArr = [
       }
     },
     images: {
-      large: '',
+      get large() {return this.card},
       card: getImgPath('1980_schwinn_air_dyne_ergometric_exerciser.png'),
     },
   },

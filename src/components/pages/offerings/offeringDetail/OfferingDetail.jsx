@@ -16,9 +16,11 @@ const fakeFetchOfferingObj = (offeringId) => {
 
 // main
 const OfferingDetail = ({props: {match: {params: {offeringId}}}}) => {
+  // state
   const [offeringObj, setOfferingObj] = useState(null);
-  // on load, get the authorized offering detail
+  // effects
   useEffect(() => {
+    // on load, get the authorized offering detail
     const newOfferingObj = fakeFetchOfferingObj(offeringId);
     setOfferingObj(newOfferingObj);
     try {
@@ -28,15 +30,10 @@ const OfferingDetail = ({props: {match: {params: {offeringId}}}}) => {
     }
   }, []);
   return offeringObj ? (
-    <div
-      className="OfferingDetail"
-      style={{
-        maxWidth: `1000px`,
-        width: `80%`,
-      }}
-    >
+    <div className="OfferingDetail w100" >
       <MainInfo offeringObj={offeringObj} />
       <ProjectInfo offeringObj={offeringObj} />
+      {/* <Overview offeringObj={offeringObj} /> */}
     </div>
   ) : (
     <></>

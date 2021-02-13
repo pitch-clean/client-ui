@@ -23,8 +23,9 @@ const OfferingsList = () => {
       className="flexrow w100 OfferingsList"
       style={{
         flexWrap: `wrap`,
-        justifyContent: `start`,
-        padding: `0 30px`,
+        justifyContent: `center`,
+        padding: `0 50px`,
+        maxWidth: `80%`,
       }}
     >
       {buildOfferingsArrElem(offeringsArr)}
