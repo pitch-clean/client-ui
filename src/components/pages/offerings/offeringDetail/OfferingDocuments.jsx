@@ -1,24 +1,19 @@
 // react
 import React from 'react';
+import GetAppIcon from '@material-ui/icons/GetApp';
 // build fxns
-const buildDocumentList = (documentsArr) => {
+const buildDocumentList = documentsArr => {
   const docList = [];
   for (let idx = 0; idx < documentsArr.length; idx++) {
     const docObj = documentsArr[idx];
-    console.log(docObj);
     const docElem = (
-      <div
-        className="docElem"
-        style={{
-          border: `1px solid rgba(255, 255, 255, 0.18)`,
-          height: `70px`,
-          width: `70px`,
-          margin: `5px`,
-          backgroundColor: `rgba(0, 0, 0, 0.08)`,
-          cursor: `pointer`,
-        }}
-      >{docObj.filePath}</div>
-    )
+      <div className="docElem flexrow h100" >
+        <GetAppIcon />
+        <div className="title" >
+          {docObj.title}
+        </div>
+      </div>
+    );
     docList.push(docElem);
   }
   return docList;
@@ -27,20 +22,9 @@ const buildDocumentList = (documentsArr) => {
 // main
 const OfferingDocuments = ({documents}) => {
   return (
-    <div
-      className="OfferingDocuments flexrow"
-      style={{
-        flexWrap: `wrap`,
-        gridArea: `documents`,
-        minHeight: `100px`,
-        justifyContent: `start`,
-        alignItems: `start`,
-        padding: `15px`,
-      }}
-    >
+    <div className="OfferingDocuments" >
       {buildDocumentList(documents.arr)}
     </div>
-    
   );
 };
 

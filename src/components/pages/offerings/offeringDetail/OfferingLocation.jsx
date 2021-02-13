@@ -19,11 +19,7 @@ const OfferingLocation = () => {
   return (
     <div
       className="OfferingLocation"
-      style={{
-        border: `1px solid black`,
-        gridArea: `map`,
-        ...fixedHeight(height, 'px'),
-      }}
+      style={{...fixedHeight(height, 'px'),}}
       ref={ref1}
     >
       Map here

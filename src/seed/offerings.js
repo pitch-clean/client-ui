@@ -22,6 +22,7 @@ export const offeringsArr = [
       ppaPriceUSD: 100,
     },
     financials: {
+      otherClass: 'Debt Refinancing',
       investmentClass: 'Common Stock',
       expectedReturn: 1800000,
       fundTarget: 1500000,
@@ -33,8 +34,10 @@ export const offeringsArr = [
     documents: {
       shareHoldersAgreement: `shareholdersAgreement.pdf`,
       arr: [
-        {filePath: 'doc1.pdf', type: 'doctype1'},
-        {filePath: 'doc2.pdf', type: 'doctype2'},
+        {title: `Shareholder's Agreement` , filePath: 'shareholder-agreement.pdf' , type: 'doctype1'},
+        {title: `Power Purhcase Agreement`, filePath: 'ppa.pdf'                   , type: 'doctype2'},
+        {title: `Land Lease`              , filePath: 'land-lease.pdf'            , type: 'doctype3'},
+        {title: `Connection Agreement`    , filePath: 'connection-agreement.pdf'  , type: 'doctype4'},
       ],
     },
     dtListed: 1612291996043,
@@ -51,6 +54,12 @@ export const offeringsArr = [
         apartment: '',
       },
     },
+    about: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      
+      Duis aute irure
+      dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+      sunt in culpa qui officia deserunt mollit anim id est laborum.
+    `,
     images: {
       get large() {return this.card},
       card: getImgPath(`extern4l-content.duckduckgo.com.jpg`),
@@ -69,6 +78,7 @@ export const offeringsArr = [
       ppaPriceUSD: 97,
     },
     financials: {
+      otherClass: 'Debt Refinancing',
       investmentClass: 'Common Stock',
       expectedReturn: 1100000,
       fundTarget: 921742,
@@ -80,8 +90,10 @@ export const offeringsArr = [
     documents: {
       shareHoldersAgreement: `shareholdersAgreement.pdf`,
       arr: [
-        {filePath: 'doc1.pdf', type: 'doctype1'},
-        {filePath: 'doc2.pdf', type: 'doctype2'},
+        {title: `Shareholder's Agreement` , filePath: 'shareholder-agreement.pdf' , type: 'doctype1'},
+        {title: `Power Purhcase Agreement`, filePath: 'ppa.pdf'                   , type: 'doctype2'},
+        {title: `Land Lease`              , filePath: 'land-lease.pdf'            , type: 'doctype3'},
+        {title: `Connection Agreement`    , filePath: 'connection-agreement.pdf'  , type: 'doctype4'},
       ],
     },
     dtListed: 1610671996043,
@@ -98,6 +110,10 @@ export const offeringsArr = [
         apartment: '',
       }
     },
+    about: `\tLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure
+dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+sunt in culpa qui officia deserunt mollit anim id est laborum.`,
     images: {
       get large() {return this.card},
       card: getImgPath(`e3xternal-content.duckduckgo.com.jpg`),
@@ -116,6 +132,7 @@ export const offeringsArr = [
       ppaPriceUSD: 212,
     },
     financials: {
+      otherClass: 'Debt Refinancing',
       investmentClass: 'Preferred Stock',
       expectedReturn: 26300000,
       fundTarget: 22300000,
@@ -127,8 +144,10 @@ export const offeringsArr = [
     documents: {
       shareHoldersAgreement: `shareholdersAgreement.pdf`,
       arr: [
-        {filePath: 'doc1.pdf', type: 'doctype1'},
-        {filePath: 'doc2.pdf', type: 'doctype2'},
+        {title: `Shareholder's Agreement` , filePath: 'shareholder-agreement.pdf' , type: 'doctype1'},
+        {title: `Power Purhcase Agreement`, filePath: 'ppa.pdf'                   , type: 'doctype2'},
+        {title: `Land Lease`              , filePath: 'land-lease.pdf'            , type: 'doctype3'},
+        {title: `Connection Agreement`    , filePath: 'connection-agreement.pdf'  , type: 'doctype4'},
       ],
     },
     dtListed: 1641691996043,
@@ -145,6 +164,10 @@ export const offeringsArr = [
         apartment: '',
       }
     },
+    about: `\tLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure
+dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+sunt in culpa qui officia deserunt mollit anim id est laborum.`,
     images: {
       get large() {return this.card},
       card: getImgPath(`1980_schwinn_air_dyne_ergometric_exerciser.png`),
@@ -163,6 +186,7 @@ export const offeringsArr = [
       ppaPriceUSD: 73,
     },
     financials: {
+      otherClass: 'Debt Refinancing',
       investmentClass: 'Subordinate Debt',
       expectedReturn: 53330000,
       fundTarget: 33330000,
@@ -174,8 +198,10 @@ export const offeringsArr = [
     documents: {
       shareHoldersAgreement: `shareholdersAgreement.pdf`,
       arr: [
-        {filePath: 'doc1.pdf', type: 'doctype1'},
-        {filePath: 'doc2.pdf', type: 'doctype2'},
+        {title: `Shareholder's Agreement` , filePath: 'shareholder-agreement.pdf' , type: 'doctype1'},
+        {title: `Power Purhcase Agreement`, filePath: 'ppa.pdf'                   , type: 'doctype2'},
+        {title: `Land Lease`              , filePath: 'land-lease.pdf'            , type: 'doctype3'},
+        {title: `Connection Agreement`    , filePath: 'connection-agreement.pdf'  , type: 'doctype4'},
       ],
     },
     dtListed: 1621691996043,
@@ -192,6 +218,10 @@ export const offeringsArr = [
         apartment: '',
       }
     },
+    about: `\tLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure
+dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+sunt in culpa qui officia deserunt mollit anim id est laborum.`,
     images: {
       get large() {return this.card},
       card: getImgPath(`external-content.duckduckgo.com.jpg`),
@@ -210,6 +240,7 @@ export const offeringsArr = [
       ppaPriceUSD: 1232,
     },
     financials: {
+      otherClass: 'Debt Refinancing',
       investmentClass: 'Common Stock',
       expectedReturn: 1900000,
       fundTarget: 1500000,
@@ -221,8 +252,10 @@ export const offeringsArr = [
     documents: {
       shareHoldersAgreement: `shareholdersAgreement.pdf`,
       arr: [
-        {filePath: 'doc1.pdf', type: 'doctype1'},
-        {filePath: 'doc2.pdf', type: 'doctype2'},
+        {title: `Shareholder's Agreement` , filePath: 'shareholder-agreement.pdf' , type: 'doctype1'},
+        {title: `Power Purhcase Agreement`, filePath: 'ppa.pdf'                   , type: 'doctype2'},
+        {title: `Land Lease`              , filePath: 'land-lease.pdf'            , type: 'doctype3'},
+        {title: `Connection Agreement`    , filePath: 'connection-agreement.pdf'  , type: 'doctype4'},
       ],
     },
     dtListed: 1612291996043,
@@ -239,6 +272,10 @@ export const offeringsArr = [
         apartment: '',
       }
     },
+    about: `\tLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure
+dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+sunt in culpa qui officia deserunt mollit anim id est laborum.`,
     images: {
       get large() {return this.card},
       card: getImgPath(`external-content2.duckduckgo.com.jpg`),
@@ -257,6 +294,7 @@ export const offeringsArr = [
       ppaPriceUSD: 192,
     },
     financials: {
+      otherClass: 'Debt Refinancing',
       investmentClass: 'Preferred Stock',
       expectedReturn: 970000,
       fundTarget: 900000,
@@ -268,8 +306,10 @@ export const offeringsArr = [
     documents: {
       shareHoldersAgreement: `shareholdersAgreement.pdf`,
       arr: [
-        {filePath: 'doc1.pdf', type: 'doctype1'},
-        {filePath: 'doc2.pdf', type: 'doctype2'},
+        {title: `Shareholder's Agreement` , filePath: 'shareholder-agreement.pdf' , type: 'doctype1'},
+        {title: `Power Purhcase Agreement`, filePath: 'ppa.pdf'                   , type: 'doctype2'},
+        {title: `Land Lease`              , filePath: 'land-lease.pdf'            , type: 'doctype3'},
+        {title: `Connection Agreement`    , filePath: 'connection-agreement.pdf'  , type: 'doctype4'},
       ],
     },
     dtListed: 1610671996043,
@@ -286,6 +326,10 @@ export const offeringsArr = [
         apartment: '',
       }
     },
+    about: `\tLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure
+dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+sunt in culpa qui officia deserunt mollit anim id est laborum.`,
     images: {
       get large() {return this.card},
       card: getImgPath(`external-content5.duckduckgo.com.jpg`),
@@ -304,8 +348,8 @@ export const offeringsArr = [
       ppaPriceUSD: 500,
     },
     financials: {
+      otherClass: 'Debt Refinancing',
       investmentClass: 'Common Stock',
-      energyOutputKWh: 33,
       expectedReturn: 24300000,
       fundTarget: 22300000,
       amtFunded: 2300000,
@@ -316,8 +360,10 @@ export const offeringsArr = [
     documents: {
       shareHoldersAgreement: `shareholdersAgreement.pdf`,
       arr: [
-        {filePath: 'doc1.pdf', type: 'doctype1'},
-        {filePath: 'doc2.pdf', type: 'doctype2'},
+        {title: `Shareholder's Agreement` , filePath: 'shareholder-agreement.pdf' , type: 'doctype1'},
+        {title: `Power Purhcase Agreement`, filePath: 'ppa.pdf'                   , type: 'doctype2'},
+        {title: `Land Lease`              , filePath: 'land-lease.pdf'            , type: 'doctype3'},
+        {title: `Connection Agreement`    , filePath: 'connection-agreement.pdf'  , type: 'doctype4'},
       ],
     },
     dtListed: 1641691996043,
@@ -334,6 +380,10 @@ export const offeringsArr = [
         apartment: '',
       }
     },
+    about: `\tLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure
+dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+sunt in culpa qui officia deserunt mollit anim id est laborum.`,
     images: {
       get large() {return this.card},
       card: getImgPath(`e3xternal-content.duckduckgo.com.jpg`),
@@ -352,19 +402,22 @@ export const offeringsArr = [
       ppaPriceUSD: 434,
     },
     financials: {
+      otherClass: 'Debt Refinancing',
+      investmentClass: 'Subordinate Debt',
       expectedReturn: 33930000,
       fundTarget: 33330000,
       amtFunded: 33130000,
       principalOutstanding: 0.00941,
       interestAccrued: 0.0124,
-      investmentClass: 'Subordinate Debt',
       ppaCounterparty: 'counterparty 7',
     },
     documents: {
       shareHoldersAgreement: `shareholdersAgreement.pdf`,
       arr: [
-        {filePath: 'doc1.pdf', type: 'doctype1'},
-        {filePath: 'doc2.pdf', type: 'doctype2'},
+        {title: `Shareholder's Agreement` , filePath: 'shareholder-agreement.pdf' , type: 'doctype1'},
+        {title: `Power Purhcase Agreement`, filePath: 'ppa.pdf'                   , type: 'doctype2'},
+        {title: `Land Lease`              , filePath: 'land-lease.pdf'            , type: 'doctype3'},
+        {title: `Connection Agreement`    , filePath: 'connection-agreement.pdf'  , type: 'doctype4'},
       ],
     },
     dtListed: 1621691996043,
@@ -381,6 +434,10 @@ export const offeringsArr = [
         apartment: '',
       }
     },
+    about: `\tLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure
+dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+sunt in culpa qui officia deserunt mollit anim id est laborum.`,
     images: {
       get large() {return this.card},
       card: getImgPath('1980_schwinn_air_dyne_ergometric_exerciser.png'),

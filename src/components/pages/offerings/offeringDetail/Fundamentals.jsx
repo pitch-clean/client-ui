@@ -4,7 +4,7 @@ import { convertUnixMsToDate } from '../../../utils/datetime';
 // fxns
 const buildListItem = (title, value) => {
   return (
-    <div className="flexrow w100" style={{fontSize: `12px`}} >
+    <div className="metric flexrow w100" >
       <div className="nowrap" style={{minWidth: `70%`, maxWidth: `70%`, textAlign: `start`}} >{title}</div>
       <div className="nowrap" style={{flex: 1, textAlign: `start`,}} >{value}</div>
     </div>
@@ -27,18 +27,11 @@ const buildMetrics = (offeringObj) => {
 const Fundamentals = ({offeringObj}) => {
 
   return (
-    <div
-      className="Fundamentals w100 flexcol"
-      style={{
-        gridArea: `fundamentals`,
-        padding: `10px 5px`,
-      }}
-    >
-      <div className="title" style={{fontSize: `20px`}} >Fundamentals</div>
-      <div style={{justifySelf: 'center', backgroundColor: `rgba(0, 0, 0, 0.16)`, width: `95%`, height: `1px`,}} ></div>
-      <div className="metrics w100" style={{padding: `4px 15px 4px 40px`}} >{buildMetrics(offeringObj)}</div>
+    <div className="Fundamentals w100 flexcol" >
+      <div className="title w100" >Fundamentals</div>
+      <div className="divider" ></div>
+      <div className="metrics w100" >{buildMetrics(offeringObj)}</div>
     </div>
-    
   );
 };
 
