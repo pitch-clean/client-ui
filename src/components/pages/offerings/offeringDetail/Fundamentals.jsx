@@ -14,10 +14,15 @@ const buildMetrics = (offeringObj) => {
   return (
     <>
       {buildListItem("Expected Annual Energy Output:", `${offeringObj.metrics.energyOutputKWh} kWh`)}
+      <div className="divider" ></div>
       {buildListItem("Capacity (AC/DC):", `${offeringObj.metrics.capacityKWh} kWh`)}
+      <div className="divider" ></div>
       {buildListItem("PPA Term:", offeringObj.metrics.ppaTerm)}
+      <div className="divider" ></div>
       {buildListItem("PPA Price:", `$${offeringObj.metrics.ppaPriceUSD}`)}
+      <div className="divider" ></div>
       {buildListItem("PPA Counterparty:", offeringObj.financials.ppaCounterparty)}
+      <div className="divider" ></div>
       {buildListItem("Commercial Operation Date", convertUnixMsToDate(offeringObj.dtInvestmentTermEnd))}
     </>
   )
@@ -29,7 +34,6 @@ const Fundamentals = ({offeringObj}) => {
   return (
     <div className="Fundamentals w100 flexcol" >
       <div className="title w100" >Fundamentals</div>
-      <div className="divider" ></div>
       <div className="metrics w100" >{buildMetrics(offeringObj)}</div>
     </div>
   );

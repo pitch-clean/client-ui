@@ -5,9 +5,7 @@ import React from 'react';
 const TemplateComponent = () => {
 
   return (
-    <div
-      style={{}}
-    ></div>
+    <div className="TemplateComponent" ></div>
   )
 };
 

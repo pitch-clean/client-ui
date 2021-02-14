@@ -58,7 +58,7 @@ const MainInfo = ({offeringObj}) => {
       <div style={{gridArea: `border1`, justifySelf: 'center', backgroundColor: `rgba(0, 0, 0, 0.16)`, width: `90%`, height: `1px`, margin: `10px 5px`,}} ></div>
       <InvestmentProgress progressPct={calculateProgressPercent()} offeringSlug={offeringObj.slug} />
       <div style={{gridArea: `border2`, justifySelf: 'center', backgroundColor: `rgba(0, 0, 0, 0.16)`, width: `90%`, height: `1px`, margin: `10px 5px`,}} ></div>
-      <div className="MainAbout">{offeringObj.about}</div>
+      <div className="MainAbout">{offeringObj.content.about}</div>
     </div>
   )
 };

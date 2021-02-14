@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 // components
 import MainInfo from './MainInfo';
 import ProjectInfo from './ProjectInfo';
+import Overview from './Overview';
 // style
 import './OfferingDetail.css';
 // seed
@@ -33,7 +34,7 @@ const OfferingDetail = ({props: {match: {params: {offeringId}}}}) => {
     <div className="OfferingDetail w100" >
       <MainInfo offeringObj={offeringObj} />
       <ProjectInfo offeringObj={offeringObj} />
-      {/* <Overview offeringObj={offeringObj} /> */}
+      <Overview offeringObj={offeringObj} />
     </div>
   ) : (
     <></>

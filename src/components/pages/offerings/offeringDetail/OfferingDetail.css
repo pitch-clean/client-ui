@@ -212,3 +212,38 @@
       .ProjectInfo .OfferingDocuments .docElem .title {
         flex: 1;
       }
+
+/* ####################################################################### */
+
+.OfferingDetail .Overview {
+  padding: 20px;
+  justify-content: start;
+  padding: 0 10%;
+}
+  .OfferingDetail .Overview .nav {
+    color: white;
+    padding: 5px;
+  }
+    .OfferingDetail .Overview .nav .divider-vertical {
+      background-color: white;
+      width: 1px;
+      padding: 3% 0;
+      margin-top: 1%;
+    }
+    .OfferingDetail .Overview .nav .item {
+      padding: 20px;
+      font-size: 35px;
+      cursor: pointer;
+    }
+    .OfferingDetail .Overview .nav .item.active {
+      color: #bceabc;
+    }
+    .OfferingDetail .Overview .nav .divider-vertical {
+      height: 70%;
+      max-height: 70%;
+      min-height: 70%;
+    }
+  .OfferingDetail .Overview .content {
+    text-align: start;
+    white-space: pre-wrap;
+  }
