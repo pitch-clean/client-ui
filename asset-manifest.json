@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fca11541.chunk.css",
+    "main.js": "/static/js/main.ec97f8fa.chunk.js",
+    "main.js.map": "/static/js/main.ec97f8fa.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.fb24b98d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.fb24b98d.js.map",
+    "static/js/2.0139ba37.chunk.js": "/static/js/2.0139ba37.chunk.js",
+    "static/js/2.0139ba37.chunk.js.map": "/static/js/2.0139ba37.chunk.js.map",
+    "static/js/3.5e9b4e31.chunk.js": "/static/js/3.5e9b4e31.chunk.js",
+    "static/js/3.5e9b4e31.chunk.js.map": "/static/js/3.5e9b4e31.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.fca11541.chunk.css.map": "/static/css/main.fca11541.chunk.css.map",
+    "static/js/2.0139ba37.chunk.js.LICENSE.txt": "/static/js/2.0139ba37.chunk.js.LICENSE.txt",
+    "static/media/1980_schwinn_air_dyne_ergometric_exerciser.png": "/static/media/1980_schwinn_air_dyne_ergometric_exerciser.1f1ca87f.png",
+    "static/media/e3xternal-content.duckduckgo.com.jpg": "/static/media/e3xternal-content.duckduckgo.com.7f7cc70b.jpg",
+    "static/media/extern4l-content.duckduckgo.com.jpg": "/static/media/extern4l-content.duckduckgo.com.2ff7011b.jpg",
+    "static/media/external-content.duckduckgo.com.jpg": "/static/media/external-content.duckduckgo.com.790ae039.jpg",
+    "static/media/external-content2.duckduckgo.com.jpg": "/static/media/external-content2.duckduckgo.com.1be3c31b.jpg",
+    "static/media/external-content5.duckduckgo.com.jpg": "/static/media/external-content5.duckduckgo.com.e9a724b8.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fb24b98d.js",
+    "static/js/2.0139ba37.chunk.js",
+    "static/css/main.fca11541.chunk.css",
+    "static/js/main.ec97f8fa.chunk.js"
+  ]
+}
