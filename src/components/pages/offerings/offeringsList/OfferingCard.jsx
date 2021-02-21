@@ -9,15 +9,19 @@ import './OfferingsList.css';
 // constants
 const filledStar = '\u2605';
 const openStar = '\u2606';
+// callback
+const onClickFavorite = () => {};
 
 // main
 const OfferingCard = ({offeringObj}) => {
   // TODO: delete this state
   const [isFavorited, setIsFavorited] = useState(false);
   const termLength = calculateTermLength(offeringObj.dtInvestmentTermEnd - offeringObj.dtInvestmentTermStart);
-  const interestAccrued = Math.round(10000 * offeringObj.financials.interestAccrued) / 100
+  const interestAccrued = Math.round(10000 * offeringObj.financials.interestAccrued) / 100;
+
   return (
     <div className="OfferingCard" >
+      <div className="otherClass" >{offeringObj.financials.otherClass}</div>
       <Link className="imgLink" to={`/offering/${offeringObj.slug}`} >
         <img
           className="img"
@@ -48,17 +52,17 @@ const OfferingCard = ({offeringObj}) => {
         <div className="info flexcol w100 f1">
           <div className="annualInterest item flexrow" >
             <div>Annual Interest: </div>
-            <div>{` ${interestAccrued}%`}</div>
+            <div style={{fontWeight: 500}}>{` ${interestAccrued}%`}</div>
           </div>
           <div className="divider"></div>
           <div className="termLength item flexrow" >
             <div>Term length: </div>
-            <div>{` ${termLength}%`}</div>
+            <div style={{fontWeight: 500}}>{` ${termLength}`}</div>
           </div>
           <div className="divider"></div>
           <div className="offeringSize item flexrow" >
             <div>Offering Size: </div>
-            <div>{` ${calcOfferSize(offeringObj.financials.fundTarget)}`}</div>
+            <div style={{fontWeight: 500}} >{` ${calcOfferSize(offeringObj.financials.fundTarget)}`}</div>
           </div>
         </div>
       </div>

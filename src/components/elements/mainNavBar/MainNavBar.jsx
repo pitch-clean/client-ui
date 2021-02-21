@@ -5,33 +5,25 @@ import {Link} from 'react-router-dom';
 import ProfileLoginRegister from './ProfileLoginRegister';
 import InfoGroup from './InfoGroup';
 // utils
-
 import { fixedHeight } from '../../utils/styleFxns';
+// styles
+import './MainNavBar.css';
 
 // main
 const MainNavBar = () => {
   // init hooks
   const ref1 = useRef(null);
-  // style
-  /**@type {React.CSSProperties} */
-  const homeLinkStyle = {
-    
-  };
 
   // effects
   useEffect(() => {
     console.log(ref1.current.getBoundingClientRect())
   }, [ref1]);
+
   return (
     <div
-      className="w100 flexrow"
+      className="w100 flexrow MainNavBar"
       style={{
         ...fixedHeight(40, 'px'),
-        backgroundColor: `black`,
-        justifyContent: `space-between`,
-        padding: `0 5px`,
-        color: `rgb(213, 220, 213)`,
-        textDecoration: 'none',
       }}
     >
       <Link
