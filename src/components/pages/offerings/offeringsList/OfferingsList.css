@@ -17,6 +17,16 @@
 .darkmode .OfferingCard {
   background-color: #292c2c;
 }
+  .OfferingCard .otherClass {
+    position: absolute;
+    font-size: 15px;
+    background-color: #1311117d;
+    color: white;
+    padding: 5px 10px;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
   .OfferingCard .divider {
     padding: 0;
     width: 90%;
@@ -34,6 +44,7 @@
   .OfferingCard .lowerCard {
     justify-content: start;
     padding: 10px;
+    font-size: 13px;
   }
     .OfferingCard .lowerCard .title {
       align-self: center;
@@ -41,7 +52,7 @@
       justify-content: space-between;
     }
       .OfferingCard .lowerCard .title .link {
-        font-size: 15px;
+        font-size: 17px;
         white-space: nowrap;
         overflow-x: hidden;
         text-overflow: ellipsis;
@@ -64,18 +75,21 @@
         text-decoration: none;
         text-align: start;
         color: inherit;
+        font-size: 13px;
       }
       .OfferingCard .lowerCard .sponsor .investmentClass {
         background-color: #cff2cf5e;
-        font-size: 12px;
         padding: 2px 5px;
       }
     .OfferingCard .lowerCard .info {
       flex: 1;
       justify-content: start;
+      align-items: start;
     }
       .OfferingCard .lowerCard .info > .item {
         padding: 5px 0;
+        justify-content: space-between;
+        width: 100%;
       }
         .OfferingCard .lowerCard .info > .item > div {
           padding: 0 5px;
