@@ -53,14 +53,14 @@ const InvestorDeveloperDashboard = ({contentStyle}) => {
             className="paragraph"
             style={paragraphStyle}
           >
-            Transactions on Envest are processed and stored using blockchain,<br/>
+            Transactions on eFunded are processed and stored using blockchain,<br/>
             allowing for rapid settlement with the highest standard for security and accountability
           </div>
         </div>
         <div className="infoCard flexcol h100" style={infoCardStyle} >
           <div className="header" style={{padding: `10px`,}}>{`Convenience`}</div>
           <div className="paragraph" style={paragraphStyle} >
-            Envest does the hard work for you: <br/>
+            eFunded does the hard work for you: <br/>
             We vet thousands of opportunities and<br/>
             compile the stats you need to know.
           </div>
@@ -68,7 +68,7 @@ const InvestorDeveloperDashboard = ({contentStyle}) => {
         <div className="infoCard flexcol h100" style={infoCardStyle} >
           <div className="header" style={{padding: `10px`,}}>{`Access`}</div>
           <div className="paragraph" style={paragraphStyle} >
-            Envest's relationships with smaller<br/>
+            eFunded's relationships with smaller<br/>
             developers means that our users get<br/>
             exclusive access to great opportunities.
           </div>

@@ -91,7 +91,7 @@ const LoginForm = () => {
     <div style={style} className="flexcol f1 page" >
       <div style={ctnrStyle} className="flexcol ctnr w100" >
         <div style={titleStyle} >
-          Sign in to Envest
+          Sign in to eFunded
         </div>
         <div className="InputCtnr flexcol w100" style={inputCtnrStyle} >
           <div className="w100 flexcol" style={inputTitleStyle} >
