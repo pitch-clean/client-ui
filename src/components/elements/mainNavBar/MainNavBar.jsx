@@ -39,7 +39,7 @@ const MainNavBar = () => {
           border: `none`,
         }}
       >
-        eFunded
+        Envest
       </Link>
       <InfoGroup />
       <ProfileLoginRegister />
