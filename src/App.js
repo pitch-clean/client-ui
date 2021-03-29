@@ -1,5 +1,5 @@
 // react
-import {useRef, useEffect} from 'react';
+import { useRef } from 'react';
 // components
 import PageRouter from './components/pages/PageRouter';
 import MainNavBar from './components/elements/mainNavBar/MainNavBar';
