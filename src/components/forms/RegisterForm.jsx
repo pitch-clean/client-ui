@@ -1,11 +1,11 @@
 // react
 import React, {useState, useEffect} from 'react';
-import FormTextField from '../../elements/FormTextField';
+import FormTextField from '../elements/FormTextField';
 // utils
-import {fixedWidth, fixedHeight} from '../../utils/styleFxns';
-import {register} from '../../../utils/requests';
-import {updateInputField} from '../../utils/formFxns';
-import {validateUsername} from './validationFxns';
+import {fixedWidth, fixedHeight} from '../utils/styleFxns';
+import {register} from '../../utils/requests';
+import {updateInputField} from '../utils/formFxns';
+import {validateUsername} from '../pages/home/validationFxns';
 // constants
 const formData = {};
 const validationObj = {

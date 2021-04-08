@@ -1,7 +1,7 @@
 // react
 import React from 'react';
 // components
-import Sidebar from '../../elements/Sidebar';
+import Sidebar from '../../elements/SideBar';
 import News from './news/News';
 import PublicMarkets from './publicMarkets/PublicMarkets';
 
@@ -9,12 +9,12 @@ import PublicMarkets from './publicMarkets/PublicMarkets';
 const RightSidebar = () => {
 
   return (
-    <div className="RightSidebar h100 flexcol" >
-      <Sidebar isLeft={false} >
+    <Sidebar isLeft={false} >
+      <div className="RightSidebar h100 flexcol" >
         <News />
         <PublicMarkets />
+      </div>
       </Sidebar>
-    </div>
   );
 };
 

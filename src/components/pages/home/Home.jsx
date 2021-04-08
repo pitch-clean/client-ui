@@ -9,7 +9,8 @@ import FeedView from '../feed/FeedView';
 const Home = () => {
   // TODO: add route for logged in user
   // const account = useSelector(s => s.auth);
-  const account = {id: 1};
+  // const account = {id: 1};
+  const account = null;
   return account ? <FeedView /> : <LandingPage />;
 };
 

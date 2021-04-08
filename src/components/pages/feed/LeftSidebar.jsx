@@ -1,7 +1,7 @@
 // react
 import React from 'react';
 // components
-import Sidebar from '../../elements/Sidebar';
+import Sidebar from '../../elements/SideBar';
 
 // main
 const LeftSidebar = () => {

@@ -1,0 +1,15 @@
+{
+  "parser": "@babel/runtime",
+  "extends": [
+    "./node_modules/cod-scripts/eslint.js"
+  ],
+  "rules": {
+    "class-methods-use-this": "off",
+    "additional-rule": "warn"
+  },
+  "ignorePatterns": [
+    "**/node_modules/*",
+    "**/build/*",
+    "config-overrides.js"
+  ]
+}

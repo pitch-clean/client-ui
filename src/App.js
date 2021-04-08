@@ -1,19 +1,19 @@
 // react
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 // components
 import PageRouter from './components/pages/PageRouter';
 import MainNavBar from './components/elements/mainNavBar/MainNavBar';
 // utils
-import {onKeyDownBlurAll} from './utils/keybinds';
+import { onKeyDownBlurAll } from './utils/keybinds';
 // styling
 import './App.css';
 import { fixedHeight } from './components/utils/styleFxns';
 
 // main
 const App = () => {
-  document.addEventListener('keydown', onKeyDownBlurAll, false)
+  document.addEventListener('keydown', onKeyDownBlurAll, false);
   // style
-  /**@type {React.CSSProperties} */
+  /** @type {React.CSSProperties} */
   const style = {
     justifyContent: `start`,
   };
@@ -38,11 +38,11 @@ const App = () => {
         }}
       >
         <PageRouter />
-        <div className="footer w100" style={{padding: `10px 20px`, backgroundColor: `black`}} >Footer</div>
+        <div className="footer w100">Footer</div>
       </div>
     </div>
   );
-}
+};
 
 // export
 export default App;

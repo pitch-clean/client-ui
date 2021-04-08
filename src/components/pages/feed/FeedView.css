@@ -1,5 +1,4 @@
 .App .FeedView {
-  min-height: 100vh;
   background-color: green;
   justify-content: space-between;
 }

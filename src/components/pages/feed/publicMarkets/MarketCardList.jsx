@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import MarketCard from './MarketCard';
 // seed
-const seedMktElems = [
+const seedMkts = [
   {
     title: 'iShares Clean Energy ETF',
     ticker: 'FAN',
@@ -16,13 +16,13 @@ const seedMktElems = [
 // main
 const MarketCardList = () => {
   // state
-  const [userMarketsElemArr, setUserMarketsElemArr] = useState(seedMktElems || []);
+  const [userMarketsElemArr, setUserMarketsElemArr] = useState([]);
   // effects
   useEffect(() => {
     const mockUserMarketsElemArr = [];
 
-    for (let idx = 0; idx < seedMktElems.length; idx += 1) {
-      const marketObj = seedMktElems[idx];
+    for (let idx = 0; idx < seedMkts.length; idx += 1) {
+      const marketObj = seedMkts[idx];
       mockUserMarketsElemArr.push(<MarketCard marketObj={marketObj} />);
     }
     setUserMarketsElemArr(mockUserMarketsElemArr);

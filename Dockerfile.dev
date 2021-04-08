@@ -10,8 +10,11 @@ RUN mkdir -p /frontend
 WORKDIR /frontend
 
 # install deps
-COPY package*.json ./
-RUN npm ci
+COPY package.json ./
+COPY yarn.lock ./
+RUN yarn install --frozen-lockfile
+# COPY package*.json ./
+# RUN npm ci
 
 # Bundle app source
 COPY ./public ./public

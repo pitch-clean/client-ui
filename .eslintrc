@@ -1,0 +1,10 @@
+{
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": [
+    "./node_modules/cod-scripts/eslint.js"
+  ]
+}
