@@ -40,7 +40,7 @@ const InfoGroup = () => {
         For Sponsors
       </Link>
     </div>
-  )
+  );
 };
 
 // export

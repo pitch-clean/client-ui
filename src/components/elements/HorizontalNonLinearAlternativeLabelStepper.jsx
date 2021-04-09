@@ -1,5 +1,6 @@
 // react
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -53,6 +54,8 @@ const HorizontalNonLinearAlternativeLabelStepper = ({ stepObjsArr, handleSubmit 
   // state
   const [activeStep, setActiveStep] = useState(0);
   const [completed] = useState(new Set());
+  const isFormValid = useSelector(s => s.register[stepObjsArr[activeStep].formName].isFormValid);
+  console.log('in the nw', isFormValid)
   // constants
   const totalSteps = stepObjsArr.length;
 
@@ -115,7 +118,7 @@ const HorizontalNonLinearAlternativeLabelStepper = ({ stepObjsArr, handleSubmit 
             </Button>
             {stepObjsArr[activeStep].component}
             <Button
-              disabled={!isLastStep(activeStep, totalSteps)}
+              disabled={!isFormValid}
               variant="contained"
               color="primary"
               onClick={handleSubmit}

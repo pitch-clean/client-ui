@@ -34,7 +34,6 @@ const App = () => {
         className="w100 flexcol f1"
         style={{
           justifyContent: `start`,
-          overflowY: `scroll`,
         }}
       >
         <PageRouter />

@@ -13,26 +13,31 @@ import './profileForms/ProfileForms.css';
  */
 const CreateProfileForm = () => {
   const handleSubmit = () => {};
+
   // state
   const [formData, setFormData] = useState({});
+  const [isFormValid, setIsFormValid] = useState(false);
   const stepObjsArr = [
     {
       header: 'Basic Info',
       message: 'Enter basic account info',
-      component: <LoginInfoForm formObj={{ formData, setFormData }} />,
+      component: <LoginInfoForm formObj={{ formData, setFormData }} setIsFormValid={setIsFormValid} />,
       isOptional: false,
+      formName: 'loginInfo',
     },
     {
       header: 'Second info',
       message: 'New second info',
-      component: <LoginInfoForm formObj={{ formData, setFormData }} />,
+      component: <LoginInfoForm formObj={{ formData, setFormData }} setIsFormValid={setIsFormValid} />,
       isOptional: false,
+      formName: 'secondInfo',
     },
     {
       header: 'Third info',
       message: 'New third info',
-      component: <LoginInfoForm formObj={{ formData, setFormData }} />,
+      component: <LoginInfoForm formObj={{ formData, setFormData }} setIsFormValid={setIsFormValid} />,
       isOptional: false,
+      formName: 'thirdInfo',
     },
   ];
 
