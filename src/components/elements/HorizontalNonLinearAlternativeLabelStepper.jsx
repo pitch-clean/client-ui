@@ -54,8 +54,9 @@ const HorizontalNonLinearAlternativeLabelStepper = ({ stepObjsArr, handleSubmit 
   // state
   const [activeStep, setActiveStep] = useState(0);
   const [completed] = useState(new Set());
-  const isFormValid = useSelector(s => s.register[stepObjsArr[activeStep].formName].isFormValid);
-  console.log('in the nw', isFormValid)
+  const isLoginInfoFormValid = useSelector(s => s.register.loginInfo.isFormValid);
+  const isProfileTypeFormValid = useSelector(s => s.register.profileType.isFormValid);
+  const areAllFormsValid = isLoginInfoFormValid && isProfileTypeFormValid;
   // constants
   const totalSteps = stepObjsArr.length;
 
@@ -100,15 +101,11 @@ const HorizontalNonLinearAlternativeLabelStepper = ({ stepObjsArr, handleSubmit 
       </Stepper>
       <div>
         <div>
-          <Typography className={classes.instructions}>
-            {stepObjsArr[activeStep].message}
-          </Typography>
           <div>
             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
               Back
             </Button>
             <Button
-              disabled={!completed.has(activeStep) || stepObjsArr[activeStep].isOptional}
               variant="contained"
               color="primary"
               onClick={handleNext}
@@ -116,9 +113,12 @@ const HorizontalNonLinearAlternativeLabelStepper = ({ stepObjsArr, handleSubmit 
             >
               Next
             </Button>
+            <Typography className={classes.instructions}>
+              {stepObjsArr[activeStep].message}
+            </Typography>
             {stepObjsArr[activeStep].component}
             <Button
-              disabled={!isFormValid}
+              disabled={!areAllFormsValid}
               variant="contained"
               color="primary"
               onClick={handleSubmit}

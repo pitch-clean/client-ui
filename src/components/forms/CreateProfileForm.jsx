@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // components
 import LoginInfoForm from './profileForms/LoginInfoForm';
+import ProfileTypeForm from './profileForms/ProfileTypeForm';
 import HorizontalNonLinearAlternativeLabelStepper from '../elements/HorizontalNonLinearAlternativeLabelStepper';
 // style
 import './profileForms/ProfileForms.css';
@@ -21,16 +22,20 @@ const CreateProfileForm = () => {
     {
       header: 'Basic Info',
       message: 'Enter basic account info',
-      component: <LoginInfoForm formObj={{ formData, setFormData }} setIsFormValid={setIsFormValid} />,
+      component: (
+        <LoginInfoForm formObj={{ formData, setFormData }} setIsFormValid={setIsFormValid} />
+      ),
       isOptional: false,
       formName: 'loginInfo',
     },
     {
-      header: 'Second info',
-      message: 'New second info',
-      component: <LoginInfoForm formObj={{ formData, setFormData }} setIsFormValid={setIsFormValid} />,
+      header: 'Account Type',
+      message: 'Business or Investor Account',
+      component: (
+        <ProfileTypeForm formObj={{ formData, setFormData }} setIsFormValid={setIsFormValid} />
+      ),
       isOptional: false,
-      formName: 'secondInfo',
+      formName: 'profileType',
     },
     {
       header: 'Third info',

@@ -30,7 +30,6 @@ const LoginInfoForm = () => {
   const dispatch = useDispatch();
   // state
   const loginInfoData = useSelector(s => s.register.loginInfo);
-  // console.log(loginInfoData);
   const [firstName, setFirstName] = useState({
     value: '',
     validator: Joi.string()
@@ -63,15 +62,14 @@ const LoginInfoForm = () => {
   const [pwd, setPwd] = useState({ value: '', validator: Joi.string().min(8).max(255), error: '' });
   const [confirmPwd, setConfirmPwd] = useState({
     value: '',
-    validator: Joi.any().equal(pwd.value),
     error: '',
   });
   const checkIsValidForm = error => {
-    const fields = [confirmPwd, pwd, email, lastName, middleName, firstName];
     if (error) {
       dispatch(updateFormValid('loginInfo', false));
       return false;
     }
+    const fields = [pwd, email, lastName, middleName, firstName];
     for (let idx = 0; idx < fields.length; idx += 1) {
       const element = fields[idx];
       if (element.error || !element.value) {
@@ -82,7 +80,7 @@ const LoginInfoForm = () => {
     dispatch(updateFormValid('loginInfo', true));
     return true;
   };
-  const validateField = (obj, setter, checkIsValidForm, e, fieldName) => {
+  const validateField = (obj, setter, checkIsValidForm, fieldName) => {
     // eslint-disable-next-line
     !obj.validator && console.error('Please set validator');
     // eslint-disable-next-line
@@ -117,7 +115,7 @@ const LoginInfoForm = () => {
           error={firstName.error}
           helperText={firstName.error}
           onChange={e => setFirstName({ ...firstName, value: e.target.value })}
-          onBlur={e => validateField(firstName, setFirstName, checkIsValidForm, e, 'firstName')}
+          onBlur={e => validateField(firstName, setFirstName, checkIsValidForm, 'firstName')}
           required
         />
         <TextField
@@ -127,7 +125,7 @@ const LoginInfoForm = () => {
           error={middleName.error}
           helperText={middleName.error}
           onChange={e => setMiddleName({ ...middleName, value: e.target.value })}
-          onBlur={e => validateField(middleName, setMiddleName, checkIsValidForm, e, 'middleName')}
+          onBlur={e => validateField(middleName, setMiddleName, checkIsValidForm, 'middleName')}
         />
         <TextField
           variant="outlined"
@@ -136,7 +134,7 @@ const LoginInfoForm = () => {
           error={lastName.error}
           helperText={lastName.error}
           onChange={e => setLastName({ ...lastName, value: e.target.value })}
-          onBlur={e => validateField(lastName, setLastName, checkIsValidForm, e, 'lastName')}
+          onBlur={e => validateField(lastName, setLastName, checkIsValidForm, 'lastName')}
           required
         />
         <TextField
@@ -146,7 +144,7 @@ const LoginInfoForm = () => {
           error={email.error}
           helperText={email.error}
           onChange={e => setEmail({ ...email, value: e.target.value })}
-          onBlur={e => validateField(email, setEmail, checkIsValidForm, e, 'email')}
+          onBlur={e => validateField(email, setEmail, checkIsValidForm, 'email')}
           required
         />
         <TextField
@@ -157,7 +155,7 @@ const LoginInfoForm = () => {
           error={pwd.error}
           helperText={pwd.error}
           onChange={e => setPwd({ ...pwd, value: e.target.value })}
-          onBlur={e => validateField(pwd, setPwd, checkIsValidForm, e, 'password')}
+          onBlur={() => validateField(pwd, setPwd, checkIsValidForm, 'password')}
           required
         />
         <TextField
@@ -167,17 +165,28 @@ const LoginInfoForm = () => {
           label="Confirm Password"
           error={confirmPwd.error}
           helperText={confirmPwd.error}
-          onChange={e => setConfirmPwd({ ...confirmPwd, value: e.target.value })}
-          onBlur={e => {
+          onChange={e => {
+            const newValidator = Joi.any()
+              .valid(pwd.value)
+              .error(new Error('Passwords do not match'));
+            const { error } = newValidator.validate(e.target.value);
+            const newConfirmPwd = {
+              ...confirmPwd,
+              value: e.target.value,
+              error: error && error.message,
+            };
+            setConfirmPwd(newConfirmPwd);
+            checkIsValidForm(error);
+            dispatch(updateProfileForm('loginInfo', { checkPassword: newConfirmPwd.value }));
+          }}
+          onBlur={() => {
             const newVal = Joi.any().valid(pwd.value).error(new Error('Passwords do not match'));
             validateField(
               { ...confirmPwd, validator: newVal },
               setConfirmPwd,
               checkIsValidForm,
-              e,
               'checkPassword',
             );
-            // setConfirmPwd({ ...confirmPwd, error: error && error.message });
           }}
           required
         />
