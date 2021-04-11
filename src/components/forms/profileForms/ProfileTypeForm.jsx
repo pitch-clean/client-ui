@@ -1,5 +1,5 @@
 // react
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // utils
 import Radio from '@material-ui/core/Radio';
@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 const formName = 'profileType';
+
 /**
  * Allows you to check if sponsor or investor
  */
@@ -27,7 +28,7 @@ const ProfileTypeForm = () => {
   const profileType = useSelector(s => s.register.profileType);
   // callbacks
   const handleChange = e => {
-    dispatch(updateProfileForm('profileType', { value: e.target.value, isFormValid: true }));
+    dispatch(updateProfileForm('profileType', { value: e.target.value }));
     dispatch(updateFormValid(formName, true));
   };
 

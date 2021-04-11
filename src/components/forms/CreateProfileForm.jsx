@@ -1,10 +1,12 @@
 // react
 import React from 'react';
+// import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 // components
 import LoginInfoForm from './profileForms/LoginInfoForm';
 import ProfileTypeForm from './profileForms/ProfileTypeForm';
-import InvestorInfoForm from './profileForms/InvestorInfoForm';
+import InvestorPurposeForm from './profileForms/InvestorPurposeForm';
+import InvestorPiiForm from './profileForms/InvestorPiiForm';
 import HorizontalNonLinearAlternativeLabelStepper from '../elements/HorizontalNonLinearAlternativeLabelStepper';
 // style
 import './profileForms/ProfileForms.css';
@@ -15,8 +17,9 @@ import './profileForms/ProfileForms.css';
  */
 const CreateProfileForm = () => {
   const handleSubmit = () => {};
-
   // state
+  // const firstName = useSelector(s => s.register.loginInfo.fields.firstName.value);
+
   const stepObjsArr = [
     {
       header: 'Login Info',
@@ -35,9 +38,17 @@ const CreateProfileForm = () => {
     {
       header: 'Investment purpose and history',
       message: 'Select all that apply',
-      component: <InvestorInfoForm />,
+      component: <InvestorPurposeForm />,
       isOptional: false,
-      formName: 'investmentPurpose',
+      formName: 'investorPurpose',
+    },
+    {
+      header: `Personal information`,
+      message: `Welcome,  Let's get started!`,
+      // message: 'Please provide the following information so we can set up your account.',
+      component: <InvestorPiiForm />,
+      isOptional: false,
+      formName: 'investorPii',
     },
   ];
 

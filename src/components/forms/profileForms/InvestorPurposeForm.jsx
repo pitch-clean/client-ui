@@ -37,15 +37,15 @@ const GreenCheckbox = withStyles({
   },
   checked: {},
 })(props => <Checkbox color="default" {...props} />);
-const formName = 'investmentPurpose';
+const formName = 'investorPurpose';
 
 // main
-const InvestorInfoForm = () => {
+const InvestorPurposeForm = () => {
   // init hooks
   const classes = useStyles();
   const dispatch = useDispatch();
   // state
-  const itemsObj = useSelector(s => s.register.investmentPurpose.items);
+  const itemsObj = useSelector(s => s.register.investorPurpose.fields.items);
 
   // callbacks
   const handleChange = event => {
@@ -98,7 +98,7 @@ const InvestorInfoForm = () => {
   }
 
   return (
-    <div className={`InvestorInfoForm ${classes.root}`}>
+    <div className={`InvestorPurposeForm ${classes.root}`}>
       <FormControl required error={error} component="fieldset" className={classes.formControl}>
         <FormGroup>{checkboxArr}</FormGroup>
         <FormHelperText style={{ color: error ? `red` : 'transparent' }}>
@@ -110,4 +110,4 @@ const InvestorInfoForm = () => {
 };
 
 // export
-export default InvestorInfoForm;
+export default InvestorPurposeForm;

@@ -1,16 +1,16 @@
 // react
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
-import StepButton from '@material-ui/core/StepButton';
+import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Proptypes from 'prop-types';
 import SendIcon from '@material-ui/icons/Send';
-import { updateActiveForm } from '../../redux/actions/RegisterActions';
+import { updateActiveForm, checkIfAllValidForms } from '../../redux/actions/RegisterActions';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,15 +40,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 // fxns
-const isStepComplete = (completed, step) => {
-  return completed.has(step);
-};
 const handleNext = (setActiveStep, activeStep, dispatch, formName) => () => {
   dispatch(updateActiveForm(formName));
   setActiveStep(activeStep + 1);
-};
-const handleStep = (setActiveStep, step) => () => {
-  setActiveStep(step);
 };
 const handleBack = (dispatch, formName, setActiveStep) => () => {
   dispatch(updateActiveForm(formName));
@@ -62,10 +56,14 @@ const HorizontalNonLinearAlternativeLabelStepper = ({ stepObjsArr, handleSubmit 
   const dispatch = useDispatch();
   // state
   const [activeStep, setActiveStep] = useState(0);
-  const [completed] = useState(new Set());
   const isActiveFormValid = useSelector(s => s.register.activeForm.isFormValid);
   const areAllFormsValid = useSelector(s => s.register.areAllFormsValid);
+  const validForms = useSelector(s => s.register.validForms);
   const stepCount = stepObjsArr.length;
+  // effects
+  useEffect(() => {
+    dispatch(checkIfAllValidForms());
+  }, [isActiveFormValid]);
 
   return (
     <div className={classes.root}>
@@ -78,13 +76,8 @@ const HorizontalNonLinearAlternativeLabelStepper = ({ stepObjsArr, handleSubmit 
           }
           return (
             <Step key={label.header} {...stepProps}>
-              <StepButton
-                onClick={handleStep(setActiveStep, index)}
-                completed={isStepComplete(completed, index)}
-                {...buttonProps}
-              >
-                {label.header}
-              </StepButton>
+              <StepLabel completed={validForms[label.formName]}>{label.header}</StepLabel>
+              {label.header}
             </Step>
           );
         })}

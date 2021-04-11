@@ -1,5 +1,6 @@
 // react
 import React from 'react';
+import { useSelector } from 'react-redux';
 // utils
 import Joi from 'joi';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,13 +15,10 @@ const useStyles = makeStyles(theme => ({
     },
   },
 }));
-// const formName = 'loginInfo';
+const formName = 'loginInfo';
 
 /**
- * This allows you to enter
- * SENDS A POST TO CREATE ENTRY IN DATABASE
  * User enters first & last name, email, password
- * dtRequest is appended
  */
 const LoginInfoForm = () => {
   // init hooks
@@ -29,6 +27,8 @@ const LoginInfoForm = () => {
   return (
     <div className={`${classes.root} LoginInfoForm flexcol w100`}>
       <TextField
+        autoFocus={true}
+        formName={formName}
         fieldName="firstName"
         label="Legal First Name"
         validator={Joi.string()
@@ -37,6 +37,7 @@ const LoginInfoForm = () => {
           .max(50)}
       />
       <TextField
+        formName={formName}
         fieldName="middleName"
         label="Middle Name/Initial"
         validator={Joi.string()
@@ -45,6 +46,7 @@ const LoginInfoForm = () => {
           .max(50)}
       />
       <TextField
+        formName={formName}
         fieldName="lastName"
         label="Legal Last Name"
         validator={Joi.string()
@@ -53,12 +55,13 @@ const LoginInfoForm = () => {
           .max(50)}
       />
       <TextField
+        formName={formName}
         fieldName="email"
         label="Email Address"
         validator={Joi.string().email({ tlds: { allow: false } })}
       />
-      <TextField fieldName="password" label="Password" />
-      <TextField fieldName="confirmPassword" label="Confirm Password" />
+      <TextField formName={formName} fieldName="password" label="Password" />
+      <TextField formName={formName} fieldName="confirmPassword" label="Confirm Password" />
     </div>
   );
 };

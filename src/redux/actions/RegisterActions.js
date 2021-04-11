@@ -38,16 +38,21 @@ export const updateFormValid = (form, isValid) => dispatch => {
     isValid,
   });
 };
-export const checkIfValidFormRedux = (form, error) => dispatch => {
+export const updateActiveForm = formName => dispatch => {
+  dispatch({
+    type: types.UPDATE_ACTIVE_FORM,
+    formName,
+  });
+};
+export const checkIfValidForm = (form, error) => dispatch => {
   dispatch({
     type: types.CHECK_IF_VALID_FORM,
     form,
     error,
   });
 };
-export const updateActiveForm = formName => dispatch => {
+export const checkIfAllValidForms = () => dispatch => {
   dispatch({
-    type: types.UPDATE_ACTIVE_FORM,
-    formName,
+    type: types.CHECK_IF_ALL_VALID_FORMS,
   });
 };
