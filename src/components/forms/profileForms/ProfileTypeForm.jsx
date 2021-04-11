@@ -12,13 +12,13 @@ import { updateProfileForm, updateFormValid } from '../../../redux/actions/Regis
 const useStyles = makeStyles(theme => ({
   root: {
     margin: theme.spacing(1),
-    width: 370,
+    width: `100%`,
   },
 }));
+const formName = 'profileType';
 /**
  * Allows you to check if sponsor or investor
  */
-
 const ProfileTypeForm = () => {
   // init hooks
   const classes = useStyles();
@@ -27,16 +27,9 @@ const ProfileTypeForm = () => {
   const profileType = useSelector(s => s.register.profileType);
   // callbacks
   const handleChange = e => {
-    dispatch(updateProfileForm('profileType', { value: e.target.value }));
+    dispatch(updateProfileForm('profileType', { value: e.target.value, isFormValid: true }));
+    dispatch(updateFormValid(formName, true));
   };
-  // effects
-  useEffect(() => {
-    if (profileType.value) {
-      dispatch(updateFormValid('profileType', true));
-    } else {
-      dispatch(updateFormValid('profileType', false));
-    }
-  }, [profileType.value]);
 
   return (
     <div className="ProfileTypeForm">
@@ -50,12 +43,12 @@ const ProfileTypeForm = () => {
           <FormControlLabel
             value="investor"
             control={<Radio />}
-            label="Is this an individual investor account?"
+            label="This is an individual investor account"
           />
           <FormControlLabel
             value="sponsor"
             control={<Radio />}
-            label="Is this an account for a company or entity?"
+            label="This is an account for a company or entity"
           />
         </RadioGroup>
       </FormControl>

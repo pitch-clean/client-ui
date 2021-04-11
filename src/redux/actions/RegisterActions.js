@@ -7,10 +7,47 @@ export const updateProfileForm = (form, payload) => dispatch => {
     payload,
   });
 };
-export const updateFormValid = (form, value) => dispatch => {
+export const updateFormFieldValue = (form, field, payload) => dispatch => {
+  dispatch({
+    type: types.UPDATE_FORM_FIELD_VALUE,
+    form,
+    field,
+    payload,
+  });
+};
+export const updateFormField = (form, field, payload) => dispatch => {
+  dispatch({
+    type: types.UPDATE_FORM_FIELD,
+    form,
+    field,
+    payload,
+  });
+};
+export const updateFormFieldError = (form, field, payload) => dispatch => {
+  dispatch({
+    type: types.UPDATE_FORM_FIELD_ERROR,
+    form,
+    field,
+    payload,
+  });
+};
+export const updateFormValid = (form, isValid) => dispatch => {
   dispatch({
     type: types.UPDATE_FORM_VALID,
     form,
-    payload: value,
+    isValid,
+  });
+};
+export const checkIfValidFormRedux = (form, error) => dispatch => {
+  dispatch({
+    type: types.CHECK_IF_VALID_FORM,
+    form,
+    error,
+  });
+};
+export const updateActiveForm = formName => dispatch => {
+  dispatch({
+    type: types.UPDATE_ACTIVE_FORM,
+    formName,
   });
 };

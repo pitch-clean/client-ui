@@ -12,7 +12,7 @@ import './CreateEditProfile.css';
 const CreateProfile = () => {
 
   return (
-    <div className="CreateProfile w100 flexrow" >
+    <div className="CreateProfile w100 flexrow h100" >
       <CreateProfileForm />
     </div>
   )

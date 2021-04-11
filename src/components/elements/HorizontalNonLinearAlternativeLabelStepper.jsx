@@ -1,6 +1,6 @@
 // react
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -9,21 +9,27 @@ import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Proptypes from 'prop-types';
+import SendIcon from '@material-ui/icons/Send';
+import { updateActiveForm } from '../../redux/actions/RegisterActions';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
     marginBottom: `10px`,
   },
-  button: {
-    marginRight: theme.spacing(1),
+  theDiv: {
+    display: `flex`,
+    flexFlow: 'row',
   },
-  submitButton: {
-    width: `300px`,
+  nextButton: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
   },
   backButton: {
     marginRight: theme.spacing(1),
-    backgroundColor: `whitesmoke`,
+  },
+  submitButton: {
+    width: `100%`,
+    marginTop: theme.spacing(1),
   },
   completed: {
     display: 'inline-block',
@@ -34,48 +40,32 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 // fxns
-const completedSteps = completed => {
-  return completed.size;
-};
-const allStepsCompleted = (completed, totalSteps) => {
-  return completedSteps(completed) === totalSteps;
-};
-const isLastStep = (activeStep, totalSteps) => {
-  return activeStep === totalSteps - 1;
-};
 const isStepComplete = (completed, step) => {
   return completed.has(step);
+};
+const handleNext = (setActiveStep, activeStep, dispatch, formName) => () => {
+  dispatch(updateActiveForm(formName));
+  setActiveStep(activeStep + 1);
+};
+const handleStep = (setActiveStep, step) => () => {
+  setActiveStep(step);
+};
+const handleBack = (dispatch, formName, setActiveStep) => () => {
+  dispatch(updateActiveForm(formName));
+  setActiveStep(prevActiveStep => prevActiveStep - 1);
 };
 
 // main
 const HorizontalNonLinearAlternativeLabelStepper = ({ stepObjsArr, handleSubmit }) => {
   // init hooks
   const classes = useStyles();
+  const dispatch = useDispatch();
   // state
   const [activeStep, setActiveStep] = useState(0);
   const [completed] = useState(new Set());
-  const isLoginInfoFormValid = useSelector(s => s.register.loginInfo.isFormValid);
-  const isProfileTypeFormValid = useSelector(s => s.register.profileType.isFormValid);
-  const areAllFormsValid = isLoginInfoFormValid && isProfileTypeFormValid;
-  // constants
-  const totalSteps = stepObjsArr.length;
-
-  // fxns
-  const handleNext = () => {
-    const newActiveStep =
-      isLastStep(activeStep) && !allStepsCompleted(completed, totalSteps)
-        ? // It's the last step, but not all steps have been completed
-          // find the first step that has been completed
-          stepObjsArr.findIndex((step, i) => !completed.has(i))
-        : activeStep + 1;
-    setActiveStep(newActiveStep);
-  };
-  const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
-  };
-  const handleStep = step => () => {
-    setActiveStep(step);
-  };
+  const isActiveFormValid = useSelector(s => s.register.activeForm.isFormValid);
+  const areAllFormsValid = useSelector(s => s.register.areAllFormsValid);
+  const stepCount = stepObjsArr.length;
 
   return (
     <div className={classes.root}>
@@ -89,7 +79,7 @@ const HorizontalNonLinearAlternativeLabelStepper = ({ stepObjsArr, handleSubmit 
           return (
             <Step key={label.header} {...stepProps}>
               <StepButton
-                onClick={handleStep(index)}
+                onClick={handleStep(setActiveStep, index)}
                 completed={isStepComplete(completed, index)}
                 {...buttonProps}
               >
@@ -102,27 +92,48 @@ const HorizontalNonLinearAlternativeLabelStepper = ({ stepObjsArr, handleSubmit 
       <div>
         <div>
           <div>
-            <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-              Back
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleNext}
-              className={classes.button}
-            >
-              Next
-            </Button>
             <Typography className={classes.instructions}>
               {stepObjsArr[activeStep].message}
             </Typography>
             {stepObjsArr[activeStep].component}
+            <div className={classes.theDiv}>
+              <Button
+                variant="outlined"
+                color="default"
+                disabled={activeStep === 0}
+                onClick={handleBack(
+                  dispatch,
+                  activeStep > 0 ? stepObjsArr[activeStep - 1].formName : '',
+                  setActiveStep,
+                )}
+                className={classes.backbutton}
+              >
+                Back
+              </Button>
+
+              <Button
+                disabled={!isActiveFormValid || activeStep >= stepCount - 1}
+                variant="outlined"
+                color="primary"
+                onClick={handleNext(
+                  setActiveStep,
+                  activeStep,
+                  dispatch,
+                  activeStep < stepCount - 1 ? stepObjsArr[activeStep + 1].formName : '',
+                )}
+                className={classes.nextButton}
+              >
+                Next
+              </Button>
+            </div>
             <Button
               disabled={!areAllFormsValid}
               variant="contained"
               color="primary"
               onClick={handleSubmit}
               className={classes.submitButton}
+              endIcon={<SendIcon />}
+              size="large"
             >
               Submit
             </Button>

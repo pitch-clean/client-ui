@@ -1,9 +1,10 @@
 // react
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 // components
 import LoginInfoForm from './profileForms/LoginInfoForm';
 import ProfileTypeForm from './profileForms/ProfileTypeForm';
+import InvestorInfoForm from './profileForms/InvestorInfoForm';
 import HorizontalNonLinearAlternativeLabelStepper from '../elements/HorizontalNonLinearAlternativeLabelStepper';
 // style
 import './profileForms/ProfileForms.css';
@@ -16,38 +17,32 @@ const CreateProfileForm = () => {
   const handleSubmit = () => {};
 
   // state
-  const [formData, setFormData] = useState({});
-  const [isFormValid, setIsFormValid] = useState(false);
   const stepObjsArr = [
     {
-      header: 'Basic Info',
-      message: 'Enter basic account info',
-      component: (
-        <LoginInfoForm formObj={{ formData, setFormData }} setIsFormValid={setIsFormValid} />
-      ),
+      header: 'Login Info',
+      message: 'Create a new profile',
+      component: <LoginInfoForm />,
       isOptional: false,
       formName: 'loginInfo',
     },
     {
       header: 'Account Type',
       message: 'Business or Investor Account',
-      component: (
-        <ProfileTypeForm formObj={{ formData, setFormData }} setIsFormValid={setIsFormValid} />
-      ),
+      component: <ProfileTypeForm />,
       isOptional: false,
       formName: 'profileType',
     },
     {
-      header: 'Third info',
-      message: 'New third info',
-      component: <LoginInfoForm formObj={{ formData, setFormData }} setIsFormValid={setIsFormValid} />,
+      header: 'Investment purpose and history',
+      message: 'Select all that apply',
+      component: <InvestorInfoForm />,
       isOptional: false,
-      formName: 'thirdInfo',
+      formName: 'investmentPurpose',
     },
   ];
 
   return (
-    <div className="CreateProfileForm flexcol w100">
+    <div className="CreateProfileForm flexcol w100 h100">
       <HorizontalNonLinearAlternativeLabelStepper
         stepObjsArr={stepObjsArr}
         handleSubmit={handleSubmit}
