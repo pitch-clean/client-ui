@@ -4,11 +4,20 @@ import { useSelector, useDispatch } from 'react-redux';
 // utils
 import Joi from 'joi';
 import { TextField as MuiTextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import {
   updateFormFieldError,
   updateFormFieldValue,
   checkIfValidForm,
 } from '../../../redux/actions/RegisterActions';
+// constants
+const useStyles = makeStyles(() => ({
+  helperText: {
+    lineHeight: 0,
+    marginBottom: `5px`,
+  },
+}));
 
 /**
  * Field
@@ -16,6 +25,7 @@ import {
 const TextField = ({ formName, fieldName, label, validator, autoFocus }) => {
   // init hooks
   const dispatch = useDispatch();
+  const classes = useStyles();
   // state
   const fieldObj = useSelector(s => s.register[formName].fields[fieldName]);
   const val = useSelector(s => s.register[formName].fields[fieldName].value);
@@ -54,20 +64,28 @@ const TextField = ({ formName, fieldName, label, validator, autoFocus }) => {
       dispatch(checkIfValidForm(formName, error));
     }
   };
-
   return (
-    <MuiTextField
-      variant="outlined"
-      value={val}
-      label={label}
-      type={type}
-      error={err}
-      helperText={err}
-      onChange={onchange}
-      onBlur={onblur}
-      required={!isOptional}
-      autoFocus={autoFocus}
-    />
+    <>
+      <MuiTextField
+        variant="outlined"
+        value={val}
+        label={label}
+        type={type}
+        error={err}
+        onChange={onchange}
+        onBlur={onblur}
+        required={!isOptional}
+        autoFocus={autoFocus}
+      />
+      <FormHelperText
+        error={err}
+        id="component-error-text"
+        style={{ color: err ? 'red' : 'transparent' }}
+        className={classes.helperText}
+      >
+        {err || 'error text'}
+      </FormHelperText>
+    </>
   );
 };
 

@@ -16,7 +16,6 @@ import './profileForms/ProfileForms.css';
  * Refreshing just repopulates fields from existing form in database
  */
 const CreateProfileForm = () => {
-  const handleSubmit = () => {};
   // state
   // const firstName = useSelector(s => s.register.loginInfo.fields.firstName.value);
 
@@ -56,7 +55,8 @@ const CreateProfileForm = () => {
     <div className="CreateProfileForm flexcol w100 h100">
       <HorizontalNonLinearAlternativeLabelStepper
         stepObjsArr={stepObjsArr}
-        handleSubmit={handleSubmit}
+        redirectAddress="/login"
+        reducerName="register"
       />
       <div className="signIn" style={{ fontSize: `15px`, margin: `10px 0` }}>
         <div>Already have an account?</div>

@@ -61,7 +61,7 @@ const SelectField = ({ formName, fieldName, label, valuesArr }) => {
         {optionArr}
       </Select>
       <FormHelperText style={{ color: err ? `red` : 'transparent' }}>
-        Please select a state/province
+        Please select a value
       </FormHelperText>
     </FormControl>
   );

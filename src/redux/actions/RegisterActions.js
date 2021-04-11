@@ -56,3 +56,8 @@ export const checkIfAllValidForms = () => dispatch => {
     type: types.CHECK_IF_ALL_VALID_FORMS,
   });
 };
+export const resetAllForms = () => dispatch => {
+  dispatch({
+    type: types.RESET_ALL_FORMS,
+  });
+};

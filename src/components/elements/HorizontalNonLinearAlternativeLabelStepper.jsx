@@ -1,5 +1,6 @@
 // react
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,7 +11,11 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Proptypes from 'prop-types';
 import SendIcon from '@material-ui/icons/Send';
-import { updateActiveForm, checkIfAllValidForms } from '../../redux/actions/RegisterActions';
+import {
+  updateActiveForm,
+  checkIfAllValidForms,
+  resetAllForms,
+} from '../../redux/actions/RegisterActions';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,20 +55,43 @@ const handleBack = (dispatch, formName, setActiveStep) => () => {
 };
 
 // main
-const HorizontalNonLinearAlternativeLabelStepper = ({ stepObjsArr, handleSubmit }) => {
+const HorizontalNonLinearAlternativeLabelStepper = ({
+  stepObjsArr,
+  reducerName,
+  redirectAddress,
+}) => {
   // init hooks
   const classes = useStyles();
   const dispatch = useDispatch();
   // state
   const [activeStep, setActiveStep] = useState(0);
-  const isActiveFormValid = useSelector(s => s.register.activeForm.isFormValid);
-  const areAllFormsValid = useSelector(s => s.register.areAllFormsValid);
-  const validForms = useSelector(s => s.register.validForms);
+  const [isRequestSuccessful, setIsRequestSuccessful] = useState(0);
+  const isActiveFormValid = useSelector(s => s[reducerName].activeForm.isFormValid);
+  const areAllFormsValid = useSelector(s => s[reducerName].areAllFormsValid);
+  const validForms = useSelector(s => s[reducerName].validForms);
   const stepCount = stepObjsArr.length;
+  console.log(isActiveFormValid)
+  // callbacks
+  const handleSubmit = () => {
+    // TODO: create route and service on backend to log in successfully
+    const isSuccess = true;
+    setIsRequestSuccessful(isSuccess);
+  };
   // effects
   useEffect(() => {
     dispatch(checkIfAllValidForms());
   }, [isActiveFormValid]);
+  useEffect(() => {
+    return () => {
+      console.log('resetting')
+      dispatch(resetAllForms());
+    };
+  }, []);
+  // logic
+  // reset form and redirect
+  if (isRequestSuccessful) {
+    return <Redirect to={redirectAddress} />;
+  }
 
   return (
     <div className={classes.root}>
@@ -140,7 +168,6 @@ const HorizontalNonLinearAlternativeLabelStepper = ({ stepObjsArr, handleSubmit 
 // proptypes
 HorizontalNonLinearAlternativeLabelStepper.propTypes = {
   stepObjsArr: Proptypes.shape([]).isRequired,
-  handleSubmit: Proptypes.shape({}).isRequired,
 };
 
 // export

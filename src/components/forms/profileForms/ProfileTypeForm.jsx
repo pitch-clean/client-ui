@@ -7,7 +7,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
-import { updateProfileForm, updateFormValid } from '../../../redux/actions/RegisterActions';
+import { updateFormFieldValue, checkIfValidForm } from '../../../redux/actions/RegisterActions';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,22 +25,20 @@ const ProfileTypeForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   // state
-  const profileType = useSelector(s => s.register.profileType);
+  const register = useSelector(s => s.register);
+  const {
+    fields: { type },
+  } = register[formName];
   // callbacks
   const handleChange = e => {
-    dispatch(updateProfileForm('profileType', { value: e.target.value }));
-    dispatch(updateFormValid(formName, true));
+    dispatch(updateFormFieldValue(formName, 'type', e.target.value));
+    dispatch(checkIfValidForm(formName, null));
   };
 
   return (
     <div className="ProfileTypeForm">
       <FormControl component="fieldset" className={classes.root}>
-        <RadioGroup
-          aria-label="gender"
-          name="gender1"
-          value={profileType.value}
-          onChange={handleChange}
-        >
+        <RadioGroup aria-label="gender" name="gender1" value={type.value} onChange={handleChange}>
           <FormControlLabel
             value="investor"
             control={<Radio />}

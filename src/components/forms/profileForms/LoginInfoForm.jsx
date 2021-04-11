@@ -1,6 +1,5 @@
 // react
 import React from 'react';
-import { useSelector } from 'react-redux';
 // utils
 import Joi from 'joi';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,7 +9,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      width: 300,
+      width: `100%`,
       display: 'flex',
     },
   },
@@ -27,7 +26,7 @@ const LoginInfoForm = () => {
   return (
     <div className={`${classes.root} LoginInfoForm flexcol w100`}>
       <TextField
-        autoFocus={true}
+        autoFocus
         formName={formName}
         fieldName="firstName"
         label="Legal First Name"
