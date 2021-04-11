@@ -1,38 +1,68 @@
 // react
-import React, {useState, useEffect} from 'react';
-// components
+import React, { useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 // utils
-import {fixedWidth, fixedHeight} from '../../utils/styleFxns';
-import {login} from '../../../utils/requests';
-import {updateInputField} from '../../utils/formFxns';
+import Joi from 'joi';
+import { fixedWidth, fixedHeight } from '../../utils/styleFxns';
+import { login } from '../../../utils/requests';
+import {
+  updateLoginField,
+  updateLoginStatus,
+  resetLoginForm,
+} from '../../../redux/actions/AuthActions';
+// components
+import TextField from '../../forms/fields/TextField';
 // event handlers
-const submitLogin = async (username, password, submitStatus) => {
-  console.log('submitting', username)
-  const loginUrl = 'http://localhost:8000/login';
-  const body = {username, password};
-  try {
-    const res = await login(loginUrl, body); 
-    console.log('response here', res);
-  } catch (error) {
-    console.error('error HERE:', error)
+const submitLogin = async (username, password, dispatch) => {
+  // TODO create routes and services to connect to backend and actually log in
+  const testing = true;
+  let res;
+  let profileObj = {};
+  if (testing) {
+    if (username === 'test@test.com' && password === 'testpassword') {
+      profileObj = { firstName: 'Test User', username };
+      console.log('success')
+    } else {
+      alert('Incorrect Email and/or Password');
+      return;
+    }
+    dispatch(updateLoginStatus(true, profileObj));
+  } else {
+    const loginUrl = 'http://localhost:8000/api/login';
+    const body = { username, password };
+    try {
+      res = await login(loginUrl, body);
+      console.log('response here', res);
+    } catch (error) {
+      console.error('error HERE:', error)
+    }
   }
 };
-const keyDownHandler = (e, username, password) => {
+const keyDownHandler = (username, password, dispatch) => e => {
   if (e.key === 'Enter') {
     e.preventDefault();
-    submitLogin(username, password)
+    submitLogin(username, password, dispatch);
   }
 };
 // main
 const LoginForm = () => {
+  // init hooks
+  const dispatch = useDispatch();
   // state
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [submitStatus, setSubmitStatus] = useState('');
+  const usernameRedux = useSelector(s => s.auth.login.fields.username.value);
+  const passwordRedux = useSelector(s => s.auth.login.fields.password.value);
+  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
+  if (isAuthenticated) {
+    console.log('its auth')
+    dispatch(resetLoginForm());
+    return <Redirect to="/" />;
+  }
+  // effects
   // style
   /**@type {React.CSSProperties} */
   const style = {
-    ...fixedWidth(30, '%'),
+    ...fixedWidth(50, '%'),
     justifyContent: `start`,
   };
   /**@type {React.CSSProperties} */
@@ -40,6 +70,7 @@ const LoginForm = () => {
     boxShadow: `0px 0px 20px 8px rgba(0, 0, 0, 0.200)`,
     marginTop: `10%`,
     flex: `unset`,
+    backgroundColor: 'whitesmoke',
   };
   /**@type {React.CSSProperties} */
   const titleStyle = {
@@ -68,59 +99,50 @@ const LoginForm = () => {
   const submitStyle = {
     ...fixedHeight(40, 'px'),
     bottom: 0,
-    backgroundColor: `black`,
+    // backgroundColor: `black`,
+    borderTop: '1px solid grey',
     borderTopRightRadius: `0`,
     borderTopLeftRadius: `0`,
     cursor: `pointer`,
   };
-  // effects
-  useEffect(() => {
-    switch (submitStatus) {
-      // TODO: logic to display a notification thru a notifications system
-      case 'submitted':
-        break;
-      case 'unsuccessful':
-        break;
-      case 'successful':
-        break;
-      default:
-        break;
-    }
-  }, [submitStatus]);
+
   return (
-    <div style={style} className="flexcol f1 page" >
-      <div style={ctnrStyle} className="flexcol ctnr w100" >
-        <div style={titleStyle} >
-          Sign in to Envest
+    <div style={style} className="flexcol f1 page">
+      <div style={ctnrStyle} className="flexcol ctnr w100">
+        <div style={titleStyle}>Sign in to Envest</div>
+        {/* eslint-disable-next-line */}
+        <div
+          className="InputCtnr flexcol w100"
+          style={inputCtnrStyle}
+          onKeyDown={keyDownHandler(usernameRedux, passwordRedux, dispatch)}
+        >
+          <TextField
+            formName="login"
+            fieldName="username"
+            label="Email" // temporary
+            validator={Joi.string()
+              .email({ tlds: { allow: false } })
+              .min(5)
+              .max(128)}
+            autoFocus
+            reducerName="auth"
+            updateFxn={updateLoginField}
+          />
+          <TextField
+            formName="login"
+            fieldName="password"
+            label="Password"
+            validator={Joi.string().min(8).max(255)}
+            reducerName="auth"
+            updateFxn={updateLoginField}
+          />
         </div>
-        <div className="InputCtnr flexcol w100" style={inputCtnrStyle} >
-          <div className="w100 flexcol" style={inputTitleStyle} >
-            <div>Username</div>
-            <input
-              style={inputStyle}
-              className="w100"
-              type="text"
-              placeholder="..."
-              value={username}
-              onChange={e => updateInputField(e, setUsername)}
-              onKeyDown={e => keyDownHandler(e)}
-              autoFocus
-            />
-          </div>
-          <div className="w100 flexcol" style={inputTitleStyle} >
-            <div>Password</div>
-            <input
-              style={inputStyle}
-              className="w100"
-              type="password"
-              placeholder="..."
-              value={password}
-              onChange={e => updateInputField(e, setPassword)}
-              onKeyDown={e => keyDownHandler(e)}
-            />
-          </div>
-        </div>
-        <div className="w100 flexcol noselect" style={submitStyle} onClick={() => submitLogin(username, password, submitStatus)} >
+        {/* eslint-disable-next-line */}
+        <div
+          className="w100 flexcol noselect"
+          style={submitStyle}
+          onClick={() => submitLogin(usernameRedux, passwordRedux, dispatch)}
+        >
           Submit
         </div>
       </div>

@@ -1,6 +1,6 @@
 // react
 import React from 'react';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 // components
 import ProfileDropDown from './ProfileDropDown';
 import LoginRegister from './LoginRegister';
@@ -15,6 +15,7 @@ const ProfileLoginRegister = () => {
     boxShadow: `rgb(79, 76, 76) 0px 0px 4px -1px`,
     margin: `0 50px`,
     border: `none`,
+    color: `white`,
   };
   return (
     <div className="h100 ctnr flexrow" style={style} >

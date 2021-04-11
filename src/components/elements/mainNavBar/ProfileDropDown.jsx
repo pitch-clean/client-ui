@@ -1,9 +1,9 @@
 // react
-import React, {useRef} from 'react';
+import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 // utils
 import { fixedHeight, fixedWidth } from '../../utils/styleFxns';
-import {mouseDownFocusBlur, showHideDropdown} from '../../utils/eventHandlers';
+import { mouseDownFocusBlur, showHideDropdown } from '../../utils/eventHandlers';
 
 // main
 const ProfileDropDown = () => {
@@ -11,13 +11,18 @@ const ProfileDropDown = () => {
   const parentRef = useRef(null);
   const dropDownRef = useRef(null);
   // state
-  const profileName = useSelector(s => s.auth.activeProfile.profileName);
+  const profileName = useSelector(s => s.auth.activeProfile.firstName);
+  const activeProfile = useSelector(s => s.auth.activeProfile);
+  const auth = useSelector(s => s.auth);
+  console.log('profileName', profileName)
+  console.log('activeProfile', activeProfile)
+  console.log('auth', auth)
   // style
   /**@type {React.CSSProperties} */
   const dropDownStyle = {
     ...fixedWidth(300, 'px'),
     ...fixedHeight(400, 'px'),
-    backgroundColor: `blue`,
+    backgroundColor: `#4c4a4a`,
     display: `none`,
     position: `absolute`,
     top: `99%`,
@@ -25,6 +30,7 @@ const ProfileDropDown = () => {
     zIndex: 100000,
     border: 0,
     outline: 0,
+    color: 'white',
   }
   const dropDownList = () => {
     const elemArr = [];
@@ -48,6 +54,7 @@ const ProfileDropDown = () => {
         margin: `0`,
         border: 0,
         outline: 0,
+        color: 'white',
       }}
     >
         {profileName}

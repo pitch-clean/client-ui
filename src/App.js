@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <div
-      className="App w100 flexcol darkmode"
+      className="App w100 flexcol "
       style={{
         ...style,
         ...fixedHeight(100, 'vh'),

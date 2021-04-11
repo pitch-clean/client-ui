@@ -22,16 +22,15 @@ const useStyles = makeStyles(() => ({
 /**
  * Field
  */
-const TextField = ({ formName, fieldName, label, validator, autoFocus }) => {
+const TextField = ({ reducerName, formName, fieldName, label, validator, autoFocus, updateFxn }) => {
   // init hooks
   const dispatch = useDispatch();
   const classes = useStyles();
   // state
-  const fieldObj = useSelector(s => s.register[formName].fields[fieldName]);
-  const val = useSelector(s => s.register[formName].fields[fieldName].value);
-  const err = useSelector(s => s.register[formName].fields[fieldName].error);
-  const isOptional = useSelector(s => s.register[formName].fields[fieldName].isOptional);
-  const passwordObj = useSelector(s => s.register[formName].fields.password);
+  const val = useSelector(s => s[reducerName][formName].fields[fieldName].value);
+  const err = useSelector(s => s[reducerName][formName].fields[fieldName].error);
+  const isOptional = useSelector(s => s[reducerName][formName].fields[fieldName].isOptional);
+  const passwordObj = useSelector(s => s[reducerName][formName].fields.password);
   let passwordValue;
   if (passwordObj) {
     passwordValue = passwordObj.value;
@@ -42,26 +41,33 @@ const TextField = ({ formName, fieldName, label, validator, autoFocus }) => {
   }
 
   const onchange = e => {
-    dispatch(updateFormFieldValue(formName, fieldName, e.target.value));
-    if (fieldName === 'confirmPassword' || fieldName === 'password') {
-      if (fieldName === 'password') {
-        const newValidator = Joi.string().min(8).max(255);
-        const { error: error2 } = newValidator.validate(e.target.value);
-        dispatch(updateFormFieldError(formName, fieldName, error2 && error2.message));
-        dispatch(checkIfValidForm(formName, error2));
+    if (reducerName === 'auth') {
+      const { error } = validator.validate(e.target.value);
+      dispatch(updateFxn(fieldName, e.target.value, error && error.message));
+    } else {
+      dispatch(updateFormFieldValue(formName, fieldName, e.target.value));
+      if (fieldName === 'confirmPassword' || fieldName === 'password') {
+        if (fieldName === 'password') {
+          const newValidator = Joi.string().min(8).max(255);
+          const { error: error2 } = newValidator.validate(e.target.value);
+          dispatch(updateFormFieldError(formName, fieldName, error2 && error2.message));
+          dispatch(checkIfValidForm(formName, error2));
+        }
+        // validate
+        const cpVal = Joi.any().valid(passwordValue).error(new Error('Passwords do not match'));
+        const { error } = cpVal.validate(e.target.value);
+        dispatch(updateFormFieldError(formName, 'confirmPassword', error && error.message));
+        dispatch(checkIfValidForm(formName, error));
       }
-      // validate
-      const cpVal = Joi.any().valid(passwordValue).error(new Error('Passwords do not match'));
-      const { error } = cpVal.validate(e.target.value);
-      dispatch(updateFormFieldError(formName, 'confirmPassword', error && error.message));
-      dispatch(checkIfValidForm(formName, error));
     }
   };
   const onblur = () => {
-    if (fieldName !== 'confirmPassword' && fieldName !== 'password') {
-      const { error } = validator.validate(fieldObj.value);
-      dispatch(updateFormFieldError(formName, fieldName, error && error.message));
-      dispatch(checkIfValidForm(formName, error));
+    if (!reducerName === 'auth') {
+      if (fieldName !== 'confirmPassword' && fieldName !== 'password') {
+        const { error } = validator.validate(val.value);
+        dispatch(updateFormFieldError(formName, fieldName, error && error.message));
+        dispatch(checkIfValidForm(formName, error));
+      }
     }
   };
   return (
@@ -76,6 +82,8 @@ const TextField = ({ formName, fieldName, label, validator, autoFocus }) => {
         onBlur={onblur}
         required={!isOptional}
         autoFocus={autoFocus}
+        margin="dense"
+        id="margin-dense"
       />
       <FormHelperText
         error={err}

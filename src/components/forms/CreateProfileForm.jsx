@@ -10,6 +10,8 @@ import InvestorPiiForm from './profileForms/InvestorPiiForm';
 import HorizontalNonLinearAlternativeLabelStepper from '../elements/HorizontalNonLinearAlternativeLabelStepper';
 // style
 import './profileForms/ProfileForms.css';
+// constants
+const reducerName = 'register';
 
 /**
  * This creates a profile and posts on personal
@@ -23,21 +25,21 @@ const CreateProfileForm = () => {
     {
       header: 'Login Info',
       message: 'Create a new profile',
-      component: <LoginInfoForm />,
+      component: <LoginInfoForm reducerName={reducerName} />,
       isOptional: false,
       formName: 'loginInfo',
     },
     {
       header: 'Account Type',
       message: 'Business or Investor Account',
-      component: <ProfileTypeForm />,
+      component: <ProfileTypeForm reducerName={reducerName} />,
       isOptional: false,
       formName: 'profileType',
     },
     {
       header: 'Investment purpose and history',
       message: 'Select all that apply',
-      component: <InvestorPurposeForm />,
+      component: <InvestorPurposeForm reducerName={reducerName} />,
       isOptional: false,
       formName: 'investorPurpose',
     },
@@ -45,7 +47,7 @@ const CreateProfileForm = () => {
       header: `Personal information`,
       message: `Welcome,  Let's get started!`,
       // message: 'Please provide the following information so we can set up your account.',
-      component: <InvestorPiiForm />,
+      component: <InvestorPiiForm reducerName={reducerName} />,
       isOptional: false,
       formName: 'investorPii',
     },

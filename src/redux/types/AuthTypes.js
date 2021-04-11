@@ -1,2 +1,5 @@
-export const LOG_IN = `LOG_IN`;
-export const LOG_OUT = `LOG_OUT`;
+export const UPDATE_LOGIN_STATUS = `UPDATE_LOGIN_STATUS`;
+export const UPDATE_PASSWORD = `UPDATE_PASSWORD`;
+export const UPDATE_USERNAME = `UPDATE_USERNAME`;
+export const UPDATE_LOGIN_FIELD = `UPDATE_LOGIN_FIELD`;
+export const RESET_LOGIN_FORM = `RESET_LOGIN_FORM`;

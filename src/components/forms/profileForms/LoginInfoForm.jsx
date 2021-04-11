@@ -19,48 +19,62 @@ const formName = 'loginInfo';
 /**
  * User enters first & last name, email, password
  */
-const LoginInfoForm = () => {
+const LoginInfoForm = ({ reducerName }) => {
   // init hooks
   const classes = useStyles();
 
   return (
     <div className={`${classes.root} LoginInfoForm flexcol w100`}>
       <TextField
-        autoFocus
-        formName={formName}
         fieldName="firstName"
         label="Legal First Name"
         validator={Joi.string()
           .regex(/^[ a-zA-Z'-]+$/)
           .allow('')
           .max(50)}
+        reducerName={reducerName}
+        formName={formName}
+        autoFocus
       />
       <TextField
-        formName={formName}
         fieldName="middleName"
         label="Middle Name/Initial"
         validator={Joi.string()
           .regex(/^[ a-zA-Z'-]+$/)
           .allow('')
           .max(50)}
+        reducerName={reducerName}
+        formName={formName}
       />
       <TextField
-        formName={formName}
         fieldName="lastName"
         label="Legal Last Name"
         validator={Joi.string()
           .regex(/^[ a-zA-Z'-]+$/)
           .allow('')
           .max(50)}
+        reducerName={reducerName}
+        formName={formName}
       />
       <TextField
-        formName={formName}
         fieldName="email"
         label="Email Address"
         validator={Joi.string().email({ tlds: { allow: false } })}
+        reducerName={reducerName}
+        formName={formName}
       />
-      <TextField formName={formName} fieldName="password" label="Password" />
-      <TextField formName={formName} fieldName="confirmPassword" label="Confirm Password" />
+      <TextField
+        fieldName="password"
+        label="Password"
+        reducerName={reducerName}
+        formName={formName}
+      />
+      <TextField
+        fieldName="confirmPassword"
+        label="Confirm Password"
+        reducerName={reducerName}
+        formName={formName}
+      />
     </div>
   );
 };
