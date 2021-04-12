@@ -70,7 +70,6 @@ const HorizontalNonLinearAlternativeLabelStepper = ({
   const areAllFormsValid = useSelector(s => s[reducerName].areAllFormsValid);
   const validForms = useSelector(s => s[reducerName].validForms);
   const stepCount = stepObjsArr.length;
-  console.log(isActiveFormValid)
   // callbacks
   const handleSubmit = () => {
     // TODO: create route and service on backend to log in successfully
@@ -83,7 +82,6 @@ const HorizontalNonLinearAlternativeLabelStepper = ({
   }, [isActiveFormValid]);
   useEffect(() => {
     return () => {
-      console.log('resetting')
       dispatch(resetAllForms());
     };
   }, []);

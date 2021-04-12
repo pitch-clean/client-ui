@@ -7,8 +7,8 @@ import NewsList from './NewsList';
 const News = () => {
 
   return (
-    <div className="News SidebarWidget w100 flexcol" >
-      <div className="header w100" >Industry News</div>
+    <div className="News SidebarWidget w100 flexcol">
+      <div className="header w100">Industry News</div>
       <NewsList />
     </div>
   );

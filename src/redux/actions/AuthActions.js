@@ -1,14 +1,15 @@
 import * as types from '../types/AuthTypes';
 
-export const updateLoginField = (fieldName, value, error) => dispatch => {
+// log in and out
+export const updateLoginField = (formName, fieldName, value, error) => dispatch => {
   dispatch({
     type: types.UPDATE_LOGIN_FIELD,
+    formName,
     fieldName,
     value,
     error,
   });
 };
-
 export const updateLoginStatus = (isLoggedIn, profileObj = {}) => dispatch => {
   dispatch({
     type: types.UPDATE_LOGIN_STATUS,
@@ -16,7 +17,6 @@ export const updateLoginStatus = (isLoggedIn, profileObj = {}) => dispatch => {
     profileObj,
   });
 };
-
 export const resetLoginForm = () => dispatch => {
   dispatch({
     type: types.RESET_LOGIN_FORM,

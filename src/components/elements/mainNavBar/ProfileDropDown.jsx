@@ -1,5 +1,6 @@
 // react
 import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // utils
 import { fixedHeight, fixedWidth } from '../../utils/styleFxns';
@@ -11,12 +12,8 @@ const ProfileDropDown = () => {
   const parentRef = useRef(null);
   const dropDownRef = useRef(null);
   // state
-  const profileName = useSelector(s => s.auth.activeProfile.firstName);
-  const activeProfile = useSelector(s => s.auth.activeProfile);
-  const auth = useSelector(s => s.auth);
-  console.log('profileName', profileName)
-  console.log('activeProfile', activeProfile)
-  console.log('auth', auth)
+  const firstName = useSelector(s => s.auth.activeProfile.firstName);
+  const username = useSelector(s => s.auth.activeProfile.username);
   // style
   /**@type {React.CSSProperties} */
   const dropDownStyle = {
@@ -31,41 +28,45 @@ const ProfileDropDown = () => {
     border: 0,
     outline: 0,
     color: 'white',
-  }
+  };
   const dropDownList = () => {
     const elemArr = [];
     return elemArr;
   };
+
   return (
-    <div
-      className="flexcol"
-      onMouseMove={() => {parentRef.current.focus()}}
-      // onClick={() => {parentRef.current.focus()}}
-      onMouseDown={e => mouseDownFocusBlur(e, parentRef, dropDownRef)}
-      onFocus={() => showHideDropdown(dropDownRef, true)}
-      onBlur={() => showHideDropdown(dropDownRef, false)}
-      onMouseOut={() => {parentRef.current.blur()}}
-      tabIndex='0'
-      ref={parentRef}
-      style={{
-        padding: `10px 25px`,
-        cursor: `default`,
-        position: `relative`,
-        margin: `0`,
-        border: 0,
-        outline: 0,
-        color: 'white',
-      }}
-    >
-        {profileName}
-        <div
-          className="profileDropDown inactive"
-          style={dropDownStyle}
-          ref={dropDownRef}
-        >
+    <Link to={`/profile/${username}`}>
+      {/* eslint-disable-next-line */}
+      <div
+        className="flexcol"
+        onMouseMove={() => {
+          parentRef.current.focus();
+        }}
+        // onMouseDown={e => mouseDownFocusBlur(e, parentRef, dropDownRef)}
+        // onFocus={() => showHideDropdown(dropDownRef, true)}
+        // onBlur={() => showHideDropdown(dropDownRef, false)}
+        onMouseOut={() => {
+          parentRef.current.blur();
+        }}
+        // eslint-disable-next-line
+        tabIndex={0}
+        ref={parentRef}
+        style={{
+          padding: `10px 25px`,
+          cursor: `default`,
+          position: `relative`,
+          margin: `0`,
+          border: 0,
+          outline: 0,
+          color: 'white',
+        }}
+      >
+        {firstName}
+        {/* <div className="profileDropDown inactive" style={dropDownStyle} ref={dropDownRef}>
           {dropDownList()}
-        </div>
-    </div>
+        </div> */}
+      </div>
+    </Link>
   )
 };
 

@@ -8,6 +8,7 @@ import NotFound from './home/NotFound';
 import LoginForm from './home/LoginForm';
 import Home from './home/Home';
 import CreateProfile from './profile/CreateProfile';
+import ProfileView from './profile/ProfileView';
 
 // main
 const PageRouter = () => {
@@ -15,6 +16,7 @@ const PageRouter = () => {
   return (
     <div className="PageRouter w100 h100" style={{ minHeight: `100vh` }}>
       <Switch>
+        <Route path="/profile/:alias" render={p => <ProfileView props={p} />} />
         <Route exact path="/offering/:offeringId" render={p => <OfferingDetail props={p} />} />
         <Route exact path="/offerings" render={p => <OfferingsView props={p} />} />
         <Route exact path="/login" render={p => <LoginForm props={p} />} />

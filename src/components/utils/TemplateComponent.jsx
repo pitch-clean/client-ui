@@ -6,7 +6,7 @@ const TemplateComponent = () => {
 
   return (
     <div className="TemplateComponent" ></div>
-  )
+  );
 };
 
 // export

@@ -1,5 +1,6 @@
 // react
 import React, { useRef } from 'react';
+import { useSelector } from 'react-redux';
 // components
 import PageRouter from './components/pages/PageRouter';
 import MainNavBar from './components/elements/mainNavBar/MainNavBar';
@@ -11,6 +12,7 @@ import { fixedHeight } from './components/utils/styleFxns';
 
 // main
 const App = () => {
+  const isDarkMode = useSelector(s => s.view.isDarkMode);
   document.addEventListener('keydown', onKeyDownBlurAll, false);
   // style
   /** @type {React.CSSProperties} */
@@ -21,7 +23,7 @@ const App = () => {
 
   return (
     <div
-      className="App w100 flexcol "
+      className={`App w100 flexcol ${isDarkMode}`}
       style={{
         ...style,
         ...fixedHeight(100, 'vh'),

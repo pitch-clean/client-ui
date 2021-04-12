@@ -8,7 +8,7 @@ const LeftSidebar = () => {
 
   return (
     <div className="LeftSidebar h100 flexcol" >
-      <Sidebar isLeft={true} />
+      <Sidebar isLeft />
     </div>
   );
 };

@@ -4,6 +4,11 @@ import React from 'react';
 import Joi from 'joi';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '../fields/TextField';
+import {
+  updateFormFieldError,
+  updateFormFieldValue,
+  checkIfValidForm,
+} from '../../../redux/actions/RegisterActions';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,6 +39,7 @@ const LoginInfoForm = ({ reducerName }) => {
           .max(50)}
         reducerName={reducerName}
         formName={formName}
+        updateFxn={updateFormFieldValue}
         autoFocus
       />
       <TextField
@@ -45,6 +51,7 @@ const LoginInfoForm = ({ reducerName }) => {
           .max(50)}
         reducerName={reducerName}
         formName={formName}
+        updateFxn={updateFormFieldValue}
       />
       <TextField
         fieldName="lastName"
@@ -55,6 +62,7 @@ const LoginInfoForm = ({ reducerName }) => {
           .max(50)}
         reducerName={reducerName}
         formName={formName}
+        updateFxn={updateFormFieldValue}
       />
       <TextField
         fieldName="email"
@@ -62,18 +70,21 @@ const LoginInfoForm = ({ reducerName }) => {
         validator={Joi.string().email({ tlds: { allow: false } })}
         reducerName={reducerName}
         formName={formName}
+        updateFxn={updateFormFieldValue}
       />
       <TextField
         fieldName="password"
         label="Password"
         reducerName={reducerName}
         formName={formName}
+        updateFxn={updateFormFieldValue}
       />
       <TextField
         fieldName="confirmPassword"
         label="Confirm Password"
         reducerName={reducerName}
         formName={formName}
+        updateFxn={updateFormFieldValue}
       />
     </div>
   );

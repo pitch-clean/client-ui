@@ -6,6 +6,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '../fields/TextField';
 import SelectField from '../fields/SelectField';
 import { unitedStates } from '../fields/statesProvinces';
+import {
+  updateFormFieldError,
+  updateFormFieldValue,
+  checkIfValidForm,
+} from '../../../redux/actions/RegisterActions';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,6 +41,7 @@ const InvestorPiiForm = ({ reducerName }) => {
           .max(128)}
         reducerName={reducerName}
         formName={formName}
+        updateFxn={updateFormFieldValue}
         autofocus
       />
       <TextField
@@ -44,6 +50,7 @@ const InvestorPiiForm = ({ reducerName }) => {
         validator={Joi.string().uri().max(512)}
         reducerName={reducerName}
         formName={formName}
+        updateFxn={updateFormFieldValue}
       />
       <TextField
         fieldName="linkedinUrl"
@@ -51,6 +58,7 @@ const InvestorPiiForm = ({ reducerName }) => {
         validator={Joi.string().uri().max(512)}
         reducerName={reducerName}
         formName={formName}
+        updateFxn={updateFormFieldValue}
       />
       <div className="addressGroup">
         <TextField
@@ -59,6 +67,7 @@ const InvestorPiiForm = ({ reducerName }) => {
           validator={Joi.string().max(512)}
           reducerName={reducerName}
           formName={formName}
+          updateFxn={updateFormFieldValue}
         />
         <TextField
           fieldName="address2"
@@ -66,6 +75,7 @@ const InvestorPiiForm = ({ reducerName }) => {
           validator={Joi.string().allow('').max(512)}
           reducerName={reducerName}
           formName={formName}
+          updateFxn={updateFormFieldValue}
         />
         <div>
           <SelectField
@@ -87,6 +97,8 @@ const InvestorPiiForm = ({ reducerName }) => {
               .regex(/^[ a-zA-Z'-]+$/)
               .max(128)}
             formName={formName}
+            reducerName={reducerName}
+            updateFxn={updateFormFieldValue}
           />
           <TextField
             fieldName="zipcode"
@@ -96,6 +108,8 @@ const InvestorPiiForm = ({ reducerName }) => {
               .min(5)
               .max(16)}
             formName={formName}
+            reducerName={reducerName}
+            updateFxn={updateFormFieldValue}
           />
         </div>
       </div>

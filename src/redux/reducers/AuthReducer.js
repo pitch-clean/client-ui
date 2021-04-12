@@ -2,7 +2,7 @@ import _ from 'lodash';
 import * as types from '../types/AuthTypes';
 
 const initialState = {
-  activeProfile: { profileName: 'test' },
+  activeProfile: {},
   login: {
     fields: {
       username: { value: '', error: '' },

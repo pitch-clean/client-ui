@@ -6,23 +6,27 @@ import Joi from 'joi';
 import { TextField as MuiTextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import {
-  updateFormFieldError,
-  updateFormFieldValue,
-  checkIfValidForm,
-} from '../../../redux/actions/RegisterActions';
+import { updateFormFieldError, checkIfValidForm } from '../../../redux/actions/RegisterActions';
 // constants
 const useStyles = makeStyles(() => ({
   helperText: {
     lineHeight: 0,
-    marginBottom: `5px`,
+    marginBottom: `8px`,
   },
 }));
 
 /**
  * Field
  */
-const TextField = ({ reducerName, formName, fieldName, label, validator, autoFocus, updateFxn }) => {
+const TextField = ({
+  reducerName,
+  formName,
+  fieldName,
+  label,
+  validator,
+  autoFocus,
+  updateFxn,
+}) => {
   // init hooks
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -43,9 +47,9 @@ const TextField = ({ reducerName, formName, fieldName, label, validator, autoFoc
   const onchange = e => {
     if (reducerName === 'auth') {
       const { error } = validator.validate(e.target.value);
-      dispatch(updateFxn(fieldName, e.target.value, error && error.message));
+      dispatch(updateFxn(formName, fieldName, e.target.value, error && error.message));
     } else {
-      dispatch(updateFormFieldValue(formName, fieldName, e.target.value));
+      dispatch(updateFxn(formName, fieldName, e.target.value));
       if (fieldName === 'confirmPassword' || fieldName === 'password') {
         if (fieldName === 'password') {
           const newValidator = Joi.string().min(8).max(255);
@@ -62,9 +66,9 @@ const TextField = ({ reducerName, formName, fieldName, label, validator, autoFoc
     }
   };
   const onblur = () => {
-    if (!reducerName === 'auth') {
+    if (reducerName !== 'auth') {
       if (fieldName !== 'confirmPassword' && fieldName !== 'password') {
-        const { error } = validator.validate(val.value);
+        const { error } = validator.validate(val);
         dispatch(updateFormFieldError(formName, fieldName, error && error.message));
         dispatch(checkIfValidForm(formName, error));
       }

@@ -1,13 +1,42 @@
+import Joi from "joi";
+
 // eslint-disable-next-line
 export const initialState = {
   loginInfo: {
     fields: {
-      firstName: { value: '', error: '' },
-      middleName: { value: '', error: '', isOptional: true },
-      lastName: { value: '', error: '' },
-      email: { value: '', error: '' },
-      password: { value: '', error: '' },
-      confirmPassword: { value: '', error: '' },
+      firstName: {
+        get validate() {
+          return Joi.string().validate(this.value);
+        },
+        value: '',
+        error: '',
+      },
+      middleName: {
+        validator: Joi.string(),
+        value: '',
+        error: '',
+        isOptional: true,
+      },
+      lastName: {
+        validator: Joi.string(),
+        value: '',
+        error: ''
+      },
+      email: {
+        validator: Joi.string(),
+        value: '',
+        error: ''
+      },
+      password: {
+        validator: Joi.string(),
+        value: '',
+        error: ''
+      },
+      confirmPassword: {
+        validator: Joi.string(),
+        value: '',
+        error: ''
+      },
     },
   },
   profileType: {

@@ -1,8 +1,28 @@
 import * as types from '../types/ViewTypes';
 
-export const updateOfferingsArr = (isDarkMode) => dispatch => {
+// eslint-disable-next-line
+export const updateIsDarkMode = payload => dispatch => {
   dispatch({
     type: types.IS_DARK_MODE,
-    isDarkMode,
-  })
+    payload,
+  });
+};
+export const updateView = payload => dispatch => {
+  dispatch({
+    type: types.UPDATE_VIEW,
+    payload,
+  });
+};
+// profile
+export const updateProfileTab = payload => dispatch => {
+  dispatch({
+    type: types.UPDATE_PROFILE_TAB,
+    payload,
+  });
+};
+export const updateViewProfile = payload => dispatch => {
+  dispatch({
+    type: types.UPDATE_VIEW_PROFILE,
+    payload,
+  });
 };

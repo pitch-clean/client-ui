@@ -1,6 +1,5 @@
 // react
 import React from 'react';
-// import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 // components
 import LoginInfoForm from './profileForms/LoginInfoForm';
@@ -19,7 +18,7 @@ const reducerName = 'register';
  */
 const CreateProfileForm = () => {
   // state
-  // const firstName = useSelector(s => s.register.loginInfo.fields.firstName.value);
+  // const reg = useSelector(s => s.register);
 
   const stepObjsArr = [
     {

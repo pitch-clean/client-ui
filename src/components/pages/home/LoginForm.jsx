@@ -1,5 +1,5 @@
 // react
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 // utils
@@ -13,6 +13,45 @@ import {
 } from '../../../redux/actions/AuthActions';
 // components
 import TextField from '../../forms/fields/TextField';
+// seed
+const education = [
+  {
+    organization: 'Yale Schoole of Management',
+    degree: 'Masters in Business Administration',
+    dtEnd: '2016-05-00T00:00:00Z',
+    dtStart: '2014-08-00T00:00:00Z',
+  },
+  {
+    organization: 'Bucknell University',
+    degree: 'B.A. in Economics',
+    dtEnd: '2013-05-00T00:00:00Z',
+    dtStart: '2013-05-00T00:00:00Z',
+  },
+];
+const employment = [
+  {
+    employer: 'Sungage Asset Management',
+    title: 'Investments Director',
+    dtEnd: '2020-05-00T00:00:00Z',
+    dtStart: '2017-05-00T00:00:00Z'
+  },
+  {
+    employer: 'Atrium Solar LLC',
+    title: 'Senior Vice President',
+    dtEnd: '2017-05-00T00:00:00Z',
+    dtStart: '2014-05-00T00:00:00Z'
+  },
+  {
+    employer: 'Wind Capital',
+    title: 'Analyst',
+    dtEnd: '2014-05-00T00:00:00Z',
+    dtStart: '2013-05-00T00:00:00Z'
+  }
+];
+const about = {
+  profileBio:
+    'As a Senior Vice President I manage all business development for the North West region of the United States for Vertex Capital’s solar project finance. With over 7 years of experience in the renewable finance sector, I am able to utilize my extensive network to access capital for our enterprise clients and oversee cashflow distribution to our investors.',
+};
 // event handlers
 const submitLogin = async (username, password, dispatch) => {
   // TODO create routes and services to connect to backend and actually log in
@@ -21,8 +60,14 @@ const submitLogin = async (username, password, dispatch) => {
   let profileObj = {};
   if (testing) {
     if (username === 'test@test.com' && password === 'testpassword') {
-      profileObj = { firstName: 'Test User', username };
-      console.log('success')
+      profileObj = {
+        firstName: 'Test User',
+        username: 'test-user-123',
+        email: username,
+        education,
+        employment,
+        about,
+      };
     } else {
       alert('Incorrect Email and/or Password');
       return;
@@ -45,6 +90,7 @@ const keyDownHandler = (username, password, dispatch) => e => {
     submitLogin(username, password, dispatch);
   }
 };
+
 // main
 const LoginForm = () => {
   // init hooks
@@ -54,7 +100,6 @@ const LoginForm = () => {
   const passwordRedux = useSelector(s => s.auth.login.fields.password.value);
   const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
   if (isAuthenticated) {
-    console.log('its auth')
     dispatch(resetLoginForm());
     return <Redirect to="/" />;
   }
@@ -124,9 +169,9 @@ const LoginForm = () => {
               .email({ tlds: { allow: false } })
               .min(5)
               .max(128)}
-            autoFocus
             reducerName="auth"
             updateFxn={updateLoginField}
+            autoFocus
           />
           <TextField
             formName="login"

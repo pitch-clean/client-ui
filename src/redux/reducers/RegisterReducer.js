@@ -2,9 +2,7 @@ import _ from 'lodash';
 import * as types from '../types/RegisterTypes';
 import { initialState } from '../initialStates/register';
 
-const cloneInitState = _.cloneDeep(initialState);
-
-export default function RegisterReducer(state = cloneInitState, action) {
+export default function RegisterReducer(state = _.cloneDeep(initialState), action) {
   const newState = { ...state };
   switch (action.type) {
     case types.UPDATE_PROFILE_FORM:

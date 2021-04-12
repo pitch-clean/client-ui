@@ -1,5 +1,6 @@
 // react
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 // seed
 const newsItems = [
   {
@@ -65,13 +66,13 @@ const NewsList = () => {
   // effects
   useEffect(() => {
     const mockNewsElemArr = [];
-    for (let idx = 0; idx < newsItems.length; idx++) {
+    for (let idx = 0; idx < newsItems.length; idx += 1) {
       const newsItem = newsItems[idx];
       const newsElem = (
-          <a href={newsItem.url} className="newsItem linkCard w100 flexcol" >
-            <div className="newsTitle">- {newsItem.title}</div>
-            <div className="newsPubDt">{formatStringDt(newsItem.dtPublished)}</div>
-          </a>
+        <Link to={newsItem.url} className="newsItem linkCard w100 flexcol" >
+          <div className="newsTitle">- {newsItem.title}</div>
+          <div className="newsPubDt">{formatStringDt(newsItem.dtPublished)}</div>
+        </Link>
       );
       console.log(newsItem.url)
       mockNewsElemArr.push(newsElem);
