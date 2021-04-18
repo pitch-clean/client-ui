@@ -58,74 +58,15 @@ const About = () => {
     dispatch(updateProfileTab('about'));
   }, []);
   // state
-  const viewProfile = useSelector(s => s.view.profile.viewProfile);
-  if (!viewProfile) {
-    return <div className="About" />;
-  }
-  const { pii, education, about, employment } = viewProfile;
-  const fullName = `${pii.firstName} ${pii.lastName}`;
-  const employmentTxt = `${employment[0].title} at ${employment[0].employer}`;
-  const employmentList = employment.map(({ employer, title, dtEnd, dtStart, img }, idx) => {
-    const dtStartStr = `${new Date(dtStart).getFullYear()}`;
-    const dtEndStr = `${new Date(dtEnd).getFullYear()}`;
+  const pii = useSelector(s => s.view.profile.viewProfile.pii);
+  const education = useSelector(s => s.view.profile.viewProfile.education);
+  const about = useSelector(s => s.view.profile.viewProfile.about);
+  const employment = useSelector(s => s.view.profile.viewProfile.employment);
+  // build
+  const bioCard = (pii, about, employment) => {
+    const fullName = `${pii.firstName} ${pii.lastName}`;
+    const employmentTxt = `${employment[0].title} at ${employment[0].employer}`;
     return (
-      <React.Fragment key={`abt-emp-list${idx}`}>
-        <ListItem button>
-          <ListItemAvatar>
-            <Avatar alt="Profile Picture" src={img} />
-          </ListItemAvatar>
-          <ListItemText
-            primary={employer}
-            secondary={
-              <>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  className={classes.inline}
-                  color="textPrimary"
-                >
-                  {title}
-                </Typography>
-                {` | (${dtStartStr} - ${dtEndStr})`}
-              </>
-            }
-          />
-        </ListItem>
-      </React.Fragment>
-    );
-  });
-  const educationList = education.map(({ organization, degree, dtEnd, dtStart, img }, idx) => {
-    const dtStartStr = `${new Date(dtStart).getFullYear()}`;
-    const dtEndStr = `${new Date(dtEnd).getFullYear()}`;
-    return (
-      <React.Fragment key={`abt-edu-list${idx}`}>
-        <ListItem button>
-          <ListItemAvatar>
-            <Avatar alt="Profile Picture" src={img} />
-          </ListItemAvatar>
-          <ListItemText
-            primary={organization}
-            secondary={
-              <>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  className={classes.inline}
-                  color="textPrimary"
-                >
-                  {degree}
-                </Typography>
-                {` | (${dtStartStr} - ${dtEndStr})`}
-              </>
-            }
-          />
-        </ListItem>
-      </React.Fragment>
-    );
-  });
-
-  return (
-    <div className="About w100">
       <Card className={classes.card}>
         <CardContent className={classes.container}>
           <Typography className={classes.title} variant="h5" component="h6">
@@ -140,7 +81,39 @@ const About = () => {
           </Typography>
         </CardContent>
       </Card>
-      <Divider className={classes.sectionDivider} component="div" />
+    );
+  };
+  const experiencesCard = employmentArr => {
+    const employmentList = employmentArr.map(({ employer, title, dtEnd, dtStart, img }, idx) => {
+      const dtStartStr = `${new Date(dtStart).getFullYear()}`;
+      const dtEndStr = `${new Date(dtEnd).getFullYear()}`;
+      return (
+        <React.Fragment key={`abt-emp-list${idx}`}>
+          <ListItem button>
+            <ListItemAvatar>
+              <Avatar alt="Profile Picture" src={img} />
+            </ListItemAvatar>
+            <ListItemText
+              primary={employer}
+              secondary={
+                <>
+                  <Typography
+                    component="span"
+                    variant="body2"
+                    className={classes.inline}
+                    color="textPrimary"
+                  >
+                    {title}
+                  </Typography>
+                  {` | (${dtStartStr} - ${dtEndStr})`}
+                </>
+              }
+            />
+          </ListItem>
+        </React.Fragment>
+      );
+    });
+    return (
       <div className="experiences">
         <Card className={classes.card}>
           <CardContent className={classes.container}>
@@ -152,6 +125,39 @@ const About = () => {
           </CardContent>
         </Card>
       </div>
+    );
+  };
+  const educationCard = educationArr => {
+    const educationList = educationArr.map(({ organization, degree, dtEnd, dtStart, img }, idx) => {
+      const dtStartStr = `${new Date(dtStart).getFullYear()}`;
+      const dtEndStr = `${new Date(dtEnd).getFullYear()}`;
+      return (
+        <React.Fragment key={`abt-edu-list${idx}`}>
+          <ListItem button>
+            <ListItemAvatar>
+              <Avatar alt="Profile Picture" src={img} />
+            </ListItemAvatar>
+            <ListItemText
+              primary={organization}
+              secondary={
+                <>
+                  <Typography
+                    component="span"
+                    variant="body2"
+                    className={classes.inline}
+                    color="textPrimary"
+                  >
+                    {degree}
+                  </Typography>
+                  {` | (${dtStartStr} - ${dtEndStr})`}
+                </>
+              }
+            />
+          </ListItem>
+        </React.Fragment>
+      );
+    });
+    return (
       <div className="education">
         <Card className={classes.card}>
           <CardContent className={classes.container}>
@@ -163,6 +169,19 @@ const About = () => {
           </CardContent>
         </Card>
       </div>
+    );
+  };
+
+  return (
+    <div className="About w100">
+      {pii && (
+        <>
+          {bioCard(pii, about, employment)}
+          <Divider className={classes.sectionDivider} component="div" />
+          {experiencesCard(employment)}
+          {educationCard(education)}
+        </>
+      )}
     </div>
   );
 };

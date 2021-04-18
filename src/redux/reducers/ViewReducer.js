@@ -22,7 +22,7 @@ const MainReducer = (state = _.cloneDeep(initialMainState), action) => {
 
 const initialProfileState = {
   activeProfileTab: 'about',
-  viewProfile: null,
+  viewProfile: {},
 };
 
 const ProfileReducer = (state = _.cloneDeep(initialProfileState), action) => {

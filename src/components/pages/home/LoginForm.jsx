@@ -13,6 +13,8 @@ import {
 } from '../../../redux/actions/AuthActions';
 // components
 import TextField from '../../forms/fields/TextField';
+
+console.log('pro', process.pid)
 // seed
 const education = [
   {

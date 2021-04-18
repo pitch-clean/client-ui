@@ -1,7 +1,6 @@
 // react
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useRouteMatch } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -27,71 +26,21 @@ const useStyles = makeStyles(theme => ({
     display: 'inline',
   },
 }));
-// seed
-const arr = [
-  {
-    _id: 0,
-    firstName: `Jamie`,
-    lastName: `Harris`,
-    position: 'Senior Vice President',
-    currentEmployer: 'Brooklane Renewables',
-    city: 'New York',
-    stateProvince: 'NY',
-  },
-  {
-    _id: 1,
-    firstName: `Tom`,
-    lastName: `Daly`,
-    position: 'Managing Director',
-    currentEmployer: 'Vertex Capital',
-    city: 'Washington',
-    stateProvince: 'DC',
-  },
-  {
-    _id: 2,
-    firstName: `Maya`,
-    lastName: `Taylor`,
-    position: 'Associate',
-    currentEmployer: 'Atrium Solar LLC',
-    city: 'Nashville',
-    stateProvince: 'TN',
-  },
-  {
-    _id: 3,
-    firstName: `Ben`,
-    lastName: `Carlton`,
-    position: 'Senior Analyst',
-    currentEmployer: 'Sunwind Asset Management',
-    city: 'Salt Lake City',
-    stateProvince: 'UT',
-  },
-  {
-    _id: 4,
-    firstName: `Jennifer`,
-    lastName: `Cunningham`,
-    position: 'Partner and COO',
-    currentEmployer: 'Solstice Capital',
-    city: 'Seattle',
-    stateProvince: 'WA',
-  },
-];
 
 // main
 const Network = () => {
   // init hooks
   const classes = useStyles();
   const dispatch = useDispatch();
-  const match = useRouteMatch();
-  console.log('Network match', match);
   // state
-  // const activeProfile = useSelector(s => s.auth.activeProfile.alias);
+  const connections = useSelector(s => s.view.profile.viewProfile.connections);
 
   // effects
   useEffect(() => {
     dispatch(updateProfileTab('network'));
   }, []);
   const following = 98;
-  const connections = 839;
+  const connectionCt = connections.length;
 
   return (
     <div className="Network w100">
@@ -106,12 +55,12 @@ const Network = () => {
             />
             <Chip
               avatar={<Avatar alt="test" src="" />}
-              label={`${connections} connections`}
+              label={`${connectionCt} connections`}
               variant="outlined"
             />
           </Grid>
           <List className={classes.list}>
-            {arr.map(obj => {
+            {connections.map(obj => {
               const {
                 _id,
                 firstName,
@@ -127,7 +76,7 @@ const Network = () => {
               const location = `${city}, ${stateProvince}`;
               return (
                 <React.Fragment key={_id}>
-                  <ListItem button>
+                  <ListItem>
                     <ListItemAvatar>
                       <Avatar alt="Profile Picture" src={image} />
                     </ListItemAvatar>

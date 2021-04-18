@@ -48,16 +48,13 @@ const formatStringDt = dtStr => {
   let newStr = `ago`;
   if (dtDiffDays > 0) {
     newStr = `${dtDiffDays} days ${newStr}`;
-  }
-  else if (dtDiffHrs > 0) {
+  } else if (dtDiffHrs > 0) {
     newStr = `${dtDiffHrs} hours ${newStr}`;
-  }
-  else if (dtDiffMin > 0) {
+  } else if (dtDiffMin > 0) {
     newStr = `${dtDiffMin} minutes ${newStr}`;
   }
   return newStr;
 };
-
 
 // main
 const NewsList = () => {
@@ -74,18 +71,12 @@ const NewsList = () => {
           <div className="newsPubDt">{formatStringDt(newsItem.dtPublished)}</div>
         </Link>
       );
-      console.log(newsItem.url)
       mockNewsElemArr.push(newsElem);
     }
-  
     setNewsElemArr(mockNewsElemArr);
   }, []);
 
-  return (
-    <div className="NewsList w100 flexcol" >
-      {newsElemArr}
-    </div>
-  );
+  return <div className="NewsList w100 flexcol">{newsElemArr}</div>;
 };
 
 // export

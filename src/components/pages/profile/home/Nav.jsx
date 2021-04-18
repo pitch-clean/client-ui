@@ -37,13 +37,13 @@ const Nav = ({ baseRoute }) => {
           centered
         >
           <Link to={baseRoute}>
-            <Tab label="About" />
+            <Tab label="About" textColor="primary" />
           </Link>
           <Link to={`${baseRoute}/investments`}>
-            <Tab label="Investments" />
+            <Tab label="Investments" textColor="primary" />
           </Link>
           <Link to={`${baseRoute}/network`}>
-            <Tab label="Network" />
+            <Tab label="Network" textColor="primary" />
           </Link>
         </Tabs>
       </Paper>
