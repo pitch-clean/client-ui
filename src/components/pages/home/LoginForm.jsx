@@ -100,8 +100,8 @@ const LoginForm = () => {
   // state
   const usernameRedux = useSelector(s => s.auth.login.fields.username.value);
   const passwordRedux = useSelector(s => s.auth.login.fields.password.value);
-  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
-  if (isAuthenticated) {
+  const activeProfile = useSelector(s => s.auth.activeProfile);
+  if (activeProfile) {
     dispatch(resetLoginForm());
     return <Redirect to="/" />;
   }

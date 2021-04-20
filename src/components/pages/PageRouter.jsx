@@ -14,7 +14,7 @@ import ProfileView from './profile/ProfileView';
 const PageRouter = () => {
   // init hooks
   return (
-    <div className="PageRouter w100 h100" style={{ minHeight: `100vh` }}>
+    <div className="PageRouter w100 h100" style={{ minHeight: `100vh`, padding: '25px 20px' }}>
       <Switch>
         <Route path="/profile/:alias" render={p => <ProfileView props={p} />} />
         <Route exact path="/offering/:offeringId" render={p => <OfferingDetail props={p} />} />

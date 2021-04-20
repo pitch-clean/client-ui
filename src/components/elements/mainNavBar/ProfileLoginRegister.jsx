@@ -8,7 +8,7 @@ import LoginRegister from './LoginRegister';
 // main
 const ProfileLoginRegister = () => {
   // init hooks
-  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
+  const activeProfile = useSelector(s => s.auth.activeProfile);
   // style
   /**@type {React.CSSProperties} */
   const style = {
@@ -19,7 +19,7 @@ const ProfileLoginRegister = () => {
   };
   return (
     <div className="h100 ctnr flexrow" style={style} >
-      {isAuthenticated ? <ProfileDropDown /> : <LoginRegister />}
+      {activeProfile ? <ProfileDropDown /> : <LoginRegister />}
     </div>
   )
 };

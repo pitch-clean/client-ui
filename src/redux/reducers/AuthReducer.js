@@ -1,8 +1,9 @@
 import _ from 'lodash';
+import { combineReducers } from 'redux';
 import * as types from '../types/AuthTypes';
 
-const initialState = {
-  activeProfile: {},
+const initialStateMain = {
+  activeProfile: null,
   login: {
     fields: {
       username: { value: '', error: '' },
@@ -10,10 +11,9 @@ const initialState = {
     },
   },
   isAuthenticated: false,
+  isTestMode: true,
 };
-const clonedInitState = _.cloneDeep(initialState);
-
-export default function AuthReducer(state = clonedInitState, action) {
+const MainReducer = (state = _.cloneDeep(initialStateMain), action) => {
   const newState = _.cloneDeep(state);
   switch (action.type) {
     case types.UPDATE_LOGIN_FIELD:
@@ -25,9 +25,15 @@ export default function AuthReducer(state = clonedInitState, action) {
       newState.activeProfile = action.profileObj;
       return newState;
     case types.RESET_LOGIN_FORM:
-      newState.login.fields = _.cloneDeep(initialState.login.fields);
+      newState.login.fields = _.cloneDeep(initialStateMain.login.fields);
       return newState;
     default:
       return newState;
   }
-}
+};
+
+const AuthReducer = combineReducers({
+  main: MainReducer,
+});
+
+export default MainReducer;

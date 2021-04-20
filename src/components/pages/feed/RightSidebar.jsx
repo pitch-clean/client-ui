@@ -14,7 +14,7 @@ const RightSidebar = () => {
         <News />
         <PublicMarkets />
       </div>
-      </Sidebar>
+    </Sidebar>
   );
 };
 

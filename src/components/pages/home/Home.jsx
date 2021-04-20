@@ -8,9 +8,9 @@ import FeedView from '../feed/FeedView';
 // main
 const Home = () => {
   // TODO: add route for logged in user
-  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
+  const activeProfile = useSelector(s => s.auth.activeProfile);
   // const account = {id: 1};
-  return isAuthenticated ? <FeedView /> : <LandingPage />;
+  return activeProfile ? <FeedView /> : <LandingPage />;
 };
 
 // export

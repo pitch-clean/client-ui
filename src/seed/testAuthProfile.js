@@ -1,25 +1,12 @@
-// react
-import React, { useEffect } from 'react';
-import { Switch, Route, useRouteMatch, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-// components
-import Sidebar from '../../elements/SideBar';
-import Nav from './home/Nav';
-import About from './home/About';
-import Investments from './home/Investments';
-import Network from './home/Network';
-// utils
-import { updateViewProfile } from '../../../redux/actions/ViewActions';
-// seed
 const education = [
   {
-    organization: 'Yale Schoole of Management',
+    organization: 'Harvard School of Management',
     degree: 'Masters in Business Administration',
     dtEnd: '2016-05-01T00:00:00.000Z',
     dtStart: '2014-08-01T00:00:00.000Z',
   },
   {
-    organization: 'Bucknell University',
+    organization: 'Cornell University',
     degree: 'B.A. in Economics',
     dtEnd: '2013-05-01T00:00:00.000Z',
     dtStart: '2013-05-01T00:00:00.000Z',
@@ -27,19 +14,19 @@ const education = [
 ];
 const employment = [
   {
-    employer: 'Sungage Asset Management',
+    employer: 'Test Asset Management',
     title: 'Investments Director',
     dtEnd: '2020-05-01T00:00:00.000Z',
     dtStart: '2017-05-01T00:00:00.000Z'
   },
   {
-    employer: 'Atrium Solar LLC',
+    employer: 'Test Solar LLC',
     title: 'Senior Vice President',
     dtEnd: '2017-05-01T00:00:00.000Z',
     dtStart: '2014-05-01T00:00:00.000Z'
   },
   {
-    employer: 'Wind Capital',
+    employer: 'Test Capital',
     title: 'Analyst',
     dtEnd: '2014-05-01T00:00:00.000Z',
     dtStart: '2013-05-01T00:00:00.000Z'
@@ -50,11 +37,11 @@ const about = {
     'As a Senior Vice President I manage all business development for the North West region of the United States for Vertex Capital’s solar project finance. With over 7 years of experience in the renewable finance sector, I am able to utilize my extensive network to access capital for our enterprise clients and oversee cashflow distribution to our investors.',
 };
 const pii = {
-  firstName: 'Rob',
-  lastName: 'Sherman',
+  firstName: 'Drew',
+  lastName: 'Orrin',
   residence: {
-    provinceState: 'NY',
-    city: 'NYC',
+    provinceState: 'CA',
+    city: 'Los Angeles',
   },
 };
 const images = {
@@ -70,11 +57,10 @@ const images = {
 const active = [
   {
     type: 'employment',
-    employer: 'Vertex Capital',
+    employer: 'Test Capital',
     title: 'Senior Vice President',
     dtStart: '2020-05-01T00:00:00.000Z',
     dtEnd: null,
-    companySlug: `vertex-capital`,
   },
 ];
 const connections = [
@@ -117,53 +103,6 @@ const connections = [
   {
     investorId: 4,
     firstName: `Jennifer`,
-    lastName: `Cunningham`,
-    position: 'Partner and COO',
-    currentEmployer: 'Solstice Capital',
-    city: 'Seattle',
-    stateProvince: 'WA',
-  },
-];
-const following = [
-  {
-    profileId: 0,
-    firstName: `Greg`,
-    lastName: `Harris`,
-    position: 'Senior Vice President',
-    currentEmployer: 'Brooklane Renewables',
-    city: 'New York',
-    stateProvince: 'NY',
-  },
-  {
-    profileId: 1,
-    firstName: `Sarah`,
-    lastName: `Daly`,
-    position: 'Managing Director',
-    currentEmployer: 'Vertex Capital',
-    city: 'Washington',
-    stateProvince: 'DC',
-  },
-  {
-    profileId: 2,
-    firstName: `Pete`,
-    lastName: `Taylor`,
-    position: 'Associate',
-    currentEmployer: 'Atrium Solar LLC',
-    city: 'Nashville',
-    stateProvince: 'TN',
-  },
-  {
-    profileId: 3,
-    firstName: `Sasha`,
-    lastName: `Carlton`,
-    position: 'Senior Analyst',
-    currentEmployer: 'Sunwind Asset Management',
-    city: 'Salt Lake City',
-    stateProvince: 'UT',
-  },
-  {
-    profileId: 4,
-    firstName: `Lauren`,
     lastName: `Cunningham`,
     position: 'Partner and COO',
     currentEmployer: 'Solstice Capital',
@@ -497,55 +436,64 @@ const investments = [
       ]
   }
 ];
+const following = [
+  {
+    profileId: 0,
+    firstName: `Greg`,
+    lastName: `Harris`,
+    position: 'Senior Vice President',
+    currentEmployer: 'Brooklane Renewables',
+    city: 'New York',
+    stateProvince: 'NY',
+  },
+  {
+    profileId: 1,
+    firstName: `Sarah`,
+    lastName: `Daly`,
+    position: 'Managing Director',
+    currentEmployer: 'Vertex Capital',
+    city: 'Washington',
+    stateProvince: 'DC',
+  },
+  {
+    profileId: 2,
+    firstName: `Pete`,
+    lastName: `Taylor`,
+    position: 'Associate',
+    currentEmployer: 'Atrium Solar LLC',
+    city: 'Nashville',
+    stateProvince: 'TN',
+  },
+  {
+    profileId: 3,
+    firstName: `Sasha`,
+    lastName: `Carlton`,
+    position: 'Senior Analyst',
+    currentEmployer: 'Sunwind Asset Management',
+    city: 'Salt Lake City',
+    stateProvince: 'UT',
+  },
+  {
+    profileId: 4,
+    firstName: `Lauren`,
+    lastName: `Cunningham`,
+    position: 'Partner and COO',
+    currentEmployer: 'Solstice Capital',
+    city: 'Seattle',
+    stateProvince: 'WA',
+  },
+];
 
-// main
-const ProfileView = () => {
-  // init hooks
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const match = useRouteMatch();
-  const {
-    params: { alias },
-  } = match;
-  const baseRoute = `/profile/${match.params.alias}`;
-  // state
-  const viewProfile = useSelector(s => s.view.profile.viewProfile);
-  // effects
-  useEffect(() => {
-    const mockProfileViewObj = {
-      _id: 3,
-      alias,
-      pii,
-      active,
-      education,
-      about,
-      employment,
-      investments,
-      connections,
-      following,
-      images,
-    };
-    dispatch(updateViewProfile(mockProfileViewObj));
-  }, []);
-  console.log(viewProfile)
-  if (!viewProfile) {
-    return <div />;
-  }
-
-  return (
-    <div className="ProfileView flexrow w100">
-      <Sidebar isLeft />
-      <div className="Body f1 flexcol">
-        <Nav baseRoute={baseRoute} />
-        <Switch location={{ ...location, baseRoute }}>
-          <Route exact path="/profile/:alias" render={p => <About props={p} />} />
-          <Route exact path="/profile/:alias/investments" render={p => <Investments props={p} />} />
-          <Route exact path="/profile/:alias/network" render={p => <Network props={p} />} />
-        </Switch>
-      </div>
-    </div>
-  );
+export const profile = {
+  _id: 3,
+  alias: 'd_orrin55',
+  pii,
+  active,
+  education,
+  about,
+  employment,
+  investments,
+  connections,
+  following,
+  images,
 };
-
-// export
-export default ProfileView;

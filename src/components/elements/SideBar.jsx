@@ -1,26 +1,32 @@
 // react
 import React from 'react';
+// utils
 import Proptypes from 'prop-types';
-// style
+import { makeStyles } from '@material-ui/core/styles';
+// css
 import './Sidebar.css';
+// constants
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: 300,
+    [theme.breakpoints.down('md')]: {
+      width: 250,
+    },
+    justifyContent: 'flex-start',
+  },
+}));
 
 // main
 const Sidebar = ({ isLeft, children }) => {
-  const style = {
-    left: isLeft ? 0 : 'initial',
-    right: isLeft ? 'initial' : 0,
-  };
+  // init hooks
+  const classes = useStyles();
 
-  return (
-    <div className={`Sidebar h100 ${isLeft ? 'left' : 'right'}`} style={style}>
-      {children}
-    </div>
-  );
+  return <div className={`Sidebar h100 ${classes.root}`}>{children}</div>;
 };
 
 // proptypes
 Sidebar.propTypes = {
-  isLeft: Proptypes.bool.isRequired,
+  isLeft: Proptypes.shape({}).isRequired,
   children: Proptypes.shape({}).isRequired,
 };
 

@@ -1,16 +1,4 @@
 .Sidebar {
-  height: 100%;
-  width: 300px;
-  margin: 30px 10px;
-}
-
-.Sidebar.left {
-  margin-left: 20px;
-}
-
-.Sidebar.right {
-  margin-right: 20px;
-  background-color: blue;
 }
 
 .Sidebar .News {}

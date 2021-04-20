@@ -9,9 +9,11 @@ import './FeedView.css';
 
 // main
 const FeedView = () => {
-
   return (
-    <div className="FeedView w100 flexrow" >
+    <div
+      className="FeedView w100 flexrow"
+      style={{ alignItems: 'flex-start', justifyContent: 'space-between' }}
+    >
       <LeftSidebar />
       <FeedContent />
       <RightSidebar />

@@ -4,3 +4,14 @@
 }
 
 .FeedContent {}
+
+.FeedView .LeftSidebar {
+  justify-content: start;
+}
+
+.App .FeedView .LSSuggestedConnections .MuiTypography-displayBlock {
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  display: inline;
+}

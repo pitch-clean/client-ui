@@ -1,17 +1,25 @@
 // react
-import React, { useRef } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 // components
 import PageRouter from './components/pages/PageRouter';
 import MainNavBar from './components/elements/mainNavBar/MainNavBar';
 // utils
 import { onKeyDownBlurAll } from './utils/keybinds';
+import { updateLoginStatus } from './redux/actions/AuthActions';
 // styling
 import './App.css';
 import { fixedHeight } from './components/utils/styleFxns';
+// seed
+import { profile } from './seed/testAuthProfile';
 
 // main
 const App = () => {
+  // init hooks
+  const dispatch = useDispatch();
+  const appRef = useRef(null);
+  // state
+  const isTestMode = useSelector(s => s.auth.isTestMode);
   const isDarkMode = useSelector(s => s.view.isDarkMode);
   document.addEventListener('keydown', onKeyDownBlurAll, false);
   // style
@@ -19,7 +27,14 @@ const App = () => {
   const style = {
     justifyContent: `start`,
   };
-  const appRef = useRef(null);
+  // effects
+  // load the state for the activeprofile
+  useEffect(() => {
+    // load
+    if (isTestMode) {
+      dispatch(updateLoginStatus(true, profile));
+    }
+  }, []);
 
   return (
     <div
