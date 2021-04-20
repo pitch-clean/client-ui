@@ -56,12 +56,21 @@ const FeedItem = ({ postObj, idx }) => {
   const classes = useStyles();
   // destructure
   const { _id, body, profile, postType } = postObj;
-  const { profileType, firstName, lastName, alias, currentEmployer, name, city, stateProvince, image } = profile;
-  console.log('postObj', postObj)
+  const {
+    profileType,
+    firstName,
+    lastName,
+    alias,
+    currentEmployer,
+    name,
+    city,
+    stateProvince,
+    image,
+  } = profile;
   const title = profileType === 'organization' ? name : buildName(firstName, lastName);
   const subtitle =
     profileType === 'organization' ? buildLocation(city, stateProvince) : currentEmployer;
-  
+
   return (
     <Card className={`${classes.cardRoot} w100`}>
       <CardHeader

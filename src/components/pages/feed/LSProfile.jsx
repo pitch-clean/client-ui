@@ -3,6 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 // utils
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Paper,
   Card,
@@ -15,7 +16,6 @@ import {
 } from '@material-ui/core';
 import { Settings } from '@material-ui/icons';
 import BookmarkBorder from '@material-ui/icons/BookmarkBorder';
-import { makeStyles } from '@material-ui/core/styles';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,6 +48,7 @@ const useStyles = makeStyles(theme => ({
     padding: `0 5px`,
   },
 }));
+const envProfilePath = 'profile';
 // fxns
 const getCtMsg = (arr, unitStr) => {
   return `${arr.length} ${unitStr}`;
@@ -82,12 +83,17 @@ const LSProfile = () => {
         <CardHeader
           className={`headSection w100`}
           avatar={
-            <Link to={`/profile/${alias}`}>
+            <Link to={`/${envProfilePath}/${alias}`}>
               <Avatar className={classes.large} variant="rounded" src={thumbnail} />
             </Link>
           }
           title={
-            <MuiLink component={Link} to={`/profile/${alias}`} color="inherit" variant="h6">
+            <MuiLink
+              component={Link}
+              to={`/${envProfilePath}/${alias}`}
+              color="inherit"
+              variant="h6"
+            >
               {buildName(firstName, lastName)}
             </MuiLink>
           }

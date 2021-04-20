@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // components
 import PageRouter from './components/pages/PageRouter';
 import MainNavBar from './components/elements/mainNavBar/MainNavBar';
+import SubNav from './components/elements/subNav/SubNav';
 // utils
 import { onKeyDownBlurAll } from './utils/keybinds';
 import { updateLoginStatus } from './redux/actions/AuthActions';
@@ -47,6 +48,7 @@ const App = () => {
       ref={appRef}
     >
       <MainNavBar />
+      <SubNav />
       <div
         className="w100 flexcol f1"
         style={{

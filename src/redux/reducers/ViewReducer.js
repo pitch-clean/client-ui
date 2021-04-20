@@ -4,11 +4,15 @@ import * as types from '../types/ViewTypes';
 
 const initialMainState = {
   currentView: 'home',
+  l1: 'home',
   isDarkMode: false,
 };
 const MainReducer = (state = _.cloneDeep(initialMainState), action) => {
   const newState = _.cloneDeep(state);
   switch (action.type) {
+    case types.UPDATE_L1:
+      newState.l1 = action.payload;
+      return newState;
     case types.UPDATE_VIEW:
       newState.currentView = action.payload;
       return newState;

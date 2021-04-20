@@ -6,9 +6,9 @@ import { useDispatch } from 'react-redux';
 import OfferingsFilterSort from './OfferingsFilterSort';
 import OfferingsList from './OfferingsList';
 // redux
-import {updateOfferingsArr} from '../../../redux/actions/OfferingsActions';
+import { updateOfferingsArr } from '../../../redux/actions/OfferingsActions';
 // seed
-import {offeringsArr} from '../../../seed/offerings';
+import { offeringsArr } from '../../../seed/offerings';
 
 // main
 const OfferingsView = () => {
@@ -16,7 +16,6 @@ const OfferingsView = () => {
   useEffect(() => {
     // make the fetch to api
     dispatch(updateOfferingsArr(offeringsArr));
-
     // TODO: fetch call here
   }, []);
   return (
@@ -24,7 +23,6 @@ const OfferingsView = () => {
       className="w100 flexcol f1 page OfferingsView"
       style={{
         justifyContent: `space-between`,
-        
       }}
     >
       {/* <OfferingsSidebar /> */}

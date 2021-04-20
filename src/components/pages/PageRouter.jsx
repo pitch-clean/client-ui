@@ -6,6 +6,7 @@ import OfferingsView from './offerings/offeringsList/OfferingsView';
 import OfferingDetail from './offerings/offeringDetail/OfferingDetail';
 import NotFound from './home/NotFound';
 import LoginForm from './home/LoginForm';
+import FeedView from './feed/FeedView';
 import Home from './home/Home';
 import CreateProfile from './profile/CreateProfile';
 import ProfileView from './profile/ProfileView';
@@ -20,6 +21,7 @@ const PageRouter = () => {
         <Route exact path="/offering/:offeringId" render={p => <OfferingDetail props={p} />} />
         <Route exact path="/offerings" render={p => <OfferingsView props={p} />} />
         <Route exact path="/login" render={p => <LoginForm props={p} />} />
+        <Route exact path="/feed" render={p => <FeedView props={p} />} />
         <Route exact path="/" render={p => <Home props={p} />} />
         <Route exact path="/register" render={p => <CreateProfile props={p} />} />
         <Route render={p => <NotFound props={p} />} />

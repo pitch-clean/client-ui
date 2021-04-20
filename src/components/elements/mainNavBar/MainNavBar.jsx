@@ -1,6 +1,7 @@
 // react
-import React, {useRef, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // components
 import ProfileLoginRegister from './ProfileLoginRegister';
 import InfoGroup from './InfoGroup';
@@ -13,7 +14,8 @@ import './MainNavBar.css';
 const MainNavBar = () => {
   // init hooks
   const ref1 = useRef(null);
-
+  // state
+  const activeProfile = useSelector(s => s.auth.activeProfile);
   // effects
   useEffect(() => {
     console.log(ref1.current.getBoundingClientRect())
@@ -24,10 +26,11 @@ const MainNavBar = () => {
       className="w100 flexrow MainNavBar"
       style={{
         ...fixedHeight(40, 'px'),
+        justifyContent: 'space-between',
       }}
     >
       <Link
-        to={{pathname: "/"}}
+        to={{ pathname: '/' }}
         className="ctnr navBarLink"
         ref={ref1}
         style={{
@@ -41,7 +44,7 @@ const MainNavBar = () => {
       >
         Envest
       </Link>
-      <InfoGroup />
+      {!activeProfile && <InfoGroup />}
       <ProfileLoginRegister />
     </div>
   );

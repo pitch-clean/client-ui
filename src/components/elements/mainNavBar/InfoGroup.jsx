@@ -25,7 +25,7 @@ const InfoGroup = () => {
     ...fixedHeight(70, '%'),
     zIndex: 100,
   };
-
+  
   return (
     <div style={style} className="h100 flexrow f1">
       <Link to="/offerings" style={linkStyle} className="navBarLink h100 flexcol">

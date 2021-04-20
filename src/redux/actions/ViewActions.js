@@ -13,6 +13,12 @@ export const updateView = payload => dispatch => {
     payload,
   });
 };
+export const updateL1 = payload => dispatch => {
+  dispatch({
+    type: types.UPDATE_L1,
+    payload,
+  });
+};
 // profile
 export const updateProfileTab = payload => dispatch => {
   dispatch({

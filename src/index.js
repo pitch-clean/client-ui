@@ -15,14 +15,14 @@ import './index.css';
 dotenv.config();
 
 ReactDOM.render(
-  <Provider store={store} >
+  <Provider store={store}>
     <BrowserRouter>
       <React.StrictMode>
         <App />
       </React.StrictMode>
     </BrowserRouter>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function

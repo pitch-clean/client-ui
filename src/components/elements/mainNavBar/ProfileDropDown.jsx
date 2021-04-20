@@ -1,73 +1,37 @@
 // react
-import React, { useRef } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // utils
-import { fixedHeight, fixedWidth } from '../../utils/styleFxns';
-import { mouseDownFocusBlur, showHideDropdown } from '../../utils/eventHandlers';
+import { makeStyles } from '@material-ui/core/styles';
+import { Typography, ButtonBase, Link as MuiLink } from '@material-ui/core';
+// constants
+const useStyles = makeStyles(theme => ({
+  root: {
+    padding: `0 15px`,
+    border: `1px solid whitesmoke`,
+    borderRadius: '7px',
+  },
+}));
+const envProfilePath = 'profile';
 
 // main
 const ProfileDropDown = () => {
   // init hooks
-  const parentRef = useRef(null);
-  const dropDownRef = useRef(null);
+  const classes = useStyles();
   // state
-  const firstName = useSelector(s => s.auth.activeProfile.firstName);
-  const username = useSelector(s => s.auth.activeProfile.username);
-  // style
-  /**@type {React.CSSProperties} */
-  const dropDownStyle = {
-    ...fixedWidth(300, 'px'),
-    ...fixedHeight(400, 'px'),
-    backgroundColor: `#4c4a4a`,
-    display: `none`,
-    position: `absolute`,
-    top: `99%`,
-    right: 0,
-    zIndex: 100000,
-    border: 0,
-    outline: 0,
-    color: 'white',
-  };
-  const dropDownList = () => {
-    const elemArr = [];
-    return elemArr;
-  };
+  const firstName = useSelector(s => s.auth.activeProfile.pii.firstName);
+  const alias = useSelector(s => s.auth.activeProfile.alias);
 
   return (
-    <Link to={`/profile/${username}`}>
-      {/* eslint-disable-next-line */}
-      <div
-        className="flexcol"
-        onMouseMove={() => {
-          parentRef.current.focus();
-        }}
-        // onMouseDown={e => mouseDownFocusBlur(e, parentRef, dropDownRef)}
-        // onFocus={() => showHideDropdown(dropDownRef, true)}
-        // onBlur={() => showHideDropdown(dropDownRef, false)}
-        onMouseOut={() => {
-          parentRef.current.blur();
-        }}
-        // eslint-disable-next-line
-        tabIndex={0}
-        ref={parentRef}
-        style={{
-          padding: `10px 25px`,
-          cursor: `default`,
-          position: `relative`,
-          margin: `0`,
-          border: 0,
-          outline: 0,
-          color: 'white',
-        }}
-      >
-        {firstName}
-        {/* <div className="profileDropDown inactive" style={dropDownStyle} ref={dropDownRef}>
-          {dropDownList()}
-        </div> */}
-      </div>
-    </Link>
-  )
+    <MuiLink color="inherit" component={Link} to={`/${envProfilePath}/${alias}`}>
+      <ButtonBase className={classes.root} variant="outlined">
+        <Typography variant="subtitle1" color="inherit" component="div">
+          {firstName}
+        </Typography>
+      </ButtonBase>
+    </MuiLink>
+  );
 };
 
 // export
