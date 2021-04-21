@@ -1,6 +1,9 @@
 // react
 import React from 'react';
 import { Link } from 'react-router-dom';
+// utils
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Typography, Link as MuiLink } from '@material-ui/core';
 // components
 import LoginInfoForm from './profileForms/LoginInfoForm';
 import ProfileTypeForm from './profileForms/ProfileTypeForm';
@@ -10,15 +13,28 @@ import HorizontalNonLinearAlternativeLabelStepper from '../elements/HorizontalNo
 // style
 import './profileForms/ProfileForms.css';
 // constants
+const useStyles = makeStyles(theme => ({
+  root: {},
+  signIn: {
+    fontSize: `15px`,
+    margin: `10px 0`,
+  },
+}));
 const reducerName = 'register';
+const envLoginRoute = 'login';
+
+/**
+ * main
+ */
 
 /**
  * This creates a profile and posts on personal
- * Refreshing just repopulates fields from existing form in database
+ * Refreshing just repopulates fields from existing form in cookies/localstorage
+ * TODO: Need to implement cookies for refreshing and clearing the cookie
  */
 const CreateProfileForm = () => {
-  // state
-  // const reg = useSelector(s => s.register);
+  // init hooks
+  const classes = useStyles();
 
   const stepObjsArr = [
     {
@@ -56,14 +72,14 @@ const CreateProfileForm = () => {
     <div className="CreateProfileForm flexcol w100 h100">
       <HorizontalNonLinearAlternativeLabelStepper
         stepObjsArr={stepObjsArr}
-        redirectAddress="/login"
-        reducerName="register"
+        redirectAddress={`/${envLoginRoute}`}
+        reducerName={reducerName}
       />
-      <div className="signIn" style={{ fontSize: `15px`, margin: `10px 0` }}>
+      <div className={`signIn ${classes.signIn}`}>
         <div>Already have an account?</div>
-        <Link to="/login" style={{ fontSize: `13px` }}>
+        <MuiLink component={Link} to={`/${envLoginRoute}`} style={{ fontSize: `13px` }}>
           Log In
-        </Link>
+        </MuiLink>
       </div>
     </div>
   );

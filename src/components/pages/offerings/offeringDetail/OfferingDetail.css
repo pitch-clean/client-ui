@@ -216,9 +216,9 @@
 /* ####################################################################### */
 
 .OfferingDetail .Overview {
-  padding: 20px;
+  /* padding: 20px; */
   justify-content: start;
-  padding: 0 10%;
+  /* padding: 0 10%; */
 }
   .OfferingDetail .Overview .nav {
     color: white;

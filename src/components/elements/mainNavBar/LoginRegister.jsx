@@ -1,23 +1,45 @@
 // react
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-// main
-const LoginRegister = () => {
-  // style
-  /**@type {React.CSSProperties} */
-  const linkStyle = {
-    textDecoration: `none`,
-    margin: `5px`,
+// utils
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Typography, Chip, Link as MuiLink } from '@material-ui/core';
+// constants
+const useStyles = makeStyles(theme => ({
+  root: {},
+  link: {
+    margin: `5px 7px`,
     padding: `7px`,
-    backgroundColor: `rgba(65, 63, 63, 0.42)`,
-  }
+  },
+  chip: {
+    padding: `7px`,
+  },
+}));
+const envLoginPath = 'login';
+const envRegisterPath = 'register';
+
+/**
+ * main
+ */
+const LoginRegister = () => {
+  // init hooks
+  const classes = useStyles();
 
   return (
-    <div className="h100 flexrow" >
-      <Link to={`/login`} className="ctnr flexrow navBarLink" style={linkStyle} >Login</Link>
-      <Link to={`/register`} className="ctnr flexrow navBarLink" style={linkStyle} >Register</Link>
-    </div>
+    <Grid item className="h100 flexrow">
+      <MuiLink component={Link} to={`/${envLoginPath}`} className={`${classes.link}`}>
+        <Typography color="primary">Login</Typography>
+      </MuiLink>
+      <MuiLink component={Link} to={`/${envRegisterPath}`} className={`${classes.link}`}>
+        <Chip
+          clickable
+          label={<Typography color="primary">Sign up</Typography>}
+          variant="outlined"
+          color="primary"
+          className={`${classes.chip}`}
+        />
+      </MuiLink>
+    </Grid>
   )
 };
 

@@ -63,20 +63,23 @@ const calcTotalProfileValue = investmentsArr => {
   const dollarAmtStr = printDollarAmt(sum);
   return dollarAmtStr;
 };
+// seed
 const interestAccrued = 0.097;
 const principleOutstanding = 70000;
 const balanceOfWallet = 32000;
 
-// main
+/**
+ * main
+ */
 const Portfolio = () => {
   // init hooks
   const classes = useStyles();
-  // state
   const investments = useSelector(s => s.auth.activeProfile.investments);
   const totalProfileValueStr = calcTotalProfileValue(investments);
   const outstandingPrincipal = calcOfferSize(principleOutstanding);
   const annualInterestStr = formatPctStr(interestAccrued);
   const walletBalance = calcOfferSize(balanceOfWallet);
+
   return (
     <Grid
       className={`${classes.root} Portfolio`}

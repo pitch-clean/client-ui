@@ -3,8 +3,9 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 // utils
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Paper, Typography } from '@material-ui/core';
 import Joi from 'joi';
-import { fixedWidth, fixedHeight } from '../../utils/styleFxns';
 import { login } from '../../../utils/requests';
 import {
   updateLoginField,
@@ -13,8 +14,49 @@ import {
 } from '../../../redux/actions/AuthActions';
 // components
 import TextField from '../../forms/fields/TextField';
-
-console.log('pro', process.pid)
+// constants
+const useStyles = makeStyles(theme => ({
+  root: {},
+  leftBlock: {
+    minWidth: `50%`,
+    // maxWidth: `50%`,
+    width: `50%`,
+    backgroundColor: `#171717`,
+  },
+  rightBlock: {
+    minWidth: `50%`,
+    maxWidth: `50%`,
+    width: `50%`,
+    padding: `0 5%`,
+  },
+  formContainer: {
+    padding: `30px`,
+    minWidth: 0,
+    width: `100%`,
+  },
+  title: {
+    padding: `10px 0`,
+    fontSize: `20px`,
+  },
+  text: {
+    flex: 1,
+    minWidth: `100%`,
+    width: `100%`,
+    maxWidth: `100%`,
+    '& .MuiTextField-root': {
+      minWidth: `100%`,
+      width: `100%`,
+      maxWidth: `100%`,
+    },
+  },
+  submit: {
+    padding: `10px 0`,
+    marginTop: '25px',
+    cursor: `pointer`,
+    color: 'whitesmoke',
+    fontWeight: 400,
+  },
+}));
 // seed
 const education = [
   {
@@ -63,12 +105,15 @@ const submitLogin = async (username, password, dispatch) => {
   if (testing) {
     if (username === 'test@test.com' && password === 'testpassword') {
       profileObj = {
-        firstName: 'Test User',
+        pii: {
+          firstName: 'Test User',
+        },
         username: 'test-user-123',
         email: username,
         education,
         employment,
         about,
+        investments: [],
       };
     } else {
       alert('Incorrect Email and/or Password');
@@ -96,6 +141,7 @@ const keyDownHandler = (username, password, dispatch) => e => {
 // main
 const LoginForm = () => {
   // init hooks
+  const classes = useStyles();
   const dispatch = useDispatch();
   // state
   const usernameRedux = useSelector(s => s.auth.login.fields.username.value);
@@ -105,65 +151,20 @@ const LoginForm = () => {
     dispatch(resetLoginForm());
     return <Redirect to="/" />;
   }
-  // effects
-  // style
-  /**@type {React.CSSProperties} */
-  const style = {
-    ...fixedWidth(50, '%'),
-    justifyContent: `start`,
-  };
-  /**@type {React.CSSProperties} */
-  const ctnrStyle = {
-    boxShadow: `0px 0px 20px 8px rgba(0, 0, 0, 0.200)`,
-    marginTop: `10%`,
-    flex: `unset`,
-    backgroundColor: 'whitesmoke',
-  };
-  /**@type {React.CSSProperties} */
-  const titleStyle = {
-    padding: `10px 0 0 0`,
-    fontSize: `20px`
-  };
-  /**@type {React.CSSProperties} */
-  const inputCtnrStyle = {
-    flex: `unset`,
-    justifyContent: `space-around`,
-    alignItems: `start`,
-    padding: `15px 30px`,
-  };
-  /**@type {React.CSSProperties} */
-  const inputStyle = {
-    ...fixedHeight(40, 'px'),
-    fontSize: `18px`,
-    padding: `10px`,
-    margin: `5px 0`,
-  };
-  /**@type {React.CSSProperties} */
-  const inputTitleStyle = {
-    alignItems: `start`,
-  };
-  /**@type {React.CSSProperties} */
-  const submitStyle = {
-    ...fixedHeight(40, 'px'),
-    bottom: 0,
-    // backgroundColor: `black`,
-    borderTop: '1px solid grey',
-    borderTopRightRadius: `0`,
-    borderTopLeftRadius: `0`,
-    cursor: `pointer`,
-  };
 
   return (
-    <div style={style} className="flexcol f1 page">
-      <div style={ctnrStyle} className="flexcol ctnr w100">
-        <div style={titleStyle}>Sign in to Envest</div>
-        {/* eslint-disable-next-line */}
-        <div
-          className="InputCtnr flexcol w100"
-          style={inputCtnrStyle}
-          onKeyDown={keyDownHandler(usernameRedux, passwordRedux, dispatch)}
-        >
+    <Grid
+      container
+      direction="row"
+      justify="space-between"
+      className={`${classes.root} w100 h100 page`}
+    >
+      <Grid item className={`h100 ${classes.leftBlock}`} />
+      <Paper square className={`h100 ${classes.rightBlock} flexcol`}>
+        <Paper square elevation={3} className={`${classes.formContainer}`}>
+          <div className={`${classes.title}`}>Sign in to Envest</div>
           <TextField
+            className={classes.text}
             formName="login"
             fieldName="username"
             label="Email" // temporary
@@ -176,6 +177,14 @@ const LoginForm = () => {
             autoFocus
           />
           <TextField
+            className={classes.text}
+            classes={{
+              root: {
+                width: `100%`,
+                maxWidth: `100%`,
+                minWidth: `100%`,
+              },
+            }}
             formName="login"
             fieldName="password"
             label="Password"
@@ -183,18 +192,19 @@ const LoginForm = () => {
             reducerName="auth"
             updateFxn={updateLoginField}
           />
-        </div>
-        {/* eslint-disable-next-line */}
-        <div
-          className="w100 flexcol noselect"
-          style={submitStyle}
-          onClick={() => submitLogin(usernameRedux, passwordRedux, dispatch)}
-        >
-          Submit
-        </div>
-      </div>
-    </div>
-  )
+          <div
+            style={{
+              backgroundColor: `rgb(27, 132, 29)`,
+            }}
+            className={`w100 flexcol noselect ${classes.submit}`}
+            onClick={() => submitLogin(usernameRedux, passwordRedux, dispatch)}
+          >
+            Submit
+          </div>
+        </Paper>
+      </Paper>
+    </Grid>
+  );
 };
 
 // export

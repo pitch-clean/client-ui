@@ -3,42 +3,63 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // utils
 import { fixedHeight } from '../../utils/styleFxns';
-
-// main
-const InfoGroup = () => {
-  // style
-  /** @type {React.CSSProperties} */
-  const style = {
+// utils
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Typography, Link as MuiLink } from '@material-ui/core';
+// components
+// import Sample from './Sample';
+// constants
+const useStyles = makeStyles(theme => ({
+  root: {
     padding: `0 40px`,
-    justifyContent: `end`,
-  };
-  /** @type {React.CSSProperties} */
-  const linkStyle = {
-    padding: `0 20px`,
-    textDecoration: `none`,
-  };
-  /** @type {React.CSSProperties} */
-  const dividerStyle = {
+    justifyContent: `start`,
+  },
+  divider: {
     backgroundColor: `grey`,
     padding: `.5px`,
     margin: `5px 0`,
     ...fixedHeight(70, '%'),
     zIndex: 100,
-  };
-  
+  },
+  link: {
+    padding: `0 20px`,
+    textDecoration: `none`,
+  },
+}));
+const envSponsorPath = 'sponsor';
+const envInvestPath = 'invest';
+const envFunctionalityPath = 'functionality';
+
+/**
+ * main
+ */
+const InfoGroup = () => {
+  // init hooks
+  const classes = useStyles();
+
   return (
-    <div style={style} className="h100 flexrow f1">
-      <Link to="/offerings" style={linkStyle} className="navBarLink h100 flexcol">
-        Offerings
-      </Link>
-      <div style={dividerStyle} className="" />
-      <Link to="/investors" style={linkStyle} className="navBarLink h100 flexcol">
-        For Investors
-      </Link>
-      <div style={dividerStyle} className="" />
-      <Link to="/sponsors" style={linkStyle} className="navBarLink h100 flexcol">
-        For Sponsors
-      </Link>
+    <div className={`h100 f1 flexrow ${classes.root}`}>
+      <MuiLink
+        component={Link}
+        to={`/${envSponsorPath}`}
+        className={`navBarLink h100 flexcol ${classes.link}`}
+      >
+        Raise Capital
+      </MuiLink>
+      <MuiLink
+        component={Link}
+        to={`/${envInvestPath}`}
+        className={`navBarLink h100 flexcol ${classes.link}`}
+      >
+        Invest
+      </MuiLink>
+      <MuiLink
+        component={Link}
+        to={`/${envFunctionalityPath}`}
+        className={`navBarLink h100 flexcol ${classes.link}`}
+      >
+        How it works
+      </MuiLink>
     </div>
   );
 };

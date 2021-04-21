@@ -1,18 +1,26 @@
 // react
 import React from 'react';
+// utils
+import { makeStyles } from '@material-ui/core/styles';
 // components
 import CreateProfileForm from '../../forms/CreateProfileForm';
-// style
-import './CreateEditProfile.css';
+// constants
+const useStyles = makeStyles(theme => ({
+  root: {
+    justifyContent: `end`,
+  },
+}));
 
 /**
  * MAIN
  * TODOs: Need to toggle dark/light theme
  */
 const CreateProfile = () => {
+  // init hooks
+  const classes = useStyles();
 
   return (
-    <div className="CreateProfile w100 flexrow h100" >
+    <div className={`${classes.root} CreateProfile w100 h100 flexrow`}>
       <CreateProfileForm />
     </div>
   )

@@ -3,29 +3,30 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
 // components
-import ProfileDropDown from './ProfileDropDown';
+import ProfileNavButton from './ProfileNavButton';
 import LoginRegister from './LoginRegister';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
-    boxShadow: `rgb(79, 76, 76) 0px 0px 4px -1px`,
     margin: `0 50px`,
-    border: `none`,
     color: `white`,
   },
 }));
 
-// main
+/**
+ * main
+ */
 const ProfileLoginRegister = () => {
   // init hooks
   const classes = useStyles();
   const activeProfile = useSelector(s => s.auth.activeProfile);
 
   return (
-    <div className={`h100 ctnr flexrow ${classes.root}`}>
-      {activeProfile ? <ProfileDropDown /> : <LoginRegister />}
-    </div>
+    <Grid item className={`h100 flexrow ${classes.root}`}>
+      {activeProfile ? <ProfileNavButton /> : <LoginRegister />}
+    </Grid>
   );
 };
 

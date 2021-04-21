@@ -13,10 +13,13 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '7px',
   },
 }));
+// TODO add env vars
 const envProfilePath = 'profile';
 
-// main
-const ProfileDropDown = () => {
+/**
+ * main
+ */
+const ProfileNavButton = () => {
   // init hooks
   const classes = useStyles();
   // state
@@ -35,4 +38,4 @@ const ProfileDropDown = () => {
 };
 
 // export
-export default ProfileDropDown;
+export default ProfileNavButton;

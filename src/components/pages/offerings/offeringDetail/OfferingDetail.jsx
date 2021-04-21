@@ -4,10 +4,11 @@ import React, {useState, useEffect} from 'react';
 import MainInfo from './MainInfo';
 import ProjectInfo from './ProjectInfo';
 import Overview from './Overview';
+import Summary from './Summary';
 // style
 import './OfferingDetail.css';
 // seed
-import {offeringsArr} from '../../../../seed/offerings';
+import { offeringsArr } from '../../../../seed/offerings';
 const fakeFetchOfferingObj = (offeringId) => {
   const offeringObj = offeringsArr.find(elem => {
     return elem.slug === offeringId;
@@ -31,9 +32,10 @@ const OfferingDetail = ({props: {match: {params: {offeringId}}}}) => {
     }
   }, []);
   return offeringObj ? (
-    <div className="OfferingDetail w100" >
+    <div className="OfferingDetail w100">
       <MainInfo offeringObj={offeringObj} />
-      <ProjectInfo offeringObj={offeringObj} />
+      <Summary offeringObj={offeringObj} />
+      {/* <ProjectInfo offeringObj={offeringObj} /> */}
       <Overview offeringObj={offeringObj} />
     </div>
   ) : (

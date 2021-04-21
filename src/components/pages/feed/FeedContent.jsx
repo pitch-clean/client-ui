@@ -21,7 +21,6 @@ const useStyles = makeStyles(theme => ({
     margin: `10px`,
   },
   cardHeader: {
-    backgroundColor: 'green',
     padding: `10px`,
     justifyContent: 'start',
   },

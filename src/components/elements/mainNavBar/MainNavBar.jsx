@@ -2,18 +2,31 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+// utils
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Button, Typography, Link as MuiLink } from '@material-ui/core';
 // components
 import ProfileLoginRegister from './ProfileLoginRegister';
 import InfoGroup from './InfoGroup';
 // utils
-import { fixedHeight } from '../../utils/styleFxns';
 // styles
 import './MainNavBar.css';
+// constants
+const useStyles = makeStyles(theme => ({
+  root: {
+    justifyContent: 'space-between',
+    alignItems: 'centered',
+    padding: 5,
+  },
+}));
 
-// main
+/**
+ * main
+ */
 const MainNavBar = () => {
   // init hooks
   const ref1 = useRef(null);
+  const classes = useStyles();
   // state
   const activeProfile = useSelector(s => s.auth.activeProfile);
   // effects
@@ -22,31 +35,20 @@ const MainNavBar = () => {
   }, [ref1]);
 
   return (
-    <div
-      className="w100 flexrow MainNavBar"
-      style={{
-        ...fixedHeight(40, 'px'),
-        justifyContent: 'space-between',
-      }}
-    >
-      <Link
-        to={{ pathname: '/' }}
-        className="ctnr navBarLink"
-        ref={ref1}
-        style={{
-          ...fixedHeight(100, '%'),
-          padding: `10px`,
-          margin: `0 30px`,
-          backgroundColor: `rgb(64, 78, 64)`,
-          textDecoration: 'inherit',
-          border: `none`,
-        }}
-      >
-        Envest
-      </Link>
+    <Grid container direction="row" className={`w100 flexrow MainNavBar ${classes.root}`}>
+      <MuiLink component={Link} to={{ pathname: '/' }} ref={ref1}>
+        <Button style={{ lineHeight: 1 }}>
+          <Typography variant="h4" color="secondary">
+            EN
+          </Typography>
+          <Typography variant="h4" color="primary">
+            VEST
+          </Typography>
+        </Button>
+      </MuiLink>
       {!activeProfile && <InfoGroup />}
       <ProfileLoginRegister />
-    </div>
+    </Grid>
   );
 };
 

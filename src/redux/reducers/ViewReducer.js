@@ -5,6 +5,9 @@ import * as types from '../types/ViewTypes';
 const initialMainState = {
   currentView: 'home',
   l1: 'home',
+  l2: '',
+  l3: '',
+  l4: '',
   isDarkMode: false,
 };
 const MainReducer = (state = _.cloneDeep(initialMainState), action) => {

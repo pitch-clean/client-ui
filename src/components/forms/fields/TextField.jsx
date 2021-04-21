@@ -74,9 +74,11 @@ const TextField = ({
       }
     }
   };
+
   return (
     <>
       <MuiTextField
+        style={{ width: `100%` }}
         variant="outlined"
         value={val}
         label={label}

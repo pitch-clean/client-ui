@@ -19,7 +19,6 @@ body {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   font-weight: 300;
   box-sizing: border-box;
-  border-radius: 5px;
   /* outline-width: 0.5px;
   outline-color: rgb(201, 216, 201);
   outline-style: dashed; */
@@ -136,6 +135,9 @@ body {
   background-color: rgb(113, 129, 118);
 }
 .contentSelector:hover {
+  color: whitesmoke;
+}
+.dark-bg {
   color: whitesmoke;
 }
 

@@ -1,19 +1,96 @@
 // react
 import React from 'react';
 import {Link} from 'react-router-dom';
+// utils
+import { makeStyles } from '@material-ui/core/styles';
+import {
+  Grid,
+  Divider,
+  ListItem,
+  ListItemText,
+  Typography,
+  Link as MuiLink,
+} from '@material-ui/core';
 import { calculateTermLength, formatPctStr, calcOfferSize } from '../../../utils/printFxns';
 // components
 import InvestmentProgress from './InvestmentProgress';
+// constants
+const useStyles = makeStyles(theme => ({
+  root: {
+    margin: 0,
+    width: '100%',
+    minHeight: 200,
+    height: 200,
+    backgroundColor: '#333533',
+    borderRadius: '0',
+    display: 'flex',
+    flexFlow: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    '& *': {
+      // color: 'whitesmoke',
+    },
+  },
+  left: {
+    height: `100%`,
+    padding: `30px 50px`,
+    paddingLeft: '70px',
+    display: 'flex',
+    flexFlow: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'start',
+    '& *': {
+      color: 'whitesmoke',
+    },
+  },
+  leftBottom: {},
+  bottomCard: {
+    margin: 5,
+    marginLeft: 0,
+    marginRight: '30px',
+    height: '100%',
+    display: 'flex',
+    flexFlow: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // verticalAlign: 'center',
+    // textAlign: 'start',
+  },
+  right: {
+    height: `100%`,
+  },
+}));
 // build fxns
 const buildStatElem = (title, number) => {
-  let printNumber = number
+  let printNumber = number;
   if (number === typeof 0.1 || number === typeof 10) {
-    printNumber = formatPctStr(number)
+    printNumber = formatPctStr(number);
   }
   return (
-    <div className="statContainer flexcol" >
-      <div className="title" >{title}</div>
-      <div className="stat" >{printNumber}</div>
+    <div
+      className="statContainer flexcol"
+      style={{
+        alignItems: 'flex-start',
+      }}
+    >
+      <div
+        className="stat"
+        style={{
+          fontSize: '20px',
+          fontWeight: 600,
+        }}
+      >
+        {printNumber}
+      </div>
+      <div
+        className="title"
+        style={{
+          fontSize: '12px',
+          fontWeight: 300,
+        }}
+      >
+        {title}
+      </div>
     </div>
   );
 };
@@ -23,44 +100,43 @@ const calculateProgressPercent = () => {
 };
 
 // main
-const MainInfo = ({offeringObj}) => {
-
-  const termLength = calculateTermLength(offeringObj.dtInvestmentTermEnd - offeringObj.dtInvestmentTermStart);
+const MainInfo = ({ offeringObj }) => {
+  // init hooks
+  const classes = useStyles();
+  const termLength = calculateTermLength(
+    offeringObj.dtInvestmentTermEnd - offeringObj.dtInvestmentTermStart,
+  );
+  const { title, sponsorSlug, sponsor, financials, slug, images, content } = offeringObj;
   return (
-    <div className="MainInfo w100" >
-      <div className="topRow flexrow">
-        <div className="OfferingTitle flexcol" >
-          <div className="offeringName" >
-            {offeringObj.title}
-          </div>
-          <div className="w100 subtitle flexrow">
-            <Link
+    <Grid container className={`${classes.root} w100`}>
+      <Grid container direction="column" className={classes.left} xs={7}>
+        <Grid container direction="column" alignItems="flex-start">
+          <Grid item>
+            <Typography variant="h5">{title}</Typography>
+          </Grid>
+          <Grid item>
+            <MuiLink
+              component={Link}
+              variant="subtitle1"
+              color="textPrimary"
               className="offeringSponsor nowrap"
-              to={`/${offeringObj.sponsorSlug}`}
+              to={`/organization/${sponsorSlug}`}
             >
-              {offeringObj.sponsor}
-            </Link>
-            <div className="assetClass">{offeringObj.financials.investmentClass}</div>
-          </div>
-          <div className="returnStats flexrow w100" >
-            <div className="annualInterest">{buildStatElem('Annual Interest', offeringObj.financials.interestAccrued)}</div>
-            <div className="divider h100" ></div>
-            <div className="termLength" >{buildStatElem('Term', termLength)}</div>
-            <div className="divider h100" ></div>
-            <div className="offeringSize" >{buildStatElem('Offering Size', calcOfferSize(offeringObj.financials.fundTarget))}</div>
-          </div>
-        </div>
-        <div className="OfferingImage h100 flexrow" >
-            <img className="h100" src={offeringObj.images.large} alt="" srcset="" height="100%" />
-            <div className="otherClass">{offeringObj.financials.otherClass}</div>
-        </div>
-      </div>
-      <div style={{gridArea: `border1`, justifySelf: 'center', backgroundColor: `rgba(0, 0, 0, 0.16)`, width: `90%`, height: `1px`, margin: `10px 5px`,}} ></div>
-      <InvestmentProgress progressPct={calculateProgressPercent()} offeringSlug={offeringObj.slug} />
-      <div style={{gridArea: `border2`, justifySelf: 'center', backgroundColor: `rgba(0, 0, 0, 0.16)`, width: `90%`, height: `1px`, margin: `10px 5px`,}} ></div>
-      <div className="MainAbout">{offeringObj.content.about}</div>
-    </div>
-  )
+              {sponsor}
+            </MuiLink>
+          </Grid>
+        </Grid>
+        <Grid container direction="row" justify="flex-start" className={classes.leftBottom}>
+          <Grid item className={classes.bottomCard}>{buildStatElem('Annual Interest', financials.interestAccrued)}</Grid>
+          <Grid item className={classes.bottomCard}>{buildStatElem('Term', termLength)}</Grid>
+          <Grid item className={classes.bottomCard}>{buildStatElem('Offering Size', calcOfferSize(financials.fundTarget))}</Grid>
+        </Grid>
+      </Grid>
+      <Grid item className={classes.right} xs={4}>
+        <img className="h100" src={images.large} alt="" srcset="" height="100%" />
+      </Grid>
+    </Grid>
+  );
 };
 
 // export

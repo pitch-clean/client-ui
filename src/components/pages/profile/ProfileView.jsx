@@ -3,11 +3,11 @@ import React, { useEffect } from 'react';
 import { Switch, Route, useRouteMatch, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // components
-import Sidebar from '../../elements/SideBar';
 import Nav from './home/Nav';
 import About from './home/About';
 import Investments from './home/Investments';
 import Network from './home/Network';
+import LeftSidebar from '../feed/LeftSidebar';
 // utils
 import { updateViewProfile } from '../../../redux/actions/ViewActions';
 // seed
@@ -533,8 +533,8 @@ const ProfileView = () => {
   }
 
   return (
-    <div className="ProfileView flexrow w100">
-      <Sidebar isLeft />
+    <div className="ProfileView flexrow w100" style={{ alignItems: 'start' }}>
+      <LeftSidebar />
       <div className="Body f1 flexcol">
         <Nav baseRoute={baseRoute} />
         <Switch location={{ ...location, baseRoute }}>
