@@ -2,14 +2,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 // components
-// import OfferingsSidebar from './OfferingsSidebar';
 // import OfferingsFilterSort from './OfferingsFilterSort';
-import OfferingsFilterSort from './OfferingsFilterSort';
 import OfferingsList from './OfferingsList';
 // redux
-import {updateOfferingsArr} from '../../../../redux/actions/OfferingsActions';
+import { updateOfferingsArr } from '../../../../redux/actions/OfferingsActions';
 // seed
-import {offeringsArr} from '../../../../seed/offerings';
+import { offeringsArr } from '../../../../seed/offerings';
 
 // main
 const OfferingsView = () => {
@@ -17,18 +15,15 @@ const OfferingsView = () => {
   useEffect(() => {
     // make the fetch to api
     dispatch(updateOfferingsArr(offeringsArr));
-
     // TODO: fetch call here
   }, []);
+
   return (
-    <div
-      className="w100 page OfferingsView"
-      style={{}}
-    >
-      <OfferingsFilterSort />
+    <div className="w100 page OfferingsView flexcol">
+      {/* <OfferingsFilterSort /> */}
       <OfferingsList />
     </div>
-  )
+  );
 };
 
 // export

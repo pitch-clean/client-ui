@@ -3,9 +3,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Divider, Paper, ListItem, ListItemText, Typography } from '@material-ui/core';
+import { Grid, Divider, ListItem, ListItemText, Typography } from '@material-ui/core';
 import { calcOfferSize, formatPctStr } from '../../utils/printFxns';
-
 // constants
 const useStyles = makeStyles(theme => ({
   root: {

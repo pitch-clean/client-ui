@@ -1,24 +1,42 @@
 // react
 import React from 'react';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
+// utils
+import { makeStyles } from '@material-ui/core/styles';
+import GridList from '@material-ui/core/GridList';
 // components
 import OfferingCard from './OfferingCard';
+// constants
+const useStyles = makeStyles(theme => ({
+  root: {
+    // '& *': {
+      // color: 'whitesmoke',
+    // },
+  },
+  gridList: {
+    maxWidth: `80%`,
+    // height: 450,
+  },
+}));
+const test = true;
 
 // main
 const OfferingsList = () => {
+  // init hooks
+  const classes = useStyles();
   // state
-  const offeringsArr = useSelector(s => s.offerings.offeringsArr);
+  const offeringsArrLen = useSelector(s => s.offerings.offeringsArr.length);
   // build fxn
-  const buildOfferingsArrElem = (offeringsArr) => {
-    const offeringsArrElem = [];
-    for (let idx = 0; idx < offeringsArr.length; idx++) {
-      const offeringObj = offeringsArr[idx];
-      offeringsArrElem.push(<OfferingCard offeringObj={offeringObj} />)
-    }
-    return offeringsArrElem;
-  };
+  const offeringsArrElem = [];
+  for (let idx = 0; idx < offeringsArrLen; idx += 1) {
+    offeringsArrElem.push(<OfferingCard idx={idx} />);
+  }
 
-  return (
+  return test ? (
+    <GridList cellHeight={300} className={classes.gridList} cols={3}>
+      {offeringsArrElem}
+    </GridList>
+  ) : (
     <div
       className="flexrow w100 OfferingsList"
       style={{
@@ -28,9 +46,9 @@ const OfferingsList = () => {
         maxWidth: `80%`,
       }}
     >
-      {buildOfferingsArrElem(offeringsArr)}
+      {offeringsArrElem}
     </div>
-  )
+  );
 };
 
 // export

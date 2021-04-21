@@ -1,73 +1,170 @@
 // react
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // utils
-import {activateFavorite} from '../../../utils/eventHandlers';
-import {calcOfferSize, calculateTermLength} from '../../../utils/printFxns';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+  GridListTile,
+  ListSubheader,
+  ListItem,
+  ListItemText,
+  Typography,
+  Divider,
+  Link as MuiLink,
+} from '@material-ui/core';
+import { activateFavorite } from '../../../utils/eventHandlers';
+import { calcOfferSize, calculateTermLength } from '../../../utils/printFxns';
 // style
 import './OfferingsList.css';
 // constants
 const filledStar = '\u2605';
 const openStar = '\u2606';
+const useStyles = makeStyles(theme => ({
+  root: {
+    // '& *': {},
+  },
+  gridItem: {
+    backgroundColor: `#f8f0e4`,
+    minWidth: `200px`,
+    width: `300px`,
+    maxWidth: `29%`,
+    border: `1px solid beige`,
+    margin: `20px 15px`,
+  },
+  gridImg: {
+    maxHeight: `175px`,
+    objectFit: `cover`,
+    borderRadius: 0,
+  },
+  subHeader: {
+    textAlign: 'start',
+    padding: `0 10px`,
+    lineHeight: 2.24,
+    color: 'whitesmoke',
+    backgroundColor: 'black',
+    borderRadius: 0,
+  },
+  cardHeader: {},
+  companyLink: {
+    padding: 0,
+    margin: 0,
+    lineHeight: 1,
+  },
+  listItem: {
+    paddingTop: 0,
+    paddingBottom: 0,
+    maxWidth: `100%`,
+    '& *': {
+      whiteSpace: `nowrap`,
+      overflowX: `hidden`,
+      textOverflow: `ellipsis`,
+    },
+  },
+  lowerListItem: {
+    maxWidth: `100%`,
+    display: 'flex',
+    flexFlow: 'column',
+  },
+  row: {
+    display: 'flex',
+    flexFlow: 'row',
+    justifyContent: 'space-between',
+    fontSize: '12px',
+    lineHeight: 1.5
+  },
+}));
+const test = true;
 // callback
 const onClickFavorite = () => {};
 
 // main
-const OfferingCard = ({offeringObj}) => {
-  // TODO: delete this state
+const OfferingCard = ({ idx }) => {
+  // init hooks
+  const classes = useStyles();
+  // TODO: make this state reliant on the offering object
   const [isFavorited, setIsFavorited] = useState(false);
-  const termLength = calculateTermLength(offeringObj.dtInvestmentTermEnd - offeringObj.dtInvestmentTermStart);
-  const interestAccrued = Math.round(10000 * offeringObj.financials.interestAccrued) / 100;
+  const offeringObj = useSelector(s => s.offerings.offeringsArr[idx]);
+  const {
+    images: { card },
+    financials,
+    location: {
+      address: { provinceState, city },
+    },
+    sponsor,
+    sponsorSlug,
+    title,
+  } = offeringObj;
+  const termLength = calculateTermLength(
+    offeringObj.dtInvestmentTermEnd - offeringObj.dtInvestmentTermStart,
+  );
+  const interestAccrued = Math.round(10000 * financials.interestAccrued) / 100;
 
   return (
-    <div className="OfferingCard" >
-      <div className="otherClass" >{offeringObj.financials.otherClass}</div>
-      <Link className="imgLink" to={`/offering/${offeringObj.slug}`} >
-        <img
-          className="img"
-          src={offeringObj.images.card}
-          alt="Not found"
-          width="100%"
-        />
+    <GridListTile className={classes.gridItem} key={`asdfasdf--${idx}`}>
+      <ListSubheader className={classes.subHeader} component="div">
+        {financials.otherClass}
+      </ListSubheader>
+      <Link className="imgLink" to={`/offering/${offeringObj.slug}`}>
+        <img className={classes.gridImg} src={card} alt="Not found" width="100%" />
       </Link>
-      <div className="lowerCard flexcol" >
-        <div className="title flexrow w100" >
-          <Link to={`/offering/${offeringObj.slug}`} className="link nowrap" >
-            {offeringObj.title}
-          </Link>
-          <div
-            className="favorite noselect"
-            style={{ color: isFavorited ? `yellow` : `white`, }}
-            onClick={() => {activateFavorite(); setIsFavorited(!isFavorited)}}
-          >
-            {isFavorited ? filledStar : openStar}
-          </div>
+      <ListItem className={classes.listItem}>
+        <ListItemText
+          primary={
+            <MuiLink
+              color="textPrimary"
+              variant="subtitle1"
+              className={`${classes.cardHeader} nowrap`}
+              component={Link}
+              to={`/offering/${offeringObj.slug}`}
+            >
+              {title}
+            </MuiLink>
+          }
+          secondary={
+            <>
+              <MuiLink
+                className={`${classes.companyLink} nowrap`}
+                component={Link}
+                variant="caption"
+                color="textPrimary"
+                to={`/organization/${sponsorSlug}`}
+              >
+                {sponsor}
+              </MuiLink>
+              <Typography
+                className={classes.companyLink}
+                component="p"
+                variant="caption"
+                color="textSecondary"
+              >
+                {`${provinceState}, ${city}`}
+              </Typography>
+            </>
+          }
+        />
+      </ListItem>
+      <Divider variant="middle" />
+      <ListItem className={classes.lowerListItem}>
+        <div className={`${classes.row} annualInterest item flexrow w100`} >
+          <div>Annual Interest: </div>
+          <div style={{ fontWeight: 500 }}>{` ${interestAccrued}%`}</div>
         </div>
-        <div className="sponsor w100 flexrow">
-          <Link className="link" to={offeringObj.sponsorSlug} >
-            {offeringObj.sponsor}
-          </Link>
-          <div className="investmentClass">{offeringObj.financials.investmentClass}</div>
+        <Divider variant="fullWidth" />
+        <div className={`${classes.row} termLength item flexrow w100`} >
+          <div>Term length: </div>
+          <div style={{ fontWeight: 500 }}>{` ${termLength}`}</div>
         </div>
-        <div className="info flexcol w100 f1">
-          <div className="annualInterest item flexrow" >
-            <div>Annual Interest: </div>
-            <div style={{fontWeight: 500}}>{` ${interestAccrued}%`}</div>
-          </div>
-          <div className="divider"></div>
-          <div className="termLength item flexrow" >
-            <div>Term length: </div>
-            <div style={{fontWeight: 500}}>{` ${termLength}`}</div>
-          </div>
-          <div className="divider"></div>
-          <div className="offeringSize item flexrow" >
-            <div>Offering Size: </div>
-            <div style={{fontWeight: 500}} >{` ${calcOfferSize(offeringObj.financials.fundTarget)}`}</div>
-          </div>
+        <Divider variant="middle" />
+        <div className={`${classes.row} offeringSize item flexrow w100`} >
+          <div>Offering Size: </div>
+          <div style={{ fontWeight: 500 }}>{`${calcOfferSize(
+            offeringObj.financials.fundTarget,
+          )}`}</div>
         </div>
-      </div>
-    </div>
-  )
+      </ListItem>
+    </GridListTile>
+  );
 };
 
 // export
