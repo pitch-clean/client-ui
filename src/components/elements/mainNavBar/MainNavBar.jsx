@@ -28,7 +28,7 @@ const MainNavBar = () => {
   const ref1 = useRef(null);
   const classes = useStyles();
   // state
-  const activeProfile = useSelector(s => s.auth.activeProfile);
+  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
   // effects
   useEffect(() => {
     console.log(ref1.current.getBoundingClientRect())
@@ -46,7 +46,7 @@ const MainNavBar = () => {
           </Typography>
         </Button>
       </MuiLink>
-      {!activeProfile && <InfoGroup />}
+      {!isAuthenticated && <InfoGroup />}
       <ProfileLoginRegister />
     </Grid>
   );

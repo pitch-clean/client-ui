@@ -1,42 +1,51 @@
 // react
 import React from 'react';
 // utils
-import Joi from 'joi';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '../fields/TextField';
+import { Grid } from '@material-ui/core';
 import {
-  updateFormFieldError,
   updateFormFieldValue,
+  updateFormFieldError,
   checkIfValidForm,
-} from '../../../redux/actions/RegisterActions';
+} from '../../../redux/actions/CreateOfferingActions';
+// components
+import TextField from '../fields/TextField';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
+    minWidth: '300px',
+    maxWidth: `80%`,
+    [theme.breakpoints.up('xs')]: {
+      width: '70%',
+      minWidth: 270,
+      paddingLeft: `30px`,
+      paddingRight: `7px`,
+    },
     '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: `100%`,
+      margin: `8px 0`,
       display: 'flex',
     },
   },
 }));
-const formName = 'loginInfo';
 
 /**
- * User enters first & last name, email, password
+ * main
  */
-const LoginInfoForm = ({ reducerName }) => {
+const FinancialProjectionsForm = ({ formName, reducerName }) => {
   // init hooks
   const classes = useStyles();
 
   return (
-    <div className={`${classes.root} LoginInfoForm flexcol w100`}>
+    <Grid
+      container
+      direction="column"
+      justify="center"
+      alignItems="center"
+      className={`OperationsForm ${classes.root}`}
+    >
       <TextField
-        fieldName="firstName"
-        label="Legal First Name"
-        validator={Joi.string()
-          .regex(/^[ a-zA-Z'-]+$/)
-          .allow('')
-          .max(50)}
+        fieldName="expectedAnnualMwh"
+        label="Expected Annual MWH"
         reducerName={reducerName}
         formName={formName}
         updateFxn={updateFormFieldValue}
@@ -45,62 +54,58 @@ const LoginInfoForm = ({ reducerName }) => {
         autoFocus
       />
       <TextField
-        fieldName="middleName"
-        label="Middle Name/Initial"
-        validator={Joi.string()
-          .regex(/^[ a-zA-Z'-]+$/)
-          .allow('')
-          .max(50)}
+        fieldName="capacity"
+        label="Capacity"
         reducerName={reducerName}
         formName={formName}
         updateFxn={updateFormFieldValue}
         updateErrorFxn={updateFormFieldError}
         validCheckFxn={checkIfValidForm}
+        isUpdateOnChange
       />
       <TextField
-        fieldName="lastName"
-        label="Legal Last Name"
-        validator={Joi.string()
-          .regex(/^[ a-zA-Z'-]+$/)
-          .allow('')
-          .max(50)}
+        fieldName="ppaTerm"
+        label="PPA Term"
         reducerName={reducerName}
         formName={formName}
         updateFxn={updateFormFieldValue}
         updateErrorFxn={updateFormFieldError}
         validCheckFxn={checkIfValidForm}
+        isUpdateOnChange
       />
       <TextField
-        fieldName="email"
-        label="Email Address"
-        validator={Joi.string().email({ tlds: { allow: false } })}
+        fieldName="ppaPrice"
+        label="PPA Price"
         reducerName={reducerName}
         formName={formName}
         updateFxn={updateFormFieldValue}
         updateErrorFxn={updateFormFieldError}
         validCheckFxn={checkIfValidForm}
+        isUpdateOnChange
       />
       <TextField
-        fieldName="password"
-        label="Password"
+        fieldName="commercial"
+        label="Commercial"
         reducerName={reducerName}
         formName={formName}
         updateFxn={updateFormFieldValue}
         updateErrorFxn={updateFormFieldError}
         validCheckFxn={checkIfValidForm}
+        isUpdateOnChange
       />
       <TextField
-        fieldName="confirmPassword"
-        label="Confirm Password"
+        fieldName="counterparty"
+        label="Counterparty"
         reducerName={reducerName}
         formName={formName}
         updateFxn={updateFormFieldValue}
         updateErrorFxn={updateFormFieldError}
         validCheckFxn={checkIfValidForm}
+        isUpdateOnChange
       />
-    </div>
+    </Grid>
   );
 };
 
 // export
-export default LoginInfoForm;
+export default FinancialProjectionsForm;

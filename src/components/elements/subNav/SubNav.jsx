@@ -52,13 +52,13 @@ const SubNav = () => {
   const loc = useLocation();
   const dispatch = useDispatch();
   // state
-  const activeProfile = useSelector(s => s.auth.activeProfile);
+  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
   const l1Path = loc.pathname.split('/')[1];
   // effects
   useEffect(() => {
     dispatch(updateL1(l1Path));
   }, []);
-  if (!activeProfile) {
+  if (!isAuthenticated) {
     return <div />;
   }
 

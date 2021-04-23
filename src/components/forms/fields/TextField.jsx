@@ -9,6 +9,11 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import { updateFormFieldError, checkIfValidForm } from '../../../redux/actions/RegisterActions';
 // constants
 const useStyles = makeStyles(() => ({
+  root: {
+    '& .Mui-focused.Mui-focused': {
+      color: '#333',
+    },
+  },
   helperText: {
     lineHeight: 0,
     marginBottom: `8px`,
@@ -26,6 +31,10 @@ const TextField = ({
   validator,
   autoFocus,
   updateFxn,
+  updateErrorFxn,
+  validCheckFxn,
+  isUpdateOnChange,
+  variant,
 }) => {
   // init hooks
   const dispatch = useDispatch();
@@ -33,8 +42,10 @@ const TextField = ({
   // state
   const val = useSelector(s => s[reducerName][formName].fields[fieldName].value);
   const err = useSelector(s => s[reducerName][formName].fields[fieldName].error);
+  const reduxValidator = useSelector(s => s[reducerName][formName].fields[fieldName].validator);
   const isOptional = useSelector(s => s[reducerName][formName].fields[fieldName].isOptional);
   const passwordObj = useSelector(s => s[reducerName][formName].fields.password);
+  const validator_ = reduxValidator || validator;
   let passwordValue;
   if (passwordObj) {
     passwordValue = passwordObj.value;
@@ -43,13 +54,19 @@ const TextField = ({
   if (fieldName === 'confirmPassword' || fieldName === 'password') {
     type = 'password';
   }
-
   const onchange = e => {
     if (reducerName === 'auth') {
-      const { error } = validator.validate(e.target.value);
+      const { error } = validator_.validate(e.target.value);
       dispatch(updateFxn(formName, fieldName, e.target.value, error && error.message));
     } else {
       dispatch(updateFxn(formName, fieldName, e.target.value));
+      if (isUpdateOnChange && updateErrorFxn && validCheckFxn) {
+        const { error } = validator_
+          ? validator_.validate(e.target.value)
+          : validator_.validate(e.target.value);
+        dispatch(updateErrorFxn(formName, fieldName, error && error.message));
+        dispatch(validCheckFxn(formName, error));
+      }
       if (fieldName === 'confirmPassword' || fieldName === 'password') {
         if (fieldName === 'password') {
           const newValidator = Joi.string().min(8).max(255);
@@ -60,17 +77,33 @@ const TextField = ({
         // validate
         const cpVal = Joi.any().valid(passwordValue).error(new Error('Passwords do not match'));
         const { error } = cpVal.validate(e.target.value);
-        dispatch(updateFormFieldError(formName, 'confirmPassword', error && error.message));
-        dispatch(checkIfValidForm(formName, error));
+        if (updateErrorFxn) {
+          dispatch(updateErrorFxn(formName, 'confirmPassword', error && error.message));
+        } else {
+          dispatch(updateFormFieldError(formName, 'confirmPassword', error && error.message));
+        }
+        if (validCheckFxn) {
+          dispatch(validCheckFxn(formName, error));
+        } else {
+          dispatch(checkIfValidForm(formName, error));
+        }
       }
     }
   };
   const onblur = () => {
     if (reducerName !== 'auth') {
       if (fieldName !== 'confirmPassword' && fieldName !== 'password') {
-        const { error } = validator.validate(val);
-        dispatch(updateFormFieldError(formName, fieldName, error && error.message));
-        dispatch(checkIfValidForm(formName, error));
+        const { error } = validator_.validate(val);
+        if (updateErrorFxn) {
+          dispatch(updateErrorFxn(formName, fieldName, error && error.message));
+        } else {
+          dispatch(updateFormFieldError(formName, fieldName, error && error.message));
+        }
+        if (validCheckFxn) {
+          dispatch(validCheckFxn(formName, error));
+        } else {
+          dispatch(checkIfValidForm(formName, error));
+        }
       }
     }
   };
@@ -78,8 +111,8 @@ const TextField = ({
   return (
     <>
       <MuiTextField
+        className={classes.root}
         style={{ width: `100%` }}
-        variant="outlined"
         value={val}
         label={label}
         type={type}
@@ -89,7 +122,10 @@ const TextField = ({
         required={!isOptional}
         autoFocus={autoFocus}
         margin="dense"
+        classes={{}}
+        variant={variant}
         id="margin-dense"
+
       />
       <FormHelperText
         error={err}
@@ -97,7 +133,7 @@ const TextField = ({
         style={{ color: err ? 'red' : 'transparent' }}
         className={classes.helperText}
       >
-        {err || 'error text'}
+        {err || 'error text error text error text error text'}
       </FormHelperText>
     </>
   );

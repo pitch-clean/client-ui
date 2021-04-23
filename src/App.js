@@ -18,6 +18,20 @@ import { fixedHeight } from './components/utils/styleFxns';
 import { profile } from './seed/testAuthProfile';
 // constants
 const theme = createMuiTheme({
+  overrides: {
+    MuiStepIcon: {
+      root: {
+        '&$completed': {
+          color: 'lightgreen',
+        },
+        '&$active': {
+          color: 'lightblue',
+        },
+      },
+      active: {},
+      completed: {},
+    },
+  },
   palette: {
     primary: {
       main: '#f4f4f4',
@@ -50,7 +64,9 @@ const theme = createMuiTheme({
   },
 });
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    backgroundColor: '#d7d3d3',
+  },
   body: {
     justifyContent: 'start',
     flex: 1,
@@ -70,13 +86,7 @@ const App = () => {
   const appRef = useRef(null);
   // state
   const isTestMode = useSelector(s => s.auth.isTestMode);
-  const isDarkMode = useSelector(s => s.view.isDarkMode);
   document.addEventListener('keydown', onKeyDownBlurAll, false);
-  // style
-  /** @type {React.CSSProperties} */
-  const style = {
-    justifyContent: `start`,
-  };
   // effects
   // load the state for the activeprofile
   useEffect(() => {
@@ -88,24 +98,22 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div
-        className={`App w100 flexcol ${isDarkMode}`}
-        style={{
-          ...style,
-          ...fixedHeight(100, 'vh'),
-          flexFlow: `start`,
-        }}
+      <Grid
+        container
+        direction="column"
+        justify="flex-start"
+        className={`${classes.root} App w100`}
         ref={appRef}
       >
         <MainNavBar />
         <SubNav />
-        <Grid container direction="column" className={`${classes.body} w100`}>
+        <Grid container direction="column" component="div" className={`${classes.body} w100`}>
           <PageRouter />
           <Grid item className={`${classes.footer} w100`}>
             Footer
           </Grid>
         </Grid>
-      </div>
+      </Grid>
     </ThemeProvider>
   );
 };

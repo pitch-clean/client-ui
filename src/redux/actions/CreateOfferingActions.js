@@ -1,8 +1,8 @@
-import * as types from '../types/RegisterTypes';
+import * as types from '../types/CreateOfferingTypes';
 
 export const updateFormFieldValue = (form, field, payload) => dispatch => {
   dispatch({
-    type: types.UPDATE_FORM_FIELD_VALUE,
+    type: types.OFFERING_UPDATE_FORM_FIELD_VALUE,
     form,
     field,
     payload,
@@ -10,7 +10,7 @@ export const updateFormFieldValue = (form, field, payload) => dispatch => {
 };
 export const updateFormField = (form, field, payload) => dispatch => {
   dispatch({
-    type: types.UPDATE_FORM_FIELD,
+    type: types.OFFERING_UPDATE_FORM_FIELD,
     form,
     field,
     payload,
@@ -18,7 +18,7 @@ export const updateFormField = (form, field, payload) => dispatch => {
 };
 export const updateFormFieldError = (form, field, payload) => dispatch => {
   dispatch({
-    type: types.UPDATE_FORM_FIELD_ERROR,
+    type: types.OFFERING_UPDATE_FORM_FIELD_ERROR,
     form,
     field,
     payload,
@@ -26,31 +26,31 @@ export const updateFormFieldError = (form, field, payload) => dispatch => {
 };
 export const updateFormValid = (form, isValid) => dispatch => {
   dispatch({
-    type: types.UPDATE_FORM_VALID,
+    type: types.OFFERING_UPDATE_FORM_VALID,
     form,
     isValid,
   });
 };
 export const updateActiveForm = formName => dispatch => {
   dispatch({
-    type: types.UPDATE_ACTIVE_FORM,
+    type: types.OFFERING_UPDATE_ACTIVE_FORM,
     formName,
   });
 };
 export const checkIfValidForm = (form, error) => dispatch => {
   dispatch({
-    type: types.CHECK_IF_VALID_FORM,
+    type: types.OFFERING_CHECK_IF_VALID_FORM,
     form,
     error,
   });
 };
 export const checkIfAllValidForms = () => dispatch => {
   dispatch({
-    type: types.CHECK_IF_ALL_VALID_FORMS,
+    type: types.OFFERING_CHECK_IF_ALL_VALID_FORMS,
   });
 };
 export const resetAllForms = () => dispatch => {
   dispatch({
-    type: types.RESET_ALL_FORMS,
+    type: types.OFFERING_RESET_ALL_FORMS,
   });
 };

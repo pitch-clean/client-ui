@@ -1,10 +1,10 @@
 // react
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Paper, Typography } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
 import Joi from 'joi';
 import { login } from '../../../utils/requests';
 import {
@@ -14,13 +14,17 @@ import {
 } from '../../../redux/actions/AuthActions';
 // components
 import TextField from '../../forms/fields/TextField';
+// seed
+import { profile } from '../../../seed/testAuthProfile';
 // constants
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    minHeight: '100vh',
+  },
   leftBlock: {
     minWidth: `50%`,
-    // maxWidth: `50%`,
     width: `50%`,
+    height: 'auto',
     backgroundColor: `#171717`,
   },
   rightBlock: {
@@ -28,6 +32,7 @@ const useStyles = makeStyles(theme => ({
     maxWidth: `50%`,
     width: `50%`,
     padding: `0 5%`,
+    height: 'auto',
   },
   formContainer: {
     padding: `30px`,
@@ -57,45 +62,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 400,
   },
 }));
-// seed
-const education = [
-  {
-    organization: 'Yale Schoole of Management',
-    degree: 'Masters in Business Administration',
-    dtEnd: '2016-05-00T00:00:00Z',
-    dtStart: '2014-08-00T00:00:00Z',
-  },
-  {
-    organization: 'Bucknell University',
-    degree: 'B.A. in Economics',
-    dtEnd: '2013-05-00T00:00:00Z',
-    dtStart: '2013-05-00T00:00:00Z',
-  },
-];
-const employment = [
-  {
-    employer: 'Sungage Asset Management',
-    title: 'Investments Director',
-    dtEnd: '2020-05-00T00:00:00Z',
-    dtStart: '2017-05-00T00:00:00Z'
-  },
-  {
-    employer: 'Atrium Solar LLC',
-    title: 'Senior Vice President',
-    dtEnd: '2017-05-00T00:00:00Z',
-    dtStart: '2014-05-00T00:00:00Z'
-  },
-  {
-    employer: 'Wind Capital',
-    title: 'Analyst',
-    dtEnd: '2014-05-00T00:00:00Z',
-    dtStart: '2013-05-00T00:00:00Z'
-  }
-];
-const about = {
-  profileBio:
-    'As a Senior Vice President I manage all business development for the North West region of the United States for Vertex Capital’s solar project finance. With over 7 years of experience in the renewable finance sector, I am able to utilize my extensive network to access capital for our enterprise clients and oversee cashflow distribution to our investors.',
-};
+
 // event handlers
 const submitLogin = async (username, password, dispatch) => {
   // TODO create routes and services to connect to backend and actually log in
@@ -104,17 +71,7 @@ const submitLogin = async (username, password, dispatch) => {
   let profileObj = {};
   if (testing) {
     if (username === 'test@test.com' && password === 'testpassword') {
-      profileObj = {
-        pii: {
-          firstName: 'Test User',
-        },
-        username: 'test-user-123',
-        email: username,
-        education,
-        employment,
-        about,
-        investments: [],
-      };
+      profileObj = profile;
     } else {
       alert('Incorrect Email and/or Password');
       return;
@@ -126,6 +83,7 @@ const submitLogin = async (username, password, dispatch) => {
     try {
       res = await login(loginUrl, body);
       console.log('response here', res);
+      dispatch(updateLoginStatus(true, res));
     } catch (error) {
       console.error('error HERE:', error)
     }
@@ -146,19 +104,17 @@ const LoginForm = () => {
   // state
   const usernameRedux = useSelector(s => s.auth.login.fields.username.value);
   const passwordRedux = useSelector(s => s.auth.login.fields.password.value);
-  const activeProfile = useSelector(s => s.auth.activeProfile);
-  if (activeProfile) {
+  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
+  // effects
+  useEffect(() => {
     dispatch(resetLoginForm());
+  }, []);
+  if (isAuthenticated) {
     return <Redirect to="/" />;
   }
 
   return (
-    <Grid
-      container
-      direction="row"
-      justify="space-between"
-      className={`${classes.root} w100 h100 page`}
-    >
+    <Grid container direction="row" justify="space-between" className={`${classes.root} w100 h100`}>
       <Grid item className={`h100 ${classes.leftBlock}`} />
       <Paper square className={`h100 ${classes.rightBlock} flexcol`}>
         <Paper square elevation={3} className={`${classes.formContainer}`}>

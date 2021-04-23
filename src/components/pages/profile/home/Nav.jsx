@@ -32,7 +32,7 @@ const Nav = ({ baseRoute }) => {
         {/* <Tabs value={0} indicatorColor="primary" textColor="primary" centered> */}
         <Tabs
           value={tabObj[activeProfileTab]}
-          indicatorColor="primary"
+          indicatorColor="secondary"
           textColor="primary"
           centered
         >

@@ -45,14 +45,20 @@ const seedPostArrs = [
     "profileId": 1,
     "profile": {
       "profileType": "user",
-      profileId: 1,
-      firstName: `Sarah`,
-      lastName: `Daly`,
+      "profileClass": "sponsor",
+      pii: {
+        firstName: `Sarah`,
+        lastName: `Daly`,
+        residence: {
+          stateProvince: 'CA',
+          city: 'Los Angeles',
+          city: 'Washington',
+          stateProvince: 'DC',
+        },
+      },
       alias: 'sarah-daly23',
       position: 'Managing Director',
       currentEmployer: 'BlackRock Renewables Group',
-      city: 'Washington',
-      stateProvince: 'DC',
       image: "",
     },
     "body": "Mark your calendar for an April 26th, 2021 subordinate debt offering \n on a 376 MwH wind project development in southern Virginia. \n The minimum investment level is $15,000.",
@@ -63,6 +69,7 @@ const seedPostArrs = [
     "profileId": 2,
     "profile": {
       "profileType": "organization",
+      "profileClass": "sponsor",
       name: `Vertex Capital`,
       alias: 'vertex-capital',
       city: 'Charlottesville',
@@ -77,6 +84,7 @@ const seedPostArrs = [
     "profileId": 3,
     "profile": {
       "profileType": "user",
+      "profileClass": "sponsor",
       firstName: `Sasha`,
       lastName: `Carlton`,
       alias: 'sasha-carlton23049',
@@ -94,6 +102,7 @@ const seedPostArrs = [
     "profileId": 4,
     "profile": {
       "profileType": "organization",
+      "profileClass": "sponsor",
       alias: 'wind-grid-capital',
       name: `Wind Grid Capital`,
       city: 'Chicago',

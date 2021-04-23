@@ -22,7 +22,6 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 const useStyles = makeStyles(theme => ({
   root: {
     minHeight: '100px',
-    border: `1px solid black`,
     margin: `20px 0 0 0`,
   },
   card: {
@@ -220,7 +219,7 @@ const LSSuggestedConnections = () => {
     setRecommendedConnectionsArr(payload);
   }, []);
   return (
-    <Paper className={`${classes.root} LSProfile w100 flexcol`} outlined elevation={3}>
+    <Paper className={`${classes.root} LSSuggestedConnections w100 flexcol`} outlined elevation={3}>
       <CardHeader
         className={`w100 ${classes.header}`}
         title={

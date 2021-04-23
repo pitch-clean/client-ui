@@ -89,7 +89,7 @@ const OfferingCard = ({ idx }) => {
     images: { card },
     financials,
     location: {
-      address: { provinceState, city },
+      address: { stateProvince, city },
     },
     sponsor,
     sponsorSlug,
@@ -138,7 +138,7 @@ const OfferingCard = ({ idx }) => {
                 variant="caption"
                 color="textSecondary"
               >
-                {`${provinceState}, ${city}`}
+                {`${stateProvince}, ${city}`}
               </Typography>
             </>
           }

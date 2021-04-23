@@ -9,13 +9,13 @@ import LSSuggestedConnections from './LSSuggestedConnections';
 // main
 const LeftSidebar = () => {
   // state
-  const activeProfile = useSelector(s => s.auth.activeProfile);
-  if (!activeProfile) {
-    return <div />;
+  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
+  if (!isAuthenticated) {
+    return <Sidebar isLeft />;
   }
 
   return (
-    <Sidebar isLeft={false}>
+    <Sidebar isLeft>
       <LSProfile />
       <LSSuggestedConnections />
     </Sidebar>

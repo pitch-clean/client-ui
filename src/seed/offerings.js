@@ -53,7 +53,7 @@ export const offeringsArr = [
       coordinates: {lat: 0.1010101, lon: 1.1049293},
       address: {
         country: 'USA',
-        provinceState: 'Oklahoma',
+        stateProvince: 'Oklahoma',
         city: 'Tulsa',
         street: 'Main',
         buildingNumber: '123',
@@ -187,7 +187,7 @@ Certain Envest employees may have an interest in, or family members or close fri
       coordinates: {lat: 2.1010101, lon: -1.1049293},
       address: {
         country: 'USA',
-        provinceState: 'Kansas',
+        stateProvince: 'Kansas',
         city: 'Kansas City',
         street: 'Broad St.',
         buildingNumber: '123',
@@ -321,7 +321,7 @@ Certain Envest employees may have an interest in, or family members or close fri
       coordinates: {lat: 0.1010101, lon: 1.1049293},
       address: {
         country: 'Australia',
-        provinceState: 'NSW',
+        stateProvince: 'NSW',
         city: 'Sydney',
         street: 'Melbourne St',
         buildingNumber: '5',
@@ -455,7 +455,7 @@ Certain Envest employees may have an interest in, or family members or close fri
       coordinates: {lat: 7.1010101, lon: 4.1049293},
       address: {
         country: 'USA',
-        provinceState: 'NJ',
+        stateProvince: 'NJ',
         city: 'Patterson',
         street: 'Main St.',
         buildingNumber: '8',
@@ -589,7 +589,7 @@ Certain Envest employees may have an interest in, or family members or close fri
       coordinates: {lat: 0.1010101, lon: 1.1049293},
       address: {
         country: 'USA',
-        provinceState: 'Oklahoma',
+        stateProvince: 'Oklahoma',
         city: 'Tulsa',
         street: 'Main',
         buildingNumber: '123',
@@ -723,7 +723,7 @@ Certain Envest employees may have an interest in, or family members or close fri
       coordinates: {lat: 2.1010101, lon: -1.1049293},
       address: {
         country: 'USA',
-        provinceState: 'Kansas',
+        stateProvince: 'Kansas',
         city: 'Kansas City',
         street: 'Broad St.',
         buildingNumber: '123',
@@ -857,7 +857,7 @@ Certain Envest employees may have an interest in, or family members or close fri
       coordinates: {lat: 0.1010101, lon: 1.1049293},
       address: {
         country: 'Australia',
-        provinceState: 'NSW',
+        stateProvince: 'NSW',
         city: 'Sydney',
         street: 'Melbourne St',
         buildingNumber: '5',
@@ -991,7 +991,7 @@ Certain Envest employees may have an interest in, or family members or close fri
       coordinates: {lat: 7.1010101, lon: 4.1049293},
       address: {
         country: 'USA',
-        provinceState: 'NJ',
+        stateProvince: 'NJ',
         city: 'Patterson',
         street: 'Main St.',
         buildingNumber: '8',

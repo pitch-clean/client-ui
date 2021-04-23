@@ -24,10 +24,7 @@ const reducerName = 'register';
 const envLoginRoute = 'login';
 
 /**
- * main
- */
-
-/**
+ * MAIN
  * This creates a profile and posts on personal
  * Refreshing just repopulates fields from existing form in cookies/localstorage
  * TODO: Need to implement cookies for refreshing and clearing the cookie

@@ -8,9 +8,9 @@ import LandingPage from './LandingPage';
 // main
 const Home = () => {
   // TODO: add route for logged in user
-  // const activeProfile = useSelector(s => s.auth.activeProfile);
+  // const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
 
-  // return activeProfile ? <FeedView /> : <LandingPage />;
+  // return isAuthenticated ? <FeedView /> : <LandingPage />;
   return <LandingPage />;
 };
 

@@ -1,29 +1,45 @@
 // react
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Proptypes from 'prop-types';
+import { Grid, Paper, Stepper, Step, StepLabel, Button, Typography } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
-import {
-  updateActiveForm,
-  checkIfAllValidForms,
-  resetAllForms,
-} from '../../redux/actions/RegisterActions';
+import Proptypes from 'prop-types';
+// import {
+//   updateActiveForm,
+//   checkIfAllValidForms,
+//   resetAllForms,
+// } from '../../redux/actions/RegisterActions';
+// seed
+import { profile } from '../../seed/testAuthProfile';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
     marginBottom: `10px`,
+    minHeight: '60vh',
+  },
+  stepper: {
+    width: `100vw`,
+    minWidth: '100vw',
+    maxWidth: '100vw',
+  },
+  step: {
+    "& $completed": {
+      color: "lightgreen"
+    },
+    "& $active": {
+      color: "pink"
+    },
+    "& $disabled": {
+      color: "red"
+    },
   },
   theDiv: {
     display: `flex`,
     flexFlow: 'row',
+    padding: `10px 100px`,
   },
   nextButton: {
     marginLeft: theme.spacing(1),
@@ -43,14 +59,21 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  paper: {
+    minWidth: '60%',
+    maxWidth: '900px',
+    alignItems: 'center',
+    display: 'flex',
+    flexFlow: 'column',
+  },
 }));
 // fxns
-const handleNext = (setActiveStep, activeStep, dispatch, formName) => () => {
-  dispatch(updateActiveForm(formName));
+const handleNext = (setActiveStep, activeStep, dispatch, formName, updateActiveForm_) => () => {
+  dispatch(updateActiveForm_(formName));
   setActiveStep(activeStep + 1);
 };
-const handleBack = (dispatch, formName, setActiveStep) => () => {
-  dispatch(updateActiveForm(formName));
+const handleBack = (dispatch, formName, setActiveStep, updateActiveForm_) => () => {
+  dispatch(updateActiveForm_(formName));
   setActiveStep(prevActiveStep => prevActiveStep - 1);
 };
 
@@ -58,14 +81,19 @@ const handleBack = (dispatch, formName, setActiveStep) => () => {
 const HorizontalNonLinearAlternativeLabelStepper = ({
   stepObjsArr,
   reducerName,
-  redirectAddress,
+  redirectPath,
+  redirectAction,
+  redirectRoute,
+  updateActiveForm_,
+  checkIfAllValidForms_,
+  resetAllForms_,
 }) => {
   // init hooks
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   // state
   const [activeStep, setActiveStep] = useState(0);
-  const [isRequestSuccessful, setIsRequestSuccessful] = useState(0);
   const isActiveFormValid = useSelector(s => s[reducerName].activeForm.isFormValid);
   const areAllFormsValid = useSelector(s => s[reducerName].areAllFormsValid);
   const validForms = useSelector(s => s[reducerName].validForms);
@@ -73,27 +101,26 @@ const HorizontalNonLinearAlternativeLabelStepper = ({
   // callbacks
   const handleSubmit = () => {
     // TODO: create route and service on backend to log in successfully
-    const isSuccess = true;
-    setIsRequestSuccessful(isSuccess);
+    const testRes = (() => profile)();
+    let path = redirectPath;
+    if (redirectRoute === 'offering') {
+      path = `${redirectPath}/${testRes.investments[1].offering.slug}`;
+    }
+    history.push(path);
   };
   // effects
   useEffect(() => {
-    dispatch(checkIfAllValidForms());
+    dispatch(checkIfAllValidForms_());
   }, [isActiveFormValid]);
   useEffect(() => {
     return () => {
-      dispatch(resetAllForms());
+      dispatch(resetAllForms_());
     };
   }, []);
-  // logic
-  // reset form and redirect
-  if (isRequestSuccessful) {
-    return <Redirect to={redirectAddress} />;
-  }
 
   return (
     <div className={classes.root}>
-      <Stepper alternativeLabel nonLinear activeStep={activeStep}>
+      <Stepper className={classes.stepper} alternativeLabel nonLinear activeStep={activeStep}>
         {stepObjsArr.map((label, index) => {
           const stepProps = {};
           const buttonProps = {};
@@ -101,64 +128,70 @@ const HorizontalNonLinearAlternativeLabelStepper = ({
             buttonProps.optional = <Typography variant="caption">Optional</Typography>;
           }
           return (
-            <Step key={label.header} {...stepProps}>
+            <Step
+              classes={{ root: classes.step, completed: classes.completed }}
+              key={label.header}
+              {...stepProps}
+            >
               <StepLabel completed={validForms[label.formName]}>{label.header}</StepLabel>
               {label.header}
             </Step>
           );
         })}
       </Stepper>
-      <div>
-        <div>
-          <div>
-            <Typography className={classes.instructions}>
-              {stepObjsArr[activeStep].message}
-            </Typography>
-            {stepObjsArr[activeStep].component}
-            <div className={classes.theDiv}>
-              <Button
-                variant="outlined"
-                color="default"
-                disabled={activeStep === 0}
-                onClick={handleBack(
-                  dispatch,
-                  activeStep > 0 ? stepObjsArr[activeStep - 1].formName : '',
-                  setActiveStep,
-                )}
-                className={classes.backbutton}
-              >
-                Back
-              </Button>
-
-              <Button
-                disabled={!isActiveFormValid || activeStep >= stepCount - 1}
-                variant="outlined"
-                color="primary"
-                onClick={handleNext(
-                  setActiveStep,
-                  activeStep,
-                  dispatch,
-                  activeStep < stepCount - 1 ? stepObjsArr[activeStep + 1].formName : '',
-                )}
-                className={classes.nextButton}
-              >
-                Next
-              </Button>
-            </div>
+      <Grid container direction="column" justify="start" alignItems="center">
+        <Paper
+          className={classes.paper}
+        >
+          <Typography className={classes.instructions}>
+            {stepObjsArr[activeStep].message}
+          </Typography>
+          {stepObjsArr[activeStep].component}
+          <div className={classes.theDiv}>
             <Button
-              disabled={!areAllFormsValid}
-              variant="contained"
-              color="primary"
-              onClick={handleSubmit}
-              className={classes.submitButton}
-              endIcon={<SendIcon />}
-              size="large"
+              variant="outlined"
+              color="default"
+              disabled={activeStep === 0}
+              onClick={handleBack(
+                dispatch,
+                activeStep > 0 ? stepObjsArr[activeStep - 1].formName : '',
+                setActiveStep,
+                updateActiveForm_,
+              )}
+              className={classes.backbutton}
             >
-              Submit
+              Back
+            </Button>
+
+            <Button
+              disabled={!isActiveFormValid || activeStep >= stepCount - 1}
+              variant="outlined"
+              color="secondary"
+              onClick={handleNext(
+                setActiveStep,
+                activeStep,
+                dispatch,
+                activeStep < stepCount - 1 ? stepObjsArr[activeStep + 1].formName : '',
+                updateActiveForm_,
+              )}
+              className={classes.nextButton}
+            >
+              Next
             </Button>
           </div>
-        </div>
-      </div>
+          <Button
+            disabled={!areAllFormsValid}
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+            className={classes.submitButton}
+            endIcon={<SendIcon />}
+            size="large"
+          >
+            Submit
+          </Button>
+        </Paper>
+      </Grid>
     </div>
   );
 };

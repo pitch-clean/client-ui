@@ -21,11 +21,11 @@ const useStyles = makeStyles(theme => ({
 const ProfileLoginRegister = () => {
   // init hooks
   const classes = useStyles();
-  const activeProfile = useSelector(s => s.auth.activeProfile);
+  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
 
   return (
     <Grid item className={`h100 flexrow ${classes.root}`}>
-      {activeProfile ? <ProfileNavButton /> : <LoginRegister />}
+      {isAuthenticated ? <ProfileNavButton /> : <LoginRegister />}
     </Grid>
   );
 };

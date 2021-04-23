@@ -110,7 +110,7 @@ const Portfolio = () => {
           <ListItemText
             className={classes.small}
             primary={
-              <Typography component="div" variant="h5" color="textPrimary">
+              <Typography component="div" variant="h5" color="textPrimary" style={{alignSelf: 'start'}}>
                 {outstandingPrincipal}
               </Typography>
             }
@@ -126,7 +126,7 @@ const Portfolio = () => {
           <ListItemText
             className={classes.small}
             primary={
-              <Typography component="div" variant="h5" color="textPrimary">
+              <Typography component="div" variant="h5" color="textPrimary" style={{alignSelf: 'start'}}>
                 {annualInterestStr}
               </Typography>
             }
@@ -142,7 +142,7 @@ const Portfolio = () => {
           <ListItemText
             className={classes.small}
             primary={
-              <Typography component="div" variant="h5" color="textPrimary">
+              <Typography component="div" variant="h5" color="textPrimary" style={{alignSelf: 'start'}}>
                 {walletBalance}
               </Typography>
             }

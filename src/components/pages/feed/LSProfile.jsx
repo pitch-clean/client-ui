@@ -20,7 +20,6 @@ import BookmarkBorder from '@material-ui/icons/BookmarkBorder';
 const useStyles = makeStyles(theme => ({
   root: {
     minHeight: '100px',
-    border: `1px solid black`,
   },
   card: {
     justifyContent: 'start',
@@ -62,6 +61,7 @@ const LSProfile = () => {
   // init hooks
   const classes = useStyles();
   // state
+  const activeProfile = useSelector(s => s.auth.activeProfile);
   const pii = useSelector(s => s.auth.activeProfile.pii);
   const alias = useSelector(s => s.auth.activeProfile.alias);
   const images = useSelector(s => s.auth.activeProfile.images);
@@ -71,7 +71,7 @@ const LSProfile = () => {
   const {
     firstName,
     lastName,
-    residence: { city, provinceState },
+    residence: { city, stateProvince },
   } = pii;
   const {
     profile: { thumbnail },
@@ -97,7 +97,7 @@ const LSProfile = () => {
               {buildName(firstName, lastName)}
             </MuiLink>
           }
-          subheader={`${city}, ${provinceState}`}
+          subheader={`${city}, ${stateProvince}`}
         />
         <Divider className={classes.divider} variant="middle" component="div" />
         <CardContent className={`${classes.container} infoSection w100`}>

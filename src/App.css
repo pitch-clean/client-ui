@@ -9,11 +9,6 @@ body {
   min-height: 100%;
 }
 
-.App .footer {
-  background-color: black;
-  padding: 10px 20px;
-}
-
 * {
   position: relative;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
@@ -26,13 +21,6 @@ body {
 .darkmode {
   color: whitesmoke;
 } 
-.App {
-  text-align: center;
-  animation-name: appOpen;
-  animation-duration: 0.23s;
-  animation-timing-function: ease-out;
-  background-color: rgb(110, 106, 101);
-}
 .w100 {
   width: 100%;
   max-width: 100%;

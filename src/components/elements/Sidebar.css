@@ -14,7 +14,7 @@
   }
   .Sidebar .SidebarWidget {}
     .Sidebar .SidebarWidget .linkCard {
-      color: rgb(41, 39, 39);
+      color: green;
       background: whitesmoke;
       padding: 5px;
       margin: 2px 0;

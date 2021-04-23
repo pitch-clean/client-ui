@@ -12,12 +12,13 @@ import LoginForm from './profile/LoginForm';
 import FeedView from './feed/FeedView';
 import Home from './home/Home';
 import CreateProfile from './profile/CreateProfile';
+import CreateOffering from './offerings/CreateOffering';
 import ProfileView from './profile/ProfileView';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
-    height: `100vh`,
-    minHeight: `100vh`,
+    height: `100%`,
+    minHeight: `100%`,
   },
 }));
 
@@ -29,7 +30,7 @@ const PageRouter = () => {
   const classes = useStyles();
 
   return (
-    <Grid className={`${classes.root} PageRouter w100`}>
+    <Grid className={`${classes.root} PageRouter w100`} direction="column" justify="flex-start" container >
       <Switch>
         <Route path="/profile/:alias" render={p => <ProfileView props={p} />} />
         <Route exact path="/offering/:offeringId" render={p => <OfferingDetail props={p} />} />
@@ -37,6 +38,7 @@ const PageRouter = () => {
         <Route exact path="/feed" render={p => <FeedView props={p} />} />
         <Route exact path="/" render={p => <Home props={p} />} />
         <Route exact path="/login" render={p => <LoginForm props={p} />} />
+        <Route exact path="/offerings/new" render={p => <CreateOffering props={p} />} />
         <Route exact path="/register" render={p => <CreateProfile props={p} />} />
         <Route render={p => <NotFound props={p} />} />
       </Switch>

@@ -40,7 +40,7 @@ const pii = {
   firstName: 'Drew',
   lastName: 'Orrin',
   residence: {
-    provinceState: 'CA',
+    stateProvince: 'CA',
     city: 'Los Angeles',
   },
 };
@@ -124,7 +124,7 @@ const investments = [
       "slug": "buffalo-creek-wind-farm",
       "location": {
         "address": {
-          "provinceState": "OK",
+          "stateProvince": "OK",
           "city": "Tulsa",
         },
       },
@@ -193,10 +193,10 @@ const investments = [
           "slug": "greenbacker-capital",
         },
         "title": "La Rosa Battery Storage",
-        "slug": "la-rosa-battery-storage",
+        "slug": "buffalocreekwindfarm",
         "location": {
           "address": {
-            "provinceState": "KS",
+            "stateProvince": "KS",
             "city": "Kansas City",
           }
         },
@@ -252,7 +252,7 @@ const investments = [
         "slug": "desert-valley-solar-station",
         "location": {
           "address": {
-            "provinceState": "KS",
+            "stateProvince": "KS",
             "city": "Kansas City",
           }
         },
@@ -308,7 +308,7 @@ const investments = [
         "slug": "spring-river-battery-storage",
         "location": {
           "address": {
-            "provinceState": "NSW",
+            "stateProvince": "NSW",
             "city": "Sydney",
           }
         },
@@ -348,7 +348,7 @@ const investments = [
         "slug": "oak-ridge-wind-farm",
         "location": {
           "address": {
-            "provinceState": "MN",
+            "stateProvince": "MN",
             "city": "Oak Ridge",
           }
         },
@@ -384,7 +384,7 @@ const investments = [
         "slug": "wharf-complex-retrofitting",
         "location": {
           "address": {
-            "provinceState": "MD",
+            "stateProvince": "MD",
             "city": "Seabright",
           }
         },
@@ -416,7 +416,7 @@ const investments = [
         "slug": "dog-river-wind-farm",
         "location": {
           "address": {
-            "provinceState": "OK",
+            "stateProvince": "OK",
             "city": "Tulsa",
           }
         },
@@ -487,6 +487,7 @@ const following = [
 export const profile = {
   _id: 3,
   alias: 'd_orrin55',
+  email: 'd_orrin55@mail.com',
   pii,
   active,
   education,
@@ -496,4 +497,6 @@ export const profile = {
   connections,
   following,
   images,
+  "profileType": "user",
+  "profileClass": "sponsor",
 };

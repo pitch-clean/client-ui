@@ -48,7 +48,7 @@ const Investments = () => {
     ? investments.map(({ offering, img, isPublic }, idx) => {
         const { sponsor, title, slug: offeringSlug, location } = offering;
         const {
-          address: { city, provinceState },
+          address: { city, stateProvince },
         } = location;
         const { name: sponsorName, slug: sponsorSlug } = sponsor;
         console.log()
@@ -85,7 +85,7 @@ const Investments = () => {
                         {sponsorName}
                       </Typography>
                     </Link>
-                    {`  (${city}, ${provinceState})`}
+                    {`  (${city}, ${stateProvince})`}
                   </>
                 }
               />
