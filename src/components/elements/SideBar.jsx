@@ -16,10 +16,12 @@ const useStyles = makeStyles(theme => ({
       paddingRight: `15px`,
     },
     [theme.breakpoints.up('xs')]: {
-      width: `33%`,
-      minWidth: 270,
-      paddingLeft: `30px`,
-      paddingRight: `7px`,
+      width: `25%`,
+      minWidth: 250,
+      // paddingLeft: `30px`,
+      // paddingRight: `7px`,
+      paddingRight: `5px`,
+      paddingLeft: `10px`,
       // fontSize: ,
     },
     justifyContent: 'flex-start',
@@ -28,14 +30,15 @@ const useStyles = makeStyles(theme => ({
     width: 0,
     [theme.breakpoints.up('md')]: {
       width: `15%`,
-      // minWidth: 450,
       // paddingLeft: `50px`,
-      // paddingRight: `20px`,
+      paddingRight: `10px`,
     },
     [theme.breakpoints.up('xs')]: {
-      width: `4%`,
-      // minWidth: 270,
-      // paddingLeft: `20px`,
+      width: `20%`,
+      minWidth: 250,
+      fontSize: 12,
+      paddingRight: `10px`,
+      paddingLeft: `5px`,
     },
     justifyContent: 'flex-start',
   },
@@ -46,7 +49,6 @@ const Sidebar = ({ isLeft, children }) => {
   // init hooks
   const classes = useStyles();
   const lr = isLeft ? 'rootleft' : 'rootright';
-  console.log(classes[lr])
   return <div className={`Sidebar h100 ${classes[lr]}`}>{children}</div>;
 };
 

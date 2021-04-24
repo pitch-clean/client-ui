@@ -4,13 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, TextField, Tab, Tabs } from '@material-ui/core';
+import { Grid, TextField, Tab, Tabs, Collapse } from '@material-ui/core';
 import { updateL1 } from '../../../redux/actions/ViewActions';
 // components
 import Portfolio from './Portfolio';
+import Portfolio2 from './Portfolio2';
 // constants
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    backgroundColor: '#333533',
+    transitionProperty: `height`,
+    transitionDuration: `0.2s`,
+    transitionTimingFunction: `ease-out`,
+  },
   nav: {
     padding: 0,
     margin: 0,
@@ -45,7 +51,12 @@ const l1Map = {
   [envMessagesPath]: 3,
 };
 
-// main
+/**
+ * main
+ * banner (already created)
+ *    IN PROGRESS portfolio (already created) - but has pie chart and diff styling
+ *    DONE nav (already created)
+ */
 const SubNav = () => {
   // init hooks
   const classes = useStyles();
@@ -57,16 +68,17 @@ const SubNav = () => {
   // effects
   useEffect(() => {
     dispatch(updateL1(l1Path));
-  }, []);
+  }, [l1Path]);
   if (!isAuthenticated) {
     return <div />;
   }
 
   return (
     <Grid className={`w100 ${classes.root} flexcol`} container>
-      <Portfolio />
+      {l1Path === envOfferingsPath && <Portfolio />}
+      {l1Path === envPortfolioPath && <Portfolio2 />}
       <Grid className={`w100 ${classes.nav} flexrow`} container alignItems="stretch">
-        <Tabs value={l1Map[l1Path]} indicatorColor="primary" textColor="primary" centered>
+        <Tabs value={l1Map[l1Path]} indicatorColor="secondary" textColor="primary" centered>
           <Link to="/feed">
             <Tab label="Newsfeed" textColor="primary" />
           </Link>

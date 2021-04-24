@@ -15,7 +15,6 @@ const postTypeMapping = {
 
 // main
 const PostActionButton = ({ postType }) => {
-  console.log(postType, postTypeMapping[postType])
   return (
     <CardActions disableSpacing>
       <Button variant="contained" size="small">

@@ -1,16 +1,18 @@
 // react
 import React from 'react';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
 // components
 import LandingPage from './LandingPage';
-// import FeedView from '../feed/FeedView';
 
 // main
 const Home = () => {
   // TODO: add route for logged in user
-  // const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
+  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
+  if (isAuthenticated) {
+    return <Redirect to="/feed" />;
+  }
 
-  // return isAuthenticated ? <FeedView /> : <LandingPage />;
   return <LandingPage />;
 };
 

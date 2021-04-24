@@ -1,13 +1,3 @@
-.App .FeedView {
-  justify-content: space-between;
-}
-
-.FeedContent {}
-
-.FeedView .LeftSidebar {
-  justify-content: start;
-}
-
 .App .FeedView .LSSuggestedConnections .MuiTypography-displayBlock {
   white-space: nowrap;
   overflow-x: hidden;

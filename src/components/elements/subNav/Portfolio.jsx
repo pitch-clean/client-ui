@@ -8,6 +8,7 @@ import { calcOfferSize, formatPctStr } from '../../utils/printFxns';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
+    flexFlow: 'row',
     padding: 0,
     margin: 0,
     width: '100%',
@@ -19,9 +20,11 @@ const useStyles = makeStyles(theme => ({
   },
   summary: {
     padding: 0,
+    paddingLeft: 20,
     margin: 0,
     '& .MuiListItem-gutters': {
-      padding: '8px 30px',
+      padding: '8px 0',
+      paddingLeft: 50,
     },
   },
   small: {
@@ -34,9 +37,15 @@ const useStyles = makeStyles(theme => ({
       marginTop: 0,
       marginBottom: 0,
     },
+    margin: `0 10px`,
+  },
+  smallGroup: {
+    justifyContent: 'center',
+    width: '70%',
+    marginRight: '20px',
   },
 }));
-
+// fxns
 const printDollarAmt = num => {
   const p = num.toFixed(2).split('.');
   return [
@@ -70,6 +79,8 @@ const balanceOfWallet = 32000;
 
 /**
  * main
+ * banner (already created)
+ *    IN PROGRESS portfolio (already created) - but has pie chart and diff styling
  */
 const Portfolio = () => {
   // init hooks
@@ -83,40 +94,46 @@ const Portfolio = () => {
   return (
     <Grid
       className={`${classes.root} Portfolio`}
-      direction="row"
       justify="space-between"
       alignItems="center"
       container
-      spacing={1}
     >
-      <Grid className={classes.summary} item xs={7}>
+      <Grid className={classes.summary} container>
         <ListItem alignItems="flex-start">
           <ListItemText
             primary={
-              <Typography component="div" variant="h5" color="textPrimary">
+              <Typography
+                variant="h5"
+                color="textPrimary"
+                style={{ letterSpacing: 1.3, fontSize: 30, fontWeight: 600 }}
+              >
                 Account Summary
               </Typography>
             }
             secondary={
-              <Typography component="div" variant="subtitle2" color="textSecondary">
+              <Typography
+                variant="subtitle2"
+                color="textSecondary"
+                style={{ letterSpacing: 1.3, fontSize: 18, fontWeight: 300 }}
+              >
                 {`Total Value: ${totalProfileValueStr}`}
               </Typography>
             }
           />
         </ListItem>
       </Grid>
-      <Grid item container="row" xs={4}>
+      <Grid container direction="row" className={classes.smallGroup}>
         <Grid item xs={3} className={classes.small}>
           <ListItemText
             className={classes.small}
             primary={
-              <Typography component="div" variant="h5" color="textPrimary" style={{alignSelf: 'start'}}>
+              <Typography align="center" variant="h5" color="textPrimary">
                 {outstandingPrincipal}
               </Typography>
             }
             secondary={
-              <Typography component="div" variant="caption" color="textSecondary">
-                Outstanding Principal
+              <Typography align="center" variant="caption" color="textSecondary">
+                Principal
               </Typography>
             }
           />
@@ -126,12 +143,12 @@ const Portfolio = () => {
           <ListItemText
             className={classes.small}
             primary={
-              <Typography component="div" variant="h5" color="textPrimary" style={{alignSelf: 'start'}}>
+              <Typography align="center" variant="h5" color="textPrimary">
                 {annualInterestStr}
               </Typography>
             }
             secondary={
-              <Typography component="div" variant="caption" color="textSecondary">
+              <Typography align="center" variant="caption" color="textSecondary">
                 Annual Interest
               </Typography>
             }
@@ -142,12 +159,12 @@ const Portfolio = () => {
           <ListItemText
             className={classes.small}
             primary={
-              <Typography component="div" variant="h5" color="textPrimary" style={{alignSelf: 'start'}}>
+              <Typography align="center" variant="h5" color="textPrimary">
                 {walletBalance}
               </Typography>
             }
             secondary={
-              <Typography component="div" variant="caption" color="textSecondary">
+              <Typography align="center" variant="caption" color="textSecondary">
                 Wallet Balance
               </Typography>
             }

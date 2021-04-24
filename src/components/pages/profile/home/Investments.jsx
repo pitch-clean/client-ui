@@ -51,7 +51,6 @@ const Investments = () => {
           address: { city, stateProvince },
         } = location;
         const { name: sponsorName, slug: sponsorSlug } = sponsor;
-        console.log()
 
         return (
           <React.Fragment key={`inv-${idx}`}>

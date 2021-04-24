@@ -30,7 +30,6 @@ const Summary = ({ offeringObj }) => {
   const {
     content: { about, investment },
   } = offeringObj;
-  console.log(offeringObj);
 
   return (
     <div className={`${classes.root} "Summary"`} >

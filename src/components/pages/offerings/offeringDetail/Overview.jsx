@@ -36,7 +36,6 @@ const defaultTab = 'investment';
 
 // main
 const Overview = ({offeringObj}) => {
-  console.log(offeringObj)
   const classes = useStyles();
   let content = '';
   // state

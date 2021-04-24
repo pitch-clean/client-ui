@@ -1,19 +1,17 @@
 // react
 import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// components
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import PageRouter from './components/pages/PageRouter';
-import MainNavBar from './components/elements/mainNavBar/MainNavBar';
-import SubNav from './components/elements/subNav/SubNav';
 // utils
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import { onKeyDownBlurAll } from './utils/keybinds';
 import { updateLoginStatus } from './redux/actions/AuthActions';
+// components
+import PageRouter from './components/pages/PageRouter';
+import MainNavBar from './components/elements/mainNavBar/MainNavBar';
+import SubNav from './components/elements/subNav/SubNav';
 // styling
 import './App.css';
-import { fixedHeight } from './components/utils/styleFxns';
 // seed
 import { profile } from './seed/testAuthProfile';
 // constants
@@ -92,7 +90,7 @@ const App = () => {
   useEffect(() => {
     // load
     if (isTestMode) {
-      // dispatch(updateLoginStatus(true, profile));
+      dispatch(updateLoginStatus(true, profile));
     }
   }, []);
 

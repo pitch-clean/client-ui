@@ -6,7 +6,6 @@ import {fixedHeight} from '../utils/styleFxns';
 import {slugify} from '../../utils/general';
 // main
 const FormTextField = ({title, value, stateUpdateFxn, isPassword, validateFxn}) => {
-  console.log()
   // style
   /**@type {React.CSSProperties} */
   const style = {

@@ -3,34 +3,8 @@
 
 .Sidebar .News {}
   .Sidebar .News .header {
-    background: rgb(238, 238, 237);
-    padding: 5px;
-    padding-left: 15px;
-    font-weight: 600;
-    text-align: start;
-    color: black;
-    border-radius: 2px;
-    border-bottom: 2px solid black;
+    
   }
-  .Sidebar .SidebarWidget {}
-    .Sidebar .SidebarWidget .linkCard {
-      color: green;
-      background: whitesmoke;
-      padding: 5px;
-      margin: 2px 0;
-      justify-content: start;
-      align-items: flex-start;
-      text-decoration: unset;
-    }
-      .Sidebar .SidebarWidget .linkCard .newsTitle {
-        text-align: start;
-        font-weight: 400;
-        text-decoration: unset;
-      }
-      .Sidebar .SidebarWidget .linkCard .newsPubDt {
-        font-size: 10px;
-        text-decoration: unset;
-      }
 .Sidebar .PublicMarkets .MarketCardList .MarketCard {
   height: 300px;
   background: whitesmoke;

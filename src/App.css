@@ -108,7 +108,13 @@ body {
 .page {
   opacity: 1;
   animation-name: pageOpen;
-  animation-duration: 0.125s;
+  animation-duration: 0.325s;
+  animation-timing-function: ease-out;
+}
+.drawer {
+  height: 100%;
+  animation-name: drawer;
+  animation-duration: 0.325s;
   animation-timing-function: ease-out;
 }
 .contentSelector {
@@ -152,6 +158,10 @@ body {
   text-overflow: ellipsis;
 }
 
+@keyframes drawer {
+  from {height: 0%;}
+  to {height: 100%;}
+}
 @keyframes pageOpen {
   from {opacity: 0;}
   to {opacity: 1;}

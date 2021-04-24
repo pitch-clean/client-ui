@@ -114,24 +114,35 @@ const investments = [
   {
     "isPublic": true,
     "offeringId": 1,
-    "offering": {
-      "sponsorId": 1,
-      "sponsor": {
-        "name": "Vertex Capital",
-        "slug": "vertex-capital",
-      },
-      "title": "Buffalo Creek Wind Farm",
-      "slug": "buffalo-creek-wind-farm",
-      "location": {
-        "address": {
-          "stateProvince": "OK",
-          "city": "Tulsa",
+      "offering": {
+        "sponsorId": 1,
+        "sponsor": {
+          "name": "Vertex Capital",
+          "slug": "vertex-capital",
+        },
+        "title": "Buffalo Creek Wind Farm",
+        "slug": "buffalo-creek-wind-farm",
+        "financials": {
+          "instrument": 'debt',
+          "expectedReturn": 133300,
+          "fundTarget": 333300,
+          "amtFunded": 333300,
+          "principalOutstanding": 0.091,
+          "interestAccrued": 0.074,
+          "ppaCounterparty": 'counterparty 8',
+          "annualInterest": '0.097',
+        },
+        "location": {
+          "address": {
+            "stateProvince": "OK",
+            "city": "Tulsa",
+          },
         },
       },
-    },
-    "datePurchased": "2020-05-19T00:00:00Z",
-    "principalInvested": 35000,
-    "img": 'https://test.io',
+      // financials
+      "datePurchased": "2020-05-19T00:00:00Z",
+      "principalInvested": 35000,
+      "img": 'https://test.io',
     "distributions": [
       {
         "date": "2021-02-01T00:00:00Z",
@@ -194,6 +205,16 @@ const investments = [
         },
         "title": "La Rosa Battery Storage",
         "slug": "buffalocreekwindfarm",
+        "financials": {
+          "instrument": 'cash',
+          "expectedReturn": 330000,
+          "fundTarget": 130000,
+          "amtFunded": 530000,
+          "principalOutstanding": 0.091,
+          "interestAccrued": 0.074,
+          "ppaCounterparty": 'counterparty 8',
+          "annualInterest": '0.097',
+        },
         "location": {
           "address": {
             "stateProvince": "KS",
@@ -250,6 +271,16 @@ const investments = [
         },
         "title": "Desert Valley Solar Station",
         "slug": "desert-valley-solar-station",
+        "financials": {
+          "instrument": 'equity',
+          "expectedReturn": 530000,
+          "fundTarget": 1333000,
+          "amtFunded": 130000,
+          "principalOutstanding": 0.091,
+          "interestAccrued": 0.074,
+          "ppaCounterparty": 'counterparty 8',
+          "annualInterest": '0.097',
+        },
         "location": {
           "address": {
             "stateProvince": "KS",
@@ -306,6 +337,16 @@ const investments = [
         },
         "title": "Spring River Battery Storage",
         "slug": "spring-river-battery-storage",
+        "financials": {
+          "instrument": 'debt',
+          "expectedReturn": 100000,
+          "fundTarget": 33330000,
+          "amtFunded": 80000,
+          "principalOutstanding": 0.091,
+          "interestAccrued": 0.074,
+          "ppaCounterparty": 'counterparty 8',
+          "annualInterest": '0.097',
+        },
         "location": {
           "address": {
             "stateProvince": "NSW",
@@ -346,6 +387,16 @@ const investments = [
         },
         "title": "Oak Ridge Wind Farm",
         "slug": "oak-ridge-wind-farm",
+        "financials": {
+          "instrument": 'cash',
+          "expectedReturn": 50000,
+          "fundTarget": 4330000,
+          "amtFunded": 30000,
+          "principalOutstanding": 0.091,
+          "interestAccrued": 0.074,
+          "ppaCounterparty": 'counterparty 8',
+          "annualInterest": '0.097',
+        },
         "location": {
           "address": {
             "stateProvince": "MN",
@@ -382,6 +433,16 @@ const investments = [
         },
         "title": "Wharf Complex Retrofitting",
         "slug": "wharf-complex-retrofitting",
+        "financials": {
+          "instrument": 'equity',
+          "expectedReturn": 9030000,
+          "fundTarget": 10030000,
+          "amtFunded": 1330000,
+          "principalOutstanding": 0.091,
+          "interestAccrued": 0.074,
+          "ppaCounterparty": 'counterparty 8',
+          "annualInterest": '0.097',
+        },
         "location": {
           "address": {
             "stateProvince": "MD",
@@ -414,6 +475,16 @@ const investments = [
         },
         "title": "Dog River Wind Farm",
         "slug": "dog-river-wind-farm",
+        "financials": {
+          "instrument": 'cash',
+          "expectedReturn": 130000,
+          "fundTarget": 33330000,
+          "amtFunded": 100000,
+          "principalOutstanding": 0.091,
+          "interestAccrued": 0.074,
+          "ppaCounterparty": 'counterparty 8',
+          "annualInterest": '0.097',
+        },
         "location": {
           "address": {
             "stateProvince": "OK",

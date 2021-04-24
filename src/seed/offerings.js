@@ -23,6 +23,7 @@ export const offeringsArr = [
     },
     financials: {
       otherClass: 'Project Development',
+      instrument: 'debt',
       investmentClass: 'Mezzanine',
       expectedReturn: 1800000,
       fundTarget: 1500000,
@@ -157,6 +158,7 @@ Certain Envest employees may have an interest in, or family members or close fri
     },
     financials: {
       otherClass: 'Debt Refinancing',
+      instrument: 'debt',
       investmentClass: 'Common Stock',
       expectedReturn: 1100000,
       fundTarget: 921742,
@@ -290,7 +292,8 @@ Certain Envest employees may have an interest in, or family members or close fri
       ppaPriceUSD: 212,
     },
     financials: {
-      otherClass: 'Debt Refinancing',
+      otherClass: 'Hybrid Debt Refinancing',
+      instrument: 'debt',
       investmentClass: 'Preferred Stock',
       expectedReturn: 26300000,
       fundTarget: 22300000,
@@ -424,7 +427,8 @@ Certain Envest employees may have an interest in, or family members or close fri
       ppaPriceUSD: 73,
     },
     financials: {
-      otherClass: 'Debt Refinancing',
+      otherClass: 'Equity Venture Capital',
+      instrument: 'debt',
       investmentClass: 'Subordinate Debt',
       expectedReturn: 53330000,
       fundTarget: 33330000,
@@ -558,7 +562,8 @@ Certain Envest employees may have an interest in, or family members or close fri
       ppaPriceUSD: 1232,
     },
     financials: {
-      otherClass: 'Debt Refinancing',
+      otherClass: 'Preferred Equity Offloading',
+      instrument: 'debt',
       investmentClass: 'Common Stock',
       expectedReturn: 1900000,
       fundTarget: 1500000,
@@ -692,7 +697,8 @@ Certain Envest employees may have an interest in, or family members or close fri
       ppaPriceUSD: 192,
     },
     financials: {
-      otherClass: 'Debt Refinancing',
+      otherClass: 'Common Equity Project Finance',
+      instrument: 'debt',
       investmentClass: 'Preferred Stock',
       expectedReturn: 970000,
       fundTarget: 900000,
@@ -826,7 +832,8 @@ Certain Envest employees may have an interest in, or family members or close fri
       ppaPriceUSD: 500,
     },
     financials: {
-      otherClass: 'Debt Refinancing',
+      otherClass: 'Common Equity Offloading',
+      instrument: 'debt',
       investmentClass: 'Common Stock',
       expectedReturn: 24300000,
       fundTarget: 22300000,
@@ -960,7 +967,8 @@ Certain Envest employees may have an interest in, or family members or close fri
       ppaPriceUSD: 434,
     },
     financials: {
-      otherClass: 'Debt Refinancing',
+      otherClass: 'Mezzanine Debt Project Finance',
+      instrument: 'debt',
       investmentClass: 'Subordinate Debt',
       expectedReturn: 33930000,
       fundTarget: 33330000,

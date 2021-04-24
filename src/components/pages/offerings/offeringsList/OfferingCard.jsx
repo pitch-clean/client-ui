@@ -24,12 +24,16 @@ const useStyles = makeStyles(theme => ({
   root: {
     // '& *': {},
   },
+  divider: {
+    width: `100%`,
+    margin: 1,
+  },
   gridItem: {
-    backgroundColor: `#f8f0e4`,
+    backgroundColor: `#eee`,
     minWidth: `200px`,
     width: `300px`,
     maxWidth: `29%`,
-    border: `1px solid beige`,
+    border: `1px solid black`,
     margin: `20px 15px`,
   },
   gridImg: {
@@ -147,15 +151,17 @@ const OfferingCard = ({ idx }) => {
       <Divider variant="middle" />
       <ListItem className={classes.lowerListItem}>
         <div className={`${classes.row} annualInterest item flexrow w100`} >
-          <div>Annual Interest: </div>
+          <div>Expected Return: </div>
           <div style={{ fontWeight: 500 }}>{` ${interestAccrued}%`}</div>
         </div>
-        <Divider variant="fullWidth" />
+        <Divider variant="fullWidth" className={classes.divider} />
         <div className={`${classes.row} termLength item flexrow w100`} >
-          <div>Term length: </div>
-          <div style={{ fontWeight: 500 }}>{` ${termLength}`}</div>
+          <div>Net Present Value: </div>
+          <div style={{ fontWeight: 500 }}>{` ${calcOfferSize(
+            offeringObj.financials.fundTarget,
+          )}`}</div>
         </div>
-        <Divider variant="middle" />
+        <Divider variant="fullWidth" className={classes.divider} />
         <div className={`${classes.row} offeringSize item flexrow w100`} >
           <div>Offering Size: </div>
           <div style={{ fontWeight: 500 }}>{`${calcOfferSize(

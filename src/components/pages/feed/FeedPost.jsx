@@ -4,13 +4,12 @@ import { Link } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  Card,
   CardHeader,
   CardContent,
   IconButton,
   Typography,
   Avatar,
-  Divider,
+  Paper,
   Link as MuiLink,
 } from '@material-ui/core';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
@@ -18,7 +17,10 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import PostActionButton from './PostActionButton';
 // constants
 const useStyles = makeStyles(theme => ({
-  cardRoot: {},
+  cardRoot: {
+    margin: `5px 0`,
+    padding: `7px `,
+  },
   cardHeader: {
     padding: `10px`,
     justifyContent: 'start',
@@ -26,10 +28,12 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     backgroundColor: 'lightblue',
-    width: theme.spacing(7),
-    height: theme.spacing(7),
+    width: theme.spacing(9),
+    height: theme.spacing(9),
     margin: 0,
     marginRight: `-7px`,
+    // width: 70,
+    // height: 70,
   },
   cardHeaderContent: {
     alignSelf: 'end',
@@ -51,11 +55,11 @@ const buildLocation = (city, stateProv) => {
 const envProfilePath = 'profile';
 
 // main
-const FeedItem = ({ postObj, idx }) => {
+const FeedPost = ({ postObj, idx }) => {
   // init hooks
   const classes = useStyles();
   // destructure
-  const { _id, body, profile, postType } = postObj;
+  const { body, profile, postType } = postObj;
   const {
     profileType,
     firstName,
@@ -72,7 +76,7 @@ const FeedItem = ({ postObj, idx }) => {
     profileType === 'organization' ? buildLocation(city, stateProvince) : currentEmployer;
 
   return (
-    <Card className={`${classes.cardRoot} w100`}>
+    <Paper elevation={3} className={`${classes.cardRoot} FeedPost w100`}>
       <CardHeader
         className={classes.cardHeader}
         classes={{
@@ -80,7 +84,7 @@ const FeedItem = ({ postObj, idx }) => {
         }}
         avatar={
           <Link to={`/${envProfilePath}/alias`}>
-            <Avatar aria-label="recipe" className={classes.avatar}>
+            <Avatar aria-label="recipe" className={classes.avatar} variant="square">
               {image}
             </Avatar>
           </Link>
@@ -112,9 +116,9 @@ const FeedItem = ({ postObj, idx }) => {
         </Typography>
       </CardContent>
       <PostActionButton postType={postType} />
-    </Card>
+    </Paper>
   );
 };
 
 // export
-export default FeedItem;
+export default FeedPost;

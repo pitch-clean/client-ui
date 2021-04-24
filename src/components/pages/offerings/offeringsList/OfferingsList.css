@@ -1,9 +1,9 @@
 .OfferingCard {
-  background-color: #f8f0e4;
+  background-color: #e5e7e4;
   min-width: 200px;
   width: 300px;
   max-width: 90%;
-  border: 1px solid beige;
+  border: 1px solid black;
   margin: 20px 15px;
   display: grid;
   grid-template-areas: 

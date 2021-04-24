@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Paper,
-  Card,
   Avatar,
   CardHeader,
   Typography,
@@ -18,35 +17,28 @@ import {
   Link as MuiLink,
 } from '@material-ui/core';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+// seed
+import { recommendedConnections } from '../../../seed/testConnections';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
     minHeight: '100px',
     margin: `20px 0 0 0`,
+    padding: '0px 16px',
+    paddingBottom: '5px',
   },
-  card: {
-    justifyContent: 'start',
-    alignItems: 'start',
-    padding: `0 10px`,
-    paddingTop: `10px`,
-    minHeight: `100px`,
-  },
-  container: {
-    display: 'flex',
-    flexFlow: 'column',
-    alignItems: 'start',
-    padding: `10px 5%`,
+  header: {
+    paddingBottom: 0,
+    paddingLeft: 5,
   },
   divider: {
     minHeight: `1px`,
-    minWidth: `75%`,
+    height: `1px`,
+    minWidth: `100%`,
   },
-  large: {
-    width: theme.spacing(10),
-    height: theme.spacing(10),
-  },
-  body: {
-    padding: `0 5px`,
+  profile: {
+    fontSize: theme.typography.fontSize / 1.01,
+    fontWeight: 600,
   },
   addIconButton: {
     padding: 2,
@@ -58,77 +50,19 @@ const useStyles = makeStyles(theme => ({
     padding: 0,
     width: `unset`,
   },
-  header: {
-    paddingBottom: 0,
-  },
   connection: {
     lineHeight: 1.1,
   },
   listItem: {
     padding: `0 10px`,
-    margin: 0,
+    margin: `2px 0`,
+  },
+  list: {
+    width: `100%`,
   },
 }));
 const envProfilePath = 'profile';
 const envCompanyPath = 'company';
-// seed
-const recommendedConnections = [
-  {
-    profileId: 0,
-    alias: 'harrisgreg49920',
-    firstName: `Greg`,
-    lastName: `Harris`,
-    position: 'Senior Vice President',
-    currentEmployer: 'Brooklane Renewables',
-    organizationSlug: 'brooklane-renewables',
-    city: 'New York',
-    stateProvince: 'NY',
-  },
-  {
-    profileId: 1,
-    alias: 'sdaly-234',
-    firstName: `Sarah`,
-    lastName: `Daly`,
-    position: 'Managing Director',
-    currentEmployer: 'Vertex Capital',
-    organizationSlug: 'vertex-capital',
-    city: 'Washington',
-    stateProvince: 'DC',
-  },
-  {
-    profileId: 2,
-    alias: 'petetaylor393',
-    firstName: `Pete`,
-    lastName: `Taylor`,
-    position: 'Associate',
-    currentEmployer: 'Atrium Solar LLC',
-    organizationSlug: 'atrium-solar-llc',
-    city: 'Nashville',
-    stateProvince: 'TN',
-  },
-  {
-    profileId: 3,
-    alias: 'sashacarlton2',
-    firstName: `Sasha`,
-    lastName: `Carlton`,
-    position: 'Senior Analyst',
-    currentEmployer: 'Sunwind Asset Management',
-    organizationSlug: 'sunwind-asset-management',
-    city: 'Salt Lake City',
-    stateProvince: 'UT',
-  },
-  {
-    profileId: 4,
-    alias: 'laurencunningham',
-    firstName: `Lauren`,
-    lastName: `Cunningham`,
-    position: 'Partner and COO',
-    currentEmployer: 'Solstice Capital',
-    organizationSlug: 'solstice-capital',
-    city: 'Seattle',
-    stateProvince: 'WA',
-  },
-];
 
 // main
 const LSSuggestedConnections = () => {
@@ -139,77 +73,76 @@ const LSSuggestedConnections = () => {
   // build
   const buildProfileCard = (profileObj, idx) => {
     const {
-      _id,
-      firstName,
-      lastName,
-      position,
-      currentEmployer,
+      pii: { firstName, lastName },
+      active: { position, currentEmployer, organizationSlug },
       image,
       alias,
-      organizationSlug,
     } = profileObj;
     return (
-      <React.Fragment key={`inv-${_id}`}>
+      <>
         {idx !== 0 && <Divider className={classes.divider} component="div" />}
-        <ListItem dense className={`${classes.listItem} w100`}>
-          <ListItemAvatar>
-            <Avatar alt="Profile Picture" src={image} />
-          </ListItemAvatar>
-          <ListItemText
-            primary={
-              <MuiLink
-                component={Link}
-                to={`/${envProfilePath}/${alias}`}
-                color="inherit"
-                variant="inherit"
-              >
-                {`${firstName} ${lastName}`}
-              </MuiLink>
-            }
-            secondary={
-              <>
-                <Typography
-                  className={classes.connection}
-                  component="p"
-                  variant="caption"
-                  color="textSecondary"
+        <Paper elevation={1}>
+          <ListItem dense className={`${classes.listItem} w100`}>
+            <MuiLink component={Link} to={`/${envProfilePath}/${alias}`}>
+              <ListItemAvatar>
+                <Avatar alt="Profile Picture" src={image} style={{width: 45, height: 45}} />
+              </ListItemAvatar>
+            </MuiLink>
+            <ListItemText
+              primary={
+                <MuiLink
+                  component={Link}
+                  to={`/${envProfilePath}/${alias}`}
+                  color="inherit"
+                  variant="subtitle2"
+                  className={classes.profile}
                 >
-                  {position}
-                </Typography>
-                <Typography component="p" variant="caption" color="textSecondary">
-                  <MuiLink
-                    component={Link}
-                    to={`/${envCompanyPath}/${organizationSlug}`}
-                    color="textSecondary"
+                  {`${firstName} ${lastName}`}
+                </MuiLink>
+              }
+              secondary={
+                <>
+                  <Typography
                     className={classes.connection}
+                    component="p"
+                    variant="caption"
+                    color="textSecondary"
                   >
-                    {currentEmployer}
-                  </MuiLink>
-                </Typography>
-              </>
-            }
-          />
-          <Button className={`${classes.addIconButton}`}>
-            <PersonAddIcon
-              className={`${classes.addIcon}`}
-              onClick={() => {
-                alert('Adding Connection');
-              }}
+                    {position}
+                  </Typography>
+                  <Typography component="p" variant="caption" color="textSecondary">
+                    <MuiLink
+                      component={Link}
+                      to={`/${envCompanyPath}/${organizationSlug}`}
+                      color="textSecondary"
+                      className={classes.connection}
+                    >
+                      {currentEmployer}
+                    </MuiLink>
+                  </Typography>
+                </>
+              }
             />
-          </Button>
-        </ListItem>
-      </React.Fragment>
+            <Button className={`${classes.addIconButton}`}>
+              <PersonAddIcon
+                className={`${classes.addIcon}`}
+                onClick={() => {
+                  alert('Adding Connection');
+                }}
+              />
+            </Button>
+          </ListItem>
+        </Paper>
+      </>
     );
   };
   const buildSCProfileList = profilesArr => {
     return (
-      <Card className={`${classes.card} w100`}>
-        <List>
-          {profilesArr.map((profileObj, idx) => {
-            return buildProfileCard(profileObj, idx);
-          })}
-        </List>
-      </Card>
+      <List className={classes.list}>
+        {profilesArr.map((profileObj, idx) => {
+          return buildProfileCard(profileObj, idx);
+        })}
+      </List>
     );
   };
   // effects

@@ -1,39 +1,41 @@
 // react
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+// utils
+import { makeStyles } from '@material-ui/core/styles';
+import { Divider, ListItem, ListItemText, Typography, Link as MuiLink } from '@material-ui/core';
 // seed
-const newsItems = [
-  {
-    title: 'Wall Street Journal: New ITC  Credits Rocket Renewables Stocks ',
-    url: 'http://envest.pro',
-    dtPublished: '2021-04-02T05:23:00Z',
+import { newsItems } from '../../../../seed/testNewsItems';
+// constants
+const useStyles = makeStyles(theme => ({
+  root: {},
+  divider: {
+    minHeight: `1px`,
+    height: `1px`,
+    minWidth: `100%`,
   },
-  {
-    title: 'UtilityDIVE: New ITC Credits Rocket Renewables Stocks',
-    url: 'http://envest.pro',
-    dtPublished: '2021-04-02T21:45:00Z',
+  source: {
+    fontSize: theme.typography.fontSize / 1.1,
+    fontWeight: 600,
   },
-  {
-    title: 'POLITICO: Biden Squeezed Between Promises to Go Green and Bolster Unions',
-    url: 'http://envest.pro',
-    dtPublished: '2021-04-01T00:00:00Z',
+  listItem: {
+    padding: 0,
+    paddingTop: `5px`,
+    '& *': {
+      lineHeight: 1.15,
+    },
   },
-  {
-    title: 'E&E News: Texas Grid Collapse Points To Looming Climate Tests',
-    url: 'http://envest.pro',
-    dtPublished: '2021-03-31T00:00:00Z',
+  cardTitle: {
+    display: 'inline',
+    fontSize: theme.typography.fontSize * 0.85,
+    cursor: 'pointer',
   },
-  {
-    title: 'Seeking Alpha: NextEra: A Bet On Renewable Energy Growth',
-    url: 'http://envest.pro',
-    dtPublished: '2021-03-30T00:00:00Z',
+  date: {
+    fontSize: theme.typography.fontSize * 0.85,
+    padding: `0`,
+    paddingTop: `2px`,
   },
-  {
-    title: 'GreenTech Media: Telecom Firms Pile Into Spain’s Renewable Energy Market',
-    url: 'http://envest.pro',
-    dtPublished: '2021-03-25T00:00:00Z',
-  },
-];
+}));
 // format fxn
 const formatStringDt = dtStr => {
   const dtDate = new Date(dtStr);
@@ -58,6 +60,8 @@ const formatStringDt = dtStr => {
 
 // main
 const NewsList = () => {
+  // init hooks
+  const classes = useStyles();
   // state
   const [newsElemArr, setNewsElemArr] = useState([]);
   // effects
@@ -66,17 +70,48 @@ const NewsList = () => {
     for (let idx = 0; idx < newsItems.length; idx += 1) {
       const newsItem = newsItems[idx];
       const newsElem = (
-        <Link to={newsItem.url} className="newsItem linkCard w100 flexcol" >
-          <div className="newsTitle">- {newsItem.title}</div>
-          <div className="newsPubDt">{formatStringDt(newsItem.dtPublished)}</div>
-        </Link>
+        <>
+          <ListItem alignItems="flex-start" className={classes.listItem}>
+            <ListItemText
+              primary={
+                <>
+                  <Typography
+                    component="span"
+                    variant="subtitle2"
+                    className={classes.source}
+                    color="textPrimary"
+                  >
+                    {`${newsItem.source}: `}
+                  </Typography>
+                  <MuiLink
+                    nowrap
+                    href={newsItem.url}
+                    variant="body2"
+                    color="textPrimary"
+                    className={`${classes.cardTitle}`}
+                  >
+                    {newsItem.title}
+                  </MuiLink>
+                </>
+              }
+              secondary={
+                <>
+                  <Typography className={classes.date}>
+                    {formatStringDt(newsItem.dtPublished)}
+                  </Typography>
+                </>
+              }
+            />
+          </ListItem>
+          <Divider className={classes.divider} variant="fullWidth" component="div" />
+        </>
       );
       mockNewsElemArr.push(newsElem);
     }
     setNewsElemArr(mockNewsElemArr);
   }, []);
 
-  return <div className="NewsList w100 flexcol">{newsElemArr}</div>;
+  return <div className={`${classes.root} NewsList w100 flexcol`}>{newsElemArr}</div>;
 };
 
 // export
