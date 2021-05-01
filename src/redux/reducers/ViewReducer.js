@@ -31,7 +31,6 @@ const initialProfileState = {
   activeProfileTab: 'about',
   viewProfile: null,
 };
-
 const ProfileReducer = (state = _.cloneDeep(initialProfileState), action) => {
   const newState = _.cloneDeep(state);
   switch (action.type) {
@@ -46,9 +45,45 @@ const ProfileReducer = (state = _.cloneDeep(initialProfileState), action) => {
   }
 };
 
+const initMessagesState = {
+  activeConversationIdx: 0,
+  activeConversationId: null,
+  activeConversationObj: null,
+  profileMap: null,
+};
+const MessagesReducer = (state = _.cloneDeep(initMessagesState), action) => {
+  const newState = _.cloneDeep(state);
+  const { payload } = action;
+  switch (action.type) {
+    case types.UPDATE_ACTIVE_CONVERSATION_IDX:
+      newState.activeConversationIdx = payload;
+      return newState;
+    case types.UPDATE_ACTIVE_CONVERSATION_ID:
+      newState.activeConversationId = payload;
+      return newState;
+    case types.UPDATE_ACTIVE_CONVERSATION:
+      if (payload.conversationId === undefined || payload.idx === undefined) {
+        alert('Please use id or idx');
+      }
+      newState.activeConversationId = payload.conversationId;
+      newState.activeConversationIdx = payload.idx;
+      newState.activeConversationObj = null;
+      return newState;
+    case types.UPDATE_ACTIVE_CONVERSATION_OBJ:
+      newState.activeConversationObj = payload;
+      return newState;
+    case types.UPDATE_PROFILE_MAP:
+      newState.profileMap = payload;
+      return newState;
+    default:
+      return newState;
+  }
+};
+
 const ViewReducer = combineReducers({
   main: MainReducer,
   profile: ProfileReducer,
+  messages: MessagesReducer,
 });
 
 export default ViewReducer;

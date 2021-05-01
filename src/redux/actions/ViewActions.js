@@ -32,3 +32,34 @@ export const updateViewProfile = payload => dispatch => {
     payload,
   });
 };
+// messages
+export const updateActiveConversationIdx = payload => dispatch => {
+  dispatch({
+    type: types.UPDATE_ACTIVE_CONVERSATION_IDX,
+    payload,
+  });
+};
+export const updateActiveConversationId = payload => dispatch => {
+  dispatch({
+    type: types.UPDATE_ACTIVE_CONVERSATION_ID,
+    payload,
+  });
+};
+export const updateActiveConversation = payload => dispatch => {
+  dispatch({
+    type: types.UPDATE_ACTIVE_CONVERSATION,
+    payload,
+  });
+};
+export const updateActiveConversationObj = payload => dispatch => {
+  dispatch({
+    type: types.UPDATE_ACTIVE_CONVERSATION_OBJ,
+    payload,
+  });
+};
+export const updateProfileMap = payload => dispatch => {
+  dispatch({
+    type: types.UPDATE_PROFILE_MAP,
+    payload,
+  });
+};

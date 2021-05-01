@@ -47,7 +47,7 @@ const pii = {
 const images = {
   "profile": {
       "large": "",
-      "thumbnail": ""
+      "thumbnail": "linda-powell-thumbnail.jpg"
   },
   "background": {
       "large": "",

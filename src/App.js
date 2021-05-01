@@ -37,9 +37,6 @@ const theme = createMuiTheme({
     secondary: {
       main: '#11cb5f',
     },
-    tertiary: {
-      main: '#9f3e3e',
-    },
   },
   typography: {
     h1: {
@@ -64,15 +61,20 @@ const theme = createMuiTheme({
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: '#d7d3d3',
+    minHeight: '100vh',
+    maxHeight: '100vh',
+    height: '100vh',
   },
   body: {
     justifyContent: 'start',
     flex: 1,
+    flexFlow: 'column',
+    overflow: 'scroll',
   },
-  footer: {
-    backgroundColor: `black`,
-    padding: `10px 20px`,
-    height: `40px`,
+  navGroup: {
+    flexFlow: 'column',
+    justifyContent: 'flex-start',
+    maxWidth: '100%',
   },
 }));
 
@@ -103,13 +105,12 @@ const App = () => {
         className={`${classes.root} App w100`}
         ref={appRef}
       >
-        <MainNavBar />
-        <SubNav />
-        <Grid container direction="column" component="div" className={`${classes.body} w100`}>
+        <Grid container className={classes.navGroup}>
+          <MainNavBar />
+          <SubNav />
+        </Grid>
+        <Grid container className={`${classes.body} w100 f1`}>
           <PageRouter />
-          <Grid item className={`${classes.footer} w100`}>
-            Footer
-          </Grid>
         </Grid>
       </Grid>
     </ThemeProvider>

@@ -1,3 +1,9 @@
+const imagesPath = './images';
+export const getImgPath = (imgPath) => {
+  const imgObj = require(`${imagesPath}/${imgPath}`);
+  const staticImgPath = imgObj.default;
+  return staticImgPath;
+};
 const education = [
   {
     organization: 'Harvard School of Management',
@@ -47,7 +53,7 @@ const pii = {
 const images = {
   "profile": {
       "large": "",
-      "thumbnail": ""
+      "thumbnail": "linda-powell-thumbnail.jpg"
   },
   "background": {
       "large": "",
@@ -507,51 +513,29 @@ const investments = [
       ]
   }
 ];
-const following = [
+const following = [4, 5, 6, 7, 8];
+const conversations = [
   {
-    profileId: 0,
-    firstName: `Greg`,
-    lastName: `Harris`,
-    position: 'Senior Vice President',
-    currentEmployer: 'Brooklane Renewables',
-    city: 'New York',
-    stateProvince: 'NY',
+    conversationId: 1,
+    participants: [2, 3],
+    lastMessage: {
+      msgId: 2,
+      profileId: 1,
+      text: "Great! Thanks.",
+      media: null,
+      dtReceipt: "2021-04-16T12:34:56.501000Z",
+    },
   },
   {
-    profileId: 1,
-    firstName: `Sarah`,
-    lastName: `Daly`,
-    position: 'Managing Director',
-    currentEmployer: 'Vertex Capital',
-    city: 'Washington',
-    stateProvince: 'DC',
-  },
-  {
-    profileId: 2,
-    firstName: `Pete`,
-    lastName: `Taylor`,
-    position: 'Associate',
-    currentEmployer: 'Atrium Solar LLC',
-    city: 'Nashville',
-    stateProvince: 'TN',
-  },
-  {
-    profileId: 3,
-    firstName: `Sasha`,
-    lastName: `Carlton`,
-    position: 'Senior Analyst',
-    currentEmployer: 'Sunwind Asset Management',
-    city: 'Salt Lake City',
-    stateProvince: 'UT',
-  },
-  {
-    profileId: 4,
-    firstName: `Lauren`,
-    lastName: `Cunningham`,
-    position: 'Partner and COO',
-    currentEmployer: 'Solstice Capital',
-    city: 'Seattle',
-    stateProvince: 'WA',
+    conversationId: 2,
+    participants: [1, 3],
+    lastMessage: {
+      msgId: 2,
+      profileId: 3,
+      text: "Thanks for reaching out, Thomas. We’ll be in touch soon with a potential investors video chat RSVP link.",
+      media: null,
+      dtReceipt: "2021-04-16T12:34:56.502Z",
+    },
   },
 ];
 
@@ -567,7 +551,8 @@ export const profile = {
   investments,
   connections,
   following,
-  images,
   "profileType": "user",
   "profileClass": "sponsor",
+  images,
+  conversations,
 };

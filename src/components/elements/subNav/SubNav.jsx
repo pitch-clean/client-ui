@@ -13,9 +13,9 @@ import Portfolio2 from './Portfolio2';
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: '#333533',
-    transitionProperty: `height`,
-    transitionDuration: `0.2s`,
-    transitionTimingFunction: `ease-out`,
+    // transitionProperty: `height`,
+    // transitionDuration: `0.2s`,
+    // transitionTimingFunction: `ease-out`,
   },
   nav: {
     padding: 0,
@@ -37,6 +37,11 @@ const useStyles = makeStyles(theme => ({
       paddingTop: 9,
       paddingBottom: 6,
       fontSize: `13px`,
+    },
+    '& input:focus': {
+      color: 'red',
+      borderColor: 'red',
+      borderWidth: 2,
     },
   },
 }));
@@ -72,11 +77,19 @@ const SubNav = () => {
   if (!isAuthenticated) {
     return <div />;
   }
-
+  // const unMountStyle = () => { // css for unmount animation
+  //   this.setState({
+  //     style: {
+  //       fontSize: 60,
+  //       opacity: 0,
+  //       transition: 'all 1s ease',
+  //     }
+  //   })
+  // }
   return (
-    <Grid className={`w100 ${classes.root} flexcol`} container>
-      {l1Path === envOfferingsPath && <Portfolio />}
-      {l1Path === envPortfolioPath && <Portfolio2 />}
+    <Grid className={`w100 ${classes.root}`} container>
+      {/* {l1Path === envOfferingsPath && <Portfolio />} */}
+      {/* {l1Path === envPortfolioPath && <Portfolio2 />} */}
       <Grid className={`w100 ${classes.nav} flexrow`} container alignItems="stretch">
         <Tabs value={l1Map[l1Path]} indicatorColor="secondary" textColor="primary" centered>
           <Link to="/feed">
@@ -98,7 +111,7 @@ const SubNav = () => {
             alert('Submitting');
           }}
         >
-          <TextField className={classes.search} label="Search" variant="outlined" size="small" />
+          <TextField className={classes.search} label="Search" variant="outlined" color="primary" size="small" />
         </form>
       </Grid>
     </Grid>

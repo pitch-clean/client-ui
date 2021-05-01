@@ -11,6 +11,7 @@ import {
   ListItemText,
   Typography,
   Divider,
+  Paper,
   Link as MuiLink,
 } from '@material-ui/core';
 import { activateFavorite } from '../../../utils/eventHandlers';
@@ -105,7 +106,7 @@ const OfferingCard = ({ idx }) => {
   const interestAccrued = Math.round(10000 * financials.interestAccrued) / 100;
 
   return (
-    <GridListTile className={classes.gridItem} key={`asdfasdf--${idx}`}>
+    <Paper className={classes.gridItem} key={`asdfasdf--${idx}`}>
       <ListSubheader className={classes.subHeader} component="div">
         {financials.otherClass}
       </ListSubheader>
@@ -169,7 +170,7 @@ const OfferingCard = ({ idx }) => {
           )}`}</div>
         </div>
       </ListItem>
-    </GridListTile>
+    </Paper>
   );
 };
 

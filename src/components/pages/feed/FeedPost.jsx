@@ -84,7 +84,7 @@ const FeedPost = ({ postObj, idx }) => {
         }}
         avatar={
           <Link to={`/${envProfilePath}/alias`}>
-            <Avatar aria-label="recipe" className={classes.avatar} variant="square">
+            <Avatar aria-label="profile pic" className={classes.avatar} variant="square">
               {image}
             </Avatar>
           </Link>

@@ -49,7 +49,7 @@ const Sidebar = ({ isLeft, children }) => {
   // init hooks
   const classes = useStyles();
   const lr = isLeft ? 'rootleft' : 'rootright';
-  return <div className={`Sidebar h100 ${classes[lr]}`}>{children}</div>;
+  return <div className={`Sidebar f1 ${classes[lr]}`}>{children}</div>;
 };
 
 // proptypes

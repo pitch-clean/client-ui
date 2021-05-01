@@ -9,14 +9,16 @@ import { Grid, Button, Typography, Link as MuiLink } from '@material-ui/core';
 import ProfileLoginRegister from './ProfileLoginRegister';
 import InfoGroup from './InfoGroup';
 // utils
-// styles
-import './MainNavBar.css';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
     justifyContent: 'space-between',
+    flexFlow: 'row',
     alignItems: 'centered',
     padding: 5,
+    backgroundColor: 'black',
+    color: 'rgb(213, 220, 213)',
+    textDecoration: 'none',
   },
 }));
 
@@ -35,7 +37,7 @@ const MainNavBar = () => {
   }, [ref1]);
 
   return (
-    <Grid container direction="row" className={`w100 flexrow MainNavBar ${classes.root}`}>
+    <Grid container className={`w100 MainNavBar ${classes.root}`}>
       <MuiLink component={Link} to={{ pathname: '/' }} ref={ref1}>
         <Button style={{ lineHeight: 1 }}>
           <Typography variant="h4" color="secondary">
