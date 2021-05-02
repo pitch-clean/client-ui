@@ -8,14 +8,15 @@ import GridList from '@material-ui/core/GridList';
 import OfferingCard from './OfferingCard';
 // constants
 const useStyles = makeStyles(theme => ({
-  root: {
-    // '& *': {
-      // color: 'whitesmoke',
-    // },
-  },
+  root: {},
   gridList: {
-    maxWidth: `80%`,
-    // height: 450,
+    justifyContent: 'center',
+  },
+  emptyList: {
+    flexWrap: `wrap`,
+    justifyContent: `center`,
+    padding: `0 50px`,
+    maxWidth: `100%`,
   },
 }));
 const test = true;
@@ -37,17 +38,7 @@ const OfferingsList = () => {
       {offeringsArrElem}
     </GridList>
   ) : (
-    <div
-      className="flexrow w100 OfferingsList"
-      style={{
-        flexWrap: `wrap`,
-        justifyContent: `center`,
-        padding: `0 50px`,
-        maxWidth: `80%`,
-      }}
-    >
-      {offeringsArrElem}
-    </div>
+    <div className={`"OfferingsList ${classes.emptyList} flexrow w100`}>{offeringsArrElem}</div>
   );
 };
 

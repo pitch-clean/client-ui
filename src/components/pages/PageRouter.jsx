@@ -6,7 +6,7 @@ import { Switch, Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 // components
-import OfferingsView from './offerings/offeringsList/OfferingsView';
+import OfferingsListView from './offerings/offeringsList/OfferingsListView';
 import OfferingDetail from './offerings/offeringDetail/OfferingDetail';
 import NotFound from './home/NotFound';
 import LoginForm from './profile/LoginForm';
@@ -50,7 +50,7 @@ const PageRouter = () => {
       <Switch>
         <Route path="/profile/:alias" render={p => <ProfileView props={p} />} />
         <Route exact path="/offering/:offeringId" render={p => <OfferingDetail props={p} />} />
-        <Route exact path="/offerings" render={p => <OfferingsView props={p} />} />
+        <Route exact path="/offerings" render={p => <OfferingsListView props={p} />} />
         <Route exact path="/" render={p => <Home props={p} />} />
         <Route exact path="/feed" render={p => <FeedView props={p} />} />
         <Route exact path="/login" render={p => <LoginForm props={p} />} />
@@ -67,7 +67,7 @@ const PageRouter = () => {
         />
         <Route
           exact
-          path="/offerings/new"
+          path="/offering/new"
           render={p => isAuthenticated && <CreateOffering props={p} />}
         />
         <Route render={p => <NotFound props={p} />} />

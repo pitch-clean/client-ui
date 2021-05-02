@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 // TODO add env vars
-const envOfferingsPath = 'offerings';
+const envOfferingsPath = 'offering';
 const envProfilePath = 'profile';
 
 /**

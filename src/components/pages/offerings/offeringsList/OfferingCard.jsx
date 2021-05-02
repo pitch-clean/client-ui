@@ -17,30 +17,22 @@ import {
 import { activateFavorite } from '../../../utils/eventHandlers';
 import { calcOfferSize, calculateTermLength } from '../../../utils/printFxns';
 // style
-import './OfferingsList.css';
+// import './OfferingsList.css';
 // constants
 const filledStar = '\u2605';
 const openStar = '\u2606';
 const useStyles = makeStyles(theme => ({
-  root: {
-    // '& *': {},
-  },
   divider: {
     width: `100%`,
     margin: 1,
   },
-  gridItem: {
+  root: {
     backgroundColor: `#eee`,
     minWidth: `200px`,
     width: `300px`,
     maxWidth: `29%`,
-    border: `1px solid black`,
+    // border: `1px solid black`,
     margin: `20px 15px`,
-  },
-  gridImg: {
-    maxHeight: `175px`,
-    objectFit: `cover`,
-    borderRadius: 0,
   },
   subHeader: {
     textAlign: 'start',
@@ -76,7 +68,16 @@ const useStyles = makeStyles(theme => ({
     flexFlow: 'row',
     justifyContent: 'space-between',
     fontSize: '12px',
-    lineHeight: 1.5
+    lineHeight: 1.5,
+  },
+  imgLink: {
+    gridArea: 'image',
+    overflow: 'hidden',
+    '& img': {
+      maxHeight: `175px`,
+      objectFit: `cover`,
+      borderRadius: 0,
+    },
   },
 }));
 const test = true;
@@ -106,12 +107,12 @@ const OfferingCard = ({ idx }) => {
   const interestAccrued = Math.round(10000 * financials.interestAccrued) / 100;
 
   return (
-    <Paper className={classes.gridItem} key={`asdfasdf--${idx}`}>
+    <Paper className={`OfferingCard ${classes.root}`} key={`asdfasdf--${idx}`}>
       <ListSubheader className={classes.subHeader} component="div">
         {financials.otherClass}
       </ListSubheader>
-      <Link className="imgLink" to={`/offering/${offeringObj.slug}`}>
-        <img className={classes.gridImg} src={card} alt="Not found" width="100%" />
+      <Link className={`imgLink ${classes.imgLink}`} to={`/offering/${offeringObj.slug}`}>
+        <img src={card} alt="Not found" width="100%" />
       </Link>
       <ListItem className={classes.listItem}>
         <ListItemText
@@ -151,19 +152,19 @@ const OfferingCard = ({ idx }) => {
       </ListItem>
       <Divider variant="middle" />
       <ListItem className={classes.lowerListItem}>
-        <div className={`${classes.row} annualInterest item flexrow w100`} >
+        <div className={`${classes.row} annualInterest item flexrow w100`}>
           <div>Expected Return: </div>
           <div style={{ fontWeight: 500 }}>{` ${interestAccrued}%`}</div>
         </div>
         <Divider variant="fullWidth" className={classes.divider} />
-        <div className={`${classes.row} termLength item flexrow w100`} >
+        <div className={`${classes.row} termLength item flexrow w100`}>
           <div>Net Present Value: </div>
           <div style={{ fontWeight: 500 }}>{` ${calcOfferSize(
             offeringObj.financials.fundTarget,
           )}`}</div>
         </div>
         <Divider variant="fullWidth" className={classes.divider} />
-        <div className={`${classes.row} offeringSize item flexrow w100`} >
+        <div className={`${classes.row} offeringSize item flexrow w100`}>
           <div>Offering Size: </div>
           <div style={{ fontWeight: 500 }}>{`${calcOfferSize(
             offeringObj.financials.fundTarget,
