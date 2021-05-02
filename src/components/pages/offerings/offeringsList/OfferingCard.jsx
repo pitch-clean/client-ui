@@ -17,44 +17,54 @@ import {
 import { activateFavorite } from '../../../utils/eventHandlers';
 import { calcOfferSize, calculateTermLength } from '../../../utils/printFxns';
 // style
-import './OfferingsList.css';
+// import './OfferingsList.css';
 // constants
 const filledStar = '\u2605';
 const openStar = '\u2606';
 const useStyles = makeStyles(theme => ({
-  root: {
-    // '& *': {},
-  },
   divider: {
     width: `100%`,
     margin: 1,
   },
-  gridItem: {
+  root: {
     backgroundColor: `#eee`,
     minWidth: `200px`,
-    width: `300px`,
+    width: `350px`,
     maxWidth: `29%`,
-    border: `1px solid black`,
-    margin: `20px 15px`,
-  },
-  gridImg: {
-    maxHeight: `175px`,
-    objectFit: `cover`,
-    borderRadius: 0,
+    margin: `15px 10px`,
+    alignSelf: 'flex-start',
+    backgroundColor: 'whitesmoke',
+    boxShadow: `
+      0px 2px 1px -1px rgba(0,0,0,0.03),
+      0px 1px 1px 0px rgba(0,0,0,0.02),
+      0px 1px 3px 0px rgba(0,0,0,0.01)
+    `,
+    borderRadius: '5px',
   },
   subHeader: {
     textAlign: 'start',
     padding: `0 10px`,
     lineHeight: 2.24,
     color: 'whitesmoke',
-    backgroundColor: 'black',
+    backgroundColor: '#262826',
     borderRadius: 0,
+    fontSize: '0.9rem',
+    borderRadius: '10px 10px 0 0 ',
   },
-  cardHeader: {},
-  companyLink: {
+  cardHeader: {
+    fontSize: '1.2rem',
+  },
+  company: {
     padding: 0,
     margin: 0,
     lineHeight: 1,
+    fontSize: '0.875rem',
+  },
+  location: {
+    padding: 0,
+    margin: 0,
+    lineHeight: 1,
+    fontSize: '0.875rem',
   },
   listItem: {
     paddingTop: 0,
@@ -75,8 +85,17 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexFlow: 'row',
     justifyContent: 'space-between',
-    fontSize: '12px',
-    lineHeight: 1.5
+    fontSize: '0.875rem',
+    lineHeight: 1.5,
+  },
+  imgLink: {
+    gridArea: 'image',
+    overflow: 'hidden',
+    '& img': {
+      maxHeight: `200px`,
+      objectFit: `cover`,
+      borderRadius: 0,
+    },
   },
 }));
 const test = true;
@@ -106,12 +125,12 @@ const OfferingCard = ({ idx }) => {
   const interestAccrued = Math.round(10000 * financials.interestAccrued) / 100;
 
   return (
-    <Paper className={classes.gridItem} key={`asdfasdf--${idx}`}>
-      <ListSubheader className={classes.subHeader} component="div">
+    <Paper className={`OfferingCard ${classes.root}`} key={`asdfasdf--${idx}`} elevation={0}>
+      <ListSubheader className={classes.subHeader}>
         {financials.otherClass}
       </ListSubheader>
-      <Link className="imgLink" to={`/offering/${offeringObj.slug}`}>
-        <img className={classes.gridImg} src={card} alt="Not found" width="100%" />
+      <Link className={`imgLink ${classes.imgLink}`} to={`/offering/${offeringObj.slug}`}>
+        <img src={card} alt="Not found" width="100%" />
       </Link>
       <ListItem className={classes.listItem}>
         <ListItemText
@@ -129,7 +148,7 @@ const OfferingCard = ({ idx }) => {
           secondary={
             <>
               <MuiLink
-                className={`${classes.companyLink} nowrap`}
+                className={`${classes.company} nowrap`}
                 component={Link}
                 variant="caption"
                 color="textPrimary"
@@ -138,7 +157,7 @@ const OfferingCard = ({ idx }) => {
                 {sponsor}
               </MuiLink>
               <Typography
-                className={classes.companyLink}
+                className={classes.location}
                 component="p"
                 variant="caption"
                 color="textSecondary"
@@ -151,19 +170,19 @@ const OfferingCard = ({ idx }) => {
       </ListItem>
       <Divider variant="middle" />
       <ListItem className={classes.lowerListItem}>
-        <div className={`${classes.row} annualInterest item flexrow w100`} >
+        <div className={`${classes.row} annualInterest item flexrow w100`}>
           <div>Expected Return: </div>
           <div style={{ fontWeight: 500 }}>{` ${interestAccrued}%`}</div>
         </div>
         <Divider variant="fullWidth" className={classes.divider} />
-        <div className={`${classes.row} termLength item flexrow w100`} >
+        <div className={`${classes.row} termLength item flexrow w100`}>
           <div>Net Present Value: </div>
           <div style={{ fontWeight: 500 }}>{` ${calcOfferSize(
             offeringObj.financials.fundTarget,
           )}`}</div>
         </div>
         <Divider variant="fullWidth" className={classes.divider} />
-        <div className={`${classes.row} offeringSize item flexrow w100`} >
+        <div className={`${classes.row} offeringSize item flexrow w100`}>
           <div>Offering Size: </div>
           <div style={{ fontWeight: 500 }}>{`${calcOfferSize(
             offeringObj.financials.fundTarget,

@@ -9,13 +9,14 @@ import OfferingCard from './OfferingCard';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
-    // '& *': {
-      // color: 'whitesmoke',
-    // },
+    justifyContent: 'center',
+    paddingTop: '20px',
   },
-  gridList: {
-    maxWidth: `80%`,
-    // height: 450,
+  emptyList: {
+    flexWrap: `wrap`,
+    justifyContent: `center`,
+    padding: `0 50px`,
+    maxWidth: `100%`,
   },
 }));
 const test = true;
@@ -37,17 +38,7 @@ const OfferingsList = () => {
       {offeringsArrElem}
     </GridList>
   ) : (
-    <div
-      className="flexrow w100 OfferingsList"
-      style={{
-        flexWrap: `wrap`,
-        justifyContent: `center`,
-        padding: `0 50px`,
-        maxWidth: `80%`,
-      }}
-    >
-      {offeringsArrElem}
-    </div>
+    <div className={`"OfferingsList ${classes.emptyList} flexrow w100`}>{offeringsArrElem}</div>
   );
 };
 

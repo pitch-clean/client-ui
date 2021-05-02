@@ -13,7 +13,7 @@ import { offeringsArr } from '../../../../seed/offerings';
 /**
  * main
  */
-const OfferingsView = () => {
+const OfferingsListView = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     // make the fetch to api
@@ -22,11 +22,12 @@ const OfferingsView = () => {
   }, []);
 
   return (
-    <div className="w100 page OfferingsView flexcol" style={{ backgroundColor: `#eee` }}>
+    <div className="w100 page OfferingsListView flexcol" style={{ backgroundColor: `#eee` }}>
+      {/* search/filter functionality */}
       <OfferingsList />
     </div>
   );
 };
 
 // export
-export default OfferingsView;
+export default OfferingsListView;
