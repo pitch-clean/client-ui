@@ -22,9 +22,11 @@ const useStyles = makeStyles(theme => ({
   root: {
     height: `100%`,
     minHeight: `100%`,
-    backgroundColor: '#e7e8e6',
-    flexFlow: 'column',
     justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: `100%`,
+    maxWidth: '1300px',
+    alignSelf: 'center',
   },
   footer: {
     backgroundColor: `black`,
@@ -44,7 +46,7 @@ const PageRouter = () => {
   const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
 
   return (
-    <Grid className={`${classes.root} PageRouter w100`} container>
+    <div className={`${classes.root} PageRouter flexcol`}>
       <Switch>
         <Route path="/profile/:alias" render={p => <ProfileView props={p} />} />
         <Route exact path="/offering/:offeringId" render={p => <OfferingDetail props={p} />} />
@@ -73,7 +75,7 @@ const PageRouter = () => {
       {/* <Grid item className={`${classes.footer} w100`}>
         Footer
       </Grid> */}
-    </Grid>
+    </div>
   );
 };
 

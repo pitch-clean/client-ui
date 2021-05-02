@@ -27,6 +27,22 @@ const MainReducer = (state = _.cloneDeep(initialMainState), action) => {
   }
 };
 
+const initialFeedState = {
+  posts: [],
+};
+const FeedReducer = (state = _.cloneDeep(initialFeedState), action) => {
+  const newState = _.cloneDeep(state);
+  switch (action.type) {
+    case types.UPDATE_POSTS:
+      newState.posts = action.payload;
+      return newState;
+    case types.CLEAR_FEED:
+      return _.cloneDeep(initialFeedState);
+    default:
+      return newState;
+  }
+};
+
 const initialProfileState = {
   activeProfileTab: 'about',
   viewProfile: null,
@@ -84,6 +100,7 @@ const ViewReducer = combineReducers({
   main: MainReducer,
   profile: ProfileReducer,
   messages: MessagesReducer,
+  feed: FeedReducer,
 });
 
 export default ViewReducer;

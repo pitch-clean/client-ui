@@ -63,3 +63,16 @@ export const updateProfileMap = payload => dispatch => {
     payload,
   });
 };
+// feed
+export const updatePosts = payload => dispatch => {
+  dispatch({
+    type: types.UPDATE_POSTS,
+    payload,
+  });
+};
+export const clearFeed = payload => dispatch => {
+  dispatch({
+    type: types.CLEAR_FEED,
+    payload,
+  });
+};

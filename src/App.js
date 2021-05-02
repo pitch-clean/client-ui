@@ -60,7 +60,7 @@ const theme = createMuiTheme({
 });
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: '#d7d3d3',
+    backgroundColor: '#eaebe8',
     minHeight: '100vh',
     maxHeight: '100vh',
     height: '100vh',

@@ -8,12 +8,13 @@ import NewsList from './NewsList';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
-    // width: `80%`,
     padding: '0px 16px',
     paddingBottom: '5px',
-    [theme.breakpoints.up('sm')]: {
-      // paddingRight: '20%',
-    },
+    boxShadow: `
+      0px 2px 1px -1px rgba(0,0,0,0.03),
+      0px 1px 1px 0px rgba(0,0,0,0.02),
+      0px 1px 3px 0px rgba(0,0,0,0.01)
+    `,
   },
   divider: {
     minHeight: `1px`,
@@ -34,7 +35,7 @@ const News = () => {
   const classes = useStyles();
 
   return (
-    <Paper className={`${classes.root} News SidebarWidget w100 flexcol`} outlined elevation={3}>
+    <Paper className={`${classes.root} News SidebarWidget w100 flexcol`} elevation={0}>
       <CardHeader
         className={`w100 ${classes.header}`}
         title={

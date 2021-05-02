@@ -1,5 +1,6 @@
 // react
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,7 +20,12 @@ import PostActionButton from './PostActionButton';
 const useStyles = makeStyles(theme => ({
   cardRoot: {
     margin: `5px 0`,
-    padding: `7px `,
+    padding: `10px`,
+    boxShadow: `
+      0px 2px 1px -1px rgba(0,0,0,0.03),
+      0px 1px 1px 0px rgba(0,0,0,0.02),
+      0px 1px 3px 0px rgba(0,0,0,0.01)
+    `,
   },
   cardHeader: {
     padding: `10px`,
@@ -32,11 +38,9 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(9),
     margin: 0,
     marginRight: `-7px`,
-    // width: 70,
-    // height: 70,
   },
   cardHeaderContent: {
-    alignSelf: 'end',
+    marginTop: `22px`,
   },
   cardMedia: {
     height: 0,
@@ -44,6 +48,10 @@ const useStyles = makeStyles(theme => ({
   },
   cardBody: {
     textAlign: 'start',
+  },
+  subtitle: {
+    display: 'block',
+    marginTop: `-3px`,
   },
 }));
 const buildName = (fName, lName) => {
@@ -55,28 +63,40 @@ const buildLocation = (city, stateProv) => {
 const envProfilePath = 'profile';
 
 // main
-const FeedPost = ({ postObj, idx }) => {
+const FeedPost = ({ idx }) => {
   // init hooks
   const classes = useStyles();
+  // state
+  const postObj = useSelector(s => s.view.feed.posts[idx]);
   // destructure
   const { body, profile, postType } = postObj;
   const {
+    // profileClass,
     profileType,
-    firstName,
-    lastName,
     alias,
-    currentEmployer,
-    name,
-    city,
-    stateProvince,
-    image,
+    pii: {
+      firstName, // if a user
+      lastName, // if a user
+      name, // if an org
+      address, // if an org
+    },
+    active, // if a user
+    images: {
+      profile: { thumbnail },
+    },
   } = profile;
-  const title = profileType === 'organization' ? name : buildName(firstName, lastName);
-  const subtitle =
-    profileType === 'organization' ? buildLocation(city, stateProvince) : currentEmployer;
+  let title = '';
+  let subtitle = '';
+  if (profileType === 'organization') {
+    title = name;
+    subtitle = buildLocation(address.city, address.stateProvince);
+  } else {
+    title = buildName(firstName, lastName);
+    subtitle = active.organization;
+  }
 
-  return (
-    <Paper elevation={3} className={`${classes.cardRoot} FeedPost w100`}>
+  return postObj ? (
+    <Paper elevation={0} className={`${classes.cardRoot} FeedPost w100`}>
       <CardHeader
         className={classes.cardHeader}
         classes={{
@@ -84,9 +104,7 @@ const FeedPost = ({ postObj, idx }) => {
         }}
         avatar={
           <Link to={`/${envProfilePath}/alias`}>
-            <Avatar aria-label="profile pic" className={classes.avatar} variant="square">
-              {image}
-            </Avatar>
+            <Avatar aria-label="profile pic" src={thumbnail} className={classes.avatar} />
           </Link>
         }
         action={
@@ -105,7 +123,7 @@ const FeedPost = ({ postObj, idx }) => {
           </MuiLink>
         }
         subheader={
-          <Typography variant="caption" component="h" color="textSecondary">
+          <Typography className={classes.subtitle} variant="caption" component="h" color="textSecondary">
             {subtitle}
           </Typography>
         }
@@ -117,6 +135,8 @@ const FeedPost = ({ postObj, idx }) => {
       </CardContent>
       <PostActionButton postType={postType} />
     </Paper>
+  ) : (
+    <div />
   );
 };
 

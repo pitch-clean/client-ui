@@ -14,7 +14,8 @@ export const users1 = {
     active: {
       type: 'employment',
       organization: 'Greenbacker Capital',
-      title: 'Senior VP',
+      organizationSlug: 'greenbacker-capital',
+      position: 'Senior VP',
     },
     images: {
       "profile": {
@@ -35,7 +36,8 @@ export const users1 = {
     active: {
       type: 'employment',
       organization: 'Brookfield Renewables',
-      title: 'Senior VP',
+      organizationSlug: 'brookfield-renewables',
+      position: 'Senior VP',
     },
     images: {
       "profile": {
@@ -57,7 +59,8 @@ export const users1 = {
     active: {
       type: 'employment',
       organization: 'Test Capital',
-      title: 'Senior Vice President',
+      organizationSlug: 'test-capital',
+      position: 'Senior Vice President',
     },
     images: {
       "profile": {
@@ -77,7 +80,9 @@ export const users1 = {
     },
     active: {
       position: 'Senior Vice President',
-      currentEmployer: 'Brooklane Renewables',
+      type: 'employment',
+      organization: 'Brooklane Renewables',
+      organizationSlug: 'brooklane-renewables',
     },
     images: {
       profile: {
@@ -97,7 +102,9 @@ export const users1 = {
     },
     active: {
       position: 'Managing Director',
-      currentEmployer: 'Vertex Capital',
+      type: 'employment',
+      organization: 'Vertex Capital',
+      organizationSlug: 'vertex-capital',
     },
     images: {
       profile: {
@@ -117,7 +124,9 @@ export const users1 = {
     },
     active: {
       position: 'Associate',
-      currentEmployer: 'Atrium Solar LLC',
+      type: 'employment',
+      organization: 'Atrium Solar LLC',
+      organizationSlug: 'atriumsolar',
     },
     images: {
       profile: {
@@ -137,7 +146,9 @@ export const users1 = {
     },
     active: {
       position: 'Senior Analyst',
-      currentEmployer: 'Sunwind Asset Management',
+      type: 'employment',
+      organization: 'Sunwind Asset Management',
+      organizationSlug: 'sunwind-am',
     },
     images: {
       profile: {
@@ -157,11 +168,184 @@ export const users1 = {
     },
     active: {
       position: 'Partner and COO',
-      currentEmployer: 'Solstice Capital',
+      organization: 'Solstice Capital',
+      organizationSlug: 'solstice-capital',
     },
     images: {
       profile: {
-        thumbnail: getImgPath(`thomas-yen-thumbnail.jpg`),
+        thumbnail: getImgPath(`lauren-cunningham-thumbnail.jpg`),
+      },
+    },
+  },
+  "xcjij0": {
+    alias: 'sasha-carlton23049',
+    pii: {
+      firstName: `Sasha`,
+      lastName: `Carlton`,
+      residence: {
+        city: 'Salt Lake City',
+        stateProvince: 'UT',
+      },
+    },
+    active: {
+      position: 'Partner and COO',
+      organization: 'Solstice Capital',
+      organizationSlug: 'solstice-capital',
+    },
+    images: {
+      profile: {
+        thumbnail: getImgPath(`sasha-carlton-thumbnail.jpg`),
+      },
+    },
+  },
+};
+
+export const usersRecConnections = {
+  "9a": {
+    alias: 'harrisgreg49920',
+    pii: {
+      firstName: `Greg`,
+      lastName: `Harris`,
+      residence: {
+        city: 'New York',
+        stateProvince: 'NY',
+      },
+    },
+    active: {
+      type: 'employment',
+      position: 'Senior Vice President',
+      organization: 'Brooklane Renewables',
+      organizationSlug: 'brooklane-renewables',
+    },
+    images: {
+      profile: {
+        thumbnail: getImgPath(`greg-harris-thumbnail.jpg`),
+      },
+    },
+  },
+  'sd8x': {
+    alias: 'sdaly-234',
+    pii: {
+      firstName: `Sarah`,
+      lastName: `Daly`,
+      residence: {
+        city: 'Washington',
+        stateProvince: 'DC',
+      },
+    },
+    active: {
+      type: 'employment',
+      position: 'Managing Director',
+      organization: 'Vertex Capital',
+      organizationSlug: 'vertex-capital',
+    },
+    images: {
+      profile: {
+        thumbnail: getImgPath(`sarah-daly-main.jpg`),
+        main: getImgPath(`sarah-daly-main.jpg`),
+      },
+    },
+  },
+  'dd9dfa09ux': {
+    alias: 'petetaylor393',
+    pii: {
+      firstName: `Pete`,
+      lastName: `Taylor`,
+      residence: {
+        city: 'Nashville',
+        stateProvince: 'TN',
+      },
+    },
+    active: {
+      position: 'Associate',
+      organization: 'Atrium Solar LLC',
+      organizationSlug: 'atrium-solar-llc',
+      type: 'employment',
+    },
+    images: {
+      profile: {
+        thumbnail: getImgPath(`pete-taylor-thumbnail.jpg`),
+        main: getImgPath(`pete-taylor-thumbnail.jpg`),
+      },
+    },
+  },
+  "8": {
+    alias: 'lc8397',
+    pii: {
+      firstName: `Lauren`,
+      lastName: `Cunningham`,
+      residence: {
+        city: 'Seattle',
+        stateProvince: 'WA',
+      },
+    },
+    active: {
+      position: 'Partner and COO',
+      organization: 'Solstice Capital',
+      organizationSlug: 'solstice-capital',
+    },
+    images: {
+      profile: {
+        thumbnail: getImgPath(`lauren-cunningham-thumbnail.jpg`),
+      },
+    },
+  },
+  "2": {
+    alias: 'lpow88',
+    pii: {
+      firstName: 'Linda',
+      lastName: 'Powell',
+      residence: {
+        stateProvince: 'CA',
+        city: 'Los Angeles',
+      },
+    },
+    active: {
+      type: 'employment',
+      organization: 'Brookfield Renewables',
+      organizationSlug: 'brookfield-renewables',
+      position: 'Senior VP',
+    },
+    images: {
+      "profile": {
+        thumbnail: getImgPath(`linda-powell-thumbnail.jpg`),
+      },
+    },
+  },
+};
+
+export const org = {
+  "zxcv87": {
+    "profileType": "organization",
+    "profileClass": "sponsor",
+    alias: 'wind-grid-capital',
+    pii: {
+      name: 'Wind Grid Capital',
+      address: {
+        stateProvince: 'VA',
+        city: 'Charlottesville',
+      },
+    },
+    images: {
+      "profile": {
+        thumbnail: getImgPath(`wind-grid-capital-thumbnail.jpg`),
+      },
+    },
+  },
+  "s0987cxlvkn": {
+    "profileType": "organization",
+    "profileClass": "sponsor",
+    alias: 'solar-energy-capital',
+    pii: {
+      name: 'Solar Energy Capital',
+      address: {
+        stateProvince: 'IL',
+        city: 'Chicago',
+      },
+    },
+    images: {
+      "profile": {
+        thumbnail: getImgPath(`solar-energy-thumbnail.jpg`),
       },
     },
   },

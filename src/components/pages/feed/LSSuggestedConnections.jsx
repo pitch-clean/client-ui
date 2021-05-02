@@ -18,7 +18,7 @@ import {
 } from '@material-ui/core';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 // seed
-import { recommendedConnections } from '../../../seed/testConnections';
+import { usersRecConnections } from '../../../seed/queryUsersById';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -77,11 +77,14 @@ const LSSuggestedConnections = () => {
   // state
   const [recommendedConnectionsArr, setRecommendedConnectionsArr] = useState([]);
   // build
-  const buildProfileCard = (profileObj, idx) => {
+  const buildProfileCard = (profileObj, idx, profileId) => {
+    console.log(profileObj.active.position)
     const {
       pii: { firstName, lastName },
-      active: { position, currentEmployer, organizationSlug },
-      image,
+      active: { position, organization, organizationSlug },
+      images: {
+        profile: { thumbnail },
+      },
       alias,
     } = profileObj;
     return (
@@ -91,7 +94,7 @@ const LSSuggestedConnections = () => {
           <ListItem dense className={`${classes.listItem} w100`}>
             <MuiLink component={Link} to={`/${envProfilePath}/${alias}`}>
               <ListItemAvatar>
-                <Avatar alt="Profile Picture" src={image} style={{ width: 45, height: 45 }} />
+                <Avatar alt="Profile Picture" src={thumbnail} style={{ width: 45, height: 45 }} />
               </ListItemAvatar>
             </MuiLink>
             <ListItemText
@@ -123,7 +126,7 @@ const LSSuggestedConnections = () => {
                       color="textSecondary"
                       className={classes.connection}
                     >
-                      {currentEmployer}
+                      {organization}
                     </MuiLink>
                   </Typography>
                 </>
@@ -145,7 +148,7 @@ const LSSuggestedConnections = () => {
   // effects
   useEffect(() => {
     // fetch recommended profiles
-    const payload = recommendedConnections;
+    const payload = usersRecConnections;
     setRecommendedConnectionsArr(payload);
   }, []);
 
@@ -161,8 +164,9 @@ const LSSuggestedConnections = () => {
       />
       <Divider className={classes.divider} variant="middle" component="div" />
       <List className={classes.list}>
-        {recommendedConnectionsArr.map((profileObj, idx) => {
-          return buildProfileCard(profileObj, idx);
+        {Object.entries(recommendedConnectionsArr).map((profileEntryArr, idx) => {
+          const [profileId, profileObj] = profileEntryArr;
+          return buildProfileCard(profileObj, idx, profileId);
         })}
       </List>
     </Paper>

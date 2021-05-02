@@ -1,12 +1,15 @@
 // react
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import { updatePosts, clearFeed } from '../../../redux/actions/ViewActions';
 // components
 import RightSidebar from './RightSidebar';
 import LeftSidebar from './LeftSidebar';
 import FeedContent from './FeedContent';
+// seed
+import { testPosts } from '../../../seed/testPosts';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,6 +23,7 @@ const useStyles = makeStyles(theme => ({
     //   textOverflow: 'ellipsis',
     //   display: 'inline',
     // },
+    // overflow: 'scroll',
   },
 }));
 
@@ -27,6 +31,12 @@ const useStyles = makeStyles(theme => ({
 const FeedView = () => {
   // init hooks
   const classes = useStyles();
+  const dispatch = useDispatch();
+  // effects
+  useEffect(() => {
+    // fetch seed posts
+    dispatch(updatePosts(testPosts));
+  }, []);
 
   return (
     <div className={`${classes.root} FeedView w100 flexrow`} container>

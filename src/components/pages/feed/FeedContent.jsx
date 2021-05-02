@@ -1,67 +1,43 @@
 // react
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, List } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
+import { updatePosts } from '../../../redux/actions/ViewActions';
 // components
 import FeedPost from './FeedPost';
-// seed
-import { testPosts } from '../../../seed/testPosts';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: `10px`,
-    margin: `0 5px`,
+    margin: `0 2px`,
     flex: 1,
   },
-  cardRoot: {
-    margin: `10px`,
-  },
-  cardHeader: {
-    padding: `10px`,
-    justifyContent: 'start',
-  },
-  avatar: {
-    backgroundColor: 'lightblue',
-    width: theme.spacing(7),
-    height: theme.spacing(7),
-    margin: 0,
-  },
-  cardMedia: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-  cardBody: {
-    textAlign: 'start',
-  },
 }));
+// fxns
+const updatePostsOnScroll = (dispatch, existingPosts) => {
+  const morePosts = [];
+  dispatch(updatePosts([...existingPosts, morePosts]));
+};
 
 // TODO refactor to have lower level components make redux calls to prevent rerendering list
 // main
 const FeedContent = () => {
   // init hooks
   const classes = useStyles();
+  // const dispatch = useDispatch();
   // state
-  const [postsArr, setPostsArr] = useState([]);
+  const postsLen = useSelector(s => s.view.feed.posts.length);
   // build
-  const buildPostElemArr = arrOfPosts => {
-    const arrOfPostElems = arrOfPosts.map((post, idx) => {
-      return <FeedPost postObj={post} idx={idx} />;
-    });
-    return <List>{arrOfPostElems}</List>;
-  };
-  // effects
-  // fetch initial posts on page load
-  useEffect(() => {
-    // TODO fetch
-    const payload = testPosts;
-    setPostsArr(payload);
-  }, []);
-  // TODO fetch additional posts when reaching the end
-  // useEffect(() => {}, []);
+  const postElemArr = [];
+  for (let idx = 0; idx < postsLen; idx += 1) {
+    postElemArr.push(<FeedPost idx={idx} />);
+  }
+
   return (
-    <Paper className={`${classes.root} FeedContainer flexcol`} outlined elevation={3}>
-      {buildPostElemArr(postsArr)}
+    <Paper className={`${classes.root} FeedContainer flexcol`} elevation={0}>
+      {postsLen > 0 && postElemArr}
+      {postsLen > 0 && <div className="endScroll" />}
     </Paper>
   );
 };

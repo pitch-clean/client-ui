@@ -72,7 +72,7 @@ const ConversationCard = ({ tabIdx, conversationObj, conversationId }) => {
   const dispatch = useDispatch();
   // state
   const profileMap = useSelector(s => s.view.messages.profileMap);
-  const activeConversationIdx = useSelector(s => s.view.messages.activeConversationIdx); // 
+  const activeConversationIdx = useSelector(s => s.view.messages.activeConversationIdx);
   const _id = useSelector(s => s.auth.activeProfile._id); // current user's id
   const { participants, lastMessage } = conversationObj;
 

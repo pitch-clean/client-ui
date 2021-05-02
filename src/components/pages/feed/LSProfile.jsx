@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Paper,
-  Card,
   CardContent,
   Divider,
   Avatar,
@@ -20,12 +19,9 @@ import BookmarkBorder from '@material-ui/icons/BookmarkBorder';
 const useStyles = makeStyles(theme => ({
   root: {
     minHeight: '100px',
-  },
-  card: {
-    justifyContent: 'start',
-    alignItems: 'start',
     padding: `0 10px`,
     paddingTop: `10px`,
+    border: '1px solid #e9e9e9',
   },
   container: {
     display: 'flex',
@@ -77,62 +73,55 @@ const LSProfile = () => {
   } = images;
 
   return (
-    <Paper className={`${classes.root} LSProfile w100 flexrow`} elevation={0}>
-      <Card className={`${classes.card} w100`}>
-        <CardHeader
-          className={`headSection w100`}
-          avatar={
-            <Link to={`/${envProfilePath}/${alias}`}>
-              <Avatar className={classes.large} variant="rounded" src={thumbnail} />
-            </Link>
-          }
-          title={
-            <MuiLink
-              component={Link}
-              to={`/${envProfilePath}/${alias}`}
-              color="inherit"
-              variant="h6"
-            >
-              {buildName(firstName, lastName)}
-            </MuiLink>
-          }
-          subheader={`${city}, ${stateProvince}`}
-        />
+    <Paper className={`${classes.root} LSProfile w100`} elevation={0}>
+      <CardHeader
+        className={`headSection w100`}
+        avatar={
+          <Link to={`/${envProfilePath}/${alias}`}>
+            <Avatar className={classes.large} variant="rounded" src={thumbnail} />
+          </Link>
+        }
+        title={
+          <MuiLink component={Link} to={`/${envProfilePath}/${alias}`} color="inherit" variant="h6">
+            {buildName(firstName, lastName)}
+          </MuiLink>
+        }
+        subheader={`${city}, ${stateProvince}`}
+      />
+      <Divider className={classes.divider} variant="middle" component="div" />
+      <CardContent className={`${classes.container} infoSection w100`}>
+        <Typography className={classes.title} variant="h5" component="h6">
+          {active[0].employer}
+        </Typography>
+        <Typography variant="subtitle1" component="h" color="textSecondary">
+          {active[0].title}
+        </Typography>
+        <Typography
+          style={{ paddingTop: `10px` }}
+          variant="caption"
+          component="h"
+          color="textSecondary"
+        >
+          {`${getCtMsg(connections, 'Connections')} | ${getCtMsg(following, 'Following')}`}
+        </Typography>
         <Divider className={classes.divider} variant="middle" component="div" />
-        <CardContent className={`${classes.container} infoSection w100`}>
-          <Typography className={classes.title} variant="h5" component="h6">
-            {active[0].employer}
+        <div className="flexrow">
+          <BookmarkBorder color="action" />
+          <Typography className={classes.body} variant="p" component="div">
+            Saved Items
           </Typography>
-          <Typography variant="subtitle1" component="h" color="textSecondary">
-            {active[0].title}
-          </Typography>
-          <Typography
-            style={{ paddingTop: `10px` }}
-            variant="caption"
-            component="h"
-            color="textSecondary"
-          >
-            {`${getCtMsg(connections, 'Connections')} | ${getCtMsg(following, 'Following')}`}
-          </Typography>
-          <Divider className={classes.divider} variant="middle" component="div" />
-          <div className="flexrow">
-            <BookmarkBorder color="action" />
-            <Typography className={classes.body} variant="p" component="div">
-              Saved Items
-            </Typography>
-          </div>
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              margin: `5px`,
-            }}
-          >
-            <Settings color="action" />
-          </div>
-        </CardContent>
-      </Card>
+        </div>
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            margin: `5px`,
+          }}
+        >
+          <Settings color="action" />
+        </div>
+      </CardContent>
     </Paper>
   );
 };

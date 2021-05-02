@@ -53,11 +53,12 @@ const pii = {
 const images = {
   "profile": {
       "large": "",
-      "thumbnail": "linda-powell-thumbnail.jpg"
+      "main": "",
+      "thumbnail": getImgPath("drew-orrin-thumbnail.jpg"),
   },
   "background": {
       "large": "",
-      "thumbnail": ""
+      "thumbnail": "",
   }
 };
 const active = [
@@ -75,7 +76,7 @@ const connections = [
     firstName: `Jamie`,
     lastName: `Harris`,
     position: 'Senior Vice President',
-    currentEmployer: 'Brooklane Renewables',
+    organization: 'Brooklane Renewables',
     city: 'New York',
     stateProvince: 'NY',
   },
@@ -84,7 +85,7 @@ const connections = [
     firstName: `Tom`,
     lastName: `Daly`,
     position: 'Managing Director',
-    currentEmployer: 'Vertex Capital',
+    organization: 'Vertex Capital',
     city: 'Washington',
     stateProvince: 'DC',
   },
@@ -93,7 +94,7 @@ const connections = [
     firstName: `Maya`,
     lastName: `Taylor`,
     position: 'Associate',
-    currentEmployer: 'Atrium Solar LLC',
+    organization: 'Atrium Solar LLC',
     city: 'Nashville',
     stateProvince: 'TN',
   },
@@ -102,7 +103,7 @@ const connections = [
     firstName: `Ben`,
     lastName: `Carlton`,
     position: 'Senior Analyst',
-    currentEmployer: 'Sunwind Asset Management',
+    organization: 'Sunwind Asset Management',
     city: 'Salt Lake City',
     stateProvince: 'UT',
   },
@@ -111,7 +112,7 @@ const connections = [
     firstName: `Jennifer`,
     lastName: `Cunningham`,
     position: 'Partner and COO',
-    currentEmployer: 'Solstice Capital',
+    organization: 'Solstice Capital',
     city: 'Seattle',
     stateProvince: 'WA',
   },
