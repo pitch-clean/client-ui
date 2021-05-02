@@ -32,8 +32,10 @@ const MsgTitle = () => {
   const classes = useStyles();
   // state
   const profileMap = useSelector(s => s.view.messages.profileMap);
-  const idx = useSelector(s => s.view.messages.activeConversationIdx);
-  const participants = useSelector(s => s.auth.activeProfile.conversations[idx].participants);
+  const conversationId = useSelector(s => s.view.messages.activeConversationId);
+  const participants = useSelector(
+    s => s.auth.activeProfile.conversations[conversationId].participants,
+  );
   const _id = useSelector(s => s.auth.activeProfile._id);
   const nonSelfParticipants = participants.filter(p => p !== _id);
 

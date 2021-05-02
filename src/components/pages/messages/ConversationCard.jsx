@@ -66,17 +66,15 @@ export const buildListOfUserNames = (participants, _id, profMap) => {
  * main
  * TODO: QUERY THE MESSAGES FOR A SINGLE CONVERSATION AFTER CLICKING ON A CONVERSATION CARD
  */
-const ConversationCard = ({ idx }) => {
+const ConversationCard = ({ tabIdx, conversationObj, conversationId }) => {
   // init hooks
   const classes = useStyles();
   const dispatch = useDispatch();
   // state
   const profileMap = useSelector(s => s.view.messages.profileMap);
-  const activeConversationIdx = useSelector(s => s.view.messages.activeConversationIdx);
-  const _id = useSelector(s => s.auth.activeProfile._id);
-  const participants = useSelector(s => s.auth.activeProfile.conversations[idx].participants);
-  const lastMessage = useSelector(s => s.auth.activeProfile.conversations[idx].lastMessage);
-  const conversationId = useSelector(s => s.auth.activeProfile.conversations[idx].conversationId);
+  const activeConversationIdx = useSelector(s => s.view.messages.activeConversationIdx); // 
+  const _id = useSelector(s => s.auth.activeProfile._id); // current user's id
+  const { participants, lastMessage } = conversationObj;
 
   const { allNamesStr, thumbnailArr } = buildListOfUserNames(participants, _id, profileMap);
 
@@ -86,11 +84,14 @@ const ConversationCard = ({ idx }) => {
       disableRipple
       className={classes.root}
       classes={{
-        root: activeConversationIdx === idx ? classes.active : {},
+        root: activeConversationIdx === tabIdx ? classes.active : {},
       }}
-      onClick={() => dispatch(updateActiveConversation({ idx, conversationId }))}
+      onClick={() =>
+        activeConversationIdx !== tabIdx &&
+        dispatch(updateActiveConversation({ idx: tabIdx, conversationId }))
+      }
       style={{
-        borderTop: idx > 0 ? '1px solid #dfdfdf' : '',
+        borderTop: tabIdx > 0 ? '1px solid #dfdfdf' : '',
         minWidth: `100%`,
       }}
       label={
@@ -121,7 +122,7 @@ const ConversationCard = ({ idx }) => {
           }
         />
       }
-      value={idx}
+      value={tabIdx}
     />
   );
 };

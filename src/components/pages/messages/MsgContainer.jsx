@@ -1,9 +1,9 @@
 // react
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Paper } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 // components
 import MessagesList from './MessagesList';
 import MsgInput from './MsgInput';
@@ -14,6 +14,8 @@ const useStyles = makeStyles(theme => ({
     flex: 1,
     flexFlow: 'column',
     display: `flex`,
+    justifyContent: 'space-between',
+    overflowY: 'scroll',
   },
 }));
 
@@ -27,14 +29,13 @@ const MsgContainer = () => {
   const activeConversationObj = useSelector(s => s.view.messages.activeConversationObj);
   // build
   // const messagesElemList = messages.map(() => {});
+  console.log('activeConversationObj', activeConversationObj)
 
-  return activeConversationObj ? (
+  return (
     <Paper square className={`MsgContainer ${classes.root}`}>
-      <MessagesList />
+      {activeConversationObj && <MessagesList />}
       <MsgInput />
     </Paper>
-  ) : (
-    <div />
   );
 };
 

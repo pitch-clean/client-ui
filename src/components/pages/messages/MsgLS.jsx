@@ -11,6 +11,7 @@ import Conversations from './Conversations';
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    overflowY: 'scroll',
     flexFlow: 'column',
     justifyContent: 'flex-start',
     width: 0,

@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexFlow: 'row',
     flex: 1,
+    maxHeight: `100%`,
   },
 }));
 
@@ -30,13 +31,12 @@ const MessagesView = () => {
   const profileMap = useSelector(s => s.view.messages.profileMap);
   // effects
   // get the mappings for profiles
-  // console.log('dis', users1)
   useEffect(() => {
     dispatch(updateProfileMap(users1));
   }, []);
 
   return profileMap ? (
-    <Grid container direction="row" className={`MessagesView w100 ${classes.root}`}>
+    <Grid container className={`MessagesView w100 ${classes.root}`}>
       <MsgLS />
       <MsgMain />
     </Grid>

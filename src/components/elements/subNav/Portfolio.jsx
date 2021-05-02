@@ -7,12 +7,17 @@ import { Grid, Divider, ListItem, ListItemText, Typography } from '@material-ui/
 import { calcOfferSize, formatPctStr } from '../../utils/printFxns';
 // constants
 const useStyles = makeStyles(theme => ({
+  container: {
+    width: '100%',
+    backgroundColor: '#262826',
+    alignItems: 'center',
+  },
   root: {
-    flexFlow: 'row',
+    justify: 'space-between',
     padding: 0,
     margin: 0,
     width: '100%',
-    backgroundColor: '#333533',
+    maxWidth: '1300px',
     borderRadius: '0',
     '& *': {
       color: 'whitesmoke',
@@ -20,11 +25,11 @@ const useStyles = makeStyles(theme => ({
   },
   summary: {
     padding: 0,
-    paddingLeft: 20,
+    // paddingLeft: 20,
     margin: 0,
     '& .MuiListItem-gutters': {
       padding: '8px 0',
-      paddingLeft: 50,
+      paddingLeft: 15,
     },
   },
   small: {
@@ -92,86 +97,83 @@ const Portfolio = () => {
   const walletBalance = calcOfferSize(balanceOfWallet);
 
   return (
-    <Grid
-      className={`${classes.root} Portfolio`}
-      justify="space-between"
-      alignItems="center"
-      container
-    >
-      <Grid className={classes.summary} container>
-        <ListItem alignItems="flex-start">
-          <ListItemText
-            primary={
-              <Typography
-                variant="h5"
-                color="textPrimary"
-                style={{ letterSpacing: 1.3, fontSize: 30, fontWeight: 600 }}
-              >
-                Account Summary
-              </Typography>
-            }
-            secondary={
-              <Typography
-                variant="subtitle2"
-                color="textSecondary"
-                style={{ letterSpacing: 1.3, fontSize: 18, fontWeight: 300 }}
-              >
-                {`Total Value: ${totalProfileValueStr}`}
-              </Typography>
-            }
-          />
-        </ListItem>
-      </Grid>
-      <Grid container direction="row" className={classes.smallGroup}>
-        <Grid item xs={3} className={classes.small}>
-          <ListItemText
-            className={classes.small}
-            primary={
-              <Typography align="center" variant="h5" color="textPrimary">
-                {outstandingPrincipal}
-              </Typography>
-            }
-            secondary={
-              <Typography align="center" variant="caption" color="textSecondary">
-                Principal
-              </Typography>
-            }
-          />
+    <div className={`${classes.container} flexcol`}>
+      <div className={`${classes.root} flexrow Portfolio`}>
+        <Grid className={classes.summary} container>
+          <ListItem alignItems="flex-start">
+            <ListItemText
+              primary={
+                <Typography
+                  variant="h5"
+                  color="textPrimary"
+                  style={{ letterSpacing: 1.3, fontSize: 30, fontWeight: 600 }}
+                >
+                  Account Summary
+                </Typography>
+              }
+              secondary={
+                <Typography
+                  variant="subtitle2"
+                  color="textSecondary"
+                  style={{ letterSpacing: 1.3, fontSize: 18, fontWeight: 300 }}
+                >
+                  {`Total Value: ${totalProfileValueStr}`}
+                </Typography>
+              }
+            />
+          </ListItem>
         </Grid>
-        <Divider orientation="vertical" />
-        <Grid item xs={3} className={classes.small}>
-          <ListItemText
-            className={classes.small}
-            primary={
-              <Typography align="center" variant="h5" color="textPrimary">
-                {annualInterestStr}
-              </Typography>
-            }
-            secondary={
-              <Typography align="center" variant="caption" color="textSecondary">
-                Annual Interest
-              </Typography>
-            }
-          />
+        <Grid container direction="row" className={classes.smallGroup}>
+          <Grid item xs={3} className={classes.small}>
+            <ListItemText
+              className={classes.small}
+              primary={
+                <Typography align="center" variant="h5" color="textPrimary">
+                  {outstandingPrincipal}
+                </Typography>
+              }
+              secondary={
+                <Typography align="center" variant="caption" color="textSecondary">
+                  Principal
+                </Typography>
+              }
+            />
+          </Grid>
+          <Divider orientation="vertical" />
+          <Grid item xs={3} className={classes.small}>
+            <ListItemText
+              className={classes.small}
+              primary={
+                <Typography align="center" variant="h5" color="textPrimary">
+                  {annualInterestStr}
+                </Typography>
+              }
+              secondary={
+                <Typography align="center" variant="caption" color="textSecondary">
+                  Annual Interest
+                </Typography>
+              }
+            />
+          </Grid>
+          <Divider orientation="vertical" />
+          <Grid item xs={3} className={classes.small}>
+            <ListItemText
+              className={classes.small}
+              primary={
+                <Typography align="center" variant="h5" color="textPrimary">
+                  {walletBalance}
+                </Typography>
+              }
+              secondary={
+                <Typography align="center" variant="caption" color="textSecondary">
+                  Wallet Balance
+                </Typography>
+              }
+            />
+          </Grid>
         </Grid>
-        <Divider orientation="vertical" />
-        <Grid item xs={3} className={classes.small}>
-          <ListItemText
-            className={classes.small}
-            primary={
-              <Typography align="center" variant="h5" color="textPrimary">
-                {walletBalance}
-              </Typography>
-            }
-            secondary={
-              <Typography align="center" variant="caption" color="textSecondary">
-                Wallet Balance
-              </Typography>
-            }
-          />
-        </Grid>
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };
 

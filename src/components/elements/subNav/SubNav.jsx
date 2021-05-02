@@ -3,24 +3,52 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 // utils
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Grid, TextField, Tab, Tabs, Collapse } from '@material-ui/core';
 import { updateL1 } from '../../../redux/actions/ViewActions';
 // components
 import Portfolio from './Portfolio';
 import Portfolio2 from './Portfolio2';
 // constants
+const StyledTabs = withStyles({
+  indicator: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: 70,
+    '& > span': {
+      maxWidth: 70,
+      width: 70,
+    },
+  },
+})(props => <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />);
+const StyledTab = withStyles(theme => ({
+  root: {
+    padding: `0px 20px`,
+    minWidth: `100%`,
+    maxWidth: `100%`,
+    width: `100%`,
+    textTransform: 'none',
+    fontWeight: theme.typography.fontWeightRegular,
+    color: `whitesmoke`,
+    fontSize: theme.typography.pxToRem(15),
+    '&:focus': {
+      opacity: 1,
+    },
+  },
+}))(props => <Tab disableRipple {...props} />);
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: '#333533',
-    // transitionProperty: `height`,
-    // transitionDuration: `0.2s`,
-    // transitionTimingFunction: `ease-out`,
+    backgroundColor: '#262826',
+    justifyContent: 'center',
+    color: `whitesmoke`,
   },
   nav: {
+    width: '100%',
+    maxWidth: '1300px',
     padding: 0,
+    paddingLeft: 10,
     margin: 0,
-    backgroundColor: 'whitesmoke',
+    marginLeft: '-30px',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
@@ -39,9 +67,12 @@ const useStyles = makeStyles(theme => ({
       fontSize: `13px`,
     },
     '& input:focus': {
-      color: 'red',
-      borderColor: 'red',
+      color: 'black',
+      borderColor: 'black',
       borderWidth: 2,
+    },
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
     },
   },
 }));
@@ -58,9 +89,6 @@ const l1Map = {
 
 /**
  * main
- * banner (already created)
- *    IN PROGRESS portfolio (already created) - but has pie chart and diff styling
- *    DONE nav (already created)
  */
 const SubNav = () => {
   // init hooks
@@ -77,43 +105,41 @@ const SubNav = () => {
   if (!isAuthenticated) {
     return <div />;
   }
-  // const unMountStyle = () => { // css for unmount animation
-  //   this.setState({
-  //     style: {
-  //       fontSize: 60,
-  //       opacity: 0,
-  //       transition: 'all 1s ease',
-  //     }
-  //   })
-  // }
+
   return (
-    <Grid className={`w100 ${classes.root}`} container>
-      {/* {l1Path === envOfferingsPath && <Portfolio />} */}
-      {/* {l1Path === envPortfolioPath && <Portfolio2 />} */}
-      <Grid className={`w100 ${classes.nav} flexrow`} container alignItems="stretch">
-        <Tabs value={l1Map[l1Path]} indicatorColor="secondary" textColor="primary" centered>
-          <Link to="/feed">
-            <Tab label="Newsfeed" textColor="primary" />
+    <Grid className={`w100 ${classes.root} flexcol`}>
+      <div className={`${classes.nav} flexrow`}>
+        <StyledTabs value={l1Map[l1Path]} indicatorColor="secondary" textColor="primary" centered>
+          <Link to={`/${envFeedPath}`}>
+            <StyledTab label="Newsfeed" textColor="primary" />
           </Link>
           <Link to={`/${envOfferingsPath}`}>
-            <Tab label="Marketplace" textColor="primary" />
+            <StyledTab label="Marketplace" textColor="primary" />
           </Link>
           <Link to={`/${envPortfolioPath}`}>
-            <Tab label="Portfolio" textColor="primary" />
+            <StyledTab label="Portfolio" textColor="primary" />
           </Link>
           <Link to={`/${envMessagesPath}`}>
-            <Tab label="Messages" textColor="primary" />
+            <StyledTab label="Messages" textColor="primary" />
           </Link>
-        </Tabs>
-        <form
+        </StyledTabs>
+        {/* <form
           onSubmit={e => {
             e.preventDefault();
             alert('Submitting');
           }}
         >
-          <TextField className={classes.search} label="Search" variant="outlined" color="primary" size="small" />
-        </form>
-      </Grid>
+          <TextField
+            className={classes.search}
+            label="Search"
+            variant="outlined"
+            color="primary"
+            size="small"
+          />
+        </form> */}
+      </div>
+      {l1Path === envOfferingsPath && <Portfolio />}
+      {l1Path === envPortfolioPath && <Portfolio2 />}
     </Grid>
   );
 };

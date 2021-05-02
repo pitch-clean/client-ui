@@ -9,21 +9,15 @@ import { updateActiveConversation } from '../../../redux/actions/ViewActions';
 import ConversationCard from './ConversationCard';
 // constants
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexFlow: `column`,
-    justifyContent: `flex-start`,
-    borderTop: `1px solid black`,
-  },
-  overflow: {
-    flex: `1 1 auto`,
-    width: `100%`,
-    '& .MuiCardHeader-content': {
-      textOverflow: 'ellipsis',
-      overflow: 'hidden',
-    },
-  },
+  root: {},
 }));
 const initConvo = 0;
+// fxns
+const sortByDt = obj => {
+  return Object.entries(obj).sort((a, b) => {
+    return new Date(b[1].lastMessage.dtReceipt) - new Date(a[1].lastMessage.dtReceipt);
+  });
+};
 
 /**
  * main
@@ -35,20 +29,25 @@ const Conversations = () => {
   const dispatch = useDispatch();
   // state
   const activeConversationIdx = useSelector(s => s.view.messages.activeConversationIdx);
-  const conversations = useSelector(s => s.auth.activeProfile.conversations);
+  const conversationsObj = useSelector(s => s.auth.activeProfile.conversations);
+  // sort
+  const sortedConvos = sortByDt(conversationsObj);
   const tabsArr = [];
-  const sortedConvos = conversations.sort((a, b) => {
-    return new Date(a.lastMessage.dtReceipt) - new Date(b.lastMessage.dtReceipt); // descending
-  });
   for (let i = 0; i < sortedConvos.length; i += 1) {
-    tabsArr.push(<ConversationCard idx={i} />);
+    const [conversationId, conversationObj] = sortedConvos[i];
+    tabsArr.push(
+      <ConversationCard
+        tabIdx={i}
+        conversationId={conversationId}
+        conversationObj={conversationObj}
+      />,
+    );
   }
-
   // effects
   useEffect(() => {
     dispatch(
       updateActiveConversation({
-        conversationId: conversations[initConvo].conversationId,
+        conversationId: sortedConvos[0][0],
         idx: initConvo,
       }),
     );
@@ -60,7 +59,7 @@ const Conversations = () => {
         orientation="vertical"
         variant="scrollable"
         value={activeConversationIdx}
-        aria-label="Vertical tabs example"
+        aria-label="Vertical tabs"
         className={classes.tabs}
         textColor="inherit"
       >

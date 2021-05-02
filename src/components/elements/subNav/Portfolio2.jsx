@@ -9,12 +9,21 @@ import { calcOfferSize, formatPctStr } from '../../utils/printFxns';
 import PieChart from './PieChart';
 // constants
 const useStyles = makeStyles(theme => ({
-  root: {
+  container: {
     height: `100%`,
     width: `100%`,
   },
+  root: {
+    height: `100%`,
+    width: `100%`,
+    maxWidth: `1300px`,
+    backgroundColor: '#262826',
+    justifyContent: 'space-between',
+  },
   left: {
     position: 'relative',
+    justifyContent: 'space-between',
+    alignItems: 'start',
     padding: 0,
     margin: 0,
     // height: '100%',
@@ -25,19 +34,19 @@ const useStyles = makeStyles(theme => ({
     },
   },
   summary: {
-    width: `80%`,
-    minWidth: `80%`,
     padding: 0,
     margin: 0,
     '& .MuiListItem-gutters': {
-      padding: '8px 20px',
+      padding: '0px 15px',
     },
   },
   group: {
-    padding: `8px 12px`,
-    width: `80%`,
-    maxWidth: `80%`,
+    padding: `8px 0px`,
     flexFlow: 'row',
+    justifyContent: 'space-between',
+  },
+  statContainer: {
+    flex: `1 1 0px`,
   },
   small: {
     display: 'flex',
@@ -96,8 +105,6 @@ const balanceOfWallet = 32000;
 
 /**
  * main
- * banner (already created)
- *    IN PROGRESS portfolio (already created) - but has pie chart and diff styling
  */
 const Portfolio = () => {
   // init hooks
@@ -109,44 +116,37 @@ const Portfolio = () => {
   const walletBalance = calcOfferSize(balanceOfWallet);
 
   return (
-    <Grid className={`${classes.root} Portfolio`} direction="row" justify="space-between" container>
-      <Grid
-        className={`${classes.left} f1`}
-        direction="column"
-        justify="space-between"
-        alignItems="center"
-        container
-        spacing={3}
-      >
-        <Grid className={classes.summary} item>
-          <ListItem alignItems="flex-start">
-            <ListItemText
-              primary={
-                <Typography
-                  component="div"
-                  variant="h1"
-                  color="textPrimary"
-                  style={{ fontSize: '40px', letterSpacing: 1 }}
-                >
-                  Account Summary
-                </Typography>
-              }
-              secondary={
-                <Typography
-                  component="div"
-                  variant="h5"
-                  color="textSecondary"
-                  style={{ padding: `7px 0` }}
-                >
-                  {`Total Value: ${totalProfileValueStr}`}
-                </Typography>
-              }
-            />
-          </ListItem>
-        </Grid>
-        <Grid container className={classes.group}>
-          <Grid>
-            <Grid item className={classes.small}>
+    <div className={`${classes.container} flexrow`}>
+      <div className={`${classes.root} Portfolio flexrow`}>
+        <Grid className={`${classes.left} flexcol`} spacing={3}>
+          <Grid className={classes.summary} item>
+            <ListItem alignItems="flex-start">
+              <ListItemText
+                primary={
+                  <Typography
+                    component="div"
+                    variant="h1"
+                    color="textPrimary"
+                    style={{ fontSize: '40px', letterSpacing: 1 }}
+                  >
+                    Account Summary
+                  </Typography>
+                }
+                secondary={
+                  <Typography
+                    component="div"
+                    variant="h5"
+                    color="textSecondary"
+                    style={{ padding: `7px 0` }}
+                  >
+                    {`Total Value: ${totalProfileValueStr}`}
+                  </Typography>
+                }
+              />
+            </ListItem>
+          </Grid>
+          <Grid container className={`${classes.group} w100`}>
+            <div className={classes.statContainer}>
               <ListItemText
                 className={classes.small}
                 primary={
@@ -160,11 +160,9 @@ const Portfolio = () => {
                   </Typography>
                 }
               />
-            </Grid>
-          </Grid>
-          <Divider orientation="vertical" style={{backgroundColor: `#595959`}} />
-          <Grid>
-            <Grid item className={classes.small}>
+            </div>
+            <Divider orientation="vertical" style={{backgroundColor: `#595959`}} />
+            <div className={classes.statContainer}>
               <ListItemText
                 className={classes.small}
                 primary={
@@ -178,13 +176,11 @@ const Portfolio = () => {
                   </Typography>
                 }
               />
-            </Grid>
-          </Grid>
-          <Divider orientation="vertical" style={{backgroundColor: `#595959`}} />
-          <Grid>
-            <Grid item className={classes.small}>
+            </div>
+            <Divider orientation="vertical" style={{backgroundColor: `#595959`}} />
+            <div className={classes.statContainer}>
               <ListItemText
-              nowrap
+                nowrap
                 className={classes.small}
                 primary={
                   <Typography color="textPrimary" className={classes.dataVal}>
@@ -196,13 +192,13 @@ const Portfolio = () => {
                     Wallet Balance
                   </Typography>
                 }
-              />
-            </Grid>
+                />
+            </div>
           </Grid>
         </Grid>
-      </Grid>
-      <PieChart />
-    </Grid>
+        <PieChart />
+      </div>
+    </div>
   );
 };
 

@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexFlow: 'column',
     display: `flex`,
+    borderBottom: '1px solid #f1f1f1',
   },
   subtitle: {
     display: 'block',
@@ -28,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     paddingTop: 10,
   },
   avatar: {
-    backgroundColor: 'green',
+    backgroundColor: 'lightgrey',
     width: theme.spacing(6),
     height: theme.spacing(6),
     marginRight: `10px`,
@@ -58,7 +59,7 @@ const MessageCard = ({ idx }) => {
   } = profileObj;
 
   return (
-    <Paper square className={`MessageCard ${classes.root}`}>
+    <Paper square elevation={0} className={`MessageCard ${classes.root}`}>
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="Profile" src={thumbnail} className={classes.avatar} />
@@ -66,7 +67,12 @@ const MessageCard = ({ idx }) => {
         <ListItemText
           primary={
             <>
-              <MuiLink component={Link} to={`/${envProfilePath}/${alias}`} variant="body1" color="textPrimary">
+              <MuiLink
+                component={Link}
+                to={`/${envProfilePath}/${alias}`}
+                variant="body1"
+                color="textPrimary"
+              >
                 {`${firstName} ${lastName}`}
               </MuiLink>
               <Typography

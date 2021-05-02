@@ -10,9 +10,9 @@ import { testPosts } from '../../../seed/testPosts';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: '60%',
     padding: `10px`,
     margin: `0 5px`,
+    flex: 1,
   },
   cardRoot: {
     margin: `10px`,
@@ -60,7 +60,7 @@ const FeedContent = () => {
   // TODO fetch additional posts when reaching the end
   // useEffect(() => {}, []);
   return (
-    <Paper className={`${classes.root} FeedContainer flexcol f1`} outlined elevation={3}>
+    <Paper className={`${classes.root} FeedContainer flexcol`} outlined elevation={3}>
       {buildPostElemArr(postsArr)}
     </Paper>
   );

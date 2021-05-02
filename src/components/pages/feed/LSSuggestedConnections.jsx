@@ -26,6 +26,12 @@ const useStyles = makeStyles(theme => ({
     margin: `20px 0 0 0`,
     padding: '0px 16px',
     paddingBottom: '5px',
+    '& .MuiTypography-displayBlock': {
+      whiteSpace: 'nowrap',
+      overflowX: 'hidden',
+      textOverflow: 'ellipsis',
+      display: 'inline',
+    },
   },
   header: {
     paddingBottom: 0,
@@ -81,11 +87,11 @@ const LSSuggestedConnections = () => {
     return (
       <>
         {idx !== 0 && <Divider className={classes.divider} component="div" />}
-        <Paper elevation={1}>
+        <Paper elevation={0}>
           <ListItem dense className={`${classes.listItem} w100`}>
             <MuiLink component={Link} to={`/${envProfilePath}/${alias}`}>
               <ListItemAvatar>
-                <Avatar alt="Profile Picture" src={image} style={{width: 45, height: 45}} />
+                <Avatar alt="Profile Picture" src={image} style={{ width: 45, height: 45 }} />
               </ListItemAvatar>
             </MuiLink>
             <ListItemText
@@ -136,23 +142,15 @@ const LSSuggestedConnections = () => {
       </>
     );
   };
-  const buildSCProfileList = profilesArr => {
-    return (
-      <List className={classes.list}>
-        {profilesArr.map((profileObj, idx) => {
-          return buildProfileCard(profileObj, idx);
-        })}
-      </List>
-    );
-  };
   // effects
   useEffect(() => {
     // fetch recommended profiles
     const payload = recommendedConnections;
     setRecommendedConnectionsArr(payload);
   }, []);
+
   return (
-    <Paper className={`${classes.root} LSSuggestedConnections w100 flexcol`} outlined elevation={3}>
+    <Paper elevation={0} className={`${classes.root} LSSuggestedConnections w100 flexcol`}>
       <CardHeader
         className={`w100 ${classes.header}`}
         title={
@@ -162,7 +160,11 @@ const LSSuggestedConnections = () => {
         }
       />
       <Divider className={classes.divider} variant="middle" component="div" />
-      {buildSCProfileList(recommendedConnectionsArr)}
+      <List className={classes.list}>
+        {recommendedConnectionsArr.map((profileObj, idx) => {
+          return buildProfileCard(profileObj, idx);
+        })}
+      </List>
     </Paper>
   );
 };

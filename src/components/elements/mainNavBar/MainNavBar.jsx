@@ -12,13 +12,16 @@ import InfoGroup from './InfoGroup';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
+    backgroundColor: '#212221',
+  },
+  items: {
+    width: '100%',
+    maxWidth: '1300px',
     justifyContent: 'space-between',
-    flexFlow: 'row',
-    alignItems: 'centered',
-    padding: 5,
-    backgroundColor: 'black',
+    alignItems: 'center',
     color: 'rgb(213, 220, 213)',
     textDecoration: 'none',
+    padding: 5,
   },
 }));
 
@@ -37,19 +40,21 @@ const MainNavBar = () => {
   }, [ref1]);
 
   return (
-    <Grid container className={`w100 MainNavBar ${classes.root}`}>
-      <MuiLink component={Link} to={{ pathname: '/' }} ref={ref1}>
-        <Button style={{ lineHeight: 1 }}>
-          <Typography variant="h4" color="secondary">
-            EN
-          </Typography>
-          <Typography variant="h4" color="primary">
-            VEST
-          </Typography>
-        </Button>
-      </MuiLink>
-      {!isAuthenticated && <InfoGroup />}
-      <ProfileLoginRegister />
+    <Grid container className={`w100 MainNavBar flexrow ${classes.root}`}>
+      <div className={`flexrow ${classes.items}`}>
+        <MuiLink component={Link} to={{ pathname: '/' }} ref={ref1}>
+          <Button style={{ lineHeight: 1 }}>
+            <Typography variant="h4" color="secondary">
+              EN
+            </Typography>
+            <Typography variant="h4" color="primary">
+              VEST
+            </Typography>
+          </Button>
+        </MuiLink>
+        {!isAuthenticated && <InfoGroup />}
+        <ProfileLoginRegister />
+      </div>
     </Grid>
   );
 };

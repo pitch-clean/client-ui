@@ -514,20 +514,18 @@ const investments = [
   }
 ];
 const following = [4, 5, 6, 7, 8];
-const conversations = [
-  {
-    conversationId: 1,
+const conversations = {
+  "1a": {
     participants: [2, 3],
     lastMessage: {
       msgId: 2,
-      profileId: 1,
+      profileId: 2,
       text: "Great! Thanks.",
       media: null,
-      dtReceipt: "2021-04-16T12:34:56.501000Z",
+      dtReceipt: "2021-04-17T12:34:56.501000Z",
     },
   },
-  {
-    conversationId: 2,
+  "2a": {
     participants: [1, 3],
     lastMessage: {
       msgId: 2,
@@ -537,7 +535,7 @@ const conversations = [
       dtReceipt: "2021-04-16T12:34:56.502Z",
     },
   },
-];
+};
 
 export const profile = {
   _id: 3,

@@ -9,13 +9,14 @@ import { updateActiveConversationObj } from '../../../redux/actions/ViewActions'
 import MsgTitle from './MsgTitle';
 import MsgGroupMedia from './MsgGroupMedia';
 // seed
-import { user1Conversation1, user1Conversation2 } from '../../../seed/testConversations';
+import { conversationObj } from '../../../seed/testConversations';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
     flex: 1,
     justifyContent: 'start',
     flexFlow: 'column',
+    maxHeight: `100%`,
   },
 }));
 
@@ -32,17 +33,12 @@ const MsgMain = () => {
   // effects
   useEffect(() => {
     // call the last 20 messages with activeConversationId
-    // console.log('calling with activeConversationId', activeConversationId)
-    if (activeConversationId === 1) {
-      dispatch(updateActiveConversationObj(user1Conversation1));
-    } else if (activeConversationId === 2) {
-      dispatch(updateActiveConversationObj(user1Conversation2));
-    }
+    dispatch(updateActiveConversationObj(conversationObj[activeConversationId]));
   }, [activeConversationId]);
 
   return (
     <Grid container className={`MsgMain ${classes.root}`}>
-      <MsgTitle />
+      {activeConversationId && <MsgTitle />}
       <MsgGroupMedia />
     </Grid>
   );

@@ -9,11 +9,9 @@ import News from './news/News';
 const RightSidebar = () => {
 
   return (
-    <Sidebar isLeft={false} >
-      <div className="RightSidebar h100 flexcol">
-        <News />
-        {/* <PublicMarkets /> */}
-      </div>
+    <Sidebar isLeft={false}>
+      <News />
+      {/* <PublicMarkets /> */}
     </Sidebar>
   );
 };

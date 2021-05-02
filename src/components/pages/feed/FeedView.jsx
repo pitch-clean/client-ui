@@ -2,13 +2,11 @@
 import React from 'react';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Paper, Typography, Divider } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 // components
 import RightSidebar from './RightSidebar';
 import LeftSidebar from './LeftSidebar';
 import FeedContent from './FeedContent';
-// style
-import './FeedView.css';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,6 +14,12 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: 'whitesmoke',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
+    // '& .LSSuggestedConnections .MuiTypography-displayBlock': {
+    //   whiteSpace: 'nowrap',
+    //   overflowX: 'hidden',
+    //   textOverflow: 'ellipsis',
+    //   display: 'inline',
+    // },
   },
 }));
 
@@ -25,11 +29,11 @@ const FeedView = () => {
   const classes = useStyles();
 
   return (
-    <Grid className={`${classes.root} FeedView w100`} container direction="row">
+    <div className={`${classes.root} FeedView w100 flexrow`} container>
       <LeftSidebar />
       <FeedContent />
       <RightSidebar />
-    </Grid>
+    </div>
   );
 };
 

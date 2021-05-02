@@ -13,6 +13,8 @@ const useStyles = makeStyles(theme => ({
     flexFlow: 'column',
     display: `flex`,
     justifyContent: 'flex-start',
+    overflowY: 'scroll',
+    height: `100%`,
   },
 }));
 
@@ -24,8 +26,7 @@ const MessagesList = () => {
   // init hooks
   const classes = useStyles();
   // state
-  const activeConversationObj = useSelector(s => s.view.messages.activeConversationObj);
-  const messagesLen = activeConversationObj.messages.length;
+  const messagesLen = useSelector(s => s.view.messages.activeConversationObj.messages.length);
   // build
   const messagesArr = [];
   for (let idx = 0; idx < messagesLen; idx += 1) {

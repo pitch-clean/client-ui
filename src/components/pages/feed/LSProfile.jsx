@@ -77,7 +77,7 @@ const LSProfile = () => {
   } = images;
 
   return (
-    <Paper className={`${classes.root} LSProfile w100 flexcol`} outlined elevation={3}>
+    <Paper className={`${classes.root} LSProfile w100 flexrow`} elevation={0}>
       <Card className={`${classes.card} w100`}>
         <CardHeader
           className={`headSection w100`}

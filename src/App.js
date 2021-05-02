@@ -74,7 +74,6 @@ const useStyles = makeStyles(theme => ({
   navGroup: {
     flexFlow: 'column',
     justifyContent: 'flex-start',
-    maxWidth: '100%',
   },
 }));
 
@@ -102,7 +101,7 @@ const App = () => {
         container
         direction="column"
         justify="flex-start"
-        className={`${classes.root} App w100`}
+        className={`${classes.root} App`}
         ref={appRef}
       >
         <Grid container className={classes.navGroup}>

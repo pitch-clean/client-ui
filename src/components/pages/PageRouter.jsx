@@ -70,9 +70,9 @@ const PageRouter = () => {
         />
         <Route render={p => <NotFound props={p} />} />
       </Switch>
-      <Grid item className={`${classes.footer} w100`}>
+      {/* <Grid item className={`${classes.footer} w100`}>
         Footer
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };

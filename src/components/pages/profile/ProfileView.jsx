@@ -54,7 +54,6 @@ const ProfileView = () => {
   return (
     <Grid
       // container
-      // direction="row"
       alignItems="flex-start"
       justify="space-between"
       className={`${classes.root} ProfileView flexrow h100`}

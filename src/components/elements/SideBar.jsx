@@ -3,44 +3,41 @@ import React from 'react';
 // utils
 import Proptypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import { Paper } from '@material-ui/core';
 // css
 import './Sidebar.css';
 // constants
 const useStyles = makeStyles(theme => ({
   rootleft: {
     width: 0,
-    [theme.breakpoints.up('md')]: {
-      width: `33%`,
-      minWidth: 450,
-      paddingLeft: `85px`,
-      paddingRight: `15px`,
-    },
-    [theme.breakpoints.up('xs')]: {
-      width: `25%`,
-      minWidth: 250,
-      // paddingLeft: `30px`,
-      // paddingRight: `7px`,
-      paddingRight: `5px`,
-      paddingLeft: `10px`,
-      // fontSize: ,
-    },
+    paddingLeft: `10px`,
+    maxWidth: 325,
+    minWidth: `30%`,
     justifyContent: 'flex-start',
+    [theme.breakpoints.up('md')]: {
+      maxWidth: 325,
+      minWidth: 325,
+    },
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
   },
   rootright: {
     width: 0,
-    [theme.breakpoints.up('md')]: {
+    minWidth: `20%`,
+    maxWidth: `250px`,
+    paddingRight: `10px`,
+    justifyContent: 'flex-start',
+    [theme.breakpoints.down('md')]: {
       width: `15%`,
-      // paddingLeft: `50px`,
-      paddingRight: `10px`,
-    },
-    [theme.breakpoints.up('xs')]: {
-      width: `20%`,
-      minWidth: 250,
+      minWidth: `20%`,
+      maxWidth: `20%`,
       fontSize: 12,
-      paddingRight: `10px`,
       paddingLeft: `5px`,
     },
-    justifyContent: 'flex-start',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
 }));
 
@@ -49,7 +46,12 @@ const Sidebar = ({ isLeft, children }) => {
   // init hooks
   const classes = useStyles();
   const lr = isLeft ? 'rootleft' : 'rootright';
-  return <div className={`Sidebar f1 ${classes[lr]}`}>{children}</div>;
+
+  return (
+    <Paper elevation={0} className={`Sidebar f1 ${classes[lr]}`}>
+      {children}
+    </Paper>
+  );
 };
 
 // proptypes
