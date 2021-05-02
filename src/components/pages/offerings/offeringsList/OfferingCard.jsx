@@ -29,24 +29,42 @@ const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: `#eee`,
     minWidth: `200px`,
-    width: `300px`,
+    width: `350px`,
     maxWidth: `29%`,
-    // border: `1px solid black`,
-    margin: `20px 15px`,
+    margin: `15px 10px`,
+    alignSelf: 'flex-start',
+    backgroundColor: 'whitesmoke',
+    boxShadow: `
+      0px 2px 1px -1px rgba(0,0,0,0.03),
+      0px 1px 1px 0px rgba(0,0,0,0.02),
+      0px 1px 3px 0px rgba(0,0,0,0.01)
+    `,
+    borderRadius: '5px',
   },
   subHeader: {
     textAlign: 'start',
     padding: `0 10px`,
     lineHeight: 2.24,
     color: 'whitesmoke',
-    backgroundColor: 'black',
+    backgroundColor: '#262826',
     borderRadius: 0,
+    fontSize: '0.9rem',
+    borderRadius: '10px 10px 0 0 ',
   },
-  cardHeader: {},
-  companyLink: {
+  cardHeader: {
+    fontSize: '1.2rem',
+  },
+  company: {
     padding: 0,
     margin: 0,
     lineHeight: 1,
+    fontSize: '0.875rem',
+  },
+  location: {
+    padding: 0,
+    margin: 0,
+    lineHeight: 1,
+    fontSize: '0.875rem',
   },
   listItem: {
     paddingTop: 0,
@@ -67,14 +85,14 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexFlow: 'row',
     justifyContent: 'space-between',
-    fontSize: '12px',
+    fontSize: '0.875rem',
     lineHeight: 1.5,
   },
   imgLink: {
     gridArea: 'image',
     overflow: 'hidden',
     '& img': {
-      maxHeight: `175px`,
+      maxHeight: `200px`,
       objectFit: `cover`,
       borderRadius: 0,
     },
@@ -107,8 +125,8 @@ const OfferingCard = ({ idx }) => {
   const interestAccrued = Math.round(10000 * financials.interestAccrued) / 100;
 
   return (
-    <Paper className={`OfferingCard ${classes.root}`} key={`asdfasdf--${idx}`}>
-      <ListSubheader className={classes.subHeader} component="div">
+    <Paper className={`OfferingCard ${classes.root}`} key={`asdfasdf--${idx}`} elevation={0}>
+      <ListSubheader className={classes.subHeader}>
         {financials.otherClass}
       </ListSubheader>
       <Link className={`imgLink ${classes.imgLink}`} to={`/offering/${offeringObj.slug}`}>
@@ -130,7 +148,7 @@ const OfferingCard = ({ idx }) => {
           secondary={
             <>
               <MuiLink
-                className={`${classes.companyLink} nowrap`}
+                className={`${classes.company} nowrap`}
                 component={Link}
                 variant="caption"
                 color="textPrimary"
@@ -139,7 +157,7 @@ const OfferingCard = ({ idx }) => {
                 {sponsor}
               </MuiLink>
               <Typography
-                className={classes.companyLink}
+                className={classes.location}
                 component="p"
                 variant="caption"
                 color="textSecondary"

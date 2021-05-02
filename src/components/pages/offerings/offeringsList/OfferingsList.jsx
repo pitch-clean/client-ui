@@ -8,9 +8,9 @@ import GridList from '@material-ui/core/GridList';
 import OfferingCard from './OfferingCard';
 // constants
 const useStyles = makeStyles(theme => ({
-  root: {},
-  gridList: {
+  root: {
     justifyContent: 'center',
+    paddingTop: '20px',
   },
   emptyList: {
     flexWrap: `wrap`,
