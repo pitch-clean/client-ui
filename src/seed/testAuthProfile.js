@@ -1,3 +1,4 @@
+import { offeringsObj } from './queryOfferings';
 const imagesPath = './images';
 export const getImgPath = (imgPath) => {
   const imgObj = require(`${imagesPath}/${imgPath}`);
@@ -117,6 +118,72 @@ const connections = [
     stateProvince: 'WA',
   },
 ];
+const distributions = {
+  "ase1wefa": [
+    {"date": "2021-02-01T00:00:00Z","amt": 2150},
+    {"date": "2021-01-01T00:00:00Z","amt": 2150},
+    {"date": "2020-12-01T00:00:00Z","amt": 2800},
+    {"date": "2020-11-01T00:00:00Z","amt": 2205},
+    {"date": "2020-10-01T00:00:00Z","amt": 2220},
+    {"date": "2020-09-01T00:00:00Z","amt": 2940},
+    {"date": "2020-08-01T00:00:00Z","amt": 2150},
+    {"date": "2020-07-01T00:00:00Z","amt": 2590},
+    {"date": "2020-06-01T00:00:00Z","amt": 2100},
+    {"date": "2020-05-01T00:00:00Z","amt": 2850},
+    {"date": "2020-04-01T00:00:00Z","amt": 2500},
+    {"date": "2020-03-01T00:00:00Z","amt": 2800},
+  ],
+  "v7vcv89": [
+    {"date": "2021-02-01T00:00:00Z","amt": 4410},
+    {"date": "2021-01-01T00:00:00Z","amt": 4410},
+    {"date": "2020-12-01T00:00:00Z","amt": 4410},
+    {"date": "2020-11-01T00:00:00Z","amt": 4410},
+    {"date": "2020-10-01T00:00:00Z","amt": 4410},
+    {"date": "2020-09-01T00:00:00Z","amt": 4410},
+    {"date": "2020-08-01T00:00:00Z","amt": 4410},
+    {"date": "2020-07-01T00:00:00Z","amt": 4410}
+  ],
+  "zxcv098": [
+    {"date": "2021-02-01T00:00:00Z","amt": 2150},
+    {"date": "2021-01-01T00:00:00Z","amt": 1089},
+    {"date": "2020-12-01T00:00:00Z","amt": 1380},
+    {"date": "2020-11-01T00:00:00Z","amt": 2196},
+    {"date": "2020-10-01T00:00:00Z","amt": 2081},
+    {"date": "2020-09-01T00:00:00Z","amt": 2334},
+    {"date": "2020-08-01T00:00:00Z","amt": 2426},
+    {"date": "2020-07-01T00:00:00Z","amt": 2610}
+  ],
+  "mnb32": [
+    {"date": "2021-02-01T00:00:00Z","amt": 3900},
+    {"date": "2021-01-01T00:00:00Z","amt": 4475},
+    {"date": "2020-12-01T00:00:00Z","amt": 3050},
+    {"date": "2020-11-01T00:00:00Z","amt": 5750}
+  ],
+  "990f0f9u09": [
+    {"date": "2021-02-01T00:00:00Z","amt": 2240},
+    {"date": "2021-01-01T00:00:00Z","amt": 2240},
+    {"date": "2020-12-01T00:00:00Z","amt": 2240}
+  ],
+  "lkhflkjhd": [
+    {"date": "2021-02-01T00:00:00Z","amt": 6030},
+    {"date": "2021-01-01T00:00:00Z","amt": 6030}
+  ],
+  "2938f2": [
+    {"date": "2021-02-01T00:00:00Z","amt": 1920},
+  ],
+};
+const portfolio = {
+  areInvestmentsPublic: true,
+  investments: [
+    {offeringId:'ase1wefa',  offering: offeringsObj['ase1wefa'],  "principalInvested": 35000, distributions: distributions['ase1wefa'],  isPublic: true},
+    {offeringId:'v7vcv89',   offering: offeringsObj['v7vcv89'],   "principalInvested": 49000, distributions: distributions['v7vcv89'],   isPublic: false},
+    {offeringId:'zxcv098',   offering: offeringsObj['zxcv098'],   "principalInvested": 23000, distributions: distributions['zxcv098'],   isPublic: true},
+    {offeringId:'mnb32',     offering: offeringsObj['mnb32'],     "principalInvested": 115000,distributions: distributions['mnb32'],     isPublic:false},
+    {offeringId:'990f0f9u09',offering: offeringsObj['990f0f9u09'],"principalInvested": 84000, distributions: distributions['990f0f9u09'],isPublic: true},
+    {offeringId:'lkhflkjhd', offering: offeringsObj['lkhflkjhd'], "principalInvested": 67000, distributions: distributions['lkhflkjhd'], isPublic: false},
+    {offeringId:'2938f2',    offering: offeringsObj['2938f2'],    "principalInvested": 56000, distributions: distributions['2938f2'],    isPublic: true},
+  ],
+};
 const investments = [
   {
     "isPublic": true,
@@ -547,11 +614,12 @@ export const profile = {
   education,
   about,
   employment,
-  investments,
   connections,
   following,
   "profileType": "user",
   "profileClass": "sponsor",
   images,
   conversations,
+  investments, //deprec
+  portfolio,
 };

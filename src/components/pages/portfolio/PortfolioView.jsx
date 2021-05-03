@@ -2,14 +2,18 @@
 import React, { useRef, useState, useEffect } from 'react';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 // components
 import BarChart from './BarChart';
-import InvestmentTable from './InvestmentTable';
+import InvestmentTable from './table/InvestmentTable';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: '20px 0',
+    padding: '20px 10px',
+    width: `100%`,
+    maxWidth: 1300,
+    justify: 'flex-start',
+    alignItems: 'center',
   },
 }));
 
@@ -18,28 +22,28 @@ const useStyles = makeStyles(theme => ({
  *    table - specify columns
  *      header row
  *      data rows
+ *  call portfolio
+ *  call table info
  */
 const PortfolioView = () => {
   // init hooks
   const classes = useStyles();
   const ref = useRef();
+  // state
   const [x, setX] = useState(false);
   useEffect(() => {
+    // need this to update ref current
     setX(true);
   }, []);
 
   return (
-    <Grid
-      container
-      direction="column"
-      justify="flex-start"
-      alignItems="center"
-      className={`PortfolioView ${classes.root}`}
+    <Paper
+      className={`PortfolioView ${classes.root} flexcol`}
       ref={ref}
     >
       {ref.current && <BarChart widthProp={ref.current.getBoundingClientRect().width} />}
       <InvestmentTable />
-    </Grid>
+    </Paper>
   );
 };
 

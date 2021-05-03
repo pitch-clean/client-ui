@@ -19,21 +19,31 @@ const useStyles = makeStyles(theme => ({
     maxWidth: `1300px`,
     backgroundColor: '#262826',
     justifyContent: 'space-between',
+    flex: 1,
+  },
+  header: {
+    fontSize: '40px',
+    letterSpacing: 1,
+    fontSize: `2.3rem`,
+  },
+  subheader: {
+    fontSize: `1.4rem`,
+    padding: `7px 0`,
   },
   left: {
     position: 'relative',
-    justifyContent: 'space-between',
-    alignItems: 'start',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
     padding: 0,
     margin: 0,
-    // height: '100%',
-    // minHeight: '100%',
+    height: '100%',
     borderRadius: '0',
     '& *': {
       color: 'whitesmoke',
     },
   },
   summary: {
+    justifyContent: 'flex-start',
     padding: 0,
     margin: 0,
     '& .MuiListItem-gutters': {
@@ -41,9 +51,9 @@ const useStyles = makeStyles(theme => ({
     },
   },
   group: {
-    padding: `8px 0px`,
+    padding: 0,
     flexFlow: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
   },
   statContainer: {
     flex: `1 1 0px`,
@@ -58,14 +68,14 @@ const useStyles = makeStyles(theme => ({
       marginTop: 0,
       marginBottom: 0,
     },
-    padding: `10px 15px`,
+    padding: `7px 15px`,
   },
   dataVal: {
-    fontSize: '2.2rem',
+    fontSize: '2rem',
     alignSelf: 'start',
   },
   dataLabel: {
-    fontSize: '1.2rem',
+    fontSize: '1rem',
     alignSelf: 'start',
     // width: 0,
   },
@@ -86,11 +96,15 @@ const printDollarAmt = num => {
   ].join('');
 };
 const calcTotalProfileValue = investmentsArr => {
+  let principal = 0;
   let sum = 0;
   for (let idx = 0; idx < investmentsArr.length; idx += 1) {
     const { principalInvested, distributions } = investmentsArr[idx];
+    principal += principalInvested;
+    let interestEarned = 0;
     let distributionSum = 0;
     for (let j = 0; j < distributions.length; j += 1) {
+      // console.log(distributions[j].amt)
       distributionSum += distributions[j].amt;
     }
     sum += principalInvested + distributionSum;
@@ -110,6 +124,7 @@ const Portfolio = () => {
   // init hooks
   const classes = useStyles();
   const investments = useSelector(s => s.auth.activeProfile.investments);
+  console.log('investments',investments)
   const totalProfileValueStr = calcTotalProfileValue(investments);
   const outstandingPrincipal = calcOfferSize(principleOutstanding);
   const annualInterestStr = formatPctStr(interestAccrued);
@@ -119,25 +134,23 @@ const Portfolio = () => {
     <div className={`${classes.container} flexrow`}>
       <div className={`${classes.root} Portfolio flexrow`}>
         <Grid className={`${classes.left} flexcol`} spacing={3}>
-          <Grid className={classes.summary} item>
-            <ListItem alignItems="flex-start">
+          <Grid className={`${classes.summary} flexcol`} item>
+            <ListItem alignItems="flex-start" justify="flex-start">
               <ListItemText
                 primary={
                   <Typography
-                    component="div"
                     variant="h1"
                     color="textPrimary"
-                    style={{ fontSize: '40px', letterSpacing: 1 }}
+                    className={classes.header}
                   >
                     Account Summary
                   </Typography>
                 }
                 secondary={
                   <Typography
-                    component="div"
+                    className={classes.subheader}
                     variant="h5"
                     color="textSecondary"
-                    style={{ padding: `7px 0` }}
                   >
                     {`Total Value: ${totalProfileValueStr}`}
                   </Typography>
@@ -161,7 +174,7 @@ const Portfolio = () => {
                 }
               />
             </div>
-            <Divider orientation="vertical" style={{backgroundColor: `#595959`}} />
+            {/* <Divider orientation="vertical" style={{backgroundColor: `#595959`}} /> */}
             <div className={classes.statContainer}>
               <ListItemText
                 className={classes.small}
@@ -177,7 +190,7 @@ const Portfolio = () => {
                 }
               />
             </div>
-            <Divider orientation="vertical" style={{backgroundColor: `#595959`}} />
+            {/* <Divider orientation="vertical" style={{backgroundColor: `#595959`}} /> */}
             <div className={classes.statContainer}>
               <ListItemText
                 nowrap

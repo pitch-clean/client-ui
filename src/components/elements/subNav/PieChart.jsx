@@ -6,7 +6,7 @@ import * as d3 from 'd3';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 // constants
-const height = 300;
+const height = 280;
 const width = 375;
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,6 +16,9 @@ const useStyles = makeStyles(theme => ({
     width,
     height: height - 35,
     boxSizing: 'content-box',
+    '& svg': {
+      maxHeight: `100%`,
+    },
   },
 }));
 
@@ -70,7 +73,7 @@ const DonutGraph = () => {
         .append('svg')
           .attr('width', width)
           .attr('height', height)
-          .style('margin-top', `-10px`)
+          .style('margin-top', `-20px`)
         .append('g')
           .attr('transform', `translate(${width / 2},${height / 2})`);
       // set the color scale

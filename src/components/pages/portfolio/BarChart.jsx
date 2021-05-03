@@ -1,5 +1,5 @@
 // react
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 // utils
 import * as d3 from 'd3';
@@ -13,6 +13,19 @@ const useStyles = makeStyles(theme => ({
     color: `black`,
     zIndex: 100,
     height: `100%`,
+    width: `100%`,
+    justifyContent: 'center',
+    '& svg': {
+      backgroundColor: `#f1f6f1`,
+      borderRadius: '10px',
+      width: `80%`,
+      margin: '20px 0',
+      boxShadow: `
+        0px 2px 1px -1px rgba(0,0,0,0.03),
+        0px 1px 1px 0px rgba(0,0,0,0.02),
+        0px 1px 3px 0px rgba(0,0,0,0.01)
+      `,
+    },
   },
 }));
 const d3Format = d3.format('.2s');
@@ -55,6 +68,7 @@ const BarChart = ({ widthProp }) => {
   // state
   const l1 = useSelector(s => s.view.main.l1);
   const investments = useSelector(s => s.auth.activeProfile.investments);
+  // const [bars, setBars] = useState([]);
   // effects
   useEffect(() => {
     const data = buildInvestmentsArr(investments);
@@ -106,7 +120,11 @@ const BarChart = ({ widthProp }) => {
     };
   }, []);
 
-  return <Paper elevation={1} className={`${classes.root} BarChart bar f1`} />;
+  return <Paper elevation={1} className={`${classes.root} BarChart bar f1 flexrow`}>
+    {/* <svg>
+      {bars.map()}
+    </svg> */}
+  </Paper>;
 };
 
 // export
