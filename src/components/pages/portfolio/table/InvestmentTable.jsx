@@ -11,7 +11,7 @@ import ITCol from './ITCol';
 const useStyles = makeStyles(theme => ({
   root: {
     // padding: '20px 0',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'start',
   },
 }));
