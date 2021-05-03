@@ -31,13 +31,15 @@ const useStyles = makeStyles(theme => ({
 /**
  * main
  */
-const ITCell = ({isHeader, input, isFirstCol, isLastCol}) => {
+const ITCell = ({ isHeader, input, isFirstCol, isLastCol }) => {
   // init hooks
   const classes = useStyles();
 
   return (
     <div
-      className={`HeaderITCell ${classes.root} ${isHeader && classes.headerRoot} ${isFirstCol && classes.firstCol} ${isLastCol && classes.lastCol} flexrow w100`}
+      className={`HeaderITCell ${classes.root} ${isHeader && classes.headerRoot} ${
+        isFirstCol && classes.firstCol
+      } ${isLastCol && classes.lastCol} flexrow w100`}
     >
       {input}
     </div>

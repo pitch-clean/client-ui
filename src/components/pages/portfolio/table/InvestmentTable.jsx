@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
 // components
-import ITHeader from './ITHeader';
 import ITCol from './ITCol';
 // constants
 const useStyles = makeStyles(theme => ({
@@ -16,11 +15,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 const columnsArr = [
-  {label: 'date', title: 'Date'},
-  {label: 'sponsor', title: 'Sponsor'},
-  {label: 'instrument', title: 'Instrument'},
-  {label: 'interest', title: 'Interest'},
-  {label: 'principal', title: 'Principal'},
+  { label: 'date', title: 'Date' },
+  { label: 'sponsor', title: 'Sponsor' },
+  { label: 'instrument', title: 'Instrument' },
+  { label: 'interest', title: 'Interest' },
+  { label: 'principal', title: 'Principal' },
 ];
 
 /**
@@ -38,10 +37,7 @@ const InvestmentTable = () => {
   });
 
   return (
-    <Paper
-      elevation={0}
-      className={`InvestmentTable ${classes.root} flexrow w100`}
-    >
+    <Paper elevation={1} className={`InvestmentTable ${classes.root} flexrow w100`}>
       {listOfCols}
     </Paper>
   );

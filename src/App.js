@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
 import { onKeyDownBlurAll } from './utils/keybinds';
 import { updateLoginStatus } from './redux/actions/AuthActions';
 // components
@@ -63,17 +62,15 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#eaebe8',
     minHeight: '100vh',
     maxHeight: '100vh',
-    height: '100vh',
-  },
-  body: {
-    justifyContent: 'start',
-    flex: 1,
-    flexFlow: 'column',
-    overflow: 'scroll',
+    justifyContent: 'flex-start',
   },
   navGroup: {
     flexFlow: 'column',
     justifyContent: 'flex-start',
+    alignItems: 'start',
+    // position: 'sticky',
+    // top: 0,
+    zIndex: 1,
   },
 }));
 
@@ -97,21 +94,13 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid
-        container
-        direction="column"
-        justify="flex-start"
-        className={`${classes.root} App`}
-        ref={appRef}
-      >
-        <Grid container className={classes.navGroup}>
+      <div className={`App ${classes.root} flexcol`} ref={appRef}>
+        <div className={`${classes.navGroup} flexcol w100`}>
           <MainNavBar />
           <SubNav />
-        </Grid>
-        <Grid container className={`${classes.body} w100 f1`}>
-          <PageRouter />
-        </Grid>
-      </Grid>
+        </div>
+        <PageRouter />
+      </div>
     </ThemeProvider>
   );
 };

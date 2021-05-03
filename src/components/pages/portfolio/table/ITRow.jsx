@@ -22,14 +22,11 @@ const useStyles = makeStyles(theme => ({
 const ITRow = ({isHeader, investmentObj, columnsArr}) => {
   // init hooks
   const classes = useStyles();
-  // console.log('ITRowITRow', investmentObj, columnsArr)
   const columns = columnsArr.map(col => {
     return (
       <div className="cell">{col.title}</div>
     );
   });
-  // const {} = investmentObj;
-
 
   return isHeader ? (
     <div
@@ -41,16 +38,6 @@ const ITRow = ({isHeader, investmentObj, columnsArr}) => {
           <ITCell isHeader input={col.title} />
         );
       })}
-    </div>
-  ) : (
-    <div
-      className={`ITRow ${classes.root} flexrow w100`}
-    >
-      {/* <ITCell />
-      <ITCell />
-      <ITCell />
-      <ITCell />
-      <ITCell /> */}
     </div>
   );
 };

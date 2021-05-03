@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
     width: `100%`,
     maxWidth: '1300px',
     alignSelf: 'center',
+    overflow: 'scroll',
   },
   footer: {
     backgroundColor: `black`,

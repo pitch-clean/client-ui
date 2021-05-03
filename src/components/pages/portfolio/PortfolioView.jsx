@@ -19,11 +19,6 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * main
- *    table - specify columns
- *      header row
- *      data rows
- *  call portfolio
- *  call table info
  */
 const PortfolioView = () => {
   // init hooks

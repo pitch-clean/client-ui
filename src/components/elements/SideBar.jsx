@@ -9,6 +9,8 @@ import './Sidebar.css';
 // constants
 const useStyles = makeStyles(theme => ({
   rootleft: {
+    position: 'sticky',
+    top: 0,
     width: 0,
     paddingLeft: `10px`,
     maxWidth: 325,
