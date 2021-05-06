@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 const tabObj = {
-  about: 0,
+  posts: 0,
   investments: 1,
   network: 2,
 };
@@ -36,8 +36,8 @@ const Nav = ({ baseRoute }) => {
           textColor="primary"
           centered
         >
-          <Link to={baseRoute}>
-            <Tab label="About" textColor="primary" />
+          <Link to={`${baseRoute}/posts`}>
+            <Tab label="Posts" textColor="primary" />
           </Link>
           <Link to={`${baseRoute}/investments`}>
             <Tab label="Investments" textColor="primary" />

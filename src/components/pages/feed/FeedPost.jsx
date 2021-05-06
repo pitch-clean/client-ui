@@ -63,11 +63,11 @@ const buildLocation = (city, stateProv) => {
 const envProfilePath = 'profile';
 
 // main
-const FeedPost = ({ idx }) => {
+const FeedPost = ({ idx, isProfile }) => {
   // init hooks
   const classes = useStyles();
   // state
-  const postObj = useSelector(s => s.view.feed.posts[idx]);
+  const postObj = useSelector(s => s.view[isProfile ? 'profile' : 'feed'].posts[idx]);
   // destructure
   const { body, profile, postType } = postObj;
   const {

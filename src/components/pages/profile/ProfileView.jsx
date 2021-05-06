@@ -1,26 +1,26 @@
 // react
 import React, { useEffect } from 'react';
-import { Switch, Route, useRouteMatch, useLocation } from 'react-router-dom';
+import { Switch, Route, useRouteMatch, useLocation, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
 // components
 import Nav from './home/Nav';
 import About from './home/About';
 import Investments from './home/Investments';
 import Network from './home/Network';
 import LeftSidebar from '../feed/LeftSidebar';
-import Sidebar from '../../elements/SideBar';
+import Posts from './home/Posts';
 // utils
 import { updateViewProfile } from '../../../redux/actions/ViewActions';
 // seed
-import { profile } from '../../../seed/testAuthProfile';
+import { queryProfileForProfilePage } from '../../../seed/queryProfileFxns';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
-    // width: `80%`,
     paddingRight: '0px',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
     [theme.breakpoints.up('sm')]: {
       // paddingRight: '20%',
     },
@@ -44,30 +44,28 @@ const ProfileView = () => {
   const viewProfile = useSelector(s => s.view.profile.viewProfile);
   // effects
   useEffect(() => {
-    const mockProfileViewObj = profile;
-    dispatch(updateViewProfile(mockProfileViewObj));
+    console.log(queryProfileForProfilePage('3'))
+    dispatch(updateViewProfile(queryProfileForProfilePage('3')));
   }, []);
   if (!viewProfile) {
     return <div />;
   }
 
   return (
-    <Grid
-      alignItems="flex-start"
-      justify="space-between"
-      className={`${classes.root} ProfileView flexrow h100`}
-    >
+    <div className={`ProfileView ${classes.root} flexrow`}>
       <LeftSidebar />
-      <Grid direction="column" className="Body f1">
+      <div direction="column" className="Body f1">
+        <About />
         <Nav baseRoute={baseRoute} />
         <Switch location={{ ...location, baseRoute }}>
-          <Route exact path="/profile/:alias" render={p => <About props={p} />} />
+          <Route exact path="/profile/:alias/posts" render={p => <Posts props={p} />} />
           <Route exact path="/profile/:alias/investments" render={p => <Investments props={p} />} />
           <Route exact path="/profile/:alias/network" render={p => <Network props={p} />} />
+          <Redirect to={`/profile/${alias}/posts`} />
         </Switch>
-      </Grid>
-      <Sidebar isLeft={false}></Sidebar>
-    </Grid>
+      </div>
+      {/* <Sidebar isLeft={false}></Sidebar> */}
+    </div>
   );
 };
 

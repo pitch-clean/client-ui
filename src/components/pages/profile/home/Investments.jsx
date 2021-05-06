@@ -44,9 +44,10 @@ const Investments = () => {
   }
 
   // build
+  console.log('investments', investments)
   const investmentList = investments
-    ? investments.map(({ offering, img, isPublic }, idx) => {
-        const { sponsor, title, slug: offeringSlug, location } = offering;
+    ? investments.map(({ offering, isPublic }, idx) => {
+        const { sponsor, title, slug: offeringSlug, location, images } = offering;
         const {
           address: { city, stateProvince },
         } = location;
@@ -56,7 +57,7 @@ const Investments = () => {
           <React.Fragment key={`inv-${idx}`}>
             <ListItem>
               <ListItemAvatar style={{ filter: isPublic ? `none` : `blur(5px)` }}>
-                <Avatar alt="Profile Picture" src={img} />
+                <Avatar alt="Profile Picture" src={images.thumbnail} />
               </ListItemAvatar>
               <ListItemText
                 style={{ filter: isPublic ? `none` : `blur(5px)` }}
@@ -75,7 +76,6 @@ const Investments = () => {
                       style={{ textDecoration: 'none' }}
                     >
                       <Typography
-                        component="span"
                         variant="body2"
                         className={classes.inline}
                         color="textPrimary"

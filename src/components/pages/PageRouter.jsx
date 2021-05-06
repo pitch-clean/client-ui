@@ -25,7 +25,9 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
     width: `100%`,
-    maxWidth: '1300px',
+    '& > div': {
+      maxWidth: '1300px',
+    },
     alignSelf: 'center',
     overflow: 'scroll',
   },

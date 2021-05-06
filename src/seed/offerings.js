@@ -1,11 +1,5 @@
 import { slugify } from "../utils/general";
-
-const imagesPath = './images';
-const getImgPath = (imgPath) => {
-  const imgObj = require(`${imagesPath}/${imgPath}`);
-  const staticImgPath = imgObj.default;
-  return staticImgPath;
-};
+import { getImgPath } from './testAuthProfile';
 
 export const offeringsArr = [
   {
