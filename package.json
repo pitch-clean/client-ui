@@ -56,7 +56,6 @@
     ]
   },
   "devDependencies": {
-    "cod-scripts": "^7.0.0",
     "joi": "^17.4.0"
   }
 }
