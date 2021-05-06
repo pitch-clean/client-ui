@@ -32,6 +32,11 @@ export const updateViewProfile = payload => dispatch => {
     payload,
   });
 };
+export const clearProfile = () => dispatch => {
+  dispatch({
+    type: types.CLEAR_PROFILE,
+  });
+};
 // messages
 export const updateActiveConversationIdx = payload => dispatch => {
   dispatch({
@@ -70,9 +75,8 @@ export const updatePosts = payload => dispatch => {
     payload,
   });
 };
-export const clearFeed = payload => dispatch => {
+export const clearFeed = () => dispatch => {
   dispatch({
     type: types.CLEAR_FEED,
-    payload,
   });
 };

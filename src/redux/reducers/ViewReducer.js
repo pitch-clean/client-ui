@@ -54,8 +54,9 @@ const ProfileReducer = (state = _.cloneDeep(initialProfileState), action) => {
       newState.activeProfileTab = action.payload;
       return newState;
     case types.UPDATE_VIEW_PROFILE:
-      newState.viewProfile = action.payload;
-      return newState;
+      return { ...newState, viewProfile: action.payload, ...action.payload };
+    case types.CLEAR_PROFILE:
+      return _.cloneDeep(initialProfileState);
     default:
       return newState;
   }

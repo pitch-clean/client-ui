@@ -3,16 +3,18 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import Chip from '@material-ui/core/Chip';
+import {
+  Grid,
+  Paper,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Avatar,
+  Chip,
+  Typography,
+  // CssBaseline,
+} from '@material-ui/core';
 import { updateProfileTab } from '../../../../redux/actions/ViewActions';
 // constants
 const useStyles = makeStyles(theme => ({
@@ -34,7 +36,7 @@ const Network = () => {
   const dispatch = useDispatch();
   // state
   const connections = useSelector(s => s.view.profile.viewProfile.connections);
-
+  console.log('conns', connections)
   // effects
   useEffect(() => {
     dispatch(updateProfileTab('network'));
@@ -45,7 +47,7 @@ const Network = () => {
   return (
     <div className="Network w100">
       <>
-        <CssBaseline />
+        {/* <CssBaseline /> */}
         <Paper square className={classes.paper}>
           <Grid container direction="row" justify="flex-start" alignItems="center">
             <Chip
@@ -63,16 +65,14 @@ const Network = () => {
             {connections.map(obj => {
               const {
                 _id,
-                firstName,
-                lastName,
-                position,
-                currentEmployer,
+                pii: { firstName, lastName },
+                active: { position, organization, organizationSlug },
                 city,
                 stateProvince,
                 image,
               } = obj;
               const primary = `${firstName} ${lastName}`;
-              const secondary = `${position} at ${currentEmployer}`;
+              const secondary = `${position} at ${organization}`;
               const location = `${city}, ${stateProvince}`;
               return (
                 <React.Fragment key={_id}>
