@@ -1,23 +1,20 @@
 // react
 import React from 'react';
 // utils
-import {
-  CardActions,
-  Button,
-  Link as MuiLink,
-} from '@material-ui/core';
+import { CardActions, Button } from '@material-ui/core';
 // constants
 const postTypeMapping = {
   offering: 'View Offering',
   interest: 'Submit Interest',
-  rsvp: 'rsvp',
+  rsvp: 'RSVP',
+  basic: 'Like',
 };
 
 // main
 const PostActionButton = ({ postType }) => {
   return (
     <CardActions disableSpacing>
-      <Button variant="contained" size="small">
+      <Button variant="contained" size="small" disableRipple>
         {postTypeMapping[postType]}
       </Button>
     </CardActions>

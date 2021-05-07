@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,6 +7,8 @@ import { Paper } from '@material-ui/core';
 import { updatePosts } from '../../../redux/actions/ViewActions';
 // components
 import FeedPost from './FeedPost';
+// seed
+import { postsArr } from '../../../seed/storePosts';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,7 +27,7 @@ const updatePostsOnScroll = (dispatch, existingPosts) => {
 const FeedContent = () => {
   // init hooks
   const classes = useStyles();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // state
   const postsLen = useSelector(s => s.view.feed.posts.length);
   // build
@@ -33,6 +35,11 @@ const FeedContent = () => {
   for (let idx = 0; idx < postsLen; idx += 1) {
     postElemArr.push(<FeedPost idx={idx} />);
   }
+  // effects
+  useEffect(() => {
+    // fetch seed posts
+    dispatch(updatePosts(postsArr));
+  }, []);
 
   return (
     <Paper className={`${classes.root} FeedContainer flexcol`} elevation={0}>

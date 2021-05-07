@@ -16,6 +16,7 @@ import {
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // components
 import PostActionButton from './PostActionButton';
+import LikesAndComments from './LikesAndComments';
 // constants
 const useStyles = makeStyles(theme => ({
   cardRoot: {
@@ -69,7 +70,7 @@ const FeedPost = ({ idx, isProfile }) => {
   // state
   const postObj = useSelector(s => s.view[isProfile ? 'profile' : 'feed'].posts[idx]);
   // destructure
-  const { body, profile, postType } = postObj;
+  const { body, profile, postType, _id, likes } = postObj;
   const {
     // profileClass,
     profileType,
@@ -123,7 +124,12 @@ const FeedPost = ({ idx, isProfile }) => {
           </MuiLink>
         }
         subheader={
-          <Typography className={classes.subtitle} variant="caption" component="h" color="textSecondary">
+          <Typography
+            className={classes.subtitle}
+            variant="caption"
+            component="h"
+            color="textSecondary"
+          >
             {subtitle}
           </Typography>
         }
@@ -133,6 +139,7 @@ const FeedPost = ({ idx, isProfile }) => {
           {body}
         </Typography>
       </CardContent>
+      {postType === 'basic' && <LikesAndComments postId={_id} likesArr={likes} />}
       <PostActionButton postType={postType} />
     </Paper>
   ) : (
