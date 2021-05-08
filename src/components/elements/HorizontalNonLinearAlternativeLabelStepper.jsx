@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper, Stepper, Step, StepLabel, Button, Typography } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import Proptypes from 'prop-types';
+import clsx from 'clsx';
 // import {
 //   updateActiveForm,
 //   checkIfAllValidForms,
@@ -67,6 +68,42 @@ const useStyles = makeStyles(theme => ({
     flexFlow: 'column',
   },
 }));
+const useIconStyles = makeStyles({
+  root: {
+    zIndex: 1,
+    width: 30,
+    height: 30,
+    display: 'flex',
+    borderRadius: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    border: '3px solid #707070',
+    backgroundColor: '#fff',
+  },
+  active: {
+    backgroundColor: '#CECECE',
+  },
+  completed: {
+    backgroundColor: '#CECECE',
+  },
+});
+
+// rendering step icon
+function StepIcon(props) {
+  const classes = useIconStyles();
+  const { active, completed } = props;
+  return (
+    <div
+      className={clsx(classes.root, {
+        [classes.active]: active,
+        [classes.completed]: completed,
+      })}
+    >
+      {String(props.icon)}
+    </div>
+  );
+}
+
 // fxns
 const handleNext = (setActiveStep, activeStep, dispatch, formName, updateActiveForm_) => () => {
   dispatch(updateActiveForm_(formName));
@@ -133,14 +170,16 @@ const HorizontalNonLinearAlternativeLabelStepper = ({
               key={label.header}
               {...stepProps}
             >
-              <StepLabel completed={validForms[label.formName]}>{label.header}</StepLabel>
+              <StepLabel StepIconComponent={StepIcon} completed={validForms[label.formName]}>
+                {label.header}
+              </StepLabel>
               {label.header}
             </Step>
           );
         })}
       </Stepper>
       <Grid container direction="column" justify="start" alignItems="center">
-        <Paper
+        <Paper 
           className={classes.paper}
         >
           <Typography className={classes.instructions}>

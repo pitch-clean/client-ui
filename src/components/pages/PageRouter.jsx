@@ -14,6 +14,7 @@ import FeedView from './feed/FeedView';
 import Home from './home/Home';
 import CreateProfile from './profile/CreateProfile';
 import CreateOffering from './offerings/CreateOffering';
+import CreateRSVP from './rsvp/CreateRSVP';
 import ProfileView from './profile/ProfileView';
 import PortfolioView from './portfolio/PortfolioView';
 import MessagesView from './messages/MessagesView';
@@ -67,8 +68,13 @@ const PageRouter = () => {
         />
         <Route
           exact
-          path="/offering/new"
+          path="/create-offering" // added test otherwise it will redirect to Offering details
           render={p => isAuthenticated && <CreateOffering props={p} />}
+        />
+        <Route
+          exact
+          path="/create-rsvp"
+          render={p => isAuthenticated && <CreateRSVP props={p} />}
         />
         <Route render={p => <NotFound props={p} />} />
       </Switch>
