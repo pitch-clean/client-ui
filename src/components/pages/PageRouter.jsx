@@ -17,6 +17,8 @@ import CreateOffering from './offerings/CreateOffering';
 import ProfileView from './profile/ProfileView';
 import PortfolioView from './portfolio/PortfolioView';
 import MessagesView from './messages/MessagesView';
+import RSVPView from './rsvp/RSVPView';
+
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -73,6 +75,7 @@ const PageRouter = () => {
           path="/offering/new"
           render={p => isAuthenticated && <CreateOffering props={p} />}
         />
+        <Route exact path="/rsvp/:rsvpId" render={p => <RSVPView props={p} />} />
         <Route render={p => <NotFound props={p} />} />
       </Switch>
       {/* <Grid item className={`${classes.footer} w100`}>
