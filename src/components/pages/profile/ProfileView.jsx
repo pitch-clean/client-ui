@@ -4,6 +4,7 @@ import { Switch, Route, useRouteMatch, useLocation, Redirect } from 'react-route
 import { useDispatch, useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
+import { updateViewProfile, clearProfile } from '../../../redux/actions/ViewActions';
 // components
 import Nav from './home/Nav';
 import About from './home/About';
@@ -11,10 +12,8 @@ import Investments from './home/Investments';
 import Network from './home/Network';
 import LeftSidebar from '../feed/LeftSidebar';
 import Posts from './home/Posts';
-// utils
-import { updateViewProfile } from '../../../redux/actions/ViewActions';
 // seed
-import { queryProfileForProfilePage } from '../../../seed/queryProfileFxns';
+import { Get } from '../../../utils/requests';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,10 +42,14 @@ const ProfileView = () => {
   // state
   const viewProfile = useSelector(s => s.view.profile.viewProfile);
   // effects
-  useEffect(() => {
-    console.log(queryProfileForProfilePage('3'))
-    dispatch(updateViewProfile(queryProfileForProfilePage('3')));
-  }, []);
+  useEffect(async () => {
+    const url = `${window.env.endpoints.profiles}/${alias}?by=alias`;
+    const res = await Get(url, {}, true);
+    dispatch(updateViewProfile(res));
+    return () => {
+      dispatch(clearProfile());
+    };
+  }, [alias]);
   if (!viewProfile) {
     return <div />;
   }

@@ -29,12 +29,25 @@ const MainReducer = (state = _.cloneDeep(initialMainState), action) => {
 
 const initialFeedState = {
   posts: [],
+  postsObj: {},
 };
 const FeedReducer = (state = _.cloneDeep(initialFeedState), action) => {
   const newState = _.cloneDeep(state);
   switch (action.type) {
-    case types.UPDATE_POSTS:
+    case types.UPDATE_POST_LIKES:
+      const idx = newState.posts.findIndex(post => post._id === action.payload._id);
+      newState.posts[idx].likes = action.payload.likes;
+      return newState;
+    case types.UPDATE_POSTS_ARR:
       newState.posts = action.payload;
+      return newState;
+    case types.UPDATE_POSTS_OBJ:
+      newState.postsObj = action.payload;
+      return newState;
+    case types.UPDATE_POST_COMMENTS:
+      console.log('adding/updating/deleting a comment', action.payload)
+      const postIdxComments = newState.posts.findIndex(post => post._id === action.payload._id);
+      newState.posts[postIdxComments].comments = action.payload.comments;
       return newState;
     case types.CLEAR_FEED:
       return _.cloneDeep(initialFeedState);
@@ -44,7 +57,7 @@ const FeedReducer = (state = _.cloneDeep(initialFeedState), action) => {
 };
 
 const initialProfileState = {
-  activeProfileTab: 'about',
+  activeProfileTab: 'posts',
   viewProfile: null,
 };
 const ProfileReducer = (state = _.cloneDeep(initialProfileState), action) => {

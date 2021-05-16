@@ -38,7 +38,7 @@ export const postsObj = {
     "profileId": '3',
     "profile": {...users1['3']},
     "body": "Hello world. This is a test post you can like.",
-    "postType": "basic",
+    "postType": "social",
     "dtCreated": 1619771596043,
   },
   "vx09xv89v": {
@@ -46,7 +46,7 @@ export const postsObj = {
     "profileId": '3',
     "profile": {...users1['3']},
     "body": "Why are building renovations so costly?  Typically the grid will be emissions-free by the time they're already done!! It may be wiser to reallocate the $$$ to speed up converting to electric + new effic. buildings near pub. transport https://test.link.here #innovate #renovate",
-    "postType": "basic",
+    "postType": "social",
     "dtCreated": 1619791596043,
   },
   "xcvxcvb": {
@@ -54,7 +54,7 @@ export const postsObj = {
     "profileId": '3',
     "profile": {...users1['3']},
     "body": "Idea: Identifying the best underground sites for carbon sinks can take up to or even over 10 yrs.  We really need to start now.  There's no excuse to delay and theres an abundance of available sites near high emission regions. Storage is relatively cheap, but capture isnt: $20 per ton https://another.test.link.here #USA #Europe",
-    "postType": "basic",
+    "postType": "social",
     "dtCreated": 1619801596043,
   },
 };

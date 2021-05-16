@@ -151,6 +151,7 @@ body {
 }
 .hide-scrollbar {
   scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 .nowrap {
   white-space: nowrap;

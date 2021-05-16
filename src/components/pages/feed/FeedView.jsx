@@ -1,5 +1,6 @@
 // react
 import React from 'react';
+import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 // import { clearFeed } from '../../../redux/actions/ViewActions';
@@ -28,13 +29,17 @@ const useStyles = makeStyles(theme => ({
 const FeedView = () => {
   // init hooks
   const classes = useStyles();
+  // state
+  const isActive = useSelector(s => s.auth.activeProfile);
 
-  return (
+  return isActive ? (
     <div className={`${classes.root} FeedView w100 flexrow`} container>
       <LeftSidebar />
       <FeedContent />
       <RightSidebar />
     </div>
+  ) : (
+    <div />
   );
 };
 

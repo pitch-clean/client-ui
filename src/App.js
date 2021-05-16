@@ -11,6 +11,7 @@ import MainNavBar from './components/elements/mainNavBar/MainNavBar';
 import SubNav from './components/elements/subNav/SubNav';
 // styling
 import './App.css';
+import './config.dev.js';
 // seed
 import { profile } from './seed/testAuthProfile';
 // constants
