@@ -11,7 +11,7 @@ export const Post = async (url, body, additionalHeaders={}, isReturnJson=false) 
       url,
       {
         method      : 'POST',
-        credentials : 'include',
+        // credentials : 'include',
         mode        : 'cors',
         headers     : headers,
         body        : JSON.stringify(body),

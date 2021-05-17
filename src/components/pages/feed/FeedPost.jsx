@@ -93,7 +93,7 @@ const FeedPost = ({ idx: postIdx, isProfile }) => {
     subtitle = buildLocation(address.city, address.stateProvince);
   } else {
     title = buildName(firstName, lastName);
-
+    // console.log(profile)
     subtitle = active.organization ? active.organization.pii.name : 'not set up';
   }
 

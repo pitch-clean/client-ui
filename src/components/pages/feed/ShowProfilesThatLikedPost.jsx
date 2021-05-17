@@ -1,15 +1,12 @@
 // react
 import React, { useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  CardHeader,
-  Avatar,
   Paper,
-  Link as MuiLink,
-  Typography,
 } from '@material-ui/core';
+// components
+import CardHeaderProfile from '../../elements/CardHeaderProfile';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -82,27 +79,7 @@ const ShowProfilesThatLikedPost = ({ setIsPopup, likesArr }) => {
     } = profile;
     const title = name ? name : `${firstName} ${lastName}`;
     return (
-      <CardHeader
-        className={classes.cardHeader}
-        classes={{
-          content: classes.cardHeaderContent,
-        }}
-        avatar={
-          <Link to={`/profile/${alias}`}>
-            <Avatar aria-label="profile pic" src={thumbnail} className={classes.avatar} />
-          </Link>
-        }
-        title={
-          <MuiLink
-            component={Link}
-            to={`/profile/${alias}`}
-            color="inherit"
-            variant="subtitle2"
-          >
-            {title}
-          </MuiLink>
-        }
-      />
+      <CardHeaderProfile type="likes" thumbnail={thumbnail} alias={alias} title={title} />
     );
   };
   const profileCardList = likesArr.map(profile => profileCard(profile));
@@ -118,17 +95,7 @@ const ShowProfilesThatLikedPost = ({ setIsPopup, likesArr }) => {
         <div className={`header ${classes.header}`}>Likes</div>
         <div className={`list ${classes.list} hide-scrollbar`}>
           {profileCardList.length === 0 ? (
-            <CardHeader
-              className={classes.cardHeader}
-              title={
-                <Typography
-                  color="inherit"
-                  variant="subtitle2"
-                >
-                  No Likes Yet
-                </Typography>
-              }
-            />
+            <CardHeaderProfile type="likes" title="No Likes Yet" />
           ) : profileCardList}
         </div>
       </Paper>

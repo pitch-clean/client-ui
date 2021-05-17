@@ -11,17 +11,9 @@ import FeedContent from './FeedContent';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: `7px 0`,
     backgroundColor: 'whitesmoke',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    // '& .LSSuggestedConnections .MuiTypography-displayBlock': {
-    //   whiteSpace: 'nowrap',
-    //   overflowX: 'hidden',
-    //   textOverflow: 'ellipsis',
-    //   display: 'inline',
-    // },
-    // overflow: 'scroll',
   },
 }));
 

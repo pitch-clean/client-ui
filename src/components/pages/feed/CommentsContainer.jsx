@@ -1,6 +1,6 @@
 // react
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import { CardActions, Button, Typography } from '@material-ui/core';
@@ -14,10 +14,6 @@ const useStyles = makeStyles(theme => ({
   },
   button: {},
 }));
-// fxn
-const onClick =  (postId, postProfileId, dispatch) => async () => {
-  // open the comments
-};
 
 /**
  * main
@@ -26,19 +22,16 @@ const onClick =  (postId, postProfileId, dispatch) => async () => {
 const CommentsContainer = ({ postId, postIdx, postProfileId, isCommentSectionOpen, setIsCommentSectionOpen }) => {
   // init hooks
   const classes = useStyles();
-  const dispatch = useDispatch();
   // state
-  const commentsArr = useSelector(s => s.view.feed.posts[postIdx].comments);
-  const commentsLen = commentsArr.length;
+  const commentsLen = useSelector(s => s.view.feed.posts[postIdx].comments.length);
   const commentsMsg = `${commentsLen} comment${commentsLen !== 1 ? 's' : ''}`;
   
-  console.log(commentsLen, commentsArr)
   // const commentsCt = commentsArr.length;
 
   return (
     <div className={`CommentsContainer ${classes.root} flexfow`}>
       <CardActions disableSpacing onClick={e => {e.preventDefault(); setIsCommentSectionOpen(!isCommentSectionOpen)}}>
-        <Button className={`button ${classes.button}`} variant="contained" size="small" disableRipple onClick={onClick(postId, postProfileId, dispatch)}>
+        <Button className={`button ${classes.button}`} variant="contained" size="small" disableRipple>
           <Typography noWrap variant="caption" color="black">
             {commentsMsg}
           </Typography>

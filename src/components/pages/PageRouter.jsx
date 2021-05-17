@@ -26,6 +26,8 @@ const useStyles = makeStyles(theme => ({
     width: `100%`,
     '& > div': {
       maxWidth: '1300px',
+      width: '100%',
+      minWidth: '500px',
     },
     alignSelf: 'center',
     overflow: 'scroll',

@@ -39,6 +39,7 @@ const FeedContent = () => {
   useEffect(async () => {
     // fetch seed posts
     const posts = await (await Get(`${window.env.endpoints.posts}/feed/${profileId}/0`, {}, false)).json();
+    console.log('posposp', posts)
     dispatch(updatePostsArr(posts));
   }, []);
 

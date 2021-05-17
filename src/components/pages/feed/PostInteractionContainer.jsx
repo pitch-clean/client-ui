@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import LikesContainer from './LikesContainer';
 import PostActionButton from './PostActionButton';
 import CommentsContainer from './CommentsContainer';
+import CommentsSection from './CommentsSection';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
   },
   subPostContainer: {
-
+    justifyContent: 'start',
   },
 }));
 
@@ -34,9 +35,9 @@ const PostInteractionContainer = ({ postId, postIdx, postProfileId, postType, is
     <div className={`subPostContainer ${classes.subPostContainer} flexcol w100`}>
       <div className={`PostInteractionContainer ${classes.root} flexrow w100`}>
         <LikesContainer postId={postId} postIdx={postIdx} postProfileId={postProfileId} />
-        <CommentsContainer postId={postId} postIdx={postIdx} />
+        <CommentsContainer postId={postId} postIdx={postIdx} isCommentSectionOpen={isCommentSectionOpen} setIsCommentSectionOpen={setIsCommentSectionOpen} />
       </div>
-      <div className={`commentsContainer ${classes.commentsContainer} flexrow w100`}></div>
+      <CommentsSection postIdx={postIdx} postId={postId} isCommentSectionOpen={isCommentSectionOpen} />
     </div>
   ) :
   (
