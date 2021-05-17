@@ -2,7 +2,15 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 
 import Grid from '@material-ui/core/Grid';
-import {Paper, Typography, List, ListItem, ListItemIcon, ListItemText, Button} from '@material-ui/core';
+import {
+  Paper,
+  Typography,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Button,
+} from '@material-ui/core';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import EventIcon from '@material-ui/icons/Event';
 import LaunchIcon from '@material-ui/icons/Launch';
@@ -148,142 +156,141 @@ const useStyles = makeStyles({
 });
 
 const RSVPView = () => {
-    const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(0);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-    const styles = useStyles();
-    return (
-        <Container>
-            <Grid container spacing={1} className={styles.wrapper}>
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  const styles = useStyles();
+  return (
+    <Container>
+      <Grid container spacing={1} className={styles.wrapper}>
+        <Grid item xs={12} md={8}>
+          <Grid className={styles.eventCardWrapper}>
+            <Paper>
+              <div className={styles.eventHeader}>
+                <div className={styles.eventHeaderCover}>
+                    <img src="https://via.placeholder.com/800x200"></img>
+                </div>
+              </div>
+              <div className={styles.eventContent}>
+                <div className={styles.eventHeaderDisplayPicture}>
+                  <img src="https://via.placeholder.com/150"></img>
+                </div>
+                <h1 className={styles.eventTopCardTitle}>Advanced tips & tricks - Skyrocket your Productivity with Microsoft Outlook</h1>
+                <div className={styles.eventTopCardEventBy}>
+                    <Typography variant="p">
+                        Event by
+                        <span>
+                        <a>Smart Events International</a>
+                    </span>
+                    </Typography>
+                    <List className={styles.eventListItems}>
+                        <ListItem>
+                            <ListItemIcon>
+                                <VideocamIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Online" />
+                        </ListItem>
+                        <ListItem>
+                            <ListItemIcon>
+                                <EventIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="May 20, 2021, 9:00 PM - 10:30 PM (your local time)" />
+                        </ListItem>
+                        <ListItem>
+                            <ListItemIcon>
+                                <LaunchIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Registration Link" />
+                        </ListItem>
 
-                <Grid item xs={12} md={8}>
-                    <Grid className={styles.eventCardWrapper}>
-                        <Paper>
-                            <div className={styles.eventHeader}>
-                                <div className={styles.eventHeaderCover}>
-                                    <img src="https://via.placeholder.com/800x200"></img>
-                                </div>
-                            </div>
-                            <div className={styles.eventContent}>
-                                <div className={styles.eventHeaderDisplayPicture}>
-                                    <img src="https://via.placeholder.com/150"></img>
-                                </div>
-                                <h1 className={styles.eventTopCardTitle}>Advanced tips & tricks - Skyrocket your Productivity with Microsoft Outlook</h1>
-                                <div className={styles.eventTopCardEventBy}>
-                                    <Typography variant="p">
-                                        Event by
-                                        <span>
-                                        <a>Smart Events International</a>
-                                    </span>
-                                    </Typography>
-                                    <List className={styles.eventListItems}>
-                                        <ListItem>
-                                            <ListItemIcon>
-                                                <VideocamIcon />
-                                            </ListItemIcon>
-                                            <ListItemText primary="Online" />
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemIcon>
-                                                <EventIcon />
-                                            </ListItemIcon>
-                                            <ListItemText primary="May 20, 2021, 9:00 PM - 10:30 PM (your local time)" />
-                                        </ListItem>
-                                        <ListItem>
-                                            <ListItemIcon>
-                                                <LaunchIcon />
-                                            </ListItemIcon>
-                                            <ListItemText primary="Registration Link" />
-                                        </ListItem>
+                        <ListItem className={styles.eventAttendees} >
+                            <ListItemAvatar>
+                                <Avatar
+                                    alt={`Avatar`}
+                                    src={`https://material-ui.com/static/images/avatar/1.jpg`}
+                                />
+                            </ListItemAvatar>
+                            <ListItemAvatar>
+                                <Avatar
+                                    alt={`Avatar`}
+                                    src={`https://material-ui.com/static/images/avatar/1.jpg`}
+                                />
+                            </ListItemAvatar>
+                            <ListItemAvatar>
+                                <Avatar
+                                    alt={`Avatar`}
+                                    src={`https://material-ui.com/static/images/avatar/1.jpg`}
+                                />
+                            </ListItemAvatar>
+                            <ListItemAvatar>
+                                <Avatar
+                                    alt={`Avatar`}
+                                    src={`https://material-ui.com/static/images/avatar/1.jpg`}
+                                />
+                            </ListItemAvatar>
+                            <ListItemAvatar>
+                                <Avatar
+                                    alt={`Avatar`}
+                                    src={`https://material-ui.com/static/images/avatar/1.jpg`}
+                                />
+                            </ListItemAvatar>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    99+
+                                </Avatar>
+                            </ListItemAvatar>
+                        </ListItem>
+                    </List>
+                </div>
+                <div className={styles.actionButtonsContainer}>
+                  <Button variant="contained" className={styles.containedButton}>
+                    Invite Connections
+                  </Button>
+                  <Button className={styles.buttonPrimary}>
+                    Share
+                  </Button>
+                  <Button className={styles.buttonSecondary}>
+                    More
+                  </Button>
+                </div>
+              </div>
+              <hr></hr>
+              <div className={styles.tabsContainer}>
+                <Tabs
+                  value={value} onChange={handleChange}
+                  indicatorColor="secondary"
+                  textColor="secondary"
+                  aria-label="full width tabs example"
+                >
+                  <Tab label="Home" />
+                  <Tab label="Details" />
+                  <Tab label="Attendees" />
+                </Tabs>
+              </div>
+            </Paper>
+          </Grid>
 
-                                        <ListItem className={styles.eventAttendees} >
-                                            <ListItemAvatar>
-                                                <Avatar
-                                                    alt={`Avatar`}
-                                                    src={`https://material-ui.com/static/images/avatar/1.jpg`}
-                                                />
-                                            </ListItemAvatar>
-                                            <ListItemAvatar>
-                                                <Avatar
-                                                    alt={`Avatar`}
-                                                    src={`https://material-ui.com/static/images/avatar/1.jpg`}
-                                                />
-                                            </ListItemAvatar>
-                                            <ListItemAvatar>
-                                                <Avatar
-                                                    alt={`Avatar`}
-                                                    src={`https://material-ui.com/static/images/avatar/1.jpg`}
-                                                />
-                                            </ListItemAvatar>
-                                            <ListItemAvatar>
-                                                <Avatar
-                                                    alt={`Avatar`}
-                                                    src={`https://material-ui.com/static/images/avatar/1.jpg`}
-                                                />
-                                            </ListItemAvatar>
-                                            <ListItemAvatar>
-                                                <Avatar
-                                                    alt={`Avatar`}
-                                                    src={`https://material-ui.com/static/images/avatar/1.jpg`}
-                                                />
-                                            </ListItemAvatar>
-                                            <ListItemAvatar>
-                                                <Avatar>
-                                                    99+
-                                                </Avatar>
-                                            </ListItemAvatar>
-                                        </ListItem>
-                                    </List>
-                                </div>
-                                <div className={styles.actionButtonsContainer}>
-                                    <Button variant="contained" className={styles.containedButton}>
-                                        Invite Connections
-                                    </Button>
-                                    <Button className={styles.buttonPrimary}>
-                                        Share
-                                    </Button>
-                                    <Button className={styles.buttonSecondary}>
-                                        More
-                                    </Button>
-                                </div>
-                            </div>
-                            <hr></hr>
-                            <div className={styles.tabsContainer}>
-                                <Tabs
-                                    value={value} onChange={handleChange}
-                                    indicatorColor="secondary"
-                                    textColor="secondary"
-                                    aria-label="full width tabs example"
-                                >
-                                    <Tab label="Home" />
-                                    <Tab label="Details" />
-                                    <Tab label="Attendees" />
-                                </Tabs>
-                            </div>
-                        </Paper>
-                    </Grid>
+          <Grid>
+            <Paper container>
+              {value === 0 && <RSVPHome/>}
+              {value === 1 && <RSVPDetails/>}
+              {value === 2 && <RSVPAttendees/>}
+            </Paper>
+          </Grid>
 
-                    <Grid>
-                        <Paper container>
-                            {value === 0 && <RSVPHome/>}
-                            {value === 1 && <RSVPDetails/>}
-                            {value === 2 && <RSVPAttendees/>}
-                        </Paper>
-                    </Grid>
+          </Grid>
 
-                </Grid>
+          <Grid item xs={12} md={4}>
+            <Paper style={{padding: 20}}>
+              Right SideBar
+            </Paper>
+          </Grid>
 
-                <Grid item xs={12} md={4}>
-                    <Paper style={{padding: 20}}>
-                        Right SideBar
-                    </Paper>
-                </Grid>
-
-            </Grid>
-        </Container>
-    );
+        </Grid>
+    </Container>
+  );
 };
 
 export default RSVPView;
