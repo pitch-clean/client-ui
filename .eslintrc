@@ -1,5 +1,5 @@
 {
   "extends": [
-    "./node_modules/cod-scripts/eslint.js"
+    // "./node_modules/cod-scripts/eslint.js"
   ]
 }

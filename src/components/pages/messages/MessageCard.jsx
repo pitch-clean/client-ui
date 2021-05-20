@@ -47,7 +47,7 @@ const MessageCard = ({ idx }) => {
   // state
   const messageObj = useSelector(s => s.view.messages.activeConversationObj.messages[idx]);
   const profileMap = useSelector(s => s.view.messages.profileMap);
-  const profileObj = profileMap[messageObj.profileId];
+  const profileObj = profileMap[messageObj.profile];
   const { text } = messageObj;
   const {
     alias,

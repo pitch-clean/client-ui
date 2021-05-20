@@ -4,15 +4,13 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 // utils
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store';
 // components
 import App from './App';
 // style
 import './index.css';
-
-dotenv.config();
 
 ReactDOM.render(
   <Provider store={store}>

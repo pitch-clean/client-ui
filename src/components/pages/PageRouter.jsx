@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
 // components
 import OfferingsListView from './offerings/offeringsList/OfferingsListView';
 import OfferingDetail from './offerings/offeringDetail/OfferingDetail';
@@ -29,6 +28,8 @@ const useStyles = makeStyles(theme => ({
     width: `100%`,
     '& > div': {
       maxWidth: '1300px',
+      width: '100%',
+      minWidth: '500px',
     },
     alignSelf: 'center',
     overflow: 'scroll',

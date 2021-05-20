@@ -4,7 +4,7 @@ export const conversationObj = {
     participants: [1, 3],
     lastMessage: {
       msgId: 2,
-      profileId: 1,
+      profile: 1,
       text: "Great! Thanks.",
       media: null,
       dtReceipt: "2021-14-16T12:34:56.500Z",
@@ -12,7 +12,7 @@ export const conversationObj = {
     messages: [
       {
         msgId: 0,
-        profileId: 1,
+        profile: 1,
         text: "Hey Drew,\n I saw the post for the La Rosa Battery Station offering and would like to submit my interest in investing.\n Best,\n Rick",
         media: null,
         dtRequest: "2021-04-16T10:34:56.500Z",
@@ -20,7 +20,7 @@ export const conversationObj = {
       },
       {
         msgId: 1,
-        profileId: 3,
+        profile: 3,
         text: "Thanks Thomas for reaching out, Thomas. We’ll be in touch soon with a potential investors video chat RSVP link.",
         media: null,
         dtRequest: "2021-04-16T11:34:56.500Z",
@@ -28,7 +28,7 @@ export const conversationObj = {
       },
       {
         msgId: 2,
-        profileId: 1,
+        profile: 1,
         text: "Great! Thanks Drew.",
         media: null,
         dtRequest: "2021-04-16T12:34:56.500Z",
@@ -40,7 +40,7 @@ export const conversationObj = {
     participants: [2, 3],
     lastMessage: {
       msgId: 2,
-      profileId: 1,
+      profile: 1,
       text: "Second msg.",
       media: null,
       dtReceipt: "2021-14-16T12:34:56.500Z",
@@ -48,7 +48,7 @@ export const conversationObj = {
     messages: [
       {
         msgId: 0,
-        profileId: 3,
+        profile: 3,
         text: "Hi Linda,\n I saw the post for the La Rosa Battery Station offering and would like to submit my interest in investing.\n Best,\n Rick",
         media: null,
         dtRequest: "2021-04-16T12:34:56.000Z",
@@ -56,7 +56,7 @@ export const conversationObj = {
       },
       {
         msgId: 1,
-        profileId: 2,
+        profile: 2,
         text: "Thanks Drew. We’ll be in touch soon with a potential investors video chat RSVP link.",
         media: null,
         dtRequest: "2021-04-16T12:35:56.000Z",
@@ -64,7 +64,7 @@ export const conversationObj = {
       },
       {
         msgId: 2,
-        profileId: 3,
+        profile: 3,
         text: "Sounds good!",
         media: null,
         dtRequest: "2021-04-16T12:36:56.000Z",
@@ -72,7 +72,7 @@ export const conversationObj = {
       },
       {
         msgId: 3,
-        profileId: 2,
+        profile: 2,
         text: "Awesome!",
         media: null,
         dtRequest: "2021-04-16T12:37:56.000Z",
@@ -87,7 +87,7 @@ export const user1Conversation1 = {
   participants: [1, 3],
   lastMessage: {
     msgId: 2,
-    profileId: 1,
+    profile: 1,
     text: "Great! Thanks.",
     media: null,
     dtReceipt: "2021-14-16T12:34:56.500Z",
@@ -95,7 +95,7 @@ export const user1Conversation1 = {
   messages: [
     {
       msgId: 0,
-      profileId: 1,
+      profile: 1,
       text: "Hi Thomas,\n I saw the post for the La Rosa Battery Station offering and would like to submit my interest in investing.\n Best,\n Rick",
       media: null,
       dtRequest: "2021-04-16T10:34:56.500Z",
@@ -103,7 +103,7 @@ export const user1Conversation1 = {
     },
     {
       msgId: 1,
-      profileId: 3,
+      profile: 3,
       text: "Thanks Linda for reaching out, Linda. We’ll be in touch soon with a potential investors video chat RSVP link.",
       media: null,
       dtRequest: "2021-04-16T11:34:56.500Z",
@@ -111,7 +111,7 @@ export const user1Conversation1 = {
     },
     {
       msgId: 2,
-      profileId: 1,
+      profile: 1,
       text: "Great! Thanks.",
       media: null,
       dtRequest: "2021-04-16T12:34:56.500Z",
@@ -124,7 +124,7 @@ export const user1Conversation2 = {
   participants: [2, 3],
   lastMessage: {
     msgId: 2,
-    profileId: 1,
+    profile: 1,
     text: "Second msg.",
     media: null,
     dtReceipt: "2021-14-16T12:34:56.500Z",
@@ -132,7 +132,7 @@ export const user1Conversation2 = {
   messages: [
     {
       msgId: 0,
-      profileId: 2,
+      profile: 2,
       text: "Hi Rob,\n I saw the post for the La Rosa Battery Station offering and would like to submit my interest in investing.\n Best,\n Rick",
       media: null,
       dtRequest: "2021-04-16T12:34:56.500Z",
@@ -140,7 +140,7 @@ export const user1Conversation2 = {
     },
     {
       msgId: 1,
-      profileId: 3,
+      profile: 3,
       text: "Thanks Drew. We’ll be in touch soon with a potential investors video chat RSVP link.",
       media: null,
       dtRequest: "2021-04-16T12:34:56.500Z",
@@ -148,7 +148,7 @@ export const user1Conversation2 = {
     },
     {
       msgId: 2,
-      profileId: 2,
+      profile: 2,
       text: "Sounds good!",
       media: null,
       dtRequest: "2021-04-16T12:34:56.500Z",

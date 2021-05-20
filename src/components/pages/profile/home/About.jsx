@@ -50,7 +50,7 @@ const About = () => {
   const profileBio = useSelector(s => s.view.profile.viewProfile.profileBio);
   const active = useSelector(s => s.view.profile.viewProfile.active);
   const fullName = `${pii.firstName} ${pii.lastName}`;
-  const employmentTxt = `${active.position} at ${active.name}`;
+  const employmentTxt = `${active.position} at ${active.organization.pii.name}`;
 
   return (
     <div className={`About ${classes.root} w100`}>

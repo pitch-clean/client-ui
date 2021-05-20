@@ -48,13 +48,13 @@ export const buildListOfUserNames = (participants, _id, profMap) => {
   const allNamesArr = [];
   const thumbnailArr = [];
   for (let i = 0; i < nonSelfParticipants.length; i += 1) {
-    const profileId = nonSelfParticipants[i];
+    const profile = nonSelfParticipants[i];
     const {
       pii: { firstName, lastName },
       images: {
         profile: { thumbnail },
       },
-    } = profMap[profileId];
+    } = profMap[profile];
     const fullName = `${firstName} ${lastName}`;
     allNamesArr.push(fullName);
     thumbnailArr.push(thumbnail);

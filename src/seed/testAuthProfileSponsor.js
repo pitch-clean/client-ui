@@ -438,7 +438,7 @@ const investments = [
 ];
 const following = [
   {
-    profileId: 0,
+    profile: 0,
     firstName: `Greg`,
     lastName: `Harris`,
     position: 'Senior Vice President',
@@ -447,7 +447,7 @@ const following = [
     stateProvince: 'NY',
   },
   {
-    profileId: 1,
+    profile: 1,
     firstName: `Sarah`,
     lastName: `Daly`,
     position: 'Managing Director',
@@ -456,7 +456,7 @@ const following = [
     stateProvince: 'DC',
   },
   {
-    profileId: 2,
+    profile: 2,
     firstName: `Pete`,
     lastName: `Taylor`,
     position: 'Associate',
@@ -465,7 +465,7 @@ const following = [
     stateProvince: 'TN',
   },
   {
-    profileId: 3,
+    profile: 3,
     firstName: `Sasha`,
     lastName: `Carlton`,
     position: 'Senior Analyst',
@@ -474,7 +474,7 @@ const following = [
     stateProvince: 'UT',
   },
   {
-    profileId: 4,
+    profile: 4,
     firstName: `Lauren`,
     lastName: `Cunningham`,
     position: 'Partner and COO',
@@ -629,7 +629,7 @@ export const profile = {
 // ];
 // const following = [
 //   {
-//     profileId: 0,
+//     profile: 0,
 //     firstName: `Greg`,
 //     lastName: `Harris`,
 //     position: 'Senior Vice President',
@@ -638,7 +638,7 @@ export const profile = {
 //     stateProvince: 'NY',
 //   },
 //   {
-//     profileId: 1,
+//     profile: 1,
 //     firstName: `Sarah`,
 //     lastName: `Daly`,
 //     position: 'Managing Director',
@@ -647,7 +647,7 @@ export const profile = {
 //     stateProvince: 'DC',
 //   },
 //   {
-//     profileId: 2,
+//     profile: 2,
 //     firstName: `Pete`,
 //     lastName: `Taylor`,
 //     position: 'Associate',
@@ -656,7 +656,7 @@ export const profile = {
 //     stateProvince: 'TN',
 //   },
 //   {
-//     profileId: 3,
+//     profile: 3,
 //     firstName: `Sasha`,
 //     lastName: `Carlton`,
 //     position: 'Senior Analyst',
@@ -665,7 +665,7 @@ export const profile = {
 //     stateProvince: 'UT',
 //   },
 //   {
-//     profileId: 4,
+//     profile: 4,
 //     firstName: `Lauren`,
 //     lastName: `Cunningham`,
 //     position: 'Partner and COO',

@@ -1,6 +1,6 @@
 // react
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // components
-import PostActionButton from './PostActionButton';
+import PostInteractionContainer from './PostInteractionContainer';
 // constants
 const useStyles = makeStyles(theme => ({
   cardRoot: {
@@ -60,16 +60,17 @@ const buildName = (fName, lName) => {
 const buildLocation = (city, stateProv) => {
   return `${city}, ${stateProv}`;
 };
-const envProfilePath = 'profile';
 
 // main
-const FeedPost = ({ idx, isProfile }) => {
+const FeedPost = ({ idx: postIdx, isProfile }) => {
   // init hooks
   const classes = useStyles();
   // state
-  const postObj = useSelector(s => s.view[isProfile ? 'profile' : 'feed'].posts[idx]);
+  const postObj = useSelector(s => s.view[isProfile ? 'profile' : 'feed'].posts[postIdx]);
+  const viewProfile = useSelector(s => s.view.profile.viewProfile);
   // destructure
-  const { body, profile, postType } = postObj;
+  const { body, postType, _id: postId, profile: postProfileId } = postObj;
+  const profile = isProfile ? viewProfile : postObj.profile; // need to do this for posts on profile
   const {
     // profileClass,
     profileType,
@@ -92,7 +93,8 @@ const FeedPost = ({ idx, isProfile }) => {
     subtitle = buildLocation(address.city, address.stateProvince);
   } else {
     title = buildName(firstName, lastName);
-    subtitle = active.organization;
+    // console.log(profile)
+    subtitle = active.organization ? active.organization.pii.name : 'not set up';
   }
 
   return postObj ? (
@@ -103,7 +105,7 @@ const FeedPost = ({ idx, isProfile }) => {
           content: classes.cardHeaderContent,
         }}
         avatar={
-          <Link to={`/${envProfilePath}/alias`}>
+          <Link to={`/profile/${alias}`}>
             <Avatar aria-label="profile pic" src={thumbnail} className={classes.avatar} />
           </Link>
         }
@@ -115,7 +117,7 @@ const FeedPost = ({ idx, isProfile }) => {
         title={
           <MuiLink
             component={Link}
-            to={`/${envProfilePath}/${alias}`}
+            to={`/profile/${alias}`}
             color="inherit"
             variant="subtitle2"
           >
@@ -123,7 +125,12 @@ const FeedPost = ({ idx, isProfile }) => {
           </MuiLink>
         }
         subheader={
-          <Typography className={classes.subtitle} variant="caption" component="h" color="textSecondary">
+          <Typography
+            className={classes.subtitle}
+            variant="caption"
+            component="h"
+            color="textSecondary"
+          >
             {subtitle}
           </Typography>
         }
@@ -133,7 +140,7 @@ const FeedPost = ({ idx, isProfile }) => {
           {body}
         </Typography>
       </CardContent>
-      <PostActionButton postType={postType} />
+      <PostInteractionContainer postId={postId} postIdx={postIdx} postProfileId={postProfileId} postType={postType} isProfile={isProfile} />
     </Paper>
   ) : (
     <div />

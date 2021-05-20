@@ -15,8 +15,8 @@ const queryOfferingsForProfile = offeringsArr => {
 const queryProfilesForConnection = profilesArr => {
   const payload = [];
   for (let i = 0; i < profilesArr.length; i += 1) {
-    const profileId = profilesArr[i];
-    const { pii, active, alias, location, images } = profilesObj[profileId];
+    const profile = profilesArr[i];
+    const { pii, active, alias, location, images } = profilesObj[profile];
     const profObj = {
       pii,
       active,
@@ -35,8 +35,8 @@ const queryOrganizationForActive = orgId => {
     slug: profilesObj[orgId].alias,
   };
 };
-export const queryProfileForPost = profileId => {
-  const { images, active, alias, pii } = profilesObj[profileId];
+export const queryProfileForPost = profile => {
+  const { images, active, alias, pii } = profilesObj[profile];
   const newProfile = {
     alias,
     pii,
@@ -48,9 +48,9 @@ export const queryProfileForPost = profileId => {
   };
   return newProfile;
 };
-export const queryProfileForProfilePage = profileId => {
+export const queryProfileForProfilePage = profile => {
   const { images, active, alias, pii, connections, profileBio, investments } = profilesObj[
-    profileId
+    profile
   ];
   const newProfile = {
     alias,

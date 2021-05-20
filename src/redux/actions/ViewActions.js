@@ -1,6 +1,5 @@
 import * as types from '../types/ViewTypes';
 
-// eslint-disable-next-line
 export const updateIsDarkMode = payload => dispatch => {
   dispatch({
     type: types.IS_DARK_MODE,
@@ -69,10 +68,22 @@ export const updateProfileMap = payload => dispatch => {
   });
 };
 // feed
-export const updatePosts = payload => dispatch => {
+export const updatePostsArr = payload => dispatch => {
   dispatch({
-    type: types.UPDATE_POSTS,
+    type: types.UPDATE_POSTS_ARR,
     payload,
+  });
+};
+export const updatePostLikes = payload => dispatch => {
+  dispatch({
+    type: types.UPDATE_POST_LIKES,
+    payload,
+  });
+};
+export const updatePostComments = ({ postId, commentsArr }) => dispatch => {
+  dispatch({
+    type: types.UPDATE_POST_COMMENTS,
+    payload: { postId, commentsArr },
   });
 };
 export const clearFeed = () => dispatch => {
