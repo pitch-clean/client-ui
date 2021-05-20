@@ -5,18 +5,23 @@ import { Switch, Route } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 // components
-import OfferingsListView from './offerings/offeringsList/OfferingsListView';
-import OfferingDetail from './offerings/offeringDetail/OfferingDetail';
 import NotFound from './home/NotFound';
 import LoginForm from './profile/LoginForm';
-import FeedView from './feed/FeedView';
+// pages
 import Home from './home/Home';
-import CreateProfile from './profile/CreateProfile';
-import CreateOffering from './offerings/CreateOffering';
+import FeedView from './feed/FeedView';
 import ProfileView from './profile/ProfileView';
 import PortfolioView from './portfolio/PortfolioView';
 import MessagesView from './messages/MessagesView';
 import RSVPView from './rsvp/RSVPView';
+// list views
+import OfferingsListView from './offerings/offeringsList/OfferingsListView';
+// detail views
+import OfferingDetail from './offerings/offeringDetail/OfferingDetail';
+// create
+import CreateOffering from './offerings/CreateOffering';
+import CreateProfile from './profile/CreateProfile';
+import CreateRSVP from './rsvp/CreateRSVP';
 
 // constants
 const useStyles = makeStyles(theme => ({
@@ -73,10 +78,15 @@ const PageRouter = () => {
         />
         <Route
           exact
-          path="/offering/new"
+          path="/create-offering" // added test otherwise it will redirect to Offering details
           render={p => isAuthenticated && <CreateOffering props={p} />}
         />
         <Route exact path="/rsvp/:rsvpId" render={p => <RSVPView props={p} />} />
+        <Route
+          exact
+          path="/create-rsvp"
+          render={p => isAuthenticated && <CreateRSVP props={p} />}
+        />
         <Route render={p => <NotFound props={p} />} />
       </Switch>
       {/* <Grid item className={`${classes.footer} w100`}>

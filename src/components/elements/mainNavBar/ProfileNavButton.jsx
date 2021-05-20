@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 // TODO add env vars
-const envOfferingsPath = 'offering';
+const envOfferingsPath = 'create-offering';
 const envProfilePath = 'profile';
 
 /**
@@ -37,7 +37,7 @@ const ProfileNavButton = () => {
     <Grid container direction="row">
       {/* new here below */}
       {profileClass === 'sponsor' && (
-        <MuiLink color="inherit" component={Link} to={`/${envOfferingsPath}/new`}>
+        <MuiLink color="inherit" component={Link} to={`/${envOfferingsPath}`}>
           <Typography
             className={classes.createOffering}
             variant="subtitle1"
