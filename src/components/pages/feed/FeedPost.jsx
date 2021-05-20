@@ -69,7 +69,7 @@ const FeedPost = ({ idx: postIdx, isProfile }) => {
   const postObj = useSelector(s => s.view[isProfile ? 'profile' : 'feed'].posts[postIdx]);
   const viewProfile = useSelector(s => s.view.profile.viewProfile);
   // destructure
-  const { body, postType, _id: postId, profileId: postProfileId } = postObj;
+  const { body, postType, _id: postId, profile: postProfileId } = postObj;
   const profile = isProfile ? viewProfile : postObj.profile; // need to do this for posts on profile
   const {
     // profileClass,

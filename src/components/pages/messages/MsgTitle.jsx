@@ -42,14 +42,14 @@ const MsgTitle = () => {
   let allNamesStr = [];
   const thumbnailArr = [];
   for (let i = 0; i < nonSelfParticipants.length; i += 1) {
-    const profileId = nonSelfParticipants[i];
+    const profile = nonSelfParticipants[i];
     const {
       active: { organization, title },
       pii: { firstName, lastName },
       images: {
         profile: { thumbnail },
       },
-    } = profileMap[profileId];
+    } = profileMap[profile];
     let fullName = '';
     if (nonSelfParticipants.length > 1) {
       fullName = `${firstName} ${lastName}`;

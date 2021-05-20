@@ -28,7 +28,7 @@ const FeedContent = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   // state
-  const profileId = useSelector(s => s.auth.activeProfile._id);
+  const profile = useSelector(s => s.auth.activeProfile._id);
   const postsLen = useSelector(s => s.view.feed.posts.length);
   // build
   const postElemArr = [];
@@ -38,13 +38,13 @@ const FeedContent = () => {
   // effects
   useEffect(async () => {
     // fetch seed posts
-    const posts = await (await Get(`${window.env.endpoints.posts}/feed/${profileId}/0`, {}, false)).json();
+    const posts = await Get(`${window.env.api.posts}/feed/${profile}/0`, {}, true);
     console.log('posposp', posts)
-    dispatch(updatePostsArr(posts));
+    dispatch(updatePostsArr(posts || []));
   }, []);
 
   return (
-    <Paper className={`${classes.root} FeedContainer flexcol`} elevation={0}>
+    <Paper className={`FeedContent ${classes.root} flexcol`} elevation={0}>
       {/* <CreatePost /> */}
       {postsLen > 0 && postElemArr}
       {postsLen > 0 && <div className="endScroll" />}

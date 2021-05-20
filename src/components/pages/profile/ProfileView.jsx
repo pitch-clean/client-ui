@@ -43,7 +43,7 @@ const ProfileView = () => {
   const viewProfile = useSelector(s => s.view.profile.viewProfile);
   // effects
   useEffect(async () => {
-    const url = `${window.env.endpoints.profiles}/${alias}?by=alias`;
+    const url = `${window.env.api.profiles}/${alias}?by=alias`;
     const res = await Get(url, {}, true);
     dispatch(updateViewProfile(res));
     return () => {

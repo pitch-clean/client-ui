@@ -77,7 +77,7 @@ const LSSuggestedConnections = () => {
   // state
   const [recommendedConnectionsArr, setRecommendedConnectionsArr] = useState([]);
   // build
-  const buildProfileCard = (profileObj, idx, profileId) => {
+  const buildProfileCard = (profileObj, idx, profile) => {
     console.log(profileObj.active.position)
     const {
       pii: { firstName, lastName },
@@ -165,8 +165,8 @@ const LSSuggestedConnections = () => {
       <Divider className={classes.divider} variant="middle" component="div" />
       <List className={classes.list}>
         {Object.entries(recommendedConnectionsArr).map((profileEntryArr, idx) => {
-          const [profileId, profileObj] = profileEntryArr;
-          return buildProfileCard(profileObj, idx, profileId);
+          const [profile, profileObj] = profileEntryArr;
+          return buildProfileCard(profileObj, idx, profile);
         })}
       </List>
     </Paper>

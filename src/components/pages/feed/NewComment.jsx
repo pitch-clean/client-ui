@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 }));
 // fxns
 const submitComment = async (input, postId, activeProfileId, dispatch) => {
-  const url = `${window.env.endpoints.posts}/comment`;
+  const url = `${window.env.api.posts}/comment`;
   const body = { activeProfileId, postId, body: input };
   try {
     const res = await Post(url, body, {}, true);

@@ -22,8 +22,8 @@ const useStyles = makeStyles(theme => ({
 }));
 // fxns
 const onClick =  (postId, postProfileId, dispatch) => async () => {
-  const endpoint = `${window.env.endpoints.posts}/like`;
-  const body = { postId, profileId: postProfileId };
+  const endpoint = `${window.env.api.posts}/like`;
+  const body = { postId, profile: postProfileId };
   const { post } = await Put(endpoint, body, {}, true);
   dispatch(updatePostLikes(post));
 };

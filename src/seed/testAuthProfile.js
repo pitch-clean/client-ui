@@ -542,7 +542,7 @@ const conversations = {
     participants: [2, 3],
     lastMessage: {
       msgId: 2,
-      profileId: 2,
+      profile: 2,
       text: "Great! Thanks.",
       media: null,
       dtReceipt: "2021-04-17T12:34:56.501000Z",
@@ -552,7 +552,7 @@ const conversations = {
     participants: [1, 3],
     lastMessage: {
       msgId: 2,
-      profileId: 3,
+      profile: 3,
       text: "Thanks for reaching out, Thomas. We’ll be in touch soon with a potential investors video chat RSVP link.",
       media: null,
       dtReceipt: "2021-04-16T12:34:56.502Z",

@@ -2,15 +2,32 @@ const protocol = 'http';
 const hostname = 'localhost';
 const clientApiPort = 8080;
 const apiLoc = 'api';
-const apiEndpoint = `${protocol}://${hostname}:${clientApiPort}/${apiLoc}`;
+const apiBase = `${protocol}://${hostname}:${clientApiPort}/${apiLoc}`;
 
-const apiRoutes = {
-  posts: 'posts',
-  offerings: 'offerings',
-  profiles: 'profiles',
-  auth: 'auth',
+// api and client route vars
+const auth = 'auth';
+const profile = 'profile';
+const profiles = 'profiles';
+const offering = 'offering';
+const offerings = 'offerings';
+const social = 'social';
+const post = 'post';
+const posts = 'posts';
+const comments = 'comments';
+
+const api = {
+  base: apiBase,
+  auth: `${apiBase}/${auth}`,
+  profiles: `${apiBase}/${profiles}`,
+  offerings: `${apiBase}/${offerings}`,
+  posts: `${apiBase}/${social}/${posts}`,
+  comments: `${apiBase}/${social}/${comments}`,
 };
-const clientRoutes = {
+
+/**
+ * client react router routes
+ */
+const client = {
   posts: 'posts',
   offerings: 'offerings',
   offering: 'offering',
@@ -21,20 +38,9 @@ const clientRoutes = {
   auth: 'auth',
 };
 
-const endpoints = {
-  apiBase: apiEndpoint,
-  posts: `${apiEndpoint}/${apiRoutes.posts}`,
-  offerings: `${apiEndpoint}/${apiRoutes.offerings}`,
-  profiles: `${apiEndpoint}/${apiRoutes.profiles}`,
-  auth: `${apiEndpoint}/${apiRoutes.auth}`,
-};
-
 window.env = {
   protocol,
   hostname,
-  clientApiPort,
-  apiLoc,
-  ...apiRoutes,
-  endpoints,
-  clientRoutes,
+  api,
+  client,
 };
