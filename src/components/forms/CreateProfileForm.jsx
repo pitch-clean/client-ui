@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Link as MuiLink } from '@material-ui/core';
+import { Link as MuiLink } from '@material-ui/core';
 // components
 import LoginInfoForm from './profileForms/LoginInfoForm';
 import ProfileTypeForm from './profileForms/ProfileTypeForm';

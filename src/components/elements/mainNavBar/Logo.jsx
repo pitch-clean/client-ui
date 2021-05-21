@@ -7,6 +7,7 @@ import { Typography, Link as MuiLink } from '@material-ui/core';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
+    padding: 10,
   },
 }));
 
@@ -18,7 +19,7 @@ const Logo = () => {
   const classes = useStyles();
 
   return (
-    <MuiLink className={`Logo ${classes.nav} flexrow`} component={Link} to={{ pathname: '/' }}>
+    <MuiLink className={`Logo ${classes.root} flexrow`} component={Link} to={{ pathname: '/' }}>
       <Typography variant="caption" color="primary">
         pitchclean
       </Typography>

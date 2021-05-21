@@ -52,7 +52,9 @@ const buildName = (fName, lName) => {
   return `${fName} ${lName}`;
 };
 
-// main
+/**
+ * main
+ */
 const LSProfile = () => {
   // init hooks
   const classes = useStyles();
@@ -73,7 +75,7 @@ const LSProfile = () => {
   } = images;
 
   return (
-    <Paper className={`${classes.root} LSProfile w100`} elevation={0}>
+    <Paper className={`LSProfile ${classes.root} w100`} elevation={0}>
       <CardHeader
         className={`headSection w100`}
         avatar={
@@ -104,13 +106,6 @@ const LSProfile = () => {
         >
           {`${getCtMsg(connections, 'Connections')} | ${getCtMsg(following, 'Following')}`}
         </Typography>
-        <Divider className={classes.divider} variant="middle" component="div" />
-        <div className="flexrow">
-          <BookmarkBorder color="action" />
-          <Typography className={classes.body} variant="p" component="div">
-            Saved Items
-          </Typography>
-        </div>
         <div
           style={{
             position: 'absolute',

@@ -10,7 +10,6 @@ import PageRouter from './components/pages/PageRouter';
 import MainNavBar from './components/elements/mainNavBar/MainNavBar';
 // styling
 import './App.css';
-import './config.dev.js';
 // seed
 import { profile } from './seed/testAuthProfile';
 // constants

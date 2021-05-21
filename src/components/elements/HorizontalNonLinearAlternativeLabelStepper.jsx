@@ -119,7 +119,6 @@ const HorizontalNonLinearAlternativeLabelStepper = ({
   stepObjsArr,
   reducerName,
   redirectPath,
-  redirectAction,
   redirectRoute,
   updateActiveForm_,
   checkIfAllValidForms_,

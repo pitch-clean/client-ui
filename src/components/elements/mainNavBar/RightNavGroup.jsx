@@ -4,11 +4,19 @@ import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 // components
+import ProfileNavButton from './ProfileNavButton';
 import ProfileLoginRegister from './ProfileLoginRegister';
-import InfoGroup from './InfoGroup';
+import Sidebar from '../SideBar';
 // constants
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    '& *:hover': {
+      textDecoration: 'none',
+    },
+    justifyContent: 'end',
+    color: 'white',
+    fontSize: '1rem',
+  },
 }));
 
 /**
@@ -21,10 +29,11 @@ const RightNavGroup = () => {
   const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
 
   return (
-    <div className={`RightNavGroup ${classes.root} flexrow`}>
-      {!isAuthenticated && <InfoGroup />}
-      <ProfileLoginRegister />
-    </div>
+    <Sidebar isNav isLeft={false}>
+      <div className={`RightNavGroup ${classes.root} flexrow w100`}>
+        {isAuthenticated ? <ProfileNavButton /> : <ProfileLoginRegister />}
+      </div>
+    </Sidebar>
   );
 };
 

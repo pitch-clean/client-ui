@@ -11,6 +11,7 @@ import store from './redux/store';
 import App from './App';
 // style
 import './index.css';
+import './config.dev.js';
 
 ReactDOM.render(
   <Provider store={store}>

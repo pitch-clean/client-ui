@@ -95,7 +95,6 @@ body {
   border: 1px solid transparent;
 }
 .navBarLink:hover {
-  /* rgb(213, 220, 213) */
   background-color: rgba(132, 167, 142, 0.185);
   box-shadow: rgba(212, 212, 212, 0.3) 0 3px 3px -1px;
   border: 1px solid rgba(149, 177, 149, 0.192);

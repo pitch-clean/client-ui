@@ -14,6 +14,9 @@ const social = 'social';
 const post = 'post';
 const posts = 'posts';
 const comments = 'comments';
+const feed = 'feed';
+const messages = 'messages';
+const portfolio = 'portfolio';
 
 const api = {
   base: apiBase,
@@ -28,14 +31,16 @@ const api = {
  * client react router routes
  */
 const client = {
-  posts: 'posts',
-  offerings: 'offerings',
-  offering: 'offering',
-  profiles: 'profiles',
-  profiles: 'profile',
-  portfolio: 'portfolio',
-  messages: 'messages',
-  auth: 'auth',
+  post,
+  posts,
+  offerings,
+  offering,
+  profiles,
+  profile,
+  portfolio,
+  messages,
+  auth,
+  feed,
 };
 
 window.env = {

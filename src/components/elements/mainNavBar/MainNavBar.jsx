@@ -8,15 +8,17 @@ import RightNavGroup from './RightNavGroup';
 import Logo from './Logo';
 // constants
 const useStyles = makeStyles(theme => ({
+  container: {
+    backgroundColor: '#323e49',
+  },
   root: {
-    backgroundColor: '#212221',
-    width: '100%',
-    maxWidth: '1300px',
     justifyContent: 'space-between',
     alignItems: 'center',
-    color: 'rgb(213, 220, 213)',
-    textDecoration: 'none',
+    width: '100%',
+    maxWidth: '1300px',
     padding: 5,
+    textDecoration: 'none',
+    color: 'rgb(213, 220, 213)',
   },
 }));
 
@@ -33,10 +35,12 @@ const MainNavBar = () => {
   }, [ref1]);
 
   return (
-    <div className={`MainNavBar ${classes.root} w100 flexrow`} ref={ref1}>
-      <Logo />
-      <CenterNavGroup />
-      <RightNavGroup />
+    <div className={`container ${classes.container} w100 flexrow`} ref={ref1}>
+      <div className={`MainNavBar ${classes.root} flexrow`}>
+        <Logo />
+        <CenterNavGroup />
+        <RightNavGroup />
+      </div>
     </div>
   );
 };
