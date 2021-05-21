@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 // import { clearFeed } from '../../../redux/actions/ViewActions';
 // components
-import RightSidebar from './RightSidebar';
-import LeftSidebar from './LeftSidebar';
+import RightSidebar from './rightSidebar/RightSidebar';
+import LeftSidebar from './leftSidebar/LeftSidebar';
 import FeedContent from './FeedContent';
 // constants
 const useStyles = makeStyles(theme => ({

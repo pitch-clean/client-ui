@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import { CardActions, Button, Link as MuiLink } from '@material-ui/core';
-import { Put } from '../../../utils/requests';
-import { updatePostLikes } from '../../../redux/actions/ViewActions';
+import { Put } from '../../../../utils/requests';
+import { updatePostLikes } from '../../../../redux/actions/ViewActions';
 // components
 import ShowProfilesThatLikedPost from './ShowProfilesThatLikedPost';
 // constants

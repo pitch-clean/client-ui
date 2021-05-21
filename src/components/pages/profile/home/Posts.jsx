@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
 import { updateProfileTab } from '../../../../redux/actions/ViewActions';
 // components
-import FeedPost from '../../feed/FeedPost';
+import FeedPost from '../../feed/posts/FeedPost';
 // constants
 const useStyles = makeStyles(() => ({
   root: {},

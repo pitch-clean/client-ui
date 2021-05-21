@@ -10,7 +10,7 @@ import Nav from './home/Nav';
 import About from './home/About';
 import Investments from './home/Investments';
 import Network from './home/Network';
-import LeftSidebar from '../feed/LeftSidebar';
+import LeftSidebar from '../feed/leftSidebar/LeftSidebar';
 import Posts from './home/Posts';
 // seed
 import { Get } from '../../../utils/requests';

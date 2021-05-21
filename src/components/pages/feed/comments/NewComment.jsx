@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, TextField, Button } from '@material-ui/core';
-import { updatePostComments } from '../../../redux/actions/ViewActions';
-import { Post } from '../../../utils/requests';
+import { updatePostComments } from '../../../../redux/actions/ViewActions';
+import { Post } from '../../../../utils/requests';
 // components
 // constants
 const useStyles = makeStyles(theme => ({

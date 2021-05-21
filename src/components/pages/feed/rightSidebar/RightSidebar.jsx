@@ -1,7 +1,7 @@
 // react
 import React from 'react';
 // components
-import Sidebar from '../../elements/SideBar';
+import Sidebar from '../../../elements/SideBar';
 import News from './news/News';
 // import PublicMarkets from './publicMarkets/PublicMarkets';
 

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Divider, ListItem, ListItemText, Typography, Link as MuiLink } from '@material-ui/core';
 // seed
-import { newsItems } from '../../../../seed/testNewsItems';
+import { newsItems } from '../../../../../seed/testNewsItems';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {},

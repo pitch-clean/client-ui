@@ -4,11 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 // utils
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { Grid, TextField, Tab, Tabs, Collapse } from '@material-ui/core';
+import { Grid, Tab, Tabs } from '@material-ui/core';
 import { updateL1 } from '../../../redux/actions/ViewActions';
-// components
-import Portfolio from './Portfolio';
-import Portfolio2 from './Portfolio2';
 // constants
 const StyledTabs = withStyles({
   indicator: {
@@ -90,25 +87,21 @@ const l1Map = {
 /**
  * main
  */
-const SubNav = () => {
+const CenterNavGroup = () => {
   // init hooks
   const classes = useStyles();
   const loc = useLocation();
   const dispatch = useDispatch();
   // state
-  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
   const l1Path = loc.pathname.split('/')[1];
   // effects
   useEffect(() => {
     dispatch(updateL1(l1Path));
   }, [l1Path]);
-  if (!isAuthenticated) {
-    return <div />;
-  }
 
   return (
-    <Grid className={`w100 ${classes.root} flexcol`}>
-      <div className={`${classes.nav} flexrow`}>
+    // <Grid className={`w100 ${classes.root} flexcol`}>
+      <div className={`CenterNavGroup ${classes.nav} flexrow`}>
         <StyledTabs value={l1Map[l1Path]} indicatorColor="secondary" textColor="primary" centered>
           <Link to={`/${envFeedPath}`}>
             <StyledTab label="Newsfeed" textColor="primary" />
@@ -123,26 +116,10 @@ const SubNav = () => {
             <StyledTab label="Messages" textColor="primary" />
           </Link>
         </StyledTabs>
-        {/* <form
-          onSubmit={e => {
-            e.preventDefault();
-            alert('Submitting');
-          }}
-        >
-          <TextField
-            className={classes.search}
-            label="Search"
-            variant="outlined"
-            color="primary"
-            size="small"
-          />
-        </form> */}
       </div>
-      {l1Path === envOfferingsPath && <Portfolio />}
-      {l1Path === envPortfolioPath && <Portfolio2 />}
-    </Grid>
+    // </Grid>
   );
 };
 
 // export
-export default SubNav;
+export default CenterNavGroup;

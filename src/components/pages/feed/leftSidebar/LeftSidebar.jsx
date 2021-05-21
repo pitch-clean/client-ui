@@ -2,7 +2,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 // components
-import Sidebar from '../../elements/SideBar';
+import Sidebar from '../../../elements/SideBar';
 import LSProfile from './LSProfile';
 
 /**

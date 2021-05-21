@@ -5,8 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 // components
 import LikesContainer from './LikesContainer';
 import PostActionButton from './PostActionButton';
-import CommentsContainer from './CommentsContainer';
-import CommentsSection from './CommentsSection';
+import CommentsContainer from './../comments/CommentsContainer';
+import CommentsSection from './../comments/CommentsSection';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
