@@ -1,13 +1,12 @@
 // react
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 // utils
 import { fixedHeight } from '../../utils/styleFxns';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Link as MuiLink } from '@material-ui/core';
-// components
-// import Sample from './Sample';
+import { Link as MuiLink } from '@material-ui/core';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,9 +25,6 @@ const useStyles = makeStyles(theme => ({
     textDecoration: `none`,
   },
 }));
-const envSponsorPath = 'sponsor';
-const envInvestPath = 'invest';
-const envFunctionalityPath = 'functionality';
 
 /**
  * main
@@ -36,32 +32,34 @@ const envFunctionalityPath = 'functionality';
 const InfoGroup = () => {
   // init hooks
   const classes = useStyles();
+  // state
+  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
 
-  return (
+  return isAuthenticated ? (
     <div className={`h100 f1 flexrow ${classes.root}`}>
       <MuiLink
         component={Link}
-        to={`/${envSponsorPath}`}
+        to={`/${window.env.client.sponsor}`}
         className={`navBarLink h100 flexcol ${classes.link}`}
       >
         Raise Capital
       </MuiLink>
       <MuiLink
         component={Link}
-        to={`/${envInvestPath}`}
+        to={`/${window.env.client.invest}`}
         className={`navBarLink h100 flexcol ${classes.link}`}
       >
         Invest
       </MuiLink>
       <MuiLink
         component={Link}
-        to={`/${envFunctionalityPath}`}
+        to={`/${window.env.client.functionality}`}
         className={`navBarLink h100 flexcol ${classes.link}`}
       >
         How it works
       </MuiLink>
     </div>
-  );
+  ) : <div />;
 };
 
 // export

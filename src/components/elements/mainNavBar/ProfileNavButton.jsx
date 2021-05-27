@@ -4,10 +4,15 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography, ButtonBase, Link as MuiLink } from '@material-ui/core';
+import { Typography, Link as MuiLink } from '@material-ui/core';
+// components
+import StyledTab from './StyledTab';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
+    fontSize: `1rem`,
+  },
+  button: {
     padding: `0 15px`,
     border: `1px solid whitesmoke`,
     borderRadius: '7px',
@@ -16,10 +21,15 @@ const useStyles = makeStyles(theme => ({
     padding: `0 15px`,
     margin: `0 45px`,
   },
+  link: {
+    textDecoration: 'none',
+  },
+  text: {
+    fontSize: `1rem`,
+    textDecoration: 'none',
+    padding: 10,
+  },
 }));
-// TODO add env vars
-const envOfferingsPath = 'offering';
-const envProfilePath = 'profile';
 
 /**
  * main
@@ -30,16 +40,15 @@ const ProfileNavButton = () => {
   // state
   const firstName = useSelector(s => s.auth.activeProfile.pii.firstName);
   const alias = useSelector(s => s.auth.activeProfile.alias);
-  const profileClass = useSelector(s => s.auth.activeProfile.profileClass);
+  // const profileClass = useSelector(s => s.auth.activeProfile.profileClass);
   // const activeProfile = useSelector(s => s.auth.activeProfile);
 
   return (
-    <Grid container direction="row">
-      {/* new here below */}
-      {profileClass === 'sponsor' && (
-        <MuiLink color="inherit" component={Link} to={`/${envOfferingsPath}/new`}>
+    <div className={`ProfileNavButton ${classes.root} flexrow navBarLink`}>
+      {/* {profileClass === 'sponsor' && (
+        <MuiLink className={`navBarLink`} color="inherit" component={Link} to={`/${window.env.client.offerings}`}>
           <Typography
-            className={classes.createOffering}
+            className={`${classes.createOffering} navBarLink`}
             variant="subtitle1"
             color="inherit"
             component="div"
@@ -47,16 +56,11 @@ const ProfileNavButton = () => {
             Create Offering
           </Typography>
         </MuiLink>
-      )}
-      {/* above */}
-      <MuiLink color="inherit" component={Link} to={`/${envProfilePath}/${alias}`}>
-        <ButtonBase className={classes.root} variant="outlined">
-          <Typography variant="subtitle1" color="inherit" component="div">
-            {firstName}
-          </Typography>
-        </ButtonBase>
+      )} */}
+      <MuiLink className={`${classes.link} navBarLink`} color="inherit" component={Link} to={`/${window.env.client.profile}/${alias}`}>
+        <StyledTab label={firstName} textColor="primary" />
       </MuiLink>
-    </Grid>
+    </div>
   );
 };
 

@@ -1,17 +1,24 @@
 // react
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import { Typography, Chip, Link as MuiLink } from '@material-ui/core';
 // components
-import ProfileNavButton from './ProfileNavButton';
-import LoginRegister from './LoginRegister';
+// import LoginRegister from './LoginRegister';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
     margin: `0 50px`,
     color: `white`,
+  },
+  link: {
+    margin: `5px 7px`,
+    padding: `7px`,
+  },
+  chip: {
+    padding: `7px`,
   },
 }));
 
@@ -24,9 +31,21 @@ const ProfileLoginRegister = () => {
   const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
 
   return (
-    <Grid item className={`h100 flexrow ${classes.root}`}>
-      {isAuthenticated ? <ProfileNavButton /> : <LoginRegister />}
-    </Grid>
+    <div className={`${classes.root} h100 flexrow`}>
+      {/* {isAuthenticated ? <ProfileNavButton /> : <LoginRegister />} */}
+      <MuiLink component={Link} to={`/${window.env.client.login}`} className={`${classes.link}`}>
+        <Typography color="primary">Login</Typography>
+      </MuiLink>
+      <MuiLink component={Link} to={`/${window.env.client.register}`} className={`${classes.link}`}>
+        <Chip
+          clickable
+          label={<Typography color="primary">Sign up</Typography>}
+          variant="outlined"
+          color="primary"
+          className={`${classes.chip}`}
+        />
+      </MuiLink>
+    </div>
   );
 };
 
