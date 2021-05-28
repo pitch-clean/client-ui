@@ -76,7 +76,7 @@ const connections = [
   {
     investorId: 1,
     firstName: `Tom`,
-    lastName: `Daly`,
+    lastName: `Jones`,
     position: 'Managing Director',
     organization: 'Vertex Capital',
     city: 'Washington',
@@ -448,8 +448,8 @@ const following = [
   },
   {
     profile: 1,
-    firstName: `Sarah`,
-    lastName: `Daly`,
+    firstName: `Emily`,
+    lastName: `Jones`,
     position: 'Managing Director',
     organization: 'Vertex Capital',
     city: 'Washington',
@@ -593,7 +593,7 @@ export const profile = {
 //   {
 //     investorId: 1,
 //     firstName: `Tom`,
-//     lastName: `Daly`,
+//     lastName: `Jones`,
 //     position: 'Managing Director',
 //     organization: 'Vertex Capital',
 //     city: 'Washington',
@@ -639,8 +639,8 @@ export const profile = {
 //   },
 //   {
 //     profile: 1,
-//     firstName: `Sarah`,
-//     lastName: `Daly`,
+//     firstName: `Emily`,
+//     lastName: `Jones`,
 //     position: 'Managing Director',
 //     organization: 'Vertex Capital',
 //     city: 'Washington',

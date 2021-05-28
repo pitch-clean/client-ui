@@ -84,7 +84,7 @@ const connections = [
   {
     investorId: 1,
     firstName: `Tom`,
-    lastName: `Daly`,
+    lastName: `Jones`,
     position: 'Managing Director',
     organization: 'Vertex Capital',
     city: 'Washington',

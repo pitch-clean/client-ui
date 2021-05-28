@@ -15,8 +15,8 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'end',
     margin: 0,
+    marginRight: 60,
     padding: 0,
-    paddingLeft: 10,
     color: `whitesmoke`,
   },
 }));

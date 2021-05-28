@@ -90,10 +90,10 @@ export const profiles = {
     },
   },
   "5": {
-    alias: 's_daly3',
+    alias: 'e_jones3',
     pii: {
-      firstName: `Sarah`,
-      lastName: `Daly`,
+      firstName: `Emily`,
+      lastName: `Jones`,
       residence: {
         city: 'Washington',
         stateProvince: 'DC',
@@ -107,7 +107,7 @@ export const profiles = {
     },
     images: {
       profile: {
-        thumbnail: getImgPath(`thomas-yen-thumbnail.jpg`),
+        thumbnail: getImgPath(`emily-jones-thumbnail.jpg`),
       },
     },
   },

@@ -36,6 +36,7 @@ const client = {
   portfolio: 'portfolio',
   messages: 'messages',
   auth: 'auth',
+  feed: 'feed',
 };
 
 window.env = {

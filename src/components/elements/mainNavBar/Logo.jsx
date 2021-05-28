@@ -31,7 +31,7 @@ const Logo = () => {
   const classes = useStyles();
 
   return (
-    <MuiLink className={`Logo ${classes.root} flexrow`} component={Link} to={{ pathname: '/' }} underline="none">
+    <MuiLink className={`Logo ${classes.root} flexrow navBarLink`} component={Link} to={{ pathname: '/' }} underline="none">
       <div className={`emoji ${classes.emoji}`}>&#x26A1;</div>
       <Typography variant="caption" color="primary">
         pitchclean

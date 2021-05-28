@@ -91,10 +91,10 @@ export const users1 = {
     },
   },
   "5": {
-    alias: 's_daly3',
+    alias: 'e_jones3',
     pii: {
-      firstName: `Sarah`,
-      lastName: `Daly`,
+      firstName: `Emily`,
+      lastName: `Jones`,
       residence: {
         city: 'Washington',
         stateProvince: 'DC',
@@ -224,10 +224,10 @@ export const usersRecConnections = {
     },
   },
   'sd8x': {
-    alias: 'sdaly-234',
+    alias: 'sjones-234',
     pii: {
-      firstName: `Sarah`,
-      lastName: `Daly`,
+      firstName: `Emily`,
+      lastName: `Jones`,
       residence: {
         city: 'Washington',
         stateProvince: 'DC',
@@ -241,8 +241,8 @@ export const usersRecConnections = {
     },
     images: {
       profile: {
-        thumbnail: getImgPath(`sarah-daly-main.jpg`),
-        main: getImgPath(`sarah-daly-main.jpg`),
+        thumbnail: getImgPath(`emily-jones-main.jpg`),
+        main: getImgPath(`emily-jones-main.jpg`),
       },
     },
   },

@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     maxWidth: '1300px',
     padding: 5,
     textDecoration: 'none',
-    color: 'rgb(213, 220, 213)',
+    color: '#1B2B41',
   },
 }));
 

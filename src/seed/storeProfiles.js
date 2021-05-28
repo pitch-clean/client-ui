@@ -142,10 +142,10 @@ export const profilesObj = {
     "_id": "zxcv09oip",
     "profileType": "user",
     "profileClass": "investor",
-    "alias": "s_daly3",
+    "alias": "e_jones3",
     "pii": {
-        "firstName": "Sarah",
-        "lastName": "Daly",
+        "firstName": "Emily",
+        "lastName": "Jones",
         "residence": {
             "stateProvince": "DC",
             "city": "Washington"
@@ -165,8 +165,8 @@ export const profilesObj = {
     "investments": [],
     "images": {
         "profile": {
-            "thumbnail": getImgPath("sarah-daly-main.jpg"),
-            "large": getImgPath("sarah-daly-main.jpg")
+            "thumbnail": getImgPath("emily-jones-main.jpg"),
+            "large": getImgPath("emily-jones-main.jpg")
         }
     }
 },
