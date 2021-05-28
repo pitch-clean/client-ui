@@ -8,7 +8,6 @@ import { updateLoginStatus } from './redux/actions/AuthActions';
 // components
 import PageRouter from './components/pages/PageRouter';
 import MainNavBar from './components/elements/mainNavBar/MainNavBar';
-import SubNav from './components/elements/subNav/SubNav';
 // styling
 import './App.css';
 import './config.dev.js';
@@ -107,7 +106,6 @@ const App = () => {
       <div className={`App ${classes.root} flexcol`} ref={appRef}>
         <div className={`${classes.navGroup} flexcol w100`}>
           <MainNavBar />
-          <SubNav />
         </div>
         <PageRouter />
       </div>
