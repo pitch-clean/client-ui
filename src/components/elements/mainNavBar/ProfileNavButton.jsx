@@ -45,6 +45,7 @@ const ProfileNavButton = () => {
 
   return (
     <div className={`ProfileNavButton ${classes.root} flexrow navBarLink`}>
+      {/* iteration 1 (below) */}
       {/* {profileClass === 'sponsor' && (
         <MuiLink className={`navBarLink`} color="inherit" component={Link} to={`/${window.env.client.offerings}`}>
           <Typography
@@ -57,9 +58,19 @@ const ProfileNavButton = () => {
           </Typography>
         </MuiLink>
       )} */}
-      <MuiLink className={`${classes.link} navBarLink`} color="inherit" component={Link} to={`/${window.env.client.profile}/${alias}`}>
+      {/* iteration 1 (above) */}
+
+      {/* iteration 2 (below) */}
+      {/* <MuiLink className={`${classes.link} navBarLink`} color="inherit" component={Link} to={`/${window.env.client.profile}/${alias}`}>
+        <StyledTab label={firstName} textColor="primary" />
+      </MuiLink> */}
+      {/* iteration 2 (above) */}
+
+      {/* iteration 3 (below) */}
+      <MuiLink className={`${classes.link}`} color="inherit" component={Link} to={`/${window.env.client.profile}/${alias}`}>
         <StyledTab label={firstName} textColor="primary" />
       </MuiLink>
+      {/* iteration 3 (above) */}
     </div>
   );
 };

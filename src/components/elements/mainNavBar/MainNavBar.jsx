@@ -10,15 +10,22 @@ import Logo from './Logo';
 const useStyles = makeStyles(theme => ({
   container: {
     backgroundColor: '#323e49',
+    flexFlow: 'column',
+    justifyContent: 'flex-start',
+    position: 'sticky',
+    top: 0,
+    zIndex: 1,
   },
   root: {
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
     maxWidth: '1300px',
-    padding: 5,
+    padding: `5px 0`,
     textDecoration: 'none',
     color: '#1B2B41',
+    position: 'sticky',
+    top: 0,
   },
 }));
 

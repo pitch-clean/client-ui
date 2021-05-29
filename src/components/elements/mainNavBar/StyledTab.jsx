@@ -7,7 +7,7 @@ import { Tab } from '@material-ui/core';
 // main
 const StyledTab = withStyles(theme => ({
   root: {
-    padding: `0px 40px`,
+    flex: 1,
     minWidth: `100%`,
     maxWidth: `100%`,
     width: `100%`,

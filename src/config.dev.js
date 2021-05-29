@@ -32,7 +32,7 @@ const client = {
   offerings: 'offerings',
   offering: 'offering',
   profiles: 'profiles',
-  profiles: 'profile',
+  profile: 'profile',
   portfolio: 'portfolio',
   messages: 'messages',
   auth: 'auth',

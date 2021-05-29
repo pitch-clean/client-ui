@@ -1,15 +1,16 @@
 // react
 import React from 'react';
-import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 // components
-import ProfileNavButton from './ProfileNavButton';
-import ProfileLoginRegister from './ProfileLoginRegister';
 import Sidebar from '../SideBar';
+import MainNavSearch from './MainNavSearch';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
+    '& *': {
+      textDecoration: 'none',
+    },
     '& *:hover': {
       textDecoration: 'none',
     },
@@ -25,13 +26,11 @@ const useStyles = makeStyles(theme => ({
 const RightNavGroup = () => {
   // init hooks
   const classes = useStyles();
-  // state
-  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
 
   return (
     <Sidebar isNav isLeft={false}>
       <div className={`RightNavGroup ${classes.root} flexrow w100`}>
-        {isAuthenticated ? <ProfileNavButton /> : <ProfileLoginRegister />}
+        <MainNavSearch />
       </div>
     </Sidebar>
   );

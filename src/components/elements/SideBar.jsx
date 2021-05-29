@@ -41,16 +41,21 @@ const useStyles = makeStyles(theme => ({
       display: 'none',
     },
   },
+  nav: {
+    background: 'inherit',
+    paddingRight: 5,
+  },
 }));
 
 // main
-const Sidebar = ({ isLeft, children }) => {
+const Sidebar = ({ isLeft, isNav, children }) => {
   // init hooks
   const classes = useStyles();
   const lr = isLeft ? 'rootleft' : 'rootright';
+  const nav = isNav ? 'nav': '';
 
   return (
-    <Paper elevation={0} className={`Sidebar f1 ${classes[lr]}`}>
+    <Paper elevation={0} className={`Sidebar f1 ${classes[lr]} ${classes[nav]}`}>
       {children}
     </Paper>
   );

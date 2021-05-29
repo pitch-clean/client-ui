@@ -7,6 +7,7 @@ import { Typography, Link as MuiLink } from '@material-ui/core';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
+    paddingLeft: 5,
     padding: 10,
     '& > *': {
       padding: '0px 10px',

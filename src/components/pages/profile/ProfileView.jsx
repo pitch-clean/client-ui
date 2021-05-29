@@ -38,6 +38,7 @@ const ProfileView = () => {
   const {
     params: { alias },
   } = match;
+  console.log('asdfosfefoi alias', alias)
   const baseRoute = `/profile/${alias}`;
   // state
   const viewProfile = useSelector(s => s.view.profile.viewProfile);
