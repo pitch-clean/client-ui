@@ -37,6 +37,7 @@ const client = {
   messages: 'messages',
   auth: 'auth',
   feed: 'feed',
+  search: 'search',
 };
 
 window.env = {

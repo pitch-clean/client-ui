@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core';
 import { Search as SearchIcon } from '@material-ui/icons';
+import { Get } from '../../../utils/requests';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -63,6 +64,26 @@ const CssTextField = withStyles({
     },
   },
 })(TextField);
+// event handlers
+const submit = async (searchStr) => {
+  const url = `${window.env.api.search}/${searchStr}`;
+  const resJson = await Get(url, {}, true);
+  return resJson;
+};
+const clickSubmit = searchStr => async () => {
+  const resJson = await submit(searchStr);
+  return resJson;
+};
+const keyDownHandler = searchStr => async e => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    const resJson = await submit(searchStr);
+    return resJson;
+  }
+};
+const updateInput = setInput => e => {
+  setInput(e.currentTarget.value);
+};
 
 /**
  * main
@@ -70,6 +91,8 @@ const CssTextField = withStyles({
 const MainNavSearch = () => {
   // init hooks
   const classes = useStyles();
+  // state
+  const [input, setInput] = useState('');
 
   return (
     <div className={`MainNavSearch ${classes.root} w100`}>
@@ -78,8 +101,11 @@ const MainNavSearch = () => {
         margin="dense"
         label="Search"
         variant="filled"
+        onKeyDown={keyDownHandler(input)}
+        value={input}
+        onChange={updateInput(setInput)}
       />
-      <Button className={`searchButton ${classes.button}`} disableRipple>
+      <Button className={`searchButton ${classes.button}`} disableRipple onClick={clickSubmit(input)}>
         <SearchIcon />
       </Button>
     </div>
