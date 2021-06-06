@@ -1,7 +1,7 @@
 // modules
 import { combineReducers } from 'redux';
 // reducers
-import ViewReducer from './reducers/ViewReducer';
+import ViewReducer from './reducers/views/ViewReducer';
 import AuthReducer from './reducers/AuthReducer';
 import OfferingsReducer from './reducers/OfferingsReducer';
 import RegisterReducer from './reducers/RegisterReducer';

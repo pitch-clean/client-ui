@@ -67,6 +67,7 @@ export const updateProfileMap = payload => dispatch => {
     payload,
   });
 };
+
 // feed
 export const updatePostsArr = payload => dispatch => {
   dispatch({
@@ -89,5 +90,25 @@ export const updatePostComments = ({ postId, commentsArr }) => dispatch => {
 export const clearFeed = () => dispatch => {
   dispatch({
     type: types.CLEAR_FEED,
+  });
+};
+
+// startup
+export const updateStartupObj = payload => dispatch => {
+  dispatch({
+    type: types.UPDATE_STARTUP_OBJ,
+    payload,
+  });
+};
+export const updateStartupObjField = (field, payload) => dispatch => {
+  dispatch({
+    type: types.UPDATE_STARTUP_OBJ_FIELD,
+    field,
+    payload,
+  });
+};
+export const clearStartup = () => dispatch => {
+  dispatch({
+    type: types.CLEAR_STARTUP,
   });
 };

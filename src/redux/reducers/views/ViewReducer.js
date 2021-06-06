@@ -1,16 +1,10 @@
 import _ from 'lodash';
 import { combineReducers } from 'redux';
-import * as types from '../types/ViewTypes';
+import * as types from '../../types/ViewTypes';
+import * as states from '../../initialStates/views';
+import StartupReducer from './StartupReducer';
 
-const initialMainState = {
-  currentView: 'home',
-  l1: 'home',
-  l2: '',
-  l3: '',
-  l4: '',
-  isDarkMode: false,
-};
-const MainReducer = (state = _.cloneDeep(initialMainState), action) => {
+const MainReducer = (state = _.cloneDeep(states.main), action) => {
   const newState = _.cloneDeep(state);
   switch (action.type) {
     case types.UPDATE_L1:
@@ -27,11 +21,7 @@ const MainReducer = (state = _.cloneDeep(initialMainState), action) => {
   }
 };
 
-const initialFeedState = {
-  posts: [],
-  postsObj: {},
-};
-const FeedReducer = (state = _.cloneDeep(initialFeedState), action) => {
+const FeedReducer = (state = _.cloneDeep(states.feed), action) => {
   const newState = _.cloneDeep(state);
   switch (action.type) {
     case types.UPDATE_POST_LIKES:
@@ -56,11 +46,7 @@ const FeedReducer = (state = _.cloneDeep(initialFeedState), action) => {
   }
 };
 
-const initialProfileState = {
-  activeProfileTab: 'posts',
-  viewProfile: null,
-};
-const ProfileReducer = (state = _.cloneDeep(initialProfileState), action) => {
+const ProfileReducer = (state = _.cloneDeep(states.profile), action) => {
   const newState = _.cloneDeep(state);
   switch (action.type) {
     case types.UPDATE_PROFILE_TAB:
@@ -75,13 +61,7 @@ const ProfileReducer = (state = _.cloneDeep(initialProfileState), action) => {
   }
 };
 
-const initMessagesState = {
-  activeConversationIdx: 0,
-  activeConversationId: null,
-  activeConversationObj: null,
-  profileMap: null,
-};
-const MessagesReducer = (state = _.cloneDeep(initMessagesState), action) => {
+const MessagesReducer = (state = _.cloneDeep(states.messages), action) => {
   const newState = _.cloneDeep(state);
   const { payload } = action;
   switch (action.type) {
@@ -115,6 +95,7 @@ const ViewReducer = combineReducers({
   profile: ProfileReducer,
   messages: MessagesReducer,
   feed: FeedReducer,
+  startup: StartupReducer,
 });
 
 export default ViewReducer;
