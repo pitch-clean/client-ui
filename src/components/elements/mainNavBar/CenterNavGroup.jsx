@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
 const CenterNavGroup = () => {
   const l1Map = {
     [window.env.client.feed]: 0,
-    [window.env.client.offerings]: 1,
+    [window.env.client.marketplace]: 1,
     [window.env.client.messages]: 2,
     [window.env.client.profile]: 3,
   };
@@ -55,7 +55,7 @@ const CenterNavGroup = () => {
         <Link className={`${classes.tab} navBarLink`} to={`/${window.env.client.feed}`}>
           <StyledTab label="Newsfeed" textColor="primary" />
         </Link>
-        <Link className={`${classes.tab} navBarLink`} to={`/${window.env.client.offerings}`}>
+        <Link className={`${classes.tab} navBarLink`} to={`/${window.env.client.marketplace}`}>
           <StyledTab label="Marketplace" textColor="primary" />
         </Link>
         <Link className={`${classes.tab} navBarLink`} to={`/${window.env.client.messages}`}>

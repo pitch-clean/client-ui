@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 // components
 import OfferingCard from './OfferingCard';
+import StartupCard from '../../startups/startupsList/StartupCard';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,10 +28,11 @@ const OfferingsList = () => {
   const classes = useStyles();
   // state
   const offeringsArrLen = useSelector(s => s.offerings.offeringsArr.length);
+  const startupsArrLen = useSelector(s => s.view.startup.startupsArr.length);
   // build fxn
   const offeringsArrElem = [];
-  for (let idx = 0; idx < offeringsArrLen; idx += 1) {
-    offeringsArrElem.push(<OfferingCard idx={idx} />);
+  for (let idx = 0; idx < startupsArrLen; idx += 1) {
+    offeringsArrElem.push(<StartupCard idx={idx} />);
   }
 
   return test ? (

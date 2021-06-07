@@ -94,21 +94,27 @@ export const clearFeed = () => dispatch => {
 };
 
 // startup
-export const updateStartupObj = payload => dispatch => {
+export const updateStartupsArr = payload => dispatch => {
   dispatch({
-    type: types.UPDATE_STARTUP_OBJ,
+    type: types.UPDATE_STARTUPS_ARR,
+    payload,
+  });
+};
+export const updateActiveStartupObj = payload => dispatch => {
+  dispatch({
+    type: types.UPDATE_ACTIVE_STARTUP_OBJ,
     payload,
   });
 };
 export const updateStartupObjField = (field, payload) => dispatch => {
   dispatch({
-    type: types.UPDATE_STARTUP_OBJ_FIELD,
+    type: types.UPDATE_ACTIVE_STARTUP_OBJ_FIELD,
     field,
     payload,
   });
 };
-export const clearStartup = () => dispatch => {
+export const clearActiveStartup = () => dispatch => {
   dispatch({
-    type: types.CLEAR_STARTUP,
+    type: types.CLEAR_ACTIVE_STARTUP,
   });
 };

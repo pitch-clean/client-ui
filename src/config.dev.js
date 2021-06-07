@@ -14,12 +14,13 @@ const social = 'social';
 const post = 'post';
 const posts = 'posts';
 const comments = 'comments';
+const startups = 'startups';
 
 const api = {
   base: apiBase,
   auth: `${apiBase}/${auth}`,
   profiles: `${apiBase}/${profiles}`,
-  offerings: `${apiBase}/${offerings}`,
+  startups: `${apiBase}/${startups}`,
   posts: `${apiBase}/${social}/${posts}`,
   comments: `${apiBase}/${social}/${comments}`,
 };
@@ -38,6 +39,9 @@ const client = {
   auth: 'auth',
   feed: 'feed',
   search: 'search',
+  startup: 'startup',
+  startups,
+  marketplace: 'marketplace',
 };
 
 window.env = {

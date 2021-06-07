@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import { Get } from '../../../../utils/requests';
-import { updateStartupObj, clearStartup } from '../../../../redux/actions/ViewActions';
+import { updateActiveStartupObj, clearActiveStartup } from '../../../../redux/actions/ViewActions';
 // components
 // constants
 const useStyles = makeStyles({
@@ -17,7 +17,7 @@ const fetchStartupObj = async (alias, isFetchingSet, dispatch) => {
     const resJSON = await Get(endpoint, {}, true);
     console.log('\n\nresJSON', resJSON, '\n')
     const payload = resJSON;
-    dispatch(updateStartupObj(payload));
+    dispatch(updateActiveStartupObj(payload));
     isFetchingSet(false);
   } catch (err) {
     console.log('ERROR: startupdetail.jsx > fetchStartupObj GET')
@@ -30,7 +30,7 @@ const fetchStartupObj = async (alias, isFetchingSet, dispatch) => {
 /**
  * main
  */
-const StartupDetail = ({props: {match: {params: { alias, _id }}}}) => {
+const StartupDetail = ({props: {match: {params: { startupId, alias }}}}) => {
   // init hooks
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -40,13 +40,13 @@ const StartupDetail = ({props: {match: {params: { alias, _id }}}}) => {
   useEffect(async () => {
     await fetchStartupObj(alias, isFetchingSet, dispatch);
     return () => {
-      dispatch(clearStartup())
+      dispatch(clearActiveStartup())
     };
   }, [alias]);
 
   return isFetching ? (
     <div className={`StartupDetail ${classes.root}`}>
-
+      Startup here
     </div>
   ) : (
     <div/>

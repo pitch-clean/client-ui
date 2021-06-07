@@ -5,8 +5,8 @@ import { Switch, Route } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 // components
-import OfferingsListView from './offerings/offeringsList/OfferingsListView';
-import OfferingDetail from './offerings/offeringDetail/OfferingDetail';
+import StartupsList from './startups/startupsList/StartupsList';
+import StartupDetail from './startups/startupDetail/StartupDetail';
 import NotFound from './home/NotFound';
 import LoginForm from './profile/LoginForm';
 import FeedView from './feed/FeedView';
@@ -55,8 +55,8 @@ const PageRouter = () => {
     <div className={`${classes.root} PageRouter flexcol`}>
       <Switch>
         <Route path="/profile/:alias" render={p => <ProfileView props={p} />} />
-        <Route exact path="/offering/:offeringId" render={p => <OfferingDetail props={p} />} />
-        <Route exact path="/offerings" render={p => <OfferingsListView props={p} />} />
+        <Route exact path="/startup/:startupId" render={p => <StartupDetail props={p} />} />
+        <Route exact path="/marketplace" render={p => <StartupsList props={p} />} />
         <Route exact path="/" render={p => <Home props={p} />} />
         <Route exact path="/feed" render={p => <FeedView props={p} />} />
         <Route exact path="/login" render={p => <LoginForm props={p} />} />
@@ -71,11 +71,11 @@ const PageRouter = () => {
           path="/register"
           render={p => !isAuthenticated && <CreateProfile props={p} />}
         />
-        <Route
+        {/* <Route
           exact
-          path="/offering/new"
-          render={p => isAuthenticated && <CreateOffering props={p} />}
-        />
+          path="/startup/new"
+          render={p => isAuthenticated && <CreateStartup props={p} />}
+        /> */}
         <Route exact path="/rsvp/:rsvpId" render={p => <RSVPView props={p} />} />
         <Route render={p => <NotFound props={p} />} />
       </Switch>
