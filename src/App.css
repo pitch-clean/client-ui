@@ -105,12 +105,6 @@ body {
   align-items: flex-start;
   text-align: start;
 }
-.page {
-  opacity: 1;
-  animation-name: pageOpen;
-  animation-duration: 0.325s;
-  animation-timing-function: ease-out;
-}
 .drawer {
   height: 100%;
   animation-name: drawer;

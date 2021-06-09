@@ -1,5 +1,5 @@
 // react
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 // components
 import MainInfo from './MainInfo';
 import ProjectInfo from './ProjectInfo';

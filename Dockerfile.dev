@@ -21,8 +21,8 @@ COPY ./src/*.env ./src/
 
 CMD if [ ${APP_ENV} = production ]; \
     then \
-    npm ci -g http-server && \
-    npm run build && \
+    yarn install --frozen-lockfile -g http-server && \
+    yarn build && \
     cd build && \
     hs -p 3000; \
     else \

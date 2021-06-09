@@ -1,6 +1,7 @@
 // react
 import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 // utils
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { onKeyDownBlurAll } from './utils/keybinds';
@@ -14,6 +15,8 @@ import './App.css';
 import './config.dev.js';
 // seed
 import { profile } from './seed/testAuthProfile';
+
+// pdfjs.GlobalWorkerOptions.workerSrc = 'pdf.worker.min.js';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {

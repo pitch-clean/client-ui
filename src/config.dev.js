@@ -14,7 +14,9 @@ const social = 'social';
 const post = 'post';
 const posts = 'posts';
 const comments = 'comments';
+const startup = 'startup';
 const startups = 'startups';
+const search = 'search';
 
 const api = {
   base: apiBase,
@@ -23,25 +25,25 @@ const api = {
   startups: `${apiBase}/${startups}`,
   posts: `${apiBase}/${social}/${posts}`,
   comments: `${apiBase}/${social}/${comments}`,
+  search: `${apiBase}/${search}`,
 };
 
 /**
  * client react router routes
  */
 const client = {
-  posts: 'posts',
-  offerings: 'offerings',
-  offering: 'offering',
-  profiles: 'profiles',
-  profile: 'profile',
-  portfolio: 'portfolio',
-  messages: 'messages',
-  auth: 'auth',
-  feed: 'feed',
-  search: 'search',
-  startup: 'startup',
-  startups,
   marketplace: 'marketplace',
+  messages: 'messages',
+  feed: 'feed',
+  auth,
+  posts,
+  offerings,
+  offering,
+  profiles,
+  profile,
+  search,
+  startup,
+  startups,
 };
 
 window.env = {

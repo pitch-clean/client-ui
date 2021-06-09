@@ -104,13 +104,6 @@ const LSProfile = () => {
         >
           {`${getCtMsg(connections, 'Connections')} | ${getCtMsg(following, 'Following')}`}
         </Typography>
-        <Divider className={classes.divider} variant="middle" component="div" />
-        <div className="flexrow">
-          <BookmarkBorder color="action" />
-          <Typography className={classes.body} variant="p" component="div">
-            Saved Items
-          </Typography>
-        </div>
         <div
           style={{
             position: 'absolute',

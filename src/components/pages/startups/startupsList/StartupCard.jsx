@@ -126,15 +126,16 @@ const StartupCard = ({ idx }) => {
 
   return (
     <Paper className={`StartupCard ${classes.root}`} key={`startupcard--${idx}`} elevation={0}>
-      <MuiLink
-        color="textPrimary"
-        variant="subtitle1"
-        className={`imgLink ${classes.imgLink}`}
-        component={Link}
-        to={`/${window.env.client.startup}/${startupId}`}
-      >
-        {thumbnail || card ? <img src={thumbnail || card} alt="Image not found" width="100%" />: <div className={`${classes.emptyImg}`}></div>}
-      </MuiLink>
+        <MuiLink
+          color="textPrimary"
+          variant="subtitle1"
+          component={Link}
+          to={`/${window.env.client.startup}/${startupId}`}
+        >
+          <div className={`imgLink ${classes.imgLink}`}>
+            <img src={thumbnail || card} alt="Image not found" width="100%" />
+          </div>
+        </MuiLink>
       <ListItem className={classes.listItem}>
         <ListItemText
           primary={

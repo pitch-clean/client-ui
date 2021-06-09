@@ -30,6 +30,10 @@ const useStyles = makeStyles(theme => ({
       maxWidth: '1300px',
       width: '100%',
       minWidth: '500px',
+      opacity: 1,
+      animationName: 'pageOpen',
+      animationDuration: `0.325s`,
+      animationTimingFunction: `ease-out`,
     },
     alignSelf: 'center',
     overflow: 'scroll',
@@ -55,7 +59,7 @@ const PageRouter = () => {
     <div className={`${classes.root} PageRouter flexcol`}>
       <Switch>
         <Route path="/profile/:alias" render={p => <ProfileView props={p} />} />
-        <Route exact path="/startup/:startupId" render={p => <StartupDetail props={p} />} />
+        <Route exact path="/startup/:alias" render={p => <StartupDetail props={p} />} />
         <Route exact path="/marketplace" render={p => <StartupsList props={p} />} />
         <Route exact path="/" render={p => <Home props={p} />} />
         <Route exact path="/feed" render={p => <FeedView props={p} />} />

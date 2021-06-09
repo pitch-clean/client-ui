@@ -32,7 +32,6 @@ const fetchStartupsArr = async (dispatch, page) => {
   } catch (err) {
     console.log("ERROR: StartupsList.jsx > fetchStartupsArr()");
     console.log(err);
-    alert(err)
   }
 };
 
