@@ -11,14 +11,27 @@ import {
   Typography,
   Divider,
   Paper,
+  Avatar,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Fab,
   Link as MuiLink,
 } from '@material-ui/core';
+import {
+  Business as BusinessIcon,
+  Menu as MenuIcon,
+  Add as AddIcon,
+  Search as SearchIcon,
+  MoreVert as MoreIcon,
+  Visibility as VisibilityIcon,
+  Reply as ReplyIcon,
+  Repeat as RepeatIcon,
+  FavoriteBorder as FavoriteBorderIcon,
+  Favorite as FavoriteIcon,
+} from '@material-ui/icons';
 // constants
 const useStyles = makeStyles(theme => ({
-  divider: {
-    width: `100%`,
-    margin: 1,
-  },
   root: {
     backgroundColor: `#eee`,
     minWidth: `200px`,
@@ -34,30 +47,18 @@ const useStyles = makeStyles(theme => ({
     `,
     borderRadius: '5px',
   },
-  subHeader: {
-    textAlign: 'start',
-    padding: `0 10px`,
-    lineHeight: 2.24,
-    color: 'whitesmoke',
-    backgroundColor: '#262826',
+  avatar: {
+    width: `100%`,
+    minHeight: `200px`,
+    maxHeight: `200px`,
+    height: `200px`,
+    objectFit: `cover`,
     borderRadius: 0,
-    fontSize: '0.9rem',
-    borderRadius: '10px 10px 0 0 ',
+    overflow: 'hidden',
+    borderRadius: '5px 5px 0 0 ',
   },
   cardHeader: {
     fontSize: '1.2rem',
-  },
-  company: {
-    padding: 0,
-    margin: 0,
-    lineHeight: 1,
-    fontSize: '0.875rem',
-  },
-  location: {
-    padding: 0,
-    margin: 0,
-    lineHeight: 1,
-    fontSize: '0.875rem',
   },
   listItem: {
     paddingTop: 0,
@@ -74,27 +75,29 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexFlow: 'column',
   },
-  row: {
-    display: 'flex',
-    flexFlow: 'row',
+  appBar: {
+    top: 'auto',
+    bottom: 0,
+  },
+  toolbar: {
     justifyContent: 'space-between',
-    fontSize: '0.875rem',
-    lineHeight: 1.5,
   },
-  emptyImg: {
-    minHeight: `200px`,
-  },
-  imgLink: {
-    gridArea: 'image',
-    overflow: 'hidden',
-    minHeight: `200px`,
-    '& img': {
-      minHeight: `200px`,
-      maxHeight: `200px`,
-      height: `200px`,
-      objectFit: `cover`,
-      borderRadius: 0,
+  icon: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    lineHeight: 2,
+    '& > svg': {
+      marginTop: '-0.32rem',
+      marginRight: 5,
     },
+    cursor: 'pointer',
+  },
+  views: {
+    cursor: 'default',
+  },
+  red: {
+    color: 'red',
   },
 }));
 
@@ -104,39 +107,51 @@ const useStyles = makeStyles(theme => ({
 const StartupCard = ({ idx }) => {
   // init hooks
   const classes = useStyles();
-  const startupObj = useSelector(s => s.view.startup.startupsArr[idx]);
+  // state
+  const activeProfile = useSelector(s => s.auth.activeProfile);
+  const address = useSelector(s => s.view.startup.startupsArr[idx].location.address);
+  const startupId = useSelector(s => s.view.startup.startupsArr[idx]._id);
+  const alias = useSelector(s => s.view.startup.startupsArr[idx].alias);
+  const title = useSelector(s => s.view.startup.startupsArr[idx].title);
+  const viewsCt = useSelector(s => s.view.startup.startupsArr[idx].views.length);
+  const likes = useSelector(s => s.view.startup.startupsArr[idx].likes);
+  const reposts = useSelector(s => s.view.startup.startupsArr[idx].reposts);
+  const cardBody = useSelector(s => s.view.startup.startupsArr[idx].content.cardBody);
+  const fundingRounds = useSelector(s => s.view.startup.startupsArr[idx].fundingRounds);
+  const card = useSelector(s => s.view.startup.startupsArr[idx].images.card);
+  const profile = useSelector(s => s.view.startup.startupsArr[idx].profile);
+  const likesCt = likes.length;
+  const repostsCt = reposts.length;
   const {
-    _id: startupId,
-    alias,
-    images: { card, thumbnail },
-    profile: {
-      alias: profileAlias,
-      pii: {
-        profileName,
-      },
-    },
-    // financials,
-    // location: {
-    //   address: { stateProvince, city },
-    // },
-    // sponsor,
-    // sponsorSlug,
-    // title,
-  } = startupObj;
+    alias: profileAlias,
+    pii: { name: profileName },
+  } = profile;
+  const addressStr = `${address.city}, ${address.provinceState}`;
+  let isLiked;
+  let isReposted;
+  if (activeProfile) {
+    const { _id: profileId } = activeProfile;
+    isLiked = likes.includes(profileId);
+    isReposted = reposts.includes(profileId);
+  }
 
   return (
     <Paper className={`StartupCard ${classes.root}`} key={`startupcard--${idx}`} elevation={0}>
-        <MuiLink
-          color="textPrimary"
-          variant="subtitle1"
-          component={Link}
-          to={`/${window.env.client.startup}/${startupId}`}
-        >
-          <div className={`imgLink ${classes.imgLink}`}>
-            <img src={thumbnail || card} alt="Image not found" width="100%" />
-          </div>
-        </MuiLink>
-      <ListItem className={classes.listItem}>
+      <MuiLink
+        color="textPrimary"
+        variant="subtitle1"
+        component={Link}
+        to={`/${window.env.client.startup}/${startupId}`}
+      >
+        <Avatar
+          className={`${classes.avatar}`}
+          alt={title}
+          src={card}
+          variant="square"
+          children={<BusinessIcon />}
+        />
+      </MuiLink>
+      <ListItem className={`listitem ${classes.listItem}`}>
         <ListItemText
           primary={
             <MuiLink
@@ -146,51 +161,31 @@ const StartupCard = ({ idx }) => {
               component={Link}
               to={`/${window.env.client.startup}/${startupId}`}
             >
-              {/* {title} */}
+              {title}
             </MuiLink>
           }
-          secondary={
-            <>
-              <MuiLink
-                className={`${classes.company} nowrap`}
-                component={Link}
-                variant="caption"
-                color="textPrimary"
-                to={`/${window.env.client.profile}/${profileAlias}`}
-              >
-                {profileName}
-              </MuiLink>
-              {/* <Typography
-                className={classes.location}
-                component="p"
-                variant="caption"
-                color="textSecondary"
-              >
-                {`${stateProvince}, ${city}`}
-              </Typography> */}
-            </>
-          }
+          secondary={addressStr}
         />
       </ListItem>
-      <Divider variant="middle" />
       <ListItem className={classes.lowerListItem}>
-        <div className={`${classes.row} annualInterest item flexrow w100`}>
-          <div>Expected Return: </div>
-          {/* <div style={{ fontWeight: 500 }}>{` ${interestAccrued}%`}</div> */}
-        </div>
-        <Divider variant="fullWidth" className={classes.divider} />
-        <div className={`${classes.row} termLength item flexrow w100`}>
-          {/* <div>Net Present Value: </div> */}
-          {/* <div style={{ fontWeight: 500 }}>{` ${calcOfferSize(
-          )}`}</div> */}
-        </div>
-        <Divider variant="fullWidth" className={classes.divider} />
-        <div className={`${classes.row} offeringSize item flexrow w100`}>
-          {/* <div>Offering Size: </div> */}
-          {/* <div style={{ fontWeight: 500 }}>{`${calcOfferSize(
-          )}`}</div> */}
-        </div>
+        {cardBody}
       </ListItem>
+      <AppBar position="relative" color="primary" className={classes.appBar} elevation={0} >
+        <Toolbar className={`${classes.toolbar} flexrow`} variant="dense">
+            <div className={`icon ${classes.icon} ${classes.views}`}>
+              <VisibilityIcon />
+              {viewsCt}
+            </div>
+          <div className={`icon ${classes.icon}`}>
+            <ReplyIcon className={isReposted && classes.red} />
+            {repostsCt}
+          </div>
+          <div className={`icon ${classes.icon} `}>
+            {isLiked ? <FavoriteIcon className={classes.red} /> : <FavoriteBorderIcon />}
+            {likesCt}
+          </div>
+        </Toolbar>
+      </AppBar>
     </Paper>
   );
 };

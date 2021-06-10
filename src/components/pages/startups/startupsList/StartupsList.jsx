@@ -11,10 +11,10 @@ import StartupCard from './StartupCard';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
-    // justifyContent: 'center',
+    flexFlow: 'row wrap',
+    justifyContent: 'center',
     // paddingTop: '20px',
   },
-  rootContainer: {},
   emptyList: {
     flexWrap: `wrap`,
     justifyContent: `center`,
@@ -41,8 +41,6 @@ const StartupsList = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   // state
-  const su = useSelector(s => s.view.startup);
-  console.log('su', su)
   const startupsArrLen = useSelector(s => s.view.startup.startupsArr.length);
   // build fxn
   const startupsArrElem = [];
@@ -59,10 +57,10 @@ const StartupsList = () => {
   }, []);
 
   return startupsArrLen > 0 ? (
-    <div className={`${classes.rootContainer} w100 page flexcol`}>
-      <GridList cellHeight={300} className={`StartupsList ${classes.root}`} cols={3}>
-        {startupsArrElem}
-      </GridList>
+    <div
+      className={`StartupsList ${classes.root} page flexrow`}
+    >
+      {startupsArrElem}
     </div>
   ) : (
     <div className={`"StartupsList ${classes.emptyList} page flexrow w100`}>{startupsArrElem}</div>

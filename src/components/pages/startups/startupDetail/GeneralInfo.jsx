@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, CardHeader, IconButton, Typography, Avatar, Divider, Button } from '@material-ui/core';
+import { Typography, Avatar, Button } from '@material-ui/core';
 import {
   MoreHoriz as MoreHorizIcon,
   MoreVert as MoreVertIcon,
@@ -86,18 +86,7 @@ const GeneralInfo = () => {
   const fundingRounds = useSelector(s => s.view.startup.activeStartup.fundingRounds);
   const website = useSelector(s => s.view.startup.activeStartup.website);
   const slogan = useSelector(s => s.view.startup.activeStartup.slogan);
-  const stats = useSelector(s => s.view.startup.activeStartup.stats);
-  const partners = useSelector(s => s.view.startup.activeStartup.partners);
-  const sponsors = useSelector(s => s.view.startup.activeStartup.sponsors);
-  const content = useSelector(s => s.view.startup.activeStartup.content);
   const about = useSelector(s => s.view.startup.activeStartup.content.about);
-  const highlights = useSelector(s => s.view.startup.activeStartup.content.highlights);
-  const recentNews = useSelector(s => s.view.startup.activeStartup.content.recentNews);
-  const media = useSelector(s => s.view.startup.activeStartup.content.media);
-  const pitchDeck = useSelector(s => s.view.startup.activeStartup.content.pitchDeck);
-  const team = useSelector(s => s.view.startup.activeStartup.team);
-  const advisors = useSelector(s => s.view.startup.activeStartup.advisors);
-  const investors = useSelector(s => s.view.startup.activeStartup.investors);
   const employeeCt = useSelector(s => s.view.startup.activeStartup.employeeCt);
   const latestFundingRound = fundingRounds[fundingRounds.length - 1];
 
