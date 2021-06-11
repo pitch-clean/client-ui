@@ -65,7 +65,7 @@ const CssTextField = withStyles({
   },
 })(TextField);
 // event handlers
-const submit = async (searchStr) => {
+const submit = async searchStr => {
   const url = `${window.env.api.search}/${searchStr}`;
   const resJson = await Get(url, {}, true);
   return resJson;

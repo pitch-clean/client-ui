@@ -3,17 +3,19 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { GridList } from '@material-ui/core';
 import { updateStartupsArr } from '../../../../redux/actions/ViewActions';
 import { Get } from '../../../../utils/requests';
 // components
 import StartupCard from './StartupCard';
 // constants
 const useStyles = makeStyles(theme => ({
-  root: {
+  root: {},
+  searchFilter: {
+    justifyContent: 'start',
+  },
+  listContainer: {
     flexFlow: 'row wrap',
     justifyContent: 'center',
-    // paddingTop: '20px',
   },
   emptyList: {
     flexWrap: `wrap`,
@@ -57,10 +59,11 @@ const StartupsList = () => {
   }, []);
 
   return startupsArrLen > 0 ? (
-    <div
-      className={`StartupsList ${classes.root} page flexrow`}
-    >
-      {startupsArrElem}
+    <div className={`StartupsList ${classes.root} page flexcol`}>
+      <div className={`search-filter ${classes.searchFilter} flexrow w100`}></div>
+      <div className={`listContainer ${classes.listContainer} flexrow w100`}>
+        {startupsArrElem}
+      </div>
     </div>
   ) : (
     <div className={`"StartupsList ${classes.emptyList} page flexrow w100`}>{startupsArrElem}</div>

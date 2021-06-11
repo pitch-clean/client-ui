@@ -113,6 +113,18 @@ export const updateStartupObjField = (field, payload) => dispatch => {
     payload,
   });
 };
+export const updateStartupLikes = payload => dispatch => {
+  dispatch({
+    payload,
+    type: types.UPDATE_STARTUP_LIKES,
+  });
+};
+export const updateStartupReposts = payload => dispatch => {
+  dispatch({
+    payload,
+    type: types.UPDATE_STARTUP_REPOSTS,
+  });
+};
 export const clearActiveStartup = () => dispatch => {
   dispatch({
     type: types.CLEAR_ACTIVE_STARTUP,

@@ -1,35 +1,27 @@
 // react
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  ListSubheader,
   ListItem,
   ListItemText,
-  Typography,
-  Divider,
   Paper,
   Avatar,
   AppBar,
   Toolbar,
-  IconButton,
-  Fab,
   Link as MuiLink,
 } from '@material-ui/core';
 import {
   Business as BusinessIcon,
-  Menu as MenuIcon,
-  Add as AddIcon,
-  Search as SearchIcon,
-  MoreVert as MoreIcon,
   Visibility as VisibilityIcon,
   Reply as ReplyIcon,
-  Repeat as RepeatIcon,
   FavoriteBorder as FavoriteBorderIcon,
   Favorite as FavoriteIcon,
 } from '@material-ui/icons';
+import { updateStartupLikes, updateStartupReposts } from '../../../../redux/actions/ViewActions';
+import { Put } from '../../../../utils/requests';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -93,6 +85,36 @@ const useStyles = makeStyles(theme => ({
     },
     cursor: 'pointer',
   },
+  button: {
+    transition: `box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, background-color 50ms cubic-bezier(0.4, 0, 0.2, 1)`,
+    '& *': {
+      transition: `font-size 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms`,
+    },
+    borderRadius: 7,
+    '&:hover': {
+      boxShadow: `0px 1px 4px -7px rgba(0,0,0,0.2),
+        0px 2px 5px -5px rgba(0,0,0,0.14),
+        0px 1px 9px -3px rgba(0,0,0,0.12)`,
+    },
+    '&:hover div': {
+      fontSize: `1.05rem`,
+    },
+    '&:hover .MuiSvgIcon-root': {
+      fontSize: `1.55rem`,
+    },
+    '&:active': {
+      backgroundColor: '#dbecde85',
+      boxShadow: `0px 3px 2px -4px rgba(0,0,0,0.2),
+        0px 3px 4px -3px rgba(0,0,0,0.14),
+        0px 1px 6px -1px rgba(0,0,0,0.12)`,
+    },
+    '&:active div': {
+      fontSize: `1.1rem`,
+    },
+    '&:active .MuiSvgIcon-root': {
+      fontSize: `1.6rem`,
+    },
+  },
   views: {
     cursor: 'default',
   },
@@ -100,6 +122,23 @@ const useStyles = makeStyles(theme => ({
     color: 'red',
   },
 }));
+// fxns
+const handleClick = (type, startupId, profileId, dispatch) => async () => {
+  let endpoint = `${window.env.api.startups}`;
+  let reduxFxn;
+  if (type === 'like') {
+    endpoint = `${endpoint}/like`;
+    reduxFxn = updateStartupLikes;
+  }
+  if (type === 'repost') {
+    endpoint = `${endpoint}/repost`;
+    reduxFxn = updateStartupReposts;
+  }
+  const body = { startupId, profile: profileId };
+  const payload = await Put(endpoint, body, {}, true);
+  console.log(payload)
+  dispatch(reduxFxn(payload));
+};
 
 /**
  * main
@@ -107,11 +146,11 @@ const useStyles = makeStyles(theme => ({
 const StartupCard = ({ idx }) => {
   // init hooks
   const classes = useStyles();
+  const dispatch = useDispatch();
   // state
   const activeProfile = useSelector(s => s.auth.activeProfile);
   const address = useSelector(s => s.view.startup.startupsArr[idx].location.address);
   const startupId = useSelector(s => s.view.startup.startupsArr[idx]._id);
-  const alias = useSelector(s => s.view.startup.startupsArr[idx].alias);
   const title = useSelector(s => s.view.startup.startupsArr[idx].title);
   const viewsCt = useSelector(s => s.view.startup.startupsArr[idx].views.length);
   const likes = useSelector(s => s.view.startup.startupsArr[idx].likes);
@@ -119,18 +158,13 @@ const StartupCard = ({ idx }) => {
   const cardBody = useSelector(s => s.view.startup.startupsArr[idx].content.cardBody);
   const fundingRounds = useSelector(s => s.view.startup.startupsArr[idx].fundingRounds);
   const card = useSelector(s => s.view.startup.startupsArr[idx].images.card);
-  const profile = useSelector(s => s.view.startup.startupsArr[idx].profile);
   const likesCt = likes.length;
   const repostsCt = reposts.length;
-  const {
-    alias: profileAlias,
-    pii: { name: profileName },
-  } = profile;
+  const { _id: profileId } = activeProfile;
   const addressStr = `${address.city}, ${address.provinceState}`;
   let isLiked;
   let isReposted;
   if (activeProfile) {
-    const { _id: profileId } = activeProfile;
     isLiked = likes.includes(profileId);
     isReposted = reposts.includes(profileId);
   }
@@ -176,13 +210,13 @@ const StartupCard = ({ idx }) => {
               <VisibilityIcon />
               {viewsCt}
             </div>
-          <div className={`icon ${classes.icon}`}>
+          <div className={`icon ${classes.icon} ${classes.button}`} onClick={handleClick('repost', startupId, profileId, dispatch)}>
             <ReplyIcon className={isReposted && classes.red} />
-            {repostsCt}
+            <div>{repostsCt}</div>
           </div>
-          <div className={`icon ${classes.icon} `}>
+          <div className={`icon ${classes.icon} ${classes.button}`} onClick={handleClick('like', startupId, profileId, dispatch)}>
             {isLiked ? <FavoriteIcon className={classes.red} /> : <FavoriteBorderIcon />}
-            {likesCt}
+            <div>{likesCt}</div>
           </div>
         </Toolbar>
       </AppBar>

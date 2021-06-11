@@ -24,8 +24,14 @@ const SocialItxnButton = ({ type, postId, postIdx }) => {
 
   return (
     <CardActions disableSpacing>
-      <Button className={`${inArr ? classes.isLiked : ''}`} variant="contained" size="small" disableRipple onClick={onClick(postId, postProfileId, dispatch)}>
-        {msg}
+      <Button
+        className={`${inArr ? classes.isLiked : ''}`}
+        variant="contained"
+        size="small"
+        disableRipple
+        onClick={onClick(postId, postProfileId, dispatch)}
+      >
+        {/* {msg} */}
       </Button>
     </CardActions>
   );
