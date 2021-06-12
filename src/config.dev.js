@@ -6,6 +6,9 @@ const apiBase = `${protocol}://${hostname}:${clientApiPort}/${apiLoc}`;
 
 // api and client route vars
 const auth = 'auth';
+const search = 'search';
+const feed = 'feed';
+const messages = 'messages';
 const profile = 'profile';
 const profiles = 'profiles';
 const offering = 'offering';
@@ -16,34 +19,40 @@ const posts = 'posts';
 const comments = 'comments';
 const startup = 'startup';
 const startups = 'startups';
-const search = 'search';
+const rsvp = 'rsvp';
+const rsvps = 'rsvps';
+
 
 const api = {
   base: apiBase,
   auth: `${apiBase}/${auth}`,
+  search: `${apiBase}/${search}`,
   profiles: `${apiBase}/${profiles}`,
   startups: `${apiBase}/${startups}`,
   posts: `${apiBase}/${social}/${posts}`,
   comments: `${apiBase}/${social}/${comments}`,
-  search: `${apiBase}/${search}`,
+  rsvps: `${apiBase}/${rsvps}`,
 };
+
 
 /**
  * client react router routes
  */
 const client = {
   marketplace: 'marketplace',
-  messages: 'messages',
-  feed: 'feed',
+  feed,
   auth,
+  search,
+  messages,
   posts,
   offerings,
   offering,
   profiles,
   profile,
-  search,
   startup,
   startups,
+  rsvp,
+  rsvps,
 };
 
 window.env = {

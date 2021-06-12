@@ -156,9 +156,7 @@ const CreateOfferingForm = () => {
     >
       <HorizontalNonLinearAlternativeLabelStepper
         stepObjsArr={stepObjsArr}
-        redirectPath={`/${envOfferingRoute}`}
         redirectRoute={`${envOfferingRoute}`}
-        redirectAction={path => history.push(path)}
         reducerName={reducerName}
         updateActiveForm_={updateActiveForm}
         checkIfAllValidForms_={checkIfAllValidForms}

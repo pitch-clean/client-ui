@@ -3,17 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 // utils
+import Proptypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper, Stepper, Step, StepLabel, Button, Typography } from '@material-ui/core';
-import SendIcon from '@material-ui/icons/Send';
-import Proptypes from 'prop-types';
-// import {
-//   updateActiveForm,
-//   checkIfAllValidForms,
-//   resetAllForms,
-// } from '../../redux/actions/RegisterActions';
-// seed
-import { profile } from '../../seed/testAuthProfile';
+import { Send as SendIcon } from '@material-ui/icons';
+import { Post } from '../../utils/requests';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,12 +39,19 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(1),
     flex: 1,
   },
-  backButton: {
-    marginRight: theme.spacing(1),
-  },
   submitButton: {
     width: `100%`,
+    
     marginTop: theme.spacing(1),
+    backgroundColor: '#3b9aee',
+    fontWeight: '500',
+    color: theme.palette.primary.light,
+    '& MuiButton-label': {
+      fontWeight: 600,
+    },
+    '&:disabled': {
+      color: theme.palette.primary.dark,
+    },
   },
   completed: {
     display: 'inline-block',
@@ -62,9 +63,6 @@ const useStyles = makeStyles(theme => ({
   paper: {
     minWidth: '60%',
     maxWidth: '900px',
-    alignItems: 'center',
-    display: 'flex',
-    flexFlow: 'column',
   },
 }));
 // fxns
@@ -81,9 +79,8 @@ const handleBack = (dispatch, formName, setActiveStep, updateActiveForm_) => () 
 const HorizontalNonLinearAlternativeLabelStepper = ({
   stepObjsArr,
   reducerName,
-  redirectPath,
-  redirectAction,
   redirectRoute,
+  apiRoute,
   updateActiveForm_,
   checkIfAllValidForms_,
   resetAllForms_,
@@ -99,14 +96,24 @@ const HorizontalNonLinearAlternativeLabelStepper = ({
   const validForms = useSelector(s => s[reducerName].validForms);
   const stepCount = stepObjsArr.length;
   // callbacks
-  const handleSubmit = () => {
+  const handleSubmit = (redirectRoute, apiRoute) => async () => {
     // TODO: create route and service on backend to log in successfully
-    const testRes = (() => profile)();
-    let path = redirectPath;
-    if (redirectRoute === 'offering') {
-      path = `${redirectPath}/${testRes.investments[1].offering.slug}`;
+    let path;
+    // send request
+    try {
+      const url = `/${apiRoute}`;
+      const resJSON = await Post(url, validForms, {}, true);
+      const { _id: id, alias } = resJSON;
+      if (['offering', 'rsvp'].includes(redirectRoute)) {
+        path = `/${redirectRoute}/${id}`;
+      } else {
+        path = `/${redirectRoute}/${alias}`;
+      }
+      // redirect browser
+      history.push(path);
+    } catch (err) {
+      console.log(err);
     }
-    history.push(path);
   };
   // effects
   useEffect(() => {
@@ -141,7 +148,7 @@ const HorizontalNonLinearAlternativeLabelStepper = ({
       </Stepper>
       <Grid container direction="column" justify="start" alignItems="center">
         <Paper
-          className={classes.paper}
+          className={`${classes.paper} flexcol`}
         >
           <Typography className={classes.instructions}>
             {stepObjsArr[activeStep].message}
@@ -183,7 +190,7 @@ const HorizontalNonLinearAlternativeLabelStepper = ({
             disabled={!areAllFormsValid}
             variant="contained"
             color="primary"
-            onClick={handleSubmit}
+            onClick={handleSubmit(redirectRoute, apiRoute)}
             className={classes.submitButton}
             endIcon={<SendIcon />}
             size="large"

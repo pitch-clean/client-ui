@@ -30,18 +30,26 @@ const useStyles = makeStyles(theme => ({
  * main
  */
 const ProfileView = () => {
+  // destructure
+  const {
+    params: { alias },
+  } = match;
   // init hooks
   const classes = useStyles();
   const dispatch = useDispatch();
   const location = useLocation();
   const match = useRouteMatch();
-  const {
-    params: { alias },
-  } = match;
-  console.log('asdfosfefoi alias', alias)
-  const baseRoute = `/profile/${alias}`;
   // state
   const viewProfile = useSelector(s => s.view.profile.viewProfile);
+  const activeProfile = useSelector(s => s.auth.activeProfile);
+  let pageAlias = alias;
+
+  if (activeProfile) {
+    if (!alias) {
+      pageAlias = activeProfile.alias;
+    }
+    // if (activeProfile.alias === alias) {}
+  }
   // effects
   useEffect(async () => {
     const url = `${window.env.api.profiles}/${alias}?by=alias`;
@@ -51,9 +59,13 @@ const ProfileView = () => {
       dispatch(clearProfile());
     };
   }, [alias]);
-  if (!viewProfile) {
-    return <div />;
+  if (!pageAlias) {
+    return <Redirect to="/" />;
   }
+  if (!viewProfile) {
+    return <div>{`issue with redux state: <ProfileView /> > viewProfile `}</div>;
+  }
+  const baseRoute = `/${window.env.client.profile}/${pageAlias}`;
 
   return (
     <div className={`ProfileView ${classes.root} flexrow`}>
