@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Link as MuiLink } from '@material-ui/core';
+import { Link as MuiLink } from '@material-ui/core';
 // components
 import StyledTab from './StyledTab';
 // constants
@@ -38,39 +38,13 @@ const ProfileNavButton = () => {
   // init hooks
   const classes = useStyles();
   // state
-  const firstName = useSelector(s => s.auth.activeProfile.pii.firstName);
   const alias = useSelector(s => s.auth.activeProfile.alias);
-  // const profileClass = useSelector(s => s.auth.activeProfile.profileClass);
-  // const activeProfile = useSelector(s => s.auth.activeProfile);
 
   return (
     <div className={`ProfileNavButton ${classes.root} flexrow navBarLink`}>
-      {/* iteration 1 (below) */}
-      {/* {profileClass === 'sponsor' && (
-        <MuiLink className={`navBarLink`} color="inherit" component={Link} to={`/${window.env.client.offerings}`}>
-          <Typography
-            className={`${classes.createOffering} navBarLink`}
-            variant="subtitle1"
-            color="inherit"
-            component="div"
-          >
-            Create Offering
-          </Typography>
-        </MuiLink>
-      )} */}
-      {/* iteration 1 (above) */}
-
-      {/* iteration 2 (below) */}
-      {/* <MuiLink className={`${classes.link} navBarLink`} color="inherit" component={Link} to={`/${window.env.client.profile}/${alias}`}>
-        <StyledTab label={firstName} textColor="primary" />
-      </MuiLink> */}
-      {/* iteration 2 (above) */}
-
-      {/* iteration 3 (below) */}
       <MuiLink className={`${classes.link}`} color="inherit" component={Link} to={`/${window.env.client.profile}/${alias}`}>
-        <StyledTab label={firstName} textColor="primary" />
+        <StyledTab label="Profile" textColor="primary" />
       </MuiLink>
-      {/* iteration 3 (above) */}
     </div>
   );
 };

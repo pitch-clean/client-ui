@@ -21,9 +21,19 @@ export const baseTheme = createMuiTheme({
       },
       wrapper: {
         fontWeight: 600,
-        textTransform: 'none'
-      }
-    }
+        textTransform: 'none',
+      },
+    },
+    MuiButton: {
+      root: {
+        textTransform: 'none',
+      },
+    },
+  },
+  props: {
+    MuiButton: {
+      disableRipple: true,
+    },
   },
   palette: {
     primary: {

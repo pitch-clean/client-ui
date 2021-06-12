@@ -9,7 +9,7 @@ import { updateL1 } from '../../../redux/actions/ViewActions';
 import StyledTabs from './StyledTabs';
 import StyledTab from './StyledTab';
 import ProfileNavButton from './ProfileNavButton';
-import ProfileLoginRegister from './ProfileLoginRegister';
+import LoginOrRegister from './LoginOrRegister';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,22 +50,20 @@ const CenterNavGroup = () => {
   }, [l1Path]);
 
   return (
-    // <div className={`CenterNavGroup ${classes.root} flexrow`}>
-      <StyledTabs className={`TabContainer ${classes.root} flexrow`} value={l1Map[l1Path]} indicatorColor="secondary" textColor="primary" >
-        <Link className={`${classes.tab} navBarLink`} to={`/${window.env.client.feed}`}>
-          <StyledTab label="Newsfeed" textColor="primary" />
-        </Link>
-        <Link className={`${classes.tab} navBarLink`} to={`/${window.env.client.marketplace}`}>
-          <StyledTab label="Marketplace" textColor="primary" />
-        </Link>
-        <Link className={`${classes.tab} navBarLink`} to={`/${window.env.client.messages}`}>
-          <StyledTab label="Messages" textColor="primary" />
-        </Link>
-        <div className={`${classes.tab} navBarLink`} >
-          {isAuthenticated ? <ProfileNavButton /> : <ProfileLoginRegister />}
-        </div>
-      </StyledTabs>
-    // </div>
+    <StyledTabs className={`TabContainer ${classes.root} flexrow`} value={l1Map[l1Path]} indicatorColor="secondary" textColor="primary" >
+      <Link className={`${classes.tab} navBarLink`} to={`/${window.env.client.feed}`}>
+        <StyledTab label="Newsfeed" textColor="primary" />
+      </Link>
+      <Link className={`${classes.tab} navBarLink`} to={`/${window.env.client.marketplace}`}>
+        <StyledTab label="Marketplace" textColor="primary" />
+      </Link>
+      <Link className={`${classes.tab} navBarLink`} to={`/${window.env.client.messages}`}>
+        <StyledTab label="Messages" textColor="primary" />
+      </Link>
+      <div className={`${classes.tab} navBarLink`} >
+        {isAuthenticated ? <ProfileNavButton /> : <LoginOrRegister />}
+      </div>
+    </StyledTabs>
   );
 };
 

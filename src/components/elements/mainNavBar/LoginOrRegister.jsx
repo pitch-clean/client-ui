@@ -1,12 +1,9 @@
 // react
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Chip, Link as MuiLink } from '@material-ui/core';
-// components
-// import LoginRegister from './LoginRegister';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,14 +22,12 @@ const useStyles = makeStyles(theme => ({
 /**
  * main
  */
-const ProfileLoginRegister = () => {
+const LoginOrRegister = () => {
   // init hooks
   const classes = useStyles();
-  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
 
   return (
-    <div className={`${classes.root} h100 flexrow`}>
-      {/* {isAuthenticated ? <ProfileNavButton /> : <LoginRegister />} */}
+    <div className={`LoginOrRegister ${classes.root} h100 flexrow`}>
       <MuiLink component={Link} to={`/${window.env.client.login}`} className={`${classes.link}`}>
         <Typography color="primary">Login</Typography>
       </MuiLink>
@@ -50,4 +45,4 @@ const ProfileLoginRegister = () => {
 };
 
 // export
-export default ProfileLoginRegister;
+export default LoginOrRegister;

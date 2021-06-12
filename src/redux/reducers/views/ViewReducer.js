@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import * as types from '../../types/ViewTypes';
 import * as states from '../../initialStates/views';
 import StartupReducer from './StartupReducer';
+import SearchReducer from './SearchReducer';
 
 const MainReducer = (state = _.cloneDeep(states.main), action) => {
   const newState = _.cloneDeep(state);
@@ -96,6 +97,7 @@ const ViewReducer = combineReducers({
   messages: MessagesReducer,
   feed: FeedReducer,
   startup: StartupReducer,
+  search: SearchReducer,
 });
 
 export default ViewReducer;

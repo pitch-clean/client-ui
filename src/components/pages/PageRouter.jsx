@@ -17,6 +17,7 @@ import ProfileView from './profile/ProfileView';
 import PortfolioView from './portfolio/PortfolioView';
 import MessagesView from './messages/MessagesView';
 import RSVPView from './rsvp/RSVPView';
+import SearchView from './search/SearchView';
 
 // constants
 const useStyles = makeStyles(theme => ({
@@ -64,11 +65,7 @@ const PageRouter = () => {
         <Route exact path="/" render={p => <Home props={p} />} />
         <Route exact path="/feed" render={p => <FeedView props={p} />} />
         <Route exact path="/login" render={p => <LoginForm props={p} />} />
-        <Route
-          exact
-          path="/portfolio"
-          render={p => isAuthenticated && <PortfolioView props={p} />}
-        />
+        <Route exact path="/search/:searchStr" render={p => <SearchView props={p} />} />
         <Route exact path="/messages" render={p => isAuthenticated && <MessagesView props={p} />} />
         <Route
           exact

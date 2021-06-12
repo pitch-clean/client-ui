@@ -130,3 +130,15 @@ export const clearActiveStartup = () => dispatch => {
     type: types.CLEAR_ACTIVE_STARTUP,
   });
 };
+// search
+export const updateSearch = payload => dispatch => {
+  dispatch({
+    payload,
+    type: types.UPDATE_SEARCH,
+  });
+};
+export const clearSearch = () => dispatch => {
+  dispatch({
+    type: types.CLEAR_SEARCH,
+  });
+};

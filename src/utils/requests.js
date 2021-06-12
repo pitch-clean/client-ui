@@ -46,7 +46,8 @@ export const Get = async (url, additionalHeaders={}, isReturnJson=false) => {
     return isReturnJson ? await response.json(): response;
   } catch (err) {
     console.log('Error: GET request');
-    console.log(err);
+    // console.log(err);
+    throw err;
   }
 };
 
@@ -70,12 +71,8 @@ export const Put = async (url, body, additionalHeaders={}, isReturnJson=false) =
       }
     );
     return isReturnJson ? await response.json(): response;
-  } catch (error) {
-    console.log('ERROR PUT: ', error);
-    console.log('url: ', url);
-    console.log('headers: ', headers);
-    console.log('body: ', body);
-    console.error(error);
+  } catch (err) {
+    throw err;
   }
 };
 

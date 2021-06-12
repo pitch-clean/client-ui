@@ -1,9 +1,12 @@
 // react
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 // utils
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core';
 import { Search as SearchIcon } from '@material-ui/icons';
+import { updateSearch } from '../../../redux/actions/ViewActions';
 import { Get } from '../../../utils/requests';
 // constants
 const useStyles = makeStyles(theme => ({
@@ -64,21 +67,42 @@ const CssTextField = withStyles({
     },
   },
 })(TextField);
+
 // event handlers
-const submit = async searchStr => {
+/**
+ * submit query to search several collections
+ * on completion, need to clear form
+ * @param {*} searchStr 
+ * @returns 
+ */
+const submit = async (searchStr, setInput, push, dispatch) => {
+  // reroute
+  push(`/search/${searchStr}`)
+  // make call
   const url = `${window.env.api.search}/${searchStr}`;
-  const resJson = await Get(url, {}, true);
-  return resJson;
+  try {
+    const resJson = await Get(url, {}, true);
+    dispatch(updateSearch(resJson));
+  } catch (err) {
+    console.log(err)
+  }
+  // update redux
+  // clear the form
+  setInput('');
 };
-const clickSubmit = searchStr => async () => {
-  const resJson = await submit(searchStr);
-  return resJson;
+/**
+ * handles the click for submitting
+ * @param {*} searchStr 
+ * @param {*} dispatch 
+ * @returns 
+ */
+const clickSubmit = (searchStr, setInput, push, dispatch) => async () => {
+  submit(searchStr, setInput, push, dispatch);
 };
-const keyDownHandler = searchStr => async e => {
-  if (e.key === 'Enter') {
+const keyDownHandler = (searchStr, setInput, push, dispatch) => async e => {
+  if (e.key === 'Enter' && searchStr) {
     e.preventDefault();
-    const resJson = await submit(searchStr);
-    return resJson;
+    submit(searchStr, setInput, push, dispatch);
   }
 };
 const updateInput = setInput => e => {
@@ -91,6 +115,8 @@ const updateInput = setInput => e => {
 const MainNavSearch = () => {
   // init hooks
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { push } = useHistory();
   // state
   const [input, setInput] = useState('');
 
@@ -101,11 +127,11 @@ const MainNavSearch = () => {
         margin="dense"
         label="Search"
         variant="filled"
-        onKeyDown={keyDownHandler(input)}
+        onKeyDown={keyDownHandler(input, setInput, push, dispatch)}
         value={input}
         onChange={updateInput(setInput)}
       />
-      <Button className={`searchButton ${classes.button}`} disableRipple onClick={clickSubmit(input)}>
+      <Button className={`searchButton ${classes.button}`} disableRipple onClick={clickSubmit(input, setInput, push, dispatch)}>
         <SearchIcon />
       </Button>
     </div>
