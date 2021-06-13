@@ -14,8 +14,8 @@ import {
   Paper,
   Link as MuiLink,
 } from '@material-ui/core';
-import { activateFavorite } from '../../../utils/eventHandlers';
-import { calcOfferSize, calculateTermLength } from '../../../utils/printFxns';
+import { activateFavorite } from '../../utils/eventHandlers';
+import { calcOfferSize, calculateTermLength } from '../../utils/printFxns';
 // style
 // import './OfferingsList.css';
 // constants

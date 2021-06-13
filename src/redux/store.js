@@ -1,5 +1,5 @@
 // modules
-import {createStore, applyMiddleware, compose} from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 // redux
 import baseReducer from './baseReducer';
@@ -21,6 +21,6 @@ const enhancer = composeEnhancers(
 const store = createStore(
     baseReducer,
     {},
-    enhancer
+    enhancer,
 );
 export default store;

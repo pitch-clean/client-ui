@@ -142,3 +142,29 @@ export const clearSearch = () => dispatch => {
     type: types.CLEAR_SEARCH,
   });
 };
+// messages
+export const createConversation = conversationObject => dispatch => {
+  const {userId, messageText} = conversationObject;
+  const formData = new FormData();
+  formData.append('userId', userId);
+  formData.append('textMessage', messageText);
+  formData.append('participants', JSON.stringify([
+    {participantId: 'participant1', actionsAllowed: ['all']},
+  ]));
+  fetch(process.env.REACT_APP_SERVER_API_PATH + '/conversations', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MGI0YWVkYzNjNDg2MjAwYjBhMDlkNTUiLCJlbWFpbEFkZHJlc3MiOiJ1c2VyQHRlc3QuY29tIiwicm9sZSI6ImludmVzdG9yIiwicHJvZmlsZSI6eyJmaXJzdE5hbWUiOiJVc2VyIiwibGFzdE5hbWUiOiJUZXN0IiwiZ2VuZGVyIjoibWFsZSIsImNvbnRhY3QiOltdfSwiaWF0IjoxNjIyNTQ4MjgwfQ.Ee3yxGDSTHrRLb3XzECq1cuuZrGtjrwFb-yY17a72O4'
+    },
+    body: formData,
+  })
+    .then(result => result.json())
+    .then((result) => {
+      dispatch({
+        type: 'test',
+        payload: result,
+      });
+    });
+};
+
+export const createMessage = () => {};

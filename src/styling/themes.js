@@ -17,7 +17,7 @@ export const baseTheme = createMuiTheme({
     },
     MuiTab: {
       root: {
-        minWidth: 100
+        minWidth: 100,
       },
       wrapper: {
         fontWeight: 600,
