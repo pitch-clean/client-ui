@@ -11,6 +11,7 @@ import {
 import HorizontalNonLinearAlternativeLabelStepper from '../elements/HorizontalNonLinearAlternativeLabelStepper';
 import BasicForm from './rsvpForms/BasicForm';
 import TimeAndDate from './rsvpForms/TimeAndDate';
+import Location from './rsvpForms/Location';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,7 +25,7 @@ const reducerName = 'createRSVP';
  * main
  * controls the form groups
  */
-function CreateRSVPForm() {
+const CreateRSVPForm = () => {
   // init hooks
   const classes = useStyles();
 
@@ -36,13 +37,20 @@ function CreateRSVPForm() {
       isOptional: false,
       formName: 'general',
     },
+    // {
+    //   header: 'Location',
+    //   message: '',
+    //   component: <Location formName="location" reducerName={reducerName} />,
+    //   isOptional: false,
+    //   formName: 'location'
+    // },
     {
-      header: 'Time and date',
+      header: 'Time and Date',
       message: '',
       component: <TimeAndDate formName="timeAndDate" reducerName={reducerName} />,
-      isOptional: true,
+      isOptional: false,
       formName: 'timeAndDate',
-    }
+    },
   ];
 
   return (

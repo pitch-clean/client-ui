@@ -25,12 +25,20 @@ export const initialState = {
         value: new Date(),
         error: '',
         isOptional: true,
-      }
-    }
+      },
+    },
   },
+  // location: {
+  //   fields: {
+  //     location: {
+  //       validator: Joi.string().allow('').max(250),
+  //     },
+  //   },
+  // },
   validForms: {
     general: false,
     timeAndDate: false,
+    // location: false,
   },
   activeForm: {
     name: 'general',

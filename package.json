@@ -23,6 +23,7 @@
     "dotenv": "^8.2.0",
     "eslint": "^7.23.0",
     "eslint-plugin-react-hooks": "4",
+    "google-map-react": "^2.1.9",
     "lodash": "^4.17.21",
     "pdfjs-dist": "^2.8.335",
     "prop-types": "^15.7.2",
