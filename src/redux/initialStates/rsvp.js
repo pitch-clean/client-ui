@@ -9,24 +9,32 @@ export const initialState = {
           .allow('')
           .max(250),
         value: '',
-        error: ''
+        error: '',
       },
       description: {
-        validator: Joi.string()
-          .regex(/^[ a-zA-Z0-9]+$/)
-          .allow('')
-          .max(250),
+        validator: Joi.string(),
         value: '',
-        error: ''
+        error: '',
+      },
+    },
+  },
+  timeAndDate: {
+    fields: {
+      date: {
+        validator: Joi.date().optional(),
+        value: new Date(),
+        error: '',
+        isOptional: true,
       }
     }
   },
   validForms: {
-    general: false
+    general: false,
+    timeAndDate: false,
   },
   activeForm: {
     name: 'general',
-    isFormValid: false
+    isFormValid: false,
   },
-  areAllFormsValid: false
+  areAllFormsValid: false,
 };

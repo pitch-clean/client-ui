@@ -14,7 +14,6 @@ import Home from './home/Home';
 import CreateProfile from './profile/CreateProfile';
 import CreateOffering from './offerings/CreateOffering';
 import ProfileView from './profile/ProfileView';
-import PortfolioView from './portfolio/PortfolioView';
 import MessagesView from './messages/MessagesView';
 import RSVPView from './rsvp/RSVPView';
 import SearchView from './search/SearchView';

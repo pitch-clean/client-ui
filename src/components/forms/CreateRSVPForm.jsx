@@ -10,6 +10,7 @@ import {
 // components
 import HorizontalNonLinearAlternativeLabelStepper from '../elements/HorizontalNonLinearAlternativeLabelStepper';
 import BasicForm from './rsvpForms/BasicForm';
+import TimeAndDate from './rsvpForms/TimeAndDate';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,12 +30,19 @@ function CreateRSVPForm() {
 
   const stepObjArr = [
     {
-      header: 'Title',
-      message: 'Upload media files here:',
+      header: 'Basic info',
+      message: '',
       component: <BasicForm formName="general" reducerName={reducerName} />,
       isOptional: false,
       formName: 'general',
     },
+    {
+      header: 'Time and date',
+      message: '',
+      component: <TimeAndDate formName="timeAndDate" reducerName={reducerName} />,
+      isOptional: true,
+      formName: 'timeAndDate',
+    }
   ];
 
   return (
