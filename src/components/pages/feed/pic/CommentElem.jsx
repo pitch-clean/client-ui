@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 // components
-import CardHeaderProfile from '../../elements/CardHeaderProfile';
+import CardHeaderProfile from '../../../elements/CardHeaderProfile';
 import { Typography } from '@material-ui/core';
 // constants
 const useStyles = makeStyles(theme => ({

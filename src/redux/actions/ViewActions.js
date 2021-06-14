@@ -81,6 +81,12 @@ export const updatePostLikes = payload => dispatch => {
     payload,
   });
 };
+export const updatePostReposts = payload => dispatch => {
+  dispatch({
+    type: types.UPDATE_POST_REPOSTS,
+    payload,
+  });
+};
 export const updatePostComments = ({ postId, commentsArr }) => dispatch => {
   dispatch({
     type: types.UPDATE_POST_COMMENTS,

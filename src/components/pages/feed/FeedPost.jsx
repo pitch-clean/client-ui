@@ -11,11 +11,19 @@ import {
   Typography,
   Avatar,
   Paper,
+  AppBar,
+  Toolbar,
   Link as MuiLink,
 } from '@material-ui/core';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import {
+  MoreHoriz as MoreHorizIcon,
+  FavoriteBorder as FavoriteBorderIcon,
+  Favorite as FavoriteIcon,
+  Visibility as VisibilityIcon,
+  Reply as ReplyIcon,
+} from '@material-ui/icons';
 // components
-import PostInteractionContainer from './PostInteractionContainer';
+import PostInteractionContainer from './pic/PostInteractionContainer';
 // constants
 const useStyles = makeStyles(theme => ({
   cardRoot: {
@@ -72,7 +80,6 @@ const FeedPost = ({ idx: postIdx, isProfile }) => {
   const { body, postType, _id: postId, profile: postProfileId } = postObj;
   const profile = isProfile ? viewProfile : postObj.profile; // need to do this for posts on profile
   const {
-    // profileClass,
     profileType,
     alias,
     pii: {
@@ -136,7 +143,7 @@ const FeedPost = ({ idx: postIdx, isProfile }) => {
         }
       />
       <CardContent>
-        <Typography className={classes.cardBody} variant="body2" color="textPrimary" component="p">
+        <Typography className={`${classes.cardBody}`} variant="body2" color="textPrimary" component="p">
           {body}
         </Typography>
       </CardContent>

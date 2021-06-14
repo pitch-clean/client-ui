@@ -7,23 +7,18 @@ import { Tabs } from '@material-ui/core';
 // components
 import Sidebar from '../../elements/SideBar';
 import LSProfile from './LSProfile';
-import ProfileTabs from './ProfileTabs';
 
 /**
  * main
  */
-const LeftSidebar = () => {
+const ProfileTabs = () => {
   // init hooks
   // state
-  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
 
-  return isAuthenticated ? (
-    <Sidebar isLeft>
-      <LSProfile />
-      <ProfileTabs />
-    </Sidebar>
-  ) : (<div></div>);
+  return (
+    <div></div>
+  );
 };
 
 // export
-export default LeftSidebar;
+export default ProfileTabs;

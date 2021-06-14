@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { updateViewProfile, clearProfile } from '../../../redux/actions/ViewActions';
 // components
-import Nav from './home/Nav';
 import About from './home/About';
 import Investments from './home/Investments';
 import Network from './home/Network';
@@ -31,14 +30,14 @@ const useStyles = makeStyles(theme => ({
  */
 const ProfileView = () => {
   // destructure
-  const {
-    params: { alias },
-  } = match;
   // init hooks
   const classes = useStyles();
   const dispatch = useDispatch();
   const location = useLocation();
   const match = useRouteMatch();
+  const {
+    params: { alias },
+  } = match;
   // state
   const viewProfile = useSelector(s => s.view.profile.viewProfile);
   const activeProfile = useSelector(s => s.auth.activeProfile);
@@ -72,10 +71,10 @@ const ProfileView = () => {
       <LeftSidebar />
       <div direction="column" className="Body f1">
         <About />
-        <Nav baseRoute={baseRoute} />
+        {/* <Nav baseRoute={baseRoute} /> */}
         <Switch location={{ ...location, baseRoute }}>
           <Route exact path="/profile/:alias/posts" render={p => <Posts props={p} />} />
-          <Route exact path="/profile/:alias/investments" render={p => <Investments props={p} />} />
+          {/* <Route exact path="/profile/:alias/investments" render={p => <Investments props={p} />} /> */}
           <Route exact path="/profile/:alias/network" render={p => <Network props={p} />} />
           <Redirect to={`/profile/${alias}/posts`} />
         </Switch>
