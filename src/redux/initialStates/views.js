@@ -12,14 +12,11 @@ export const feed = {
   postsObj: {},
 };
 
-export const profile = {
-  activeProfileTab: 'posts',
-  viewProfile: null,
-};
-
 export const messages = {
   activeConversationIdx: 0,
   activeConversationId: null,
   activeConversationObj: null,
   profileMap: null,
 };
+
+export const recommendedConnections = [];

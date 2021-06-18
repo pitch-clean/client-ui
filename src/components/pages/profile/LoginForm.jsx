@@ -118,7 +118,7 @@ const LoginForm = () => {
       <Grid item className={`h100 ${classes.leftBlock}`} />
       <Paper square className={`h100 ${classes.rightBlock} flexcol`}>
         <Paper square elevation={3} className={`${classes.formContainer}`}>
-          <div className={`${classes.title}`}>Sign in to Envest</div>
+          <div className={`${classes.title}`}>Sign in to Pitchclean</div>
           <TextField
             className={classes.text}
             formName="login"

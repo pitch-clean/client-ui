@@ -12,11 +12,11 @@ import LoginForm from './profile/LoginForm';
 import FeedView from './feed/FeedView';
 import Home from './home/Home';
 import CreateProfile from './profile/CreateProfile';
-import CreateOffering from './offerings/CreateOffering';
+// import CreateOffering from './offerings/CreateOffering';
 import ProfileView from './profile/ProfileView';
 import MessagesView from './messages/MessagesView';
 import RSVPView from './rsvp/RSVPView';
-import SearchView from './search/SearchView';
+// import SearchView from './search/SearchView';
 import CreateRSVP from './rsvp/CreateRSVP';
 
 // constants

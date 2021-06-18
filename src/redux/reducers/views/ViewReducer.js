@@ -4,6 +4,7 @@ import * as types from '../../types/ViewTypes';
 import * as states from '../../initialStates/views';
 import StartupReducer from './StartupReducer';
 import SearchReducer from './SearchReducer';
+import ProfileReducer from './ProfileReducer';
 
 const MainReducer = (state = _.cloneDeep(states.main), action) => {
   const newState = _.cloneDeep(state);
@@ -22,11 +23,26 @@ const MainReducer = (state = _.cloneDeep(states.main), action) => {
   }
 };
 
-const FeedReducer = (state = _.cloneDeep(states.feed), action) => {
+const RecommendedConnectionsReducer = (state = _.cloneDeep([]), action) => {
   const newState = _.cloneDeep(state);
   switch (action.type) {
+    case types.UPDATE_RECOMMENDED_CONNECTIONS:
+      return action.payload;
+    default:
+      return newState;
+  }
+};
+
+const FeedReducer = (state = _.cloneDeep(states.feed), action) => {
+  const newState = _.cloneDeep(state);
+  let idx;
+  switch (action.type) {
+    case types.UPDATE_POST_REPOSTS:
+      idx = newState.posts.findIndex(post => post._id === action.payload._id);
+      newState.posts[idx].reposts = action.payload.reposts;
+      return newState;
     case types.UPDATE_POST_LIKES:
-      const idx = newState.posts.findIndex(post => post._id === action.payload._id);
+      idx = newState.posts.findIndex(post => post._id === action.payload._id);
       newState.posts[idx].likes = action.payload.likes;
       return newState;
     case types.UPDATE_POSTS_ARR:
@@ -37,26 +53,14 @@ const FeedReducer = (state = _.cloneDeep(states.feed), action) => {
       return newState;
     case types.UPDATE_POST_COMMENTS:
       console.log('adding/updating/deleting a comment', action.payload)
-      const postIdxComments = newState.posts.findIndex(post => post._id === action.payload._id);
-      newState.posts[postIdxComments].comments = action.payload.comments;
+      console.log('newState.posts', newState.posts)
+      const postIdxComments = newState.posts.findIndex(post => post._id === action.payload.postId);
+      console.log('postIdxComments', postIdxComments)
+      console.log('newState.posts[postIdxComments]', newState.posts[postIdxComments])
+      // newState.posts[postIdxComments].comments = action.payload.commentsArr;
       return newState;
     case types.CLEAR_FEED:
       return _.cloneDeep(initialFeedState);
-    default:
-      return newState;
-  }
-};
-
-const ProfileReducer = (state = _.cloneDeep(states.profile), action) => {
-  const newState = _.cloneDeep(state);
-  switch (action.type) {
-    case types.UPDATE_PROFILE_TAB:
-      newState.activeProfileTab = action.payload;
-      return newState;
-    case types.UPDATE_VIEW_PROFILE:
-      return { ...newState, viewProfile: action.payload, ...action.payload };
-    case types.CLEAR_PROFILE:
-      return _.cloneDeep(initialProfileState);
     default:
       return newState;
   }
@@ -98,6 +102,7 @@ const ViewReducer = combineReducers({
   feed: FeedReducer,
   startup: StartupReducer,
   search: SearchReducer,
+  recommendedConnections: RecommendedConnectionsReducer,
 });
 
 export default ViewReducer;

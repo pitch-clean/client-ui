@@ -6,7 +6,7 @@ import {
   Paper,
 } from '@material-ui/core';
 // components
-import CardHeaderProfile from '../../elements/CardHeaderProfile';
+import CardHeaderProfile from '../../../elements/CardHeaderProfile';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {

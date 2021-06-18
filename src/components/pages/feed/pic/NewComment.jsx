@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, TextField, Button } from '@material-ui/core';
-import { updatePostComments } from '../../../redux/actions/ViewActions';
-import { Post } from '../../../utils/requests';
+import { updatePostComments } from '../../../../redux/actions/ViewActions';
+import { Post } from '../../../../utils/requests';
 // components
 // constants
 const useStyles = makeStyles(theme => ({
@@ -36,22 +36,24 @@ const useStyles = makeStyles(theme => ({
   button: {
     height: 40,
     margin: 5,
-    color: 'whitesmoke',
     backgroundColor: '#87a1d2',
     '&:hover': {
       backgroundColor: '#aec2e8',
+    },
+    '& *': {
+      color: 'white',
     },
   },
 }));
 // fxns
 const submitComment = async (input, postId, activeProfileId, dispatch) => {
-  const url = `${window.env.api.posts}/comment`;
-  const body = { activeProfileId, postId, body: input };
+  const url = `${window.env.api.comments}`;
+  const body = { profile: activeProfileId, post: postId, body: input };
   try {
-    const res = await Post(url, body, {}, true);
+    const resCommentsArr = await Post(url, body, {}, true);
     console.log('\nstart\n', url, body)
-    console.log(res, '\nend\n\n')
-    dispatch(updatePostComments(res));
+    console.log(resCommentsArr, '\nend\n\n')
+    dispatch(updatePostComments(resCommentsArr));
   } catch (err) {
     console.log(err)
   }
@@ -86,7 +88,7 @@ const NewComment = ({ postId }) => {
         value={input}
         onChange={e => setInput(e.currentTarget.value)}
       />
-      <Button variant="contained" className={classes.button} onClick={async () => await submitComment(input, postId, activeProfileId, dispatch)} >
+      <Button variant="contained" disabled={!input} className={classes.button} onClick={async () => await submitComment(input, postId, activeProfileId, dispatch)} >
         Submit
       </Button>
     </Paper>

@@ -22,8 +22,6 @@ import {
   Visibility as VisibilityIcon,
   Reply as ReplyIcon,
 } from '@material-ui/icons';
-// components
-import PostInteractionContainer from './pic/PostInteractionContainer';
 // constants
 const useStyles = makeStyles(theme => ({
   cardRoot: {
@@ -70,15 +68,13 @@ const buildLocation = (city, stateProv) => {
 };
 
 // main
-const FeedPost = ({ idx: postIdx, isProfile }) => {
+const BaseFeedPost = ({ postObj, idx: postIdx, isProfile }) => {
   // init hooks
   const classes = useStyles();
   // state
-  const postObj = useSelector(s => s.view[isProfile ? 'profile' : 'feed'].posts[postIdx]);
   const viewProfile = useSelector(s => s.view.profile.viewProfile);
   // destructure
   const { body, postType, _id: postId, profile: postProfileId } = postObj;
-  const profile = isProfile ? viewProfile : postObj.profile; // need to do this for posts on profile
   const {
     profileType,
     alias,
@@ -105,7 +101,7 @@ const FeedPost = ({ idx: postIdx, isProfile }) => {
   }
 
   return postObj ? (
-    <Paper elevation={0} className={`${classes.cardRoot} FeedPost w100`}>
+    <Paper elevation={0} className={`BaseFeedPost ${classes.cardRoot} w100`}>
       <CardHeader
         className={classes.cardHeader}
         classes={{
@@ -147,7 +143,6 @@ const FeedPost = ({ idx: postIdx, isProfile }) => {
           {body}
         </Typography>
       </CardContent>
-      <PostInteractionContainer postId={postId} postIdx={postIdx} postProfileId={postProfileId} postType={postType} isProfile={isProfile} />
     </Paper>
   ) : (
     <div />
@@ -155,4 +150,4 @@ const FeedPost = ({ idx: postIdx, isProfile }) => {
 };
 
 // export
-export default FeedPost;
+export default BaseFeedPost;

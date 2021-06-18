@@ -1,9 +1,9 @@
 {
-  "name": "envest-client-ui",
+  "name": "pitchclean-client-ui",
   "version": "0.1.0",
   "homepage": "https://envest.pro",
   "repository": {
-    "url": "https://github.com/mattroccolucciola/envest-client-ui"
+    "url": "https://github.com/pitch-clean/client-ui"
   },
   "private": true,
   "dependencies": {

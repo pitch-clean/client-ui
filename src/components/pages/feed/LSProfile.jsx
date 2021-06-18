@@ -14,7 +14,6 @@ import {
   Link as MuiLink,
 } from '@material-ui/core';
 import { Settings } from '@material-ui/icons';
-import BookmarkBorder from '@material-ui/icons/BookmarkBorder';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {

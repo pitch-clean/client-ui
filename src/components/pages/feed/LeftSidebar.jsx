@@ -4,16 +4,22 @@ import { useSelector } from 'react-redux';
 // components
 import Sidebar from '../../elements/SideBar';
 import LSProfile from './LSProfile';
+import ProfileTabs from './ProfileTabs';
 
 /**
  * main
  */
-const LeftSidebar = () => {
-  // init hooks
+const LeftSidebar = ({ baseRoute }) => {
   // state
   const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
 
-  return <Sidebar isLeft>{isAuthenticated && <LSProfile />}</Sidebar>;
+  return isAuthenticated ? (
+    <Sidebar isLeft>
+      <LSProfile />
+      {/* (below) only enabled for profile view */}
+      {baseRoute && <ProfileTabs baseRoute={baseRoute} />}
+    </Sidebar>
+  ) : (<div></div>);
 };
 
 // export
