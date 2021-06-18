@@ -31,9 +31,15 @@ export const updateViewProfile = payload => dispatch => {
     payload,
   });
 };
-export const clearProfile = () => dispatch => {
+export const clearViewProfile = () => dispatch => {
   dispatch({
-    type: types.CLEAR_PROFILE,
+    type: types.CLEAR_VIEW_PROFILE,
+  });
+};
+export const updateRecommendedConnections = payload => dispatch => {
+  dispatch({
+    payload,
+    type: types.UPDATE_RECOMMENDED_CONNECTIONS,
   });
 };
 // messages

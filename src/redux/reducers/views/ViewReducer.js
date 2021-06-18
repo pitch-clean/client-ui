@@ -4,6 +4,7 @@ import * as types from '../../types/ViewTypes';
 import * as states from '../../initialStates/views';
 import StartupReducer from './StartupReducer';
 import SearchReducer from './SearchReducer';
+import ProfileReducer from './ProfileReducer';
 
 const MainReducer = (state = _.cloneDeep(states.main), action) => {
   const newState = _.cloneDeep(state);
@@ -17,6 +18,16 @@ const MainReducer = (state = _.cloneDeep(states.main), action) => {
     case types.IS_DARK_MODE:
       newState.isDarkMode = action.payload;
       return newState;
+    default:
+      return newState;
+  }
+};
+
+const RecommendedConnectionsReducer = (state = _.cloneDeep([]), action) => {
+  const newState = _.cloneDeep(state);
+  switch (action.type) {
+    case types.UPDATE_RECOMMENDED_CONNECTIONS:
+      return action.payload;
     default:
       return newState;
   }
@@ -50,21 +61,6 @@ const FeedReducer = (state = _.cloneDeep(states.feed), action) => {
       return newState;
     case types.CLEAR_FEED:
       return _.cloneDeep(initialFeedState);
-    default:
-      return newState;
-  }
-};
-
-const ProfileReducer = (state = _.cloneDeep(states.profile), action) => {
-  const newState = _.cloneDeep(state);
-  switch (action.type) {
-    case types.UPDATE_PROFILE_TAB:
-      newState.activeProfileTab = action.payload;
-      return newState;
-    case types.UPDATE_VIEW_PROFILE:
-      return { ...newState, viewProfile: action.payload, ...action.payload };
-    case types.CLEAR_PROFILE:
-      return _.cloneDeep(initialProfileState);
     default:
       return newState;
   }
@@ -106,6 +102,7 @@ const ViewReducer = combineReducers({
   feed: FeedReducer,
   startup: StartupReducer,
   search: SearchReducer,
+  recommendedConnections: RecommendedConnectionsReducer,
 });
 
 export default ViewReducer;

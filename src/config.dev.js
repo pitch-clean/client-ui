@@ -11,8 +11,8 @@ const feed = 'feed';
 const messages = 'messages';
 const profile = 'profile';
 const profiles = 'profiles';
-const offering = 'offering';
-const offerings = 'offerings';
+// const offering = 'offering'; // deprecated
+// const offerings = 'offerings'; // deprecated
 const social = 'social';
 const post = 'post';
 const posts = 'posts';
@@ -45,8 +45,6 @@ const client = {
   search,
   messages,
   posts,
-  offerings,
-  offering,
   profiles,
   profile,
   startup,
