@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "homepage": "https://envest.pro",
   "repository": {
-    "url": "https://github.com/mattroccolucciola/pitchclean-client-ui"
+    "url": "https://github.com/pitch-clean/client-ui"
   },
   "private": true,
   "dependencies": {
