@@ -22,14 +22,23 @@ const useStyles = makeStyles(theme => ({
 /**
  * main
  */
-const CommentElem = ({ postIdx, commentIdx }) => {
+const CommentElem = ({ postIdx, commentIdx, commentObj }) => {
   // init hooks
   const classes = useStyles();
   // state
-  const body = useSelector(s => s.view.feed.posts[postIdx].comments[commentIdx].body);
-  const alias = useSelector(s => s.view.feed.posts[postIdx].comments[commentIdx].profile.alias);
-  const pii = useSelector(s => s.view.feed.posts[postIdx].comments[commentIdx].profile.pii);
-  const thumbnail = useSelector(s => s.view.feed.posts[postIdx].comments[commentIdx].profile.images.profile.thumbnail);
+  const {
+    body,
+    profile: {
+      alias,
+      pii,
+      images: {
+        profile: {
+          thumbnail,
+        },
+      },
+    },
+  } = commentObj;
+  
   // build
   const buildBody = body => {
     return (

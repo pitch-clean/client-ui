@@ -21,8 +21,6 @@ const PostActionButton = ({ postType, postId, postIdx, postProfileId }) => {
   // init hooks
   const dispatch = useDispatch();
   // state
-  const activeProfileId = useSelector(s => s.auth.activeProfile._id);
-  const likesArr = useSelector(s => s.view.feed.posts[postIdx].likes);
   let msg = postTypeMapping[postType];
 
   return (

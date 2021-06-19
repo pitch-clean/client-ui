@@ -5,21 +5,13 @@ import { Link } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  CardHeader,
   CardContent,
-  IconButton,
   Typography,
-  Avatar,
   Paper,
-  AppBar,
-  Toolbar,
-  Link as MuiLink,
 } from '@material-ui/core';
-import {
-  MoreHoriz as MoreHorizIcon,
-} from '@material-ui/icons';
 // components
 import PostInteractionContainer from './pic/PostInteractionContainer';
+import PostHeader from './post/PostHeader';
 // constants
 const useStyles = makeStyles(theme => ({
   cardRoot: {
@@ -74,14 +66,12 @@ const FeedPost = ({ idx: postIdx, isProfile }) => {
   // init hooks
   const classes = useStyles();
   // state
-  const postObj = useSelector(s => s.view[isProfile ? 'profile' : 'feed'].posts[postIdx]);
+  const postObj = useSelector(s => s.view.profile.posts[postIdx]);
   const viewProfile = useSelector(s => s.view.profile.viewProfile);
   // destructure
   const { body, postType, _id: postId, profile: postProfileId } = postObj;
-  const profile = isProfile ? viewProfile : postObj.profile; // need to do this for posts on profile
   const {
     profileType,
-    alias,
     pii: {
       firstName, // if a user
       lastName, // if a user
@@ -92,7 +82,7 @@ const FeedPost = ({ idx: postIdx, isProfile }) => {
     images: {
       profile: { thumbnail },
     },
-  } = profile;
+  } = viewProfile;
   let title = '';
   let subtitle = '';
   if (profileType === 'organization') {
@@ -106,48 +96,13 @@ const FeedPost = ({ idx: postIdx, isProfile }) => {
 
   return postObj ? (
     <Paper elevation={0} className={`${classes.cardRoot} FeedPost w100`}>
-      <CardHeader
-        className={classes.cardHeader}
-        classes={{
-          content: classes.cardHeaderContent,
-        }}
-        avatar={
-          <Link to={`/profile/${alias}`}>
-            <Avatar aria-label="profile pic" src={thumbnail} className={classes.avatar} />
-          </Link>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreHorizIcon />
-          </IconButton>
-        }
-        title={
-          <MuiLink
-            component={Link}
-            to={`/profile/${alias}`}
-            color="inherit"
-            variant="subtitle2"
-          >
-            {title}
-          </MuiLink>
-        }
-        subheader={
-          <Typography
-            className={classes.subtitle}
-            variant="caption"
-            component="h"
-            color="textSecondary"
-          >
-            {subtitle}
-          </Typography>
-        }
-      />
+      <PostHeader postObj={postObj} />
       <CardContent>
         <Typography className={`${classes.cardBody}`} variant="body2" color="textPrimary" component="p">
           {body}
         </Typography>
       </CardContent>
-      <PostInteractionContainer postId={postId} postIdx={postIdx} postProfileId={postProfileId} postType={postType} isProfile={isProfile} />
+      <PostInteractionContainer postObj={postObj} postId={postId} postIdx={postIdx} postProfileId={postProfileId} postType={postType} isProfile={isProfile} />
     </Paper>
   ) : (
     <div />

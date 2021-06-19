@@ -99,6 +99,12 @@ export const updatePostComments = ({ postId, commentsArr }) => dispatch => {
     payload: { postId, commentsArr },
   });
 };
+export const createComment = commentObj => dispatch => {
+  dispatch({
+    type: types.UPDATE_POST_COMMENTS,
+    payload: commentObj,
+  });
+};
 export const clearFeed = () => dispatch => {
   dispatch({
     type: types.CLEAR_FEED,
@@ -179,4 +185,17 @@ export const createConversation = conversationObject => dispatch => {
     });
 };
 
-export const createMessage = () => {};
+export const createMessage = () => dispatch => {};
+
+// post detail
+export const clearPostDetail = () => dispatch => {
+  dispatch({
+    type: types.CLEAR_POST_DETAIL,
+  });
+};
+export const overwritePostDetail = payload => dispatch => {
+  dispatch({
+    type: types.OVERWRITE_POST_DETAIL,
+    payload
+  });
+};

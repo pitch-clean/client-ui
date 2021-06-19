@@ -1,17 +1,22 @@
 /**
  * traverse a "profile" object to get the name
  */
+export const getProfileNameFromPii = pii => {
+  if (pii.firstName) {
+    return `${pii.firstName} ${pii.lastName}`;
+  } else if (pii.name) {
+    return pii.name;
+  } else {
+    throw new Error('Please use approved variable for getProfileNameFromPii()');
+  }
+};
 export const getProfileName = (profileObj, type=null) => {
   if (profileObj.firstName) {
     return `${profileObj.firstName} ${profileObj.lastName}`;
   } else if (profileObj.name) {
     return profileObj.name;
   } else if (profileObj.pii) {
-    if (profileObj.pii.firstName) {
-      return `${profileObj.pii.firstName} ${profileObj.pii.lastName}`;
-    } else if (profileObj.pii.name) {
-      return profileObj.pii.name;
-    }
+    return getProfileNameFromPii(profileObj.pii);
   } else {
     throw new Error('Please use approved variable for getProfileName()');
   }

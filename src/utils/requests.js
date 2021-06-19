@@ -1,4 +1,4 @@
-export const Post = async (url, body, additionalHeaders={}, isReturnJson=false) => {
+export const Post = async (url, body, additionalHeaders={}, isReturnJson=true) => {
   const headers = {
     accept: 'application/json',
     'content-type': 'application/json',
@@ -6,52 +6,38 @@ export const Post = async (url, body, additionalHeaders={}, isReturnJson=false) 
   };
 
   // make request
-  try {
-    const response = await fetch(
-      url,
-      {
-        method      : 'POST',
-        // credentials : 'include',
-        mode        : 'cors',
-        headers     : headers,
-        body        : JSON.stringify(body),
-      }
-    );
-    return isReturnJson ? await response.json(): response;
-  } catch (error) {
-    console.log('ERROR POST: ', error);
-    console.log('url: ', url);
-    console.log('headers: ', headers);
-    console.log('body: ', body);
-    console.error(error);
-  }
+  const response = await fetch(
+    url,
+    {
+      method      : 'POST',
+      // credentials : 'include',
+      mode        : 'cors',
+      headers     : headers,
+      body        : JSON.stringify(body),
+    }
+  );
+  return isReturnJson ? await response.json(): response;
 };
 
-export const Get = async (url, additionalHeaders={}, isReturnJson=false) => {
+export const Get = async (url, additionalHeaders={}, isReturnJson=true) => {
   const headers = {
     accept: 'application/json',
     'content-type': 'application/json',
     ...additionalHeaders,
   };
 
-  try {
-    const response = await fetch(
-      url,
-      {
-        method: 'GET',
-        mode: 'cors',
-        headers: headers,
-      },
-    );
-    return isReturnJson ? await response.json(): response;
-  } catch (err) {
-    console.log('Error: GET request');
-    // console.log(err);
-    throw err;
-  }
+  const response = await fetch(
+    url,
+    {
+      method: 'GET',
+      mode: 'cors',
+      headers: headers,
+    },
+  );
+  return isReturnJson ? await response.json(): response;
 };
 
-export const Put = async (url, body, additionalHeaders={}, isReturnJson=false) => {
+export const Put = async (url, body, additionalHeaders={}, isReturnJson=true) => {
   const headers = {
     accept: 'application/json',
     'content-type': 'application/json',

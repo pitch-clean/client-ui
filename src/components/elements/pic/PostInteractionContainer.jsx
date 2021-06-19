@@ -7,27 +7,32 @@ import {
 } from '@material-ui/core';
 // components
 import SocialPIC from './SocialPIC';
+import InterestPIC from './InterestPIC';
 // constants
 const useStyles = makeStyles(theme => ({
-  root: {
-    justifyContent: 'start'
-  },
   appBar: {
     top: 'auto',
     bottom: 0,
+    minHeight: `1rem`,
   },
 }));
 
 /**
  * main
  */
-const PostInteractionContainer = ({ postId, postIdx, postProfileId, postType, isProfile }) => {
+const PostInteractionContainer = ({ postObj, postIdx, postType }) => {
   // init hooks
   const classes = useStyles();
 
   return (
-    <AppBar position="relative" color="primary" className={classes.appBar} elevation={0} >
-      {postType === 'social' && <SocialPIC isProfile={isProfile} postIdx={postIdx} />}
+    <AppBar
+      className={`PIC ${classes.appBar} flexrow`}
+      position="relative"
+      color="primary"
+      elevation={0}
+    >
+      {postType === 'social' && <SocialPIC postObj={postObj} postIdx={postIdx} />}
+      {postType === 'interest' && <InterestPIC postObj={postObj} postIdx={postIdx} />}
     </AppBar>
   );
 };

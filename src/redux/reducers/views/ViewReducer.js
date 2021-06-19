@@ -5,6 +5,7 @@ import * as states from '../../initialStates/views';
 import StartupReducer from './StartupReducer';
 import SearchReducer from './SearchReducer';
 import ProfileReducer from './ProfileReducer';
+import PostReducer from './PostReducer';
 
 const MainReducer = (state = _.cloneDeep(states.main), action) => {
   const newState = _.cloneDeep(state);
@@ -103,6 +104,7 @@ const ViewReducer = combineReducers({
   startup: StartupReducer,
   search: SearchReducer,
   recommendedConnections: RecommendedConnectionsReducer,
+  post: PostReducer,
 });
 
 export default ViewReducer;

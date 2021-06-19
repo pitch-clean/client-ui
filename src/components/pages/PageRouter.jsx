@@ -15,6 +15,7 @@ import CreateProfile from './profile/CreateProfile';
 // import CreateOffering from './offerings/CreateOffering';
 import ProfileView from './profile/ProfileView';
 import MessagesView from './messages/MessagesView';
+import PostDetail from './post/PostDetail';
 import RSVPView from './rsvp/RSVPView';
 // import SearchView from './search/SearchView';
 import CreateRSVP from './rsvp/CreateRSVP';
@@ -60,7 +61,7 @@ const PageRouter = () => {
     <div className={`${classes.root} PageRouter flexcol`}>
       <Switch>
         <Route path="/profile/:alias" render={p => <ProfileView props={p} />} />
-        <Route exact path="/startup/:alias" render={p => <StartupDetail props={p} />} />
+        <Route exact path="/startup/:startupId" render={p => <StartupDetail props={p} />} />
         <Route exact path="/marketplace" render={p => <StartupsList props={p} />} />
         <Route exact path="/" render={p => <Home props={p} />} />
         <Route exact path="/feed" render={p => <FeedView props={p} />} />
@@ -77,12 +78,12 @@ const PageRouter = () => {
           path="/startup/new"
           render={p => isAuthenticated && <CreateStartup props={p} />}
         /> */}
-        <Route exact path="/rsvp/:rsvpId" render={p => <RSVPView props={p} />} />
-        <Route
+        <Route exact path="/post/:postId" render={p => <PostDetail props={p} />} />
+        {/* <Route
           exact
           path="/create-rsvp"
           render={p => isAuthenticated ? <CreateRSVP props={p} /> : <div>Please sign in</div>}
-        />
+        /> */}
         <Route render={p => <NotFound props={p} />} />
       </Switch>
       {/* <Grid item className={`${classes.footer} w100`}>

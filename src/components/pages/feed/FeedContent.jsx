@@ -38,7 +38,7 @@ const FeedContent = () => {
   // effects
   useEffect(async () => {
     // fetch seed posts
-    const posts = await Get(`${window.env.api.posts}/feed/${activeProfileId}/0`, {}, true);
+    const posts = await Get(`${window.env.api.posts}/feed/${activeProfileId}/0`);
     dispatch(updatePostsArr(posts || []));
   }, []);
 

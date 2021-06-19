@@ -1,6 +1,7 @@
 // react
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect, useRouteMatch } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import { Get } from '../../../../utils/requests';
@@ -26,14 +27,12 @@ const useStyles = makeStyles({
     padding: '0 10px',
   },
 })
-const fetchStartupObj = async (alias, isFetchingSet, dispatch) => {
-  isFetchingSet(true);
-  const endpoint = `${window.env.api.startups}/${alias}`;
+const fetchStartupObj = async (startupId, dispatch) => {
+  const endpoint = `${window.env.api.startups}/${startupId}`;
   try {
-    const resJSON = await Get(endpoint, {}, true);
+    const resJSON = await Get(endpoint);
     const payload = resJSON;
     dispatch(updateActiveStartupObj(payload));
-    isFetchingSet(!payload);
   } catch (err) {
     console.log('ERROR: startupdetail.jsx > fetchStartupObj GET')
     console.log(err)
@@ -41,33 +40,19 @@ const fetchStartupObj = async (alias, isFetchingSet, dispatch) => {
 };
 
 /**
- * main
+ * view component
+ * @param {*} param0 
+ * @returns 
  */
-const StartupDetail = ({props: {match: {params: { alias }}}}) => {
+const StartupDetailView = ({ startupObj, activeProfile }) => {
   // init hooks
   const classes = useStyles();
-  const dispatch = useDispatch();
-  // state
-  const activeProfile = useSelector(s => s.auth.activeProfile);
-  const activeStartup = useSelector(s => s.view.startup.activeStartup);
-  const [isFetching, isFetchingSet] = useState(true);
-  // effects
-  useEffect(async () => {
-    alias && await fetchStartupObj(alias, isFetchingSet, dispatch);
-    // allow editing if logged in
-    if (activeProfile) {
-      console.log(activeStartup)
-      console.log(activeProfile)
-      if (activeProfile) {
+  // allow editing if logged in
+  if (activeProfile) {
+    console.log('allow editing?', activeProfile._id, startupObj.profile, activeProfile._id === startupObj.profile)
+  }
 
-      }
-    }
-    return () => {
-      dispatch(clearActiveStartup())
-    };
-  }, [alias]);
-
-  return !isFetching ? (
+  return (
     <div className={`StartupDetail ${classes.root} page flexrow`}>
       <LeftSidebar />
       <div className={`${classes.content} flexcol`}>
@@ -116,6 +101,37 @@ const StartupDetail = ({props: {match: {params: { alias }}}}) => {
       </div>
       <LeadershipTeam />
     </div>
+  );
+};
+
+/**
+ * main
+ */
+const StartupDetail = () => {
+  // init hooks
+  const dispatch = useDispatch();
+  const {
+    params: {
+      startupId,
+    },
+  } = useRouteMatch();
+  // state
+  const activeProfile = useSelector(s => s.auth.activeProfile);
+  const activeStartup = useSelector(s => s.view.startup.activeStartup) || {};
+  // effects
+  useEffect(async () => {
+    await fetchStartupObj(startupId, dispatch);
+    return () => {
+      dispatch(clearActiveStartup())
+    };
+  }, [startupId]);
+  if (startupId === 'undefined') {
+    // display toast noti saying startup doesnt exist
+    // then redirect to startups
+    return <Redirect to={`/${window.env.client.marketplace}`} />
+  }
+  return activeStartup._id ? (
+    <StartupDetailView startupObj={activeStartup} activeProfile={activeProfile} />
   ) : (
     <div/>
   );

@@ -25,7 +25,7 @@ const Posts = () => {
     postElemArr.push(<ProfilePost idx={idx} isProfile />);
   }
   // effects
-  useEffect(() => {
+  useEffect(async () => {
     dispatch(updateProfileTab('posts'));
   }, []);
 

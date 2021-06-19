@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const envProfilePath = 'profile';
 // fxns
-const getCtMsg = (arr, unitStr) => {
+const getCtMsg = (arr = [], unitStr) => {
   return `${arr.length} ${unitStr}`;
 };
 const buildName = (fName, lName) => {
@@ -56,6 +56,7 @@ const LSProfile = () => {
   // init hooks
   const classes = useStyles();
   // state
+  const activeProfile = useSelector(s => s.auth.activeProfile);
   const pii = useSelector(s => s.auth.activeProfile.pii);
   const alias = useSelector(s => s.auth.activeProfile.alias);
   const images = useSelector(s => s.auth.activeProfile.images);
@@ -65,12 +66,11 @@ const LSProfile = () => {
   const {
     firstName,
     lastName,
-    residence: { city, stateProvince },
+    address: { city, stateProvince },
   } = pii;
   const {
     profile: { thumbnail },
   } = images;
-
   return (
     <Paper className={`${classes.root} LSProfile w100`} elevation={0}>
       <CardHeader
@@ -90,10 +90,10 @@ const LSProfile = () => {
       <Divider className={classes.divider} variant="middle" component="div" />
       <CardContent className={`${classes.container} infoSection w100`}>
         <Typography className={classes.title} variant="h5" component="h6">
-          {active[0].employer}
+          {active.employer}
         </Typography>
         <Typography variant="subtitle1" component="h" color="textSecondary">
-          {active[0].title}
+          {active.title}
         </Typography>
         <Typography
           style={{ paddingTop: `10px` }}

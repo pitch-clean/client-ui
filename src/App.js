@@ -13,7 +13,7 @@ import MainNavBar from './components/elements/mainNavBar/MainNavBar';
 import './App.css';
 import './config.dev.js';
 // seed
-import { profile } from './seed/testAuthProfile';
+import { Get } from './utils/requests';
 
 // pdfjs.GlobalWorkerOptions.workerSrc = 'pdf.worker.min.js';
 // constants
@@ -33,6 +33,11 @@ const useStyles = makeStyles(theme => ({
     zIndex: 1,
   },
 }));
+const getProfile = async window => {
+  const url = `${window.env.api.profiles}/333ccc`;
+  const profile = await Get(url, {}, true);
+  return profile;
+};
 
 // main
 const App = () => {
@@ -45,9 +50,10 @@ const App = () => {
   document.addEventListener('keydown', onKeyDownBlurAll, false);
   // effects
   // load the state for the activeprofile
-  useEffect(() => {
+  useEffect(async () => {
     // load
     if (isTestMode) {
+      const profile = await getProfile(window);
       dispatch(updateLoginStatus(true, profile));
     }
   }, []);

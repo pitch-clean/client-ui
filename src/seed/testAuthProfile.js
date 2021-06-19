@@ -73,7 +73,7 @@ const active = [
 ];
 const connections = [
   {
-    investorId: 0,
+    investorId: "0",
     firstName: `Jamie`,
     lastName: `Harris`,
     position: 'Senior Vice President',
@@ -82,7 +82,7 @@ const connections = [
     stateProvince: 'NY',
   },
   {
-    investorId: 1,
+    investorId: "1",
     firstName: `Tom`,
     lastName: `Jones`,
     position: 'Managing Director',
@@ -91,7 +91,7 @@ const connections = [
     stateProvince: 'DC',
   },
   {
-    investorId: 2,
+    investorId: "2",
     firstName: `Maya`,
     lastName: `Taylor`,
     position: 'Associate',
@@ -100,7 +100,7 @@ const connections = [
     stateProvince: 'TN',
   },
   {
-    investorId: 3,
+    investorId: "3",
     firstName: `Ben`,
     lastName: `Carlton`,
     position: 'Senior Analyst',
@@ -109,7 +109,7 @@ const connections = [
     stateProvince: 'UT',
   },
   {
-    investorId: 4,
+    investorId: "4",
     firstName: `Jennifer`,
     lastName: `Cunningham`,
     position: 'Partner and COO',
@@ -359,7 +359,7 @@ const investments = [
     "isPublic": true,
     "offeringId": 3,
       "offering": {
-        "sponsorId": 3,
+        "sponsorId": "333ccc",
         "sponsor": {
           "name": "Wind Grid Investments",
           "slug": "wind-grid-investments",
@@ -409,7 +409,7 @@ const investments = [
     "isPublic": true,
     "offeringId": 7,
       "offering": {
-        "sponsorId": 3,
+        "sponsorId": "333ccc",
         "sponsor": {
           "name": "Wind Grid Investments",
           "slug": "wind-grid-investments",
@@ -536,23 +536,23 @@ const investments = [
       ]
   }
 ];
-const following = [4, 5, 6, 7, 8];
+const following = ["4", "5", "6", "7", "8"];
 const conversations = {
   "1a": {
-    participants: [2, 3],
+    participants: ["2", "333ccc"],
     lastMessage: {
-      msgId: 2,
-      profile: 2,
+      msgId: "2",
+      profile: "2",
       text: "Great! Thanks.",
       media: null,
       dtReceipt: "2021-04-17T12:34:56.501000Z",
     },
   },
   "2a": {
-    participants: [1, 3],
+    participants: ["1", "333ccc"],
     lastMessage: {
-      msgId: 2,
-      profile: 3,
+      msgId: "2",
+      profile: "333ccc",
       text: "Thanks for reaching out, Thomas. We’ll be in touch soon with a potential investors video chat RSVP link.",
       media: null,
       dtReceipt: "2021-04-16T12:34:56.502Z",
@@ -566,7 +566,7 @@ const posts = [
 ];
 
 export const profile = {
-  _id: 3,
+  _id: "3",
   alias: 'd_orrin55',
   email: 'd_orrin55@mail.com',
   pii,

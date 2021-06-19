@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 const getRecommendedConnections = async (window, dispatch, viewProfileId, activeProfileId) => {
-  const url = `${window.env.api.profiles}/${viewProfileId}/recommended/?by=id&activeProfile=${activeProfileId}`;
+  const url = `${window.env.api.profiles}/recommended/${viewProfileId}/?by=id&activeProfile=${activeProfileId}`;
   try {
     const res = await Get(url, {}, true);
     dispatch(updateRecommendedConnections(res));
@@ -49,37 +49,37 @@ const ProfileView = () => {
     params: { alias },
   } = match;
   // state
-  const viewProfile = useSelector(s => s.view.profile.viewProfile) || {};
-  const activeProfile = useSelector(s => s.auth.activeProfile) || {};
+  const viewProfile = useSelector(s => s.view.profile.viewProfile);
+  const activeProfile = useSelector(s => s.auth.activeProfile);
   let pageAlias = alias;
 
-  if (activeProfile._id) {
-    if (!alias) {
-      pageAlias = activeProfile.alias;
+  if (activeProfile) {
+    if (activeProfile._id) {
+      if (!alias) {
+        pageAlias = activeProfile.alias;
+      }
+      // if (activeProfile.alias === alias) {}
     }
-    // if (activeProfile.alias === alias) {}
   }
   // effects
   useEffect(async () => {
-    console.log('hey3', alias)
     const url = `${window.env.api.profiles}/${alias}?by=alias`;
     const res = await Get(url, {}, true);
-    console.log(res, 'res', url)
     dispatch(updateViewProfile(res));
     // depending on who's profile, get recommended connections
-    if (viewProfile._id) {
-      await getRecommendedConnections(window, dispatch, viewProfile._id, activeProfile._id );
+    if (viewProfile && viewProfile._id) {
+      await getRecommendedConnections(window, dispatch, viewProfile._id, activeProfile && activeProfile._id );
     }
     return () => {
       dispatch(clearViewProfile());
     };
-  }, [alias, viewProfile._id]);
+  }, [alias, viewProfile && viewProfile._id]);
 
   if (!pageAlias) {
     return <Redirect to="/" />;
   }
 
-  if (!viewProfile._id) {
+  if (!viewProfile || !viewProfile._id) {
     return <div>{`issue with redux state: <ProfileView /> > viewProfile `}</div>;
   }
 
