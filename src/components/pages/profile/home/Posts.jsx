@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
 import { updateProfileTab } from '../../../../redux/actions/ViewActions';
 // components
-import FeedPost from '../../feed/FeedPost';
+import ProfilePost from '../../../elements/ProfilePost';
 // constants
 const useStyles = makeStyles(() => ({
   root: {},
@@ -22,7 +22,7 @@ const Posts = () => {
   // build
   const postElemArr = [];
   for (let idx = 0; idx < postsLen; idx += 1) {
-    postElemArr.push(<FeedPost idx={idx} isProfile />);
+    postElemArr.push(<ProfilePost idx={idx} isProfile />);
   }
   // effects
   useEffect(() => {

@@ -11,16 +11,10 @@ import {
   Typography,
   Avatar,
   Paper,
-  AppBar,
-  Toolbar,
   Link as MuiLink,
 } from '@material-ui/core';
 import {
   MoreHoriz as MoreHorizIcon,
-  FavoriteBorder as FavoriteBorderIcon,
-  Favorite as FavoriteIcon,
-  Visibility as VisibilityIcon,
-  Reply as ReplyIcon,
 } from '@material-ui/icons';
 // components
 import PostInteractionContainer from './pic/PostInteractionContainer';
@@ -69,30 +63,37 @@ const buildLocation = (city, stateProv) => {
   return `${city}, ${stateProv}`;
 };
 
-// main
-const FeedPost = ({ idx: postIdx, isProfile }) => {
+/**
+ * view component for a single post on the feed
+ * @param {int} postIdx
+ * @returns
+ */
+const FeedPost = ({ idx: postIdx }) => {
   // init hooks
   const classes = useStyles();
   // state
-  const postObj = useSelector(s => s.view[isProfile ? 'profile' : 'feed'].posts[postIdx]);
-  const viewProfile = useSelector(s => s.view.profile.viewProfile);
+  const postObj = useSelector(s => s.view.feed.posts[postIdx]);
   // destructure
-  const { body, postType, _id: postId, profile: postProfileId } = postObj;
-  const profile = isProfile ? viewProfile : postObj.profile; // need to do this for posts on profile
   const {
-    profileType,
-    alias,
-    pii: {
-      firstName, // if a user
-      lastName, // if a user
-      name, // if an org
-      address, // if an org
+    body,
+    postType,
+    _id: postId,
+    profile: {
+      _id: postProfileId,
+      profileType,
+      alias,
+      pii: {
+        firstName, // if a user
+        lastName, // if a user
+        name, // if an org
+        address, // if an org
+      },
+      active, // if a user
+      images: {
+        profile: { thumbnail },
+      },
     },
-    active, // if a user
-    images: {
-      profile: { thumbnail },
-    },
-  } = profile;
+  } = postObj;
   let title = '';
   let subtitle = '';
   if (profileType === 'organization') {
@@ -147,7 +148,7 @@ const FeedPost = ({ idx: postIdx, isProfile }) => {
           {body}
         </Typography>
       </CardContent>
-      <PostInteractionContainer postId={postId} postIdx={postIdx} postProfileId={postProfileId} postType={postType} isProfile={isProfile} />
+      <PostInteractionContainer postId={postId} postIdx={postIdx} postProfileId={postProfileId} postType={postType} />
     </Paper>
   ) : (
     <div />

@@ -7,7 +7,7 @@ import { Paper } from '@material-ui/core';
 import { updatePostsArr } from '../../../redux/actions/ViewActions';
 import { Get } from '../../../utils/requests'
 // components
-import FeedPost from './FeedPost';
+import FeedPost from '../../elements/FeedPost';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,7 +28,7 @@ const FeedContent = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   // state
-  const profile = useSelector(s => s.auth.activeProfile._id);
+  const activeProfileId = useSelector(s => s.auth.activeProfile._id);
   const postsLen = useSelector(s => s.view.feed.posts.length);
   // build
   const postElemArr = [];
@@ -38,8 +38,7 @@ const FeedContent = () => {
   // effects
   useEffect(async () => {
     // fetch seed posts
-    const posts = await Get(`${window.env.api.posts}/feed/${profile}/0`, {}, true);
-    console.log('posposp', posts)
+    const posts = await Get(`${window.env.api.posts}/feed/${activeProfileId}/0`, {}, true);
     dispatch(updatePostsArr(posts || []));
   }, []);
 
