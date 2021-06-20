@@ -14,8 +14,6 @@ import './App.css';
 import './config.dev.js';
 // seed
 import { Get } from './utils/requests';
-
-// pdfjs.GlobalWorkerOptions.workerSrc = 'pdf.worker.min.js';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
