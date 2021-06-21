@@ -1,9 +1,10 @@
 // react
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, CardHeader, Typography, Divider } from '@material-ui/core';
+import HighlightsEdit from './HighlightsEdit';
 // constants
 const useStyles = makeStyles({
   root: {
@@ -30,11 +31,12 @@ const useStyles = makeStyles({
 /**
  * main
  */
-const Highlights = () => {
+const Highlights = ({ isEditing }) => {
   // init hooks
   const classes = useStyles();
   // state
-  const highlights = useSelector(s => s.view.startup.activeStartup.content.highlights);
+  const highlights_ = useSelector(s => s.view.startup.activeStartup.content.highlights);
+  const [highlights, highlightsSet] = useState(highlights_);
   // build
   const buildHightlights = highlights => {
     const highlightsElemArr = [];
@@ -55,11 +57,13 @@ const Highlights = () => {
     }
     return highlightsElemArr;
   };
-
-  return (
+  console.log('isediting', isEditing)
+  return !isEditing ? (
     <div className={classes.content}>
       {buildHightlights(highlights)}
     </div>
+  ) : (
+    <HighlightsEdit highlights={highlights} highlightsSet={highlightsSet}/>
   );
 };
 

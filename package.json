@@ -14,7 +14,6 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@material-ui/pickers": "^3.3.10",
-    "@pdftron/webviewer": "^7.3.3",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -55,7 +54,7 @@
     "git-commit": "git commit -m '(re)building and deploying'",
     "git-push": "git push origin gh-pages",
     "git-deploy": "yarn git-add && yarn git-commit && yarn git-push",
-    "deploy": "yarn build && yarn move && yarn git-deploy",
+    "deploy": "yarn build && yarn move && yarn git-deploy"
   },
   "browserslist": {
     "production": [

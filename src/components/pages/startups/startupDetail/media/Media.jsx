@@ -51,7 +51,7 @@ const picturesArr = [
 /**
  * main
  */
-const Media = () => {
+const Media = ({ isEditing }) => {
   // init hooks
   const classes = useStyles();
   const buildItem = ({ imgUrl }) => {

@@ -1,29 +1,34 @@
 // react
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Divider, Button, Avatar } from '@material-ui/core';
+import { Typography, Divider, Button, Avatar, CardHeader } from '@material-ui/core';
+import SettingsIcon from '@material-ui/icons/Settings';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+// components
 import Sidebar from '../../../elements/SideBar';
+import LeadershipTeamEdit from './LeadershipTeamEdit';
 // constants
 const useStyles = makeStyles({
   card: {
     justifyContent: 'space-between',
-    padding: `0.5rem`,
+    padding: `0.8rem`,
+    paddingLeft: `1.2rem`,
   },
   header: {
     justifyContent: 'start',
   },
   avatar: {
-    height: `3rem`,
-    width: `3rem`,
+    height: `3.5rem`,
+    width: `3.5rem`,
     margin: `0 0.2rem`,
   },
   headerRight: {
     justifyContent: 'center',
     alignItems: 'start',
     padding: `0 0.3rem`,
+    paddingTop: '0.5rem',
   },
   cardContent: {
     alignItems: 'start',
@@ -44,7 +49,6 @@ const useStyles = makeStyles({
     paddingRight: 10,
     lineHeight: 1.3,
   },
-  
 });
 
 /**
@@ -54,11 +58,14 @@ const LeadershipTeam = () => {
   // init hooks
   const classes = useStyles();
   // state
-  const team = useSelector(s => s.view.startup.activeStartup.team);
+  const profile = useSelector(s => s.view.startup.activeStartup.profile);
+  const activeProfile = useSelector(s => s.auth.activeProfile) || {};
+  const [isEditing, isEditingSet] = useState(false);
+  const team_ = useSelector(s => s.view.startup.activeStartup.team);
+  const [team, teamSet] = useState(team_);
   // build
   const buildCard = entity => {
     const {
-      profile,
       name,
       title,
       image,
@@ -100,7 +107,22 @@ const LeadershipTeam = () => {
     return elemArr;
   };
 
-  return <Sidebar width="wide">{buildList(team)}</Sidebar>;
+  return !isEditing ? (
+    <Sidebar width="wide">
+      <div className={`${classes.bar} flexrow w100`}>
+        <CardHeader
+          className={`${classes.header} f1`}
+          title='Leadership Team'
+        />
+        <CardHeader
+          className={`${classes.header}`}
+          title={profile === activeProfile._id && <Button className={isEditing ? classes.buttonActive : classes.buttonInactive} disableRipple size="small" onClick={() => isEditingSet(!isEditing)}><SettingsIcon /></Button>}
+        />
+      </div>
+      <Divider className="w100" variant="fullWidth"/>
+      {buildList(team)}
+    </Sidebar>
+  ) : <LeadershipTeamEdit activeProfile={activeProfile} profile={profile} isEditingSet={isEditingSet} isEditing={isEditing} team={team} teamSet={teamSet} />;
 };
 
 // export

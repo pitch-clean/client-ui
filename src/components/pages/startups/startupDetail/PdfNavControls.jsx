@@ -17,15 +17,19 @@ const useStyles = makeStyles({
   pageCt: {},
 });
 // event handlers
-const nextPage = (totalPages, currentPage, currentPageSet) => () => currentPage < totalPages && currentPageSet(currentPage + 1);
-const prevPage = (currentPage, currentPageSet) => () => currentPage > 1 && currentPageSet(currentPage - 1);
+const nextPage = (totalPages, currentPage, currentPageSet) => () => {
+  currentPage < totalPages && currentPageSet(currentPage + 1);
+};
+const prevPage = (currentPage, currentPageSet) => () => {
+  currentPage > 1 && currentPageSet(currentPage - 1);
+};
 
 /**
  * main
  * @param {*} param0 
  * @returns 
  */
-const PdfNavControls = ({ totalPages, currentPage, currentPageSet }) => {
+const PdfNavControls = ({ totalPages, currentPage, currentPageSet, isRenderingSet, isRendering }) => {
   // init hooks
   const classes = useStyles();
 
@@ -35,6 +39,8 @@ const PdfNavControls = ({ totalPages, currentPage, currentPageSet }) => {
         className={`button ${classes.button}`}
         id="go_previous"
         onClick={prevPage(currentPage, currentPageSet)}
+        // onMouseDown={() => isRenderingSet(true)}
+        disabled={isRendering}
       >
         Previous
       </button>
@@ -43,6 +49,8 @@ const PdfNavControls = ({ totalPages, currentPage, currentPageSet }) => {
         className={`goNext ${classes.goNext}`}
         id="go_next"
         onClick={nextPage(totalPages, currentPage, currentPageSet)}
+        // onMouseDown={() => isRenderingSet(true)}
+        disabled={isRendering}
       >
         Next
       </button>

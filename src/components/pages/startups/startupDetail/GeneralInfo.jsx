@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,6 +17,7 @@ import {
   Business as BusinessIcon,
 } from '@material-ui/icons';
 // components
+import GeneralInfoEdit from './GeneralInfoEdit';
 // constants
 const useStyles = makeStyles({
   root: {
@@ -73,24 +74,27 @@ const useStyles = makeStyles({
 /**
  * main
  */
-const GeneralInfo = () => {
+const GeneralInfo = ({ isEditing }) => {
   // init hooks
   const classes = useStyles();
   // state
-  const profile = useSelector(s => s.view.startup.activeStartup.profile);
-  const images = useSelector(s => s.view.startup.activeStartup.images);
-  const title = useSelector(s => s.view.startup.activeStartup.title);
-  const address = useSelector(s => s.view.startup.activeStartup.location.address);
-  const sector = useSelector(s => s.view.startup.activeStartup.sector);
-  const social = useSelector(s => s.view.startup.activeStartup.social);
-  const fundingRounds = useSelector(s => s.view.startup.activeStartup.fundingRounds);
-  const website = useSelector(s => s.view.startup.activeStartup.website);
-  const slogan = useSelector(s => s.view.startup.activeStartup.slogan);
-  const about = useSelector(s => s.view.startup.activeStartup.content.about);
-  const employeeCt = useSelector(s => s.view.startup.activeStartup.employeeCt);
+  const activeStartup_ = useSelector(s => s.view.startup.activeStartup);
+  const [activeStartup, activeStartupSet] = useState(activeStartup_)
+  const {
+    images,
+    title,
+    location: { address },
+    sector,
+    social,
+    fundingRounds,
+    website,
+    slogan,
+    content: { about },
+    employeeCt,
+  } = activeStartup;
   const latestFundingRound = fundingRounds[fundingRounds.length - 1];
 
-  return true ? (
+  return !isEditing ? (
     <div className={`flexrow`}>
       <div className={`${classes.avatarContainer}`}>
         <Avatar className={`${classes.avatar}`} alt="Picture" src={images.thumbnail} children={<BusinessIcon />} />
@@ -168,7 +172,7 @@ const GeneralInfo = () => {
       </div>
     </div>
   ) : (
-    <></>
+    <GeneralInfoEdit activeStartup={activeStartup} activeStartupSet={activeStartupSet} />
   )
 };
 

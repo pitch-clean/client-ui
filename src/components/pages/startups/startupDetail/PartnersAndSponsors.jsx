@@ -1,9 +1,11 @@
 // react
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, CardHeader, Typography, Divider, Avatar, Link as MuiLink } from '@material-ui/core';
+// components
+import PartnersAndSponsorsEdit from './PartnersAndSponsorsEdit';
 // constants
 const useStyles = makeStyles({
   root: {
@@ -34,12 +36,14 @@ const useStyles = makeStyles({
 /**
  * main
  */
-const PartnersAndSponsors = () => {
+const PartnersAndSponsors = ({ isEditing }) => {
   // init hooks
   const classes = useStyles();
   // state
-  const partners = useSelector(s => s.view.startup.activeStartup.partners);
-  const sponsors = useSelector(s => s.view.startup.activeStartup.sponsors);
+  const partners_ = useSelector(s => s.view.startup.activeStartup.partners);
+  const sponsors_ = useSelector(s => s.view.startup.activeStartup.sponsors);
+  const [partners, partnersSet] = useState(partners_)
+  const [sponsors, sponsorsSet] = useState(sponsors_)
   // build
   const buildList = items => {
     const itemElemArr = [];
@@ -58,10 +62,12 @@ const PartnersAndSponsors = () => {
     return itemElemArr;
   };
 
-  return (
+  return !isEditing ? (
     <div className={`${classes.content} flexrow`}>
       {buildList([...partners, ...sponsors])}
     </div>
+  ) : (
+    <PartnersAndSponsorsEdit partners={partners} partnersSet={partnersSet} sponsors={sponsors} sponsorsSet={sponsorsSet} />
   );
 };
 

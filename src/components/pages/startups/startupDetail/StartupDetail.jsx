@@ -13,7 +13,7 @@ import Highlights from './Highlights';
 import RecentNews from './RecentNews';
 import PartnersAndSponsors from './PartnersAndSponsors';
 import PitchDeck from './PitchDeck';
-import Media from './Media';
+import Media from './media/Media';
 import AdvisorsAndInvestors from './AdvisorsAndInvestors';
 import LeadershipTeam from './LeadershipTeam';
 import LeftSidebar from '../../feed/LeftSidebar';

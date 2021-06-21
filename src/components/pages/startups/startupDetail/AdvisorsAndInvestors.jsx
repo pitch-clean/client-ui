@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, CardHeader, Grid, CardMedia, Typography, Divider, Button, Avatar } from '@material-ui/core';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import AdvisorsAndInvestorsEdit from './AdvisorsAndInvestorsEdit';
 // constants
 const useStyles = makeStyles({
   root: {},
@@ -44,12 +45,14 @@ const useStyles = makeStyles({
 /**
  * main
  */
-const AdvisorsAndInvestors = () => {
+const AdvisorsAndInvestors = ({ isEditing }) => {
   // init hooks
   const classes = useStyles();
   // state
-  const investors = useSelector(s => s.view.startup.activeStartup.investors);
-  const advisors = useSelector(s => s.view.startup.activeStartup.advisors);
+  const investors_ = useSelector(s => s.view.startup.activeStartup.investors);
+  const advisors_ = useSelector(s => s.view.startup.activeStartup.advisors);
+  const [investors, investorsSet] = useState(investors_);
+  const [advisors, advisorsSet] = useState(advisors_);
   // build
   const buildCard = entity => {
     const {
@@ -95,7 +98,7 @@ const AdvisorsAndInvestors = () => {
     return elemArr;
   };
 
-  return buildList([...investors, ...advisors]);
+  return !isEditing ? buildList([...investors, ...advisors]) : <AdvisorsAndInvestorsEdit advisors={advisors} advisorsSet={advisorsSet} investors={investors} investorsSet={investorsSet} />;
 };
 
 // export

@@ -1,10 +1,9 @@
 // react
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useLayoutEffect } from 'react';
 import { useSelector } from 'react-redux';
 // utils
 import { pdfjs } from 'react-pdf/dist/esm/entry.webpack';
 import { makeStyles } from '@material-ui/core/styles';
-console.log('pdfjsLib', pdfjs)
 // components
 // constants
 const useStyles = makeStyles({
@@ -22,47 +21,50 @@ const useStyles = makeStyles({
 /**
  * pdf viewer
  */
- const PdfViewer = ({ currentPage, totalPagesSet }) => {
+ const PdfViewer = ({ pdfFile, currentPage, totalPagesSet, isRendering, isRenderingSet }) => {
   // init hooks
   const classes = useStyles();
   const canvasRef = useRef();
   // state
   const [pdfRef, pdfRefSet] = useState();
-  // const pitchDeckResource = useSelector(s => s.view.startup.activeStartup.content.pitchDeck);
-  const pitchDeckResource = require("/Users/matthias/work/pitchclean/pitchclean-client-ui/src/seed/1907.00235.pdf").default;
+  const [allPdfPages, allPdfPagesSet] = useState([]);
+
   // fxns
-  const renderPage = useCallback(async (pageNum, pdf=pdfRef) => {
-    pdf && await pdf.getPage(pageNum).then(async page => {
-      const viewport = await page.getViewport({ scale: 1.5 });
+  const renderPage = useCallback(async (pageNum, pdf=pdfRef, pdfFile) => {
+    if (pdf) {
+      const preLoadedPdf = await pdfjs.getDocument(pdfFile);
+      const newPdf = await preLoadedPdf.promise;
+
       const canvas = canvasRef.current;
+      const context = canvas.getContext('2d');
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.beginPath();
+      const renderedPage = await newPdf.getPage(pageNum);
+      const viewport = renderedPage.getViewport({ scale: 1.5 });
       canvas.height = viewport.height;
       canvas.width = viewport.width;
       const renderContext = {
-        canvasContext: await canvas.getContext('2d'),
+        canvasContext: context,
         viewport,
       };
-      await page.render(renderContext);
-    });   
+      await renderedPage.render(renderContext);
+    }
   }, [pdfRef]);
 
   // effects
-  useEffect(async () => {
-    await renderPage(currentPage, pdfRef);
-  }, [pdfRef, currentPage, renderPage]);
+  useLayoutEffect(() => {
+    renderPage(currentPage, pdfRef, pdfFile);
+  }, [pdfRef, currentPage, renderPage, pdfFile]);
   useEffect(async () => {
     try {
-      const preLoadedPdf = await pdfjs.getDocument(pitchDeckResource);
-      await preLoadedPdf.promise.then(
-        async loadedPdf => {
-          await pdfRefSet(loadedPdf);
-          await totalPagesSet(loadedPdf.numPages)
-        },
-        err => {console.error(err)},
-      )
+      const preLoadedPdf = await pdfjs.getDocument(pdfFile);
+      const pdfPromise = await preLoadedPdf.promise;
+      pdfRefSet(pdfPromise);
+      totalPagesSet(pdfPromise.numPages);
     } catch (err) {
-      console.log('ERRORRORR', err)
+      console.log(`${err.name}: ${err.message}`, '\n\n', err.stack)
     }
-  }, []);
+  }, [pdfFile]);
 
   return (
     <div className={`PdfViewer ${classes.root} w100 h100`} id="my_pdf_viewer">

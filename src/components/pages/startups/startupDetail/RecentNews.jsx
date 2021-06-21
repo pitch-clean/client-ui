@@ -1,10 +1,12 @@
 // react
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, CardHeader, Typography, Divider, Link as MuiLink } from '@material-ui/core';
+import { Typography, Link as MuiLink } from '@material-ui/core';
+// components
+import RecentNewsEdit from './RecentNewsEdit';
 // constants
 const useStyles = makeStyles({
   root: {
@@ -35,11 +37,12 @@ const useStyles = makeStyles({
 /**
  * main
  */
-const RecentNews = () => {
+const RecentNews = ({ isEditing }) => {
   // init hooks
   const classes = useStyles();
   // state
-  const recentNews = useSelector(s => s.view.startup.activeStartup.content.recentNews);
+  const recentNews_ = useSelector(s => s.view.startup.activeStartup.content.recentNews);
+  const [recentNews, recentNewsSet] = useState(recentNews_);
   // build
   const buildList = items => {
     const recentNewssElemArr = [];
@@ -69,11 +72,11 @@ const RecentNews = () => {
     return recentNewssElemArr;
   };
 
-  return (
+  return !isEditing ? (
     <>
       {buildList(recentNews)}
     </>
-  );
+  ) : <RecentNewsEdit recentNews={recentNews} recentNewsSet={recentNewsSet} />;
 };
 
 // export
