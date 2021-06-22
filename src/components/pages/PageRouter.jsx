@@ -1,7 +1,7 @@
 // react
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 // components
@@ -16,9 +16,9 @@ import CreateProfile from './profile/CreateProfile';
 import ProfileView from './profile/ProfileView';
 import MessagesView from './messages/MessagesView';
 import PostDetail from './post/PostDetail';
-import RSVPView from './rsvp/RSVPView';
+// import RSVPView from './rsvp/RSVPView';
 // import SearchView from './search/SearchView';
-import CreateRSVP from './rsvp/CreateRSVP';
+// import CreateRSVP from './rsvp/CreateRSVP';
 
 // constants
 const useStyles = makeStyles(theme => ({
@@ -64,25 +64,16 @@ const PageRouter = () => {
         <Route exact path="/startup/:startupId" render={p => <StartupDetail props={p} />} />
         <Route exact path="/marketplace" render={p => <StartupsList props={p} />} />
         <Route exact path="/post/:postId" render={p => <PostDetail props={p} />} />
-        <Route exact path="/feed" render={p => <FeedView props={p} />} />
         {/* <Route exact path="/search/:searchStr" render={p => <SearchView props={p} />} /> */}
-        <Route exact path="/messages" render={p => isAuthenticated && <MessagesView props={p} />} />
+        {isAuthenticated && <Route exact path="/feed" render={p => <FeedView props={p} />} />}
+        {isAuthenticated && <Route exact path="/messages" render={p => <MessagesView props={p} />} />}
+        {!isAuthenticated && <Route exact path="/login" render={p => <LoginView props={p} />} />}
+        {isAuthenticated && <Route exact path="/new/startup" render={p => <CreateStartup props={p} />} />}
+        {!isAuthenticated && <Route exact path="/new/profile" render={p => <CreateProfile props={p} />} />}
         <Route exact path="/" render={p => <Home props={p} />} />
-        <Route
-          exact
-          path="/register"
-          render={p => !isAuthenticated ? <CreateProfile props={p} /> : <Redirect to={`/profile`} />}
-        />
-        <Route exact path="/login" render={p => !isAuthenticated ? <LoginView props={p} /> : <Redirect to={`/profile`} />} />
         {/* <Route
           exact
-          path="/startup/new"
-          render={p => isAuthenticated && <CreateStartup props={p} />}
-        /> */}
-        
-        {/* <Route
-          exact
-          path="/create-rsvp"
+          path="/new/rsvp"
           render={p => isAuthenticated ? <CreateRSVP props={p} /> : <div>Please sign in</div>}
         /> */}
         <Route path="/profile" render={p => <ProfileView props={p} />} />

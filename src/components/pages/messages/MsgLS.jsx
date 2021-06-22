@@ -1,49 +1,25 @@
 // react
 import React from 'react';
 // utils
-import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Divider } from '@material-ui/core';
+import { Divider } from '@material-ui/core';
 // components
-import Search from './Search';
+import MsgSearch from './MsgSearch';
 // import RecentMessages from './RecentMessages';
 import Conversations from './Conversations';
-// constants
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    overflowY: 'scroll',
-    flexFlow: 'column',
-    justifyContent: 'flex-start',
-    width: 0,
-    border: `1px solid #b6b6b6`,
-    [theme.breakpoints.up('md')]: {
-      width: `33%`,
-      paddingRight: `15px`,
-    },
-    [theme.breakpoints.up('xs')]: {
-      width: `25%`,
-      minWidth: 300,
-      paddingRight: `5px`,
-      paddingLeft: `10px`,
-    },
-  },
-}));
+import Sidebar from '../../elements/SideBar';
 
 /**
  * main
- *
+ * data component
  */
 const MsgLS = () => {
-  // init hooks
-  const classes = useStyles();
 
   return (
-    <Paper className={`${classes.root}`}>
-      <Search />
-      {/* <RecentMessages /> */}
+    <Sidebar h100>
+      <MsgSearch />
       <Divider variant="fullWidth" />
       <Conversations />
-    </Paper>
+    </Sidebar>
   );
 };
 

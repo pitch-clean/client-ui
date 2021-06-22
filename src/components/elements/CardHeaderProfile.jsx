@@ -6,33 +6,46 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   CardHeader,
   Avatar,
+  Paper,
   Link as MuiLink,
   Typography,
 } from '@material-ui/core';
 // components
 // constants
 const useStyles = makeStyles(theme => ({
+  container: {
+    margin: '2px 0'
+  },
   root: {
     padding: `0`,
     justifyContent: 'start',
     textAlign: `start`,
+    marginTop: 10,
+    marginBottom: 10,
+    paddingRight: 15,
+    paddingLeft: 15,
   },
   cardHeaderContent: {},
   avatar: {
-    height: `50px`,
-    width: `50px`,
+    height: `60px`,
+    width: `60px`,
   },
   title: {
-    marginTop: `-15px`,
-    fontWeight: 600,
+    marginTop: `-5px`,
     fontSize: '15px',
+    '& *': {
+      fontWeight: 600,
+    },
+  },
+  subheader: {
+    fontSize: '.8rem',
   },
 }));
 
 /**
  * main
  */
-const CardHeaderProfile = ({ type, thumbnail, alias, title }) => {
+const CardHeaderProfile = ({ type, thumbnail, alias, title, subheader }) => {
   // init hooks
   const classes = useStyles();
   let avatarElem;
@@ -88,14 +101,18 @@ const CardHeaderProfile = ({ type, thumbnail, alias, title }) => {
   }
 
   return (
-    <CardHeader
-      className={`CardHeaderProfile ${classes.root} w100`}
-      classes={{
-        content: classes.cardHeaderContent,
-      }}
-      avatar={ alias && avatarElem }
-      title={ title && titleElem }
-    />);
+    <Paper elevation={1} className={classes.container}>
+      <CardHeader
+        className={`CardHeaderProfile ${classes.root} w100`}
+        classes={{
+          content: classes.cardHeaderContent,
+        }}
+        avatar={ alias && avatarElem }
+        title={ title && titleElem }
+        subheader={subheader && <Typography color="textSecondary" className={classes.subheader}>{subheader}</Typography>}
+      />
+    </Paper>
+  );
 };
 
 // export

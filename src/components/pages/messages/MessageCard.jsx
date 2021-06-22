@@ -45,10 +45,10 @@ const MessageCard = ({ idx }) => {
   // init hooks
   const classes = useStyles();
   // state
-  const messageObj = useSelector(s => s.view.messages.activeConversationObj.messages[idx]);
-  const profileMap = useSelector(s => s.view.messages.profileMap);
-  const profileObj = profileMap[messageObj.profile];
-  const { text } = messageObj;
+  const messageProfile = useSelector(s => s.view.messages.activeConversationObj.messages[idx].profile);
+  const messageBody = useSelector(s => s.view.messages.activeConversationObj.messages[idx].msgBody);
+  const messageId = useSelector(s => s.view.messages.activeConversationObj.messages[idx]._id);
+  const dtCreated = useSelector(s => s.view.messages.activeConversationObj.messages[idx].dtCreated);
   const {
     alias,
     pii: { firstName, lastName },
@@ -56,7 +56,7 @@ const MessageCard = ({ idx }) => {
     images: {
       profile: { thumbnail },
     },
-  } = profileObj;
+  } = messageProfile;
 
   return (
     <Paper square elevation={0} className={`MessageCard ${classes.root}`}>
@@ -93,7 +93,7 @@ const MessageCard = ({ idx }) => {
                 className={classes.body}
                 color="textPrimary"
               >
-                {text}
+                {messageBody}
               </Typography>
             </>
           }

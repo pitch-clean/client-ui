@@ -9,33 +9,38 @@ import MessageCard from './MessageCard';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
-    flex: 1,
-    flexFlow: 'column',
-    display: `flex`,
     justifyContent: 'flex-start',
     overflowY: 'scroll',
     height: `100%`,
+    scrollbarWidth: `none`,
   },
 }));
 
 /**
+ * data
+ */
+const MessagesListData = () => {
+  const conversationObj = useSelector(s => s.view.messages.activeConversationObj) || {};
+  const messagesArr = conversationObj.messages || [];
+  // build
+  const messagesElemArr = [];
+  for (let idx = 0; idx < messagesArr.length; idx += 1) {
+    messagesElemArr.push(<MessageCard idx={idx} />);
+  }
+  return <>{messagesElemArr}</>
+};
+
+/**
  * main
- *
  */
 const MessagesList = () => {
   // init hooks
   const classes = useStyles();
   // state
-  const messagesLen = useSelector(s => s.view.messages.activeConversationObj.messages.length);
-  // build
-  const messagesArr = [];
-  for (let idx = 0; idx < messagesLen; idx += 1) {
-    messagesArr.push(<MessageCard idx={idx} />);
-  }
 
   return (
-    <Paper square className={`MessagesList ${classes.root}`}>
-      {messagesArr}
+    <Paper square className={`MessagesList ${classes.root} flexcol`}>
+      <MessagesListData />
     </Paper>
   );
 };

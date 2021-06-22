@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
@@ -46,6 +46,14 @@ const MsgInput = () => {
   const classes = useStyles();
   // const dispatch = useDispatch();
   // state
+  const [input, inputSet] = useState('');
+  // effects
+  // when exiting mesages, save as draft to backend
+  useEffect(() => {
+    return () => {
+      // save as draft in conversation, need to make new data model
+    };
+  }, []);
 
   return (
     <Paper square className={`MsgInput ${classes.root}`}>

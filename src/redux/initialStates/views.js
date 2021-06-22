@@ -12,11 +12,4 @@ export const feed = {
   postsObj: {},
 };
 
-export const messages = {
-  activeConversationIdx: 0,
-  activeConversationId: null,
-  activeConversationObj: null,
-  profileMap: null,
-};
-
 export const recommendedConnections = [];

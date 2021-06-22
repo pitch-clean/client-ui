@@ -51,8 +51,8 @@ const App = () => {
   useEffect(async () => {
     // load
     if (isTestMode) {
-      // const profile = await getProfile(window);
-      // dispatch(updateLoginStatus(profile));
+      const profile = await getProfile(window);
+      dispatch(updateLoginStatus(profile));
     }
   }, []);
 

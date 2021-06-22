@@ -56,25 +56,40 @@ const useStyles = makeStyles(theme => ({
     },
   },
 }));
+// fxns
+const setWidth = (classes, width = null, isLeft = null) => {
+  // default case
+  let sidebarWidth = classes.widthWide;
+
+  if (width) {
+    if (width === 'wide') {
+      sidebarWidth = classes.widthWide;
+    } else if (width === 'thin') {
+      sidebarWidth = classes.widthThin;
+    }
+  } else if (isLeft) {
+    sidebarWidth = classes.widthWide;
+  }
+  return sidebarWidth;
+};
+const setNavStyle = (classes, isNav = null) => {
+  let navStyle = classes.misc;
+  if (isNav) {
+    navStyle = classes.nav;
+  }
+  return navStyle;
+};
 
 // main
-const Sidebar = ({ isLeft, isNav, width, children }) => {
+const Sidebar = ({ isLeft, isNav, width, h100, elevation = 0, children }) => {
   // init hooks
   const classes = useStyles();
   const lr = isLeft ? 'rootleft' : 'rootright';
-  const nav = isNav ? 'nav': '';
-  let cwidth = classes.widthThin;
-  
-  // default case
-  if (isLeft) {cwidth = classes.widthWide;}
-  if (width === 'wide') {
-    cwidth = classes.widthWide;
-  } else if (width === 'thin') {
-    cwidth = classes.widthThin;
-  }
+  const navStyle = setNavStyle(classes, isNav);
+  const widthStyle = setWidth(classes, width, isLeft);
 
   return (
-    <Paper elevation={0} className={`Sidebar ${classes[lr]} ${classes[nav]} ${cwidth} f1`}>
+    <Paper elevation={elevation} className={`Sidebar ${classes[lr]} ${navStyle} ${widthStyle} ${h100 && ' h100 '} f1`}>
       {children}
     </Paper>
   );

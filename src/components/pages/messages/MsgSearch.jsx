@@ -9,7 +9,9 @@ import AddIcon from '@material-ui/icons/Add';
 // components
 // constants
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    margin: 5,
+  },
   text: {},
   button: {
     // borderRadius: `50%`,
@@ -39,15 +41,15 @@ const CssTextField = withStyles({
 
 /**
  * main
- *
+ * view component for message search
  */
-const Search = () => {
+const MsgSearch = () => {
   // init hooks
   const classes = useStyles();
   return (
-    <Grid container className={`Search ${classes.root} w100`}>
+    <Grid container className={`MsgSearch ${classes.root} w100`}>
       <CssTextField
-        className={`Search ${classes.text} f1`}
+        className={`textField ${classes.text} f1`}
         margin="dense"
         label="Filter messages"
         variant="outlined"
@@ -60,4 +62,4 @@ const Search = () => {
 };
 
 // export
-export default Search;
+export default MsgSearch;

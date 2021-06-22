@@ -4,8 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import { CardHeader, Typography, Avatar, Tab } from '@material-ui/core';
-import { updateActiveConversation } from '../../../redux/actions/ViewActions';
-// components
+import { updateActiveConversation } from '../../../redux/actions/views/MessagesActions';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,18 +42,18 @@ const useStyles = makeStyles(theme => ({
     },
   },
 }));
-export const buildListOfUserNames = (participants, _id, profMap) => {
-  const nonSelfParticipants = participants.filter(p => p !== _id);
+export const buildListOfUserNames = (participants, activeProfileId) => {
+  const nonSelfParticipants = participants.filter(({ _id: participantId }) => participantId !== activeProfileId);
   const allNamesArr = [];
   const thumbnailArr = [];
   for (let i = 0; i < nonSelfParticipants.length; i += 1) {
-    const profile = nonSelfParticipants[i];
+    const participantProfile = nonSelfParticipants[i];
     const {
       pii: { firstName, lastName },
       images: {
         profile: { thumbnail },
       },
-    } = profMap[profile];
+    } = participantProfile;
     const fullName = `${firstName} ${lastName}`;
     allNamesArr.push(fullName);
     thumbnailArr.push(thumbnail);
@@ -62,21 +61,23 @@ export const buildListOfUserNames = (participants, _id, profMap) => {
   const allNamesStr = allNamesArr.join(', ');
   return { allNamesStr, thumbnailArr };
 };
+
 /**
  * main
  * TODO: QUERY THE MESSAGES FOR A SINGLE CONVERSATION AFTER CLICKING ON A CONVERSATION CARD
  */
-const ConversationCard = ({ tabIdx, conversationObj, conversationId }) => {
+const ConversationCard = ({ tabIdx }) => {
   // init hooks
   const classes = useStyles();
   const dispatch = useDispatch();
   // state
-  const profileMap = useSelector(s => s.view.messages.profileMap);
   const activeConversationIdx = useSelector(s => s.view.messages.activeConversationIdx);
-  const _id = useSelector(s => s.auth.activeProfile._id); // current user's id
-  const { participants, lastMessage } = conversationObj;
-
-  const { allNamesStr, thumbnailArr } = buildListOfUserNames(participants, _id, profileMap);
+  const conversationObj = useSelector(s => s.view.messages.conversationsArr[tabIdx]);
+  const activeProfileId = useSelector(s => s.auth.activeProfile._id); // current user's id
+  const { participants, messages } = conversationObj;
+  const lastMessage = messages[messages.length - 1];
+  const previewText = lastMessage ? `${lastMessage.profile.pii.firstName}: ${lastMessage.msgBody}` : 'New Conversation';
+  const { allNamesStr, thumbnailArr } = buildListOfUserNames(participants, activeProfileId);
 
   return (
     <Tab
@@ -88,7 +89,7 @@ const ConversationCard = ({ tabIdx, conversationObj, conversationId }) => {
       }}
       onClick={() =>
         activeConversationIdx !== tabIdx &&
-        dispatch(updateActiveConversation({ idx: tabIdx, conversationId }))
+        dispatch(updateActiveConversation({ idx: tabIdx }))
       }
       style={{
         borderTop: tabIdx > 0 ? '1px solid #dfdfdf' : '',
@@ -103,7 +104,6 @@ const ConversationCard = ({ tabIdx, conversationObj, conversationId }) => {
               noWrap
               className={classes.overflow}
               color="textPrimary"
-              component="div"
               variant="subtitle2"
             >
               {allNamesStr}
@@ -114,10 +114,9 @@ const ConversationCard = ({ tabIdx, conversationObj, conversationId }) => {
               noWrap
               className={classes.overflow}
               variant="caption"
-              component="div"
               color="textSecondary"
             >
-              {lastMessage.text}
+              {previewText}
             </Typography>
           }
         />

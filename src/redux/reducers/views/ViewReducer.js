@@ -6,6 +6,7 @@ import StartupReducer from './StartupReducer';
 import SearchReducer from './SearchReducer';
 import ProfileReducer from './ProfileReducer';
 import PostReducer from './PostReducer';
+import MessagesReducer from './MessagesReducer';
 
 const MainReducer = (state = _.cloneDeep(states.main), action) => {
   const newState = _.cloneDeep(state);
@@ -62,35 +63,6 @@ const FeedReducer = (state = _.cloneDeep(states.feed), action) => {
       return newState;
     case types.CLEAR_FEED:
       return _.cloneDeep(initialFeedState);
-    default:
-      return newState;
-  }
-};
-
-const MessagesReducer = (state = _.cloneDeep(states.messages), action) => {
-  const newState = _.cloneDeep(state);
-  const { payload } = action;
-  switch (action.type) {
-    case types.UPDATE_ACTIVE_CONVERSATION_IDX:
-      newState.activeConversationIdx = payload;
-      return newState;
-    case types.UPDATE_ACTIVE_CONVERSATION_ID:
-      newState.activeConversationId = payload;
-      return newState;
-    case types.UPDATE_ACTIVE_CONVERSATION:
-      if (payload.conversationId === undefined || payload.idx === undefined) {
-        alert('Please use id or idx');
-      }
-      newState.activeConversationId = payload.conversationId;
-      newState.activeConversationIdx = payload.idx;
-      newState.activeConversationObj = null;
-      return newState;
-    case types.UPDATE_ACTIVE_CONVERSATION_OBJ:
-      newState.activeConversationObj = payload;
-      return newState;
-    case types.UPDATE_PROFILE_MAP:
-      newState.profileMap = payload;
-      return newState;
     default:
       return newState;
   }

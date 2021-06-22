@@ -3,17 +3,15 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
-import { updateActiveConversationObj } from '../../../redux/actions/ViewActions';
+import { updateActiveConversationObj } from '../../../redux/actions/views/MessagesActions';
 // components
 import MsgTitle from './MsgTitle';
 import MsgGroupMedia from './MsgGroupMedia';
-// seed
-import { conversationObj } from '../../../seed/testConversations';
+import { Paper } from '@material-ui/core';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
-    flex: 1,
+    flex: '1 0',
     justifyContent: 'start',
     flexFlow: 'column',
     maxHeight: `100%`,
@@ -22,25 +20,27 @@ const useStyles = makeStyles(theme => ({
 
 /**
  * main
- *
+ * data component
  */
 const MsgMain = () => {
   // init hooks
   const classes = useStyles();
   const dispatch = useDispatch();
   // state
-  const activeConversationId = useSelector(s => s.view.messages.activeConversationId);
+  const activeConversationIdx = useSelector(s => s.view.messages.activeConversationIdx)
+  const conversationsArr = useSelector(s => s.view.messages.conversationsArr)
+  const conversationsCt = conversationsArr.length
   // effects
   useEffect(() => {
-    // call the last 20 messages with activeConversationId
-    dispatch(updateActiveConversationObj(conversationObj[activeConversationId]));
-  }, [activeConversationId]);
+
+    conversationsCt && dispatch(updateActiveConversationObj(conversationsArr[activeConversationIdx]))
+  }, [activeConversationIdx, conversationsCt]);
 
   return (
-    <Grid container className={`MsgMain ${classes.root}`}>
-      {activeConversationId && <MsgTitle />}
+    <Paper className={`MsgMain ${classes.root} flexcol h100`}>
+      <MsgTitle />
       <MsgGroupMedia />
-    </Grid>
+    </Paper>
   );
 };
 

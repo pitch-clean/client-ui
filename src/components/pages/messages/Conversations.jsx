@@ -4,23 +4,34 @@ import { useDispatch, useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import { Tabs } from '@material-ui/core';
-import { updateActiveConversation } from '../../../redux/actions/ViewActions';
+import { updateActiveConversation, updateConversationsArr } from '../../../redux/actions/views/MessagesActions';
 // components
 import ConversationCard from './ConversationCard';
+import { Get } from '../../../utils/requests';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {},
 }));
 const initConvo = 0;
 // fxns
-const sortByDt = obj => {
-  return Object.entries(obj).sort((a, b) => {
-    return new Date(b[1].lastMessage.dtReceipt) - new Date(a[1].lastMessage.dtReceipt);
-  });
+const sortByDt = arr => {
+  return arr.sort((a, b) => {
+    return b.dtUpdated - a.dtUpdated;
+  })
+};
+/**
+ * view component
+ * Vertical Tabs list
+ */
+const ConversationsView = () => {
+  return (
+    <div></div>
+  );
 };
 
 /**
  * main
+ * data component
  * Vertical Tabs list
  */
 const Conversations = () => {
@@ -29,32 +40,26 @@ const Conversations = () => {
   const dispatch = useDispatch();
   // state
   const activeConversationIdx = useSelector(s => s.view.messages.activeConversationIdx);
-  const conversationsObj = useSelector(s => s.auth.activeProfile.conversations);
-  // sort
-  const sortedConvos = sortByDt(conversationsObj);
+  const activeProfileId = useSelector(s => s.auth.activeProfile._id);
+  const conversationsCt = useSelector(s => s.view.messages.conversationsArr.length);
   const tabsArr = [];
-  for (let i = 0; i < sortedConvos.length; i += 1) {
-    const [conversationId, conversationObj] = sortedConvos[i];
+  for (let i = 0; i < conversationsCt; i += 1) {
     tabsArr.push(
       <ConversationCard
         tabIdx={i}
-        conversationId={conversationId}
-        conversationObj={conversationObj}
       />,
     );
   }
   // effects
-  useEffect(() => {
-    dispatch(
-      updateActiveConversation({
-        conversationId: sortedConvos[0][0],
-        idx: initConvo,
-      }),
-    );
+  useEffect(async () => {
+    // get the messages from active profile
+    const url = `${window.env.api.conversations}/user/${activeProfileId}`;
+    const conversations = await Get(url);
+    const sortedConvos = sortByDt(conversations);
+    dispatch(updateConversationsArr(sortedConvos))
   }, []);
 
   return (
-    <>
       <Tabs
         orientation="vertical"
         variant="scrollable"
@@ -65,7 +70,6 @@ const Conversations = () => {
       >
         {tabsArr}
       </Tabs>
-    </>
   );
 };
 
