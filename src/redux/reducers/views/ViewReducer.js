@@ -49,7 +49,7 @@ const FeedReducer = (state = _.cloneDeep(states.feed), action) => {
     case types.UPDATE_POSTS_ARR:
       newState.posts = action.payload;
       return newState;
-    case types.UPDATE_POSTS_OBJ:
+      case types.UPDATE_POSTS_OBJ:
       newState.postsObj = action.payload;
       return newState;
     case types.UPDATE_POST_COMMENTS:

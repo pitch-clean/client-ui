@@ -91,8 +91,8 @@ const ProfileView = () => {
       <div className={`Body f1 flexcol`}>
         <About />
         <Switch location={{ ...location, baseRoute }}>
-          <Route exact path="/profile/:alias/posts" render={p => <Posts props={p} />} />
-          <Route exact path="/profile/:alias/likes" render={p => <LikesView props={p} />} />
+          <Route exact path="/profile/:profileAlias/posts" render={p => <Posts props={p} />} />
+          <Route exact path="/profile/:profileAlias/likes" render={p => <LikesView props={p} />} />
           {/* <Route exact path="/profile/:alias/network" render={p => <Network props={p} />} /> */}
           {/* <Route exact path="/profile/:alias/portfolio" render={p => <Portfolio props={p} />} /> */}
           <Redirect to={`/profile/${alias}/posts`} />

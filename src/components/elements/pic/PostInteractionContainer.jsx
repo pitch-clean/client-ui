@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 /**
  * main
  */
-const PostInteractionContainer = ({ postObj, postIdx, postType }) => {
+const PostInteractionContainer = ({ postObj, postIdx, postType, startupObj }) => {
   // init hooks
   const classes = useStyles();
 
@@ -33,6 +33,7 @@ const PostInteractionContainer = ({ postObj, postIdx, postType }) => {
     >
       {postType === 'social' && <SocialPIC postObj={postObj} postIdx={postIdx} />}
       {postType === 'interest' && <InterestPIC postObj={postObj} postIdx={postIdx} />}
+      {startupObj && <SocialPIC startupObj={startupObj} />}
     </AppBar>
   );
 };

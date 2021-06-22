@@ -42,6 +42,18 @@ export const updateRecommendedConnections = payload => dispatch => {
     type: types.UPDATE_RECOMMENDED_CONNECTIONS,
   });
 };
+export const updateProfilePosts = payload => dispatch => {
+  dispatch({
+    payload,
+    type: types.UPDATE_PROFILE_POSTS,
+  });
+};
+export const updateProfileLikes = payload => dispatch => {
+  dispatch({
+    payload,
+    type: types.UPDATE_LIKED_ITEMS,
+  });
+};
 // messages
 export const updateActiveConversationIdx = payload => dispatch => {
   dispatch({

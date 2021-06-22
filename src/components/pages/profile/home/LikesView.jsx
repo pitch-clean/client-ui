@@ -1,81 +1,53 @@
 // react
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  Paper,
-  CardHeader,
-  Typography,
-  List,
-  Divider,
-} from '@material-ui/core';
-import { getLikesByQuery } from '../../../utils/queries';
+import { Paper } from '@material-ui/core';
+import { updateProfileTab, updateProfileLikes } from '../../../../redux/actions/ViewActions';
+import { Get } from '../../../../utils/requests';
 // components
-import BaseFeedPost from '../../../elements/BaseFeedPost';
+import ProfilePost from '../../../elements/ProfilePost';
+import ProfileStartup from '../../../elements/ProfileStartup';
 // constants
-const useStyles = makeStyles(theme => ({
-  root: {
-  },
-  likesContainer: {},
+const useStyles = makeStyles(() => ({
+  root: {},
 }));
-const init = {};
 
 /**
  * main
  */
-const LikesView = () => {
-  console.log('showing likesview')
+const Posts = () => {
   // init hooks
   const classes = useStyles();
+  const dispatch = useDispatch();
   // state
-  const viewProfileId = useSelector(s => s.view.profile.viewProfile._id);
-  const [likesArrsObj, likesArrsObjSet] = useState();
+  const activeProfile = useSelector(s => s.auth.activeProfile) || {};
+  const pageProfileId = useSelector(s => s.view.profile.viewProfile._id);
+  const postsLen = useSelector(s => s.view.profile.posts.length);
+  const startupsLen = useSelector(s => s.view.profile.likes.startups.length);
+  const activeProfileId = activeProfile._id;
   // build
-  const likesElemsArr = [];
-  ['startups', 'posts'].forEach((likeGroup) => {
-    const likesArr = likesArrsObj[likeGroup];
-    const nestedElemArr = [];
-    for (let idx = 0; idx < likesArr.length; idx += 1) {
-      const obj = likesArr[idx];
-      nestedElemArr.push(
-        <>
-          {idx !== 0 && <Divider className={classes.divider} component="div" />}
-          {likeGroup === 'posts' && <BaseFeedPost postObj={obj} />}
-          {/* {<div className={``}>
-            {obj}
-          </div>} */}
-        </>
-      );
-    }
-    likesElemsArr.push(
-      <div className={`container ${classes.likesContainer}`}>
-        {nestedElemArr}
-      </div>
-    );
-
-    return (
-      <>
-        {/* {idx !== 0 && <Divider className={classes.divider} component="div" />} */}
-      </>
-    );
-  });
+  const postElemArr = [];
+  for (let idx = 0; idx < postsLen; idx += 1) {
+    postElemArr.push(<ProfilePost idx={idx} isProfile isLikes  />);
+  }
+  for (let idx = 0; idx < startupsLen; idx += 1) {
+    postElemArr.push(<ProfileStartup idx={idx} isProfile />);
+  }
   // effects
   useEffect(async () => {
-    const resLikesArrsObj = await getLikesByQuery(viewProfileId, 'profile', window);
-    console.log(resLikesArrsObj);
-    likesArrsObjSet(resLikesArrsObj);
-  }, []);
+    const newLikedItems = await Get(`${window.env.api.profiles}/likedContent/${pageProfileId}/0`);
+    dispatch(updateProfileLikes(newLikedItems));
+    dispatch(updateProfileTab('likes'));
+  }, [activeProfileId]);
 
   return (
-    <Paper
-      elevation={0}
-      className={`LikesView ${classes.root} w100 flexcol`}
-    >
-      {likesElemsArr}
+    <Paper className={`Posts ${classes.root} flexcol w100`}>
+      {postElemArr}
     </Paper>
   );
 };
 
 // export
-export default LikesView;
+export default Posts;

@@ -18,19 +18,6 @@ import { Put } from '../../../utils/requests';
 import CommentsSection from './CommentsSection';
 // constants
 const useStyles = makeStyles(theme => ({
-  root: {
-    justifyContent: 'start'
-  },
-  typography: {
-    padding: theme.spacing(2),
-  },
-  subPostContainer: {
-    justifyContent: 'start',
-  },
-  appBar: {
-    top: 'auto',
-    bottom: 0,
-  },
   toolbar: {
     justifyContent: 'space-between',
   },
@@ -63,7 +50,7 @@ const onClickRepost = (postId, activeProfileId, dispatch) => async () => {
   dispatch(updatePostReposts(post));
 };
 
-const handleClick = (type, postId, activeProfileId, postProfileId, dispatch) => async () => {
+const handleClick = (type, postId, activeProfileId, dispatch) => async () => {
   if (type === 'like') {
     await onClickLike(postId, activeProfileId, dispatch);
   }
@@ -72,28 +59,24 @@ const handleClick = (type, postId, activeProfileId, postProfileId, dispatch) => 
   }
 };
 
-const SocialPIC = ({ postObj, postIdx }) => {
+const SocialPIC = ({ postObj, postIdx, startupObj }) => {
   // init hooks
   const dispatch = useDispatch();
   const classes = useStyles();
   // state
+  const itemObj = postObj ? postObj : startupObj;
   const {
     _id: postId,
     profile: { _id: postProfileId },
     likes: likesArr,
     reposts: repostsArr,
     comments,
-  } = postObj;
-  const commentsCt = comments.length;
+  } = itemObj;
   const activeProfile = useSelector(s => s.auth.activeProfile);
   const [isCommentSectionOpen, setIsCommentSectionOpen] = useState(false);
 
-  // const repostsArr = ['asdf', 'sdfg', 'vcoiu', 'xcovui8'];
   const likesCt = likesArr.length;
   const repostsCt = repostsArr.length;
-  // const postObj = useSelector(s => s.view[isProfile ? 'profile' : 'feed'].posts[postIdx]);
-  // const { body, postType, _id: postId, profile: postProfileId } = postObj;
-  // const profile = isProfile ? viewProfile : postObj.profile; // need to do this for posts on profile
   let isLiked;
   let isReposted;
   let activeProfileId = null;
@@ -110,24 +93,24 @@ const SocialPIC = ({ postObj, postIdx }) => {
   return (
     <div className={`SocalPIC flexcol w100 h100`}>
       <Toolbar className={`${classes.toolbar} flexrow w100`} variant="dense">
-        <div className={`icon ${classes.icon} ${classes.button}`} onClick={e => {
+        {postObj && <div className={`icon ${classes.icon} ${classes.button}`} onClick={e => {
             e.preventDefault();
             setIsCommentSectionOpen(!isCommentSectionOpen);
           }}
         >
           <CommentIcon className={classes.commentIcon} color="action" />
-          <div>{commentsCt}</div>
-        </div>
-        <div className={`icon ${classes.icon} ${classes.button}`} onClick={handleClick('repost', postId, activeProfileId, postProfileId, dispatch)}>
+          <div>{comments.length}</div>
+        </div>}
+        <div className={`icon ${classes.icon} ${classes.button}`} onClick={handleClick('repost', postId, activeProfileId, dispatch)}>
           <ReplyIcon className={isReposted && classes.red} />
           <div>{repostsCt}</div>
         </div>
-        <div className={`icon ${classes.icon} ${classes.button}`} onClick={handleClick('like', postId, activeProfileId, postProfileId, dispatch)}>
+        <div className={`icon ${classes.icon} ${classes.button}`} onClick={handleClick('like', postId, activeProfileId, dispatch)}>
           {isLiked ? <FavoriteIcon className={classes.red} /> : <FavoriteBorderIcon />}
           <div>{likesCt}</div>
         </div>
       </Toolbar>
-      <CommentsSection commentsArr={postObj.comments} postIdx={postIdx} postId={postId} isCommentSectionOpen={isCommentSectionOpen} />
+      {postObj && <CommentsSection commentsArr={comments} postIdx={postIdx} postId={postId} isCommentSectionOpen={isCommentSectionOpen} />}
     </div>
   );
 };

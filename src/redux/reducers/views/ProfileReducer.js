@@ -6,8 +6,12 @@ import * as types from '../../types/ViewTypes';
 const initState = {
   activeProfileTab: 'posts',
   viewProfile: null,
-  posts: {},
-  comments: {},
+  posts: [],
+  likes: {
+    posts: [],
+    startups: [],
+  },
+  comments: [],
 };
 
 /**
@@ -30,7 +34,17 @@ const ProfileReducer = (state = _.cloneDeep(initState), action) => {
       newState.viewProfile.posts[postIdx].comments.push(action.payload._id);
       return newState;
     case types.UPDATE_VIEW_PROFILE:
-      return { ...newState, viewProfile: action.payload, ...action.payload };
+      return { ...newState, viewProfile: action.payload };
+    case types.UPDATE_PROFILE_POSTS:
+      return { ...newState, posts: action.payload };
+    case types.UPDATE_LIKED_ITEMS:
+      return {
+        ...newState,
+        likes: {
+          startups: action.payload.startups,
+        },
+        posts: action.payload.posts,
+      };
     case types.CLEAR_VIEW_PROFILE:
       return _.cloneDeep(initialProfileState);
     default:
