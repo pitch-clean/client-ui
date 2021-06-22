@@ -1,6 +1,6 @@
 // react
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import { Select, MenuItem, Button } from '@material-ui/core';
@@ -37,30 +37,31 @@ const onClickLogout = (dispatch) => () => {
 /**
  * main
  */
-const Logout = () => {
+const Settings = () => {
   // init hooks
   const classes = useStyles();
   const dispatch = useDispatch();
   // state
+  const activeProfileId = useSelector(s => s.auth.activeProfile._id);
   const [isOpen, isOpenSet] = useState(false);
   
-  return (
-    <Button className={`Logout ${classes.root} flexcol`} onClick={handleClick(isOpen, isOpenSet)} disableRipple >
-      
+  return activeProfileId ? (
+    <Button className={`Settings ${classes.root} flexcol`} onClick={handleClick(isOpen, isOpenSet)} disableRipple >
       <SettingsIcon className={`${classes.outerIcon}`} />
-        
       <div className={`${classes.innerGroup} `} >
-        <SettingsIcon className={`${classes.innerIcon}  h100`} />
+        <SettingsIcon className={`${classes.innerIcon} h100`} />
         <Select
           open={isOpen}
           className={`${classes.select} ${!isOpen && classes.closed}`}
         >
-          <MenuItem onClick={onClickLogout(dispatch)}>Logout</MenuItem>
+          {activeProfileId && <MenuItem onClick={onClickLogout(dispatch)}>Logout</MenuItem>}
+          {!activeProfileId && <MenuItem onClick={onClickLogout(dispatch)}>Log in</MenuItem>}
         </Select>
       </div>
+      
     </Button>
-  );
+  ) : <div />;
 };
 
 // export
-export default Logout;
+export default Settings;

@@ -56,7 +56,6 @@ const LSProfile = () => {
   // init hooks
   const classes = useStyles();
   // state
-  const activeProfile = useSelector(s => s.auth.activeProfile);
   const pii = useSelector(s => s.auth.activeProfile.pii);
   const alias = useSelector(s => s.auth.activeProfile.alias);
   const images = useSelector(s => s.auth.activeProfile.images);

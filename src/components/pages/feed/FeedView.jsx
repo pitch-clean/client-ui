@@ -22,10 +22,10 @@ const FeedView = () => {
   // init hooks
   const classes = useStyles();
   // state
-  const isActive = useSelector(s => s.auth.activeProfile);
+  const isActive = useSelector(s => s.auth.activeProfile._id);
 
   return isActive ? (
-    <div className={`${classes.root} FeedView w100 flexrow`} container>
+    <div className={`FeedView ${classes.root} w100 flexrow`} container>
       <LeftSidebar />
       <FeedContent />
       <RightSidebar />

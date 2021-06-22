@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import StartupsList from './startups/startupsList/StartupsList';
 import StartupDetail from './startups/startupDetail/StartupDetail';
 import NotFound from './home/NotFound';
-import LoginForm from './profile/LoginForm';
+import LoginView from './login/LoginView';
 import FeedView from './feed/FeedView';
 import Home from './home/Home';
 import CreateProfile from './profile/CreateProfile';
@@ -55,35 +55,37 @@ const PageRouter = () => {
   // init hooks
   const classes = useStyles();
   // state
-  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
+  const isAuthenticated = useSelector(s => s.auth.activeProfile._id);
 
   return (
-    <div className={`${classes.root} PageRouter flexcol`}>
+    <div className={`PageRouter ${classes.root} flexcol f1`}>
       <Switch>
         <Route path="/profile/:alias" render={p => <ProfileView props={p} />} />
         <Route exact path="/startup/:startupId" render={p => <StartupDetail props={p} />} />
         <Route exact path="/marketplace" render={p => <StartupsList props={p} />} />
-        <Route exact path="/" render={p => <Home props={p} />} />
+        <Route exact path="/post/:postId" render={p => <PostDetail props={p} />} />
         <Route exact path="/feed" render={p => <FeedView props={p} />} />
-        <Route exact path="/login" render={p => <LoginForm props={p} />} />
         {/* <Route exact path="/search/:searchStr" render={p => <SearchView props={p} />} /> */}
         <Route exact path="/messages" render={p => isAuthenticated && <MessagesView props={p} />} />
+        <Route exact path="/" render={p => <Home props={p} />} />
         <Route
           exact
           path="/register"
           render={p => !isAuthenticated ? <CreateProfile props={p} /> : <Redirect to={`/profile`} />}
         />
+        <Route exact path="/login" render={p => !isAuthenticated ? <LoginView props={p} /> : <Redirect to={`/profile`} />} />
         {/* <Route
           exact
           path="/startup/new"
           render={p => isAuthenticated && <CreateStartup props={p} />}
         /> */}
-        <Route exact path="/post/:postId" render={p => <PostDetail props={p} />} />
+        
         {/* <Route
           exact
           path="/create-rsvp"
           render={p => isAuthenticated ? <CreateRSVP props={p} /> : <div>Please sign in</div>}
         /> */}
+        <Route path="/profile" render={p => <ProfileView props={p} />} />
         <Route render={p => <NotFound props={p} />} />
       </Switch>
       {/* <Grid item className={`${classes.footer} w100`}>

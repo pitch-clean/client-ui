@@ -122,7 +122,7 @@ const MainNavSearch = () => {
   const [input, setInput] = useState('');
 
   return (
-    <div className={`MainNavSearch ${classes.root} `}>
+    <div className={`MainNavSearch ${classes.root}`}>
       <CssTextField
         className={`Search ${classes.text} f1`}
         margin="dense"

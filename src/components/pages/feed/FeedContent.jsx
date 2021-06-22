@@ -42,13 +42,13 @@ const FeedContent = () => {
     dispatch(updatePostsArr(posts || []));
   }, []);
 
-  return (
+  return activeProfileId ? (
     <Paper className={`FeedContent ${classes.root} flexcol`} elevation={0}>
       {/* <CreatePost /> */}
       {postsLen > 0 && postElemArr}
       {postsLen > 0 && <div className="endScroll" />}
     </Paper>
-  );
+  ) : <div />;
 };
 
 // export

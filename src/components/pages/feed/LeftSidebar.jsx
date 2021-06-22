@@ -11,15 +11,15 @@ import ProfileTabs from './ProfileTabs';
  */
 const LeftSidebar = ({ baseRoute }) => {
   // state
-  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
+  const isAuthenticated = useSelector(s => s.auth.activeProfile._id);
 
-  return isAuthenticated ? (
+  return (
     <Sidebar isLeft>
-      <LSProfile />
+      {isAuthenticated && <LSProfile />}
       {/* (below) only enabled for profile view */}
       {baseRoute && <ProfileTabs baseRoute={baseRoute} />}
     </Sidebar>
-  ) : (<div></div>);
+  );
 };
 
 // export

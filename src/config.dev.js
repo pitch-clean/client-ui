@@ -26,6 +26,7 @@ const rsvps = 'rsvps';
 const api = {
   base: apiBase,
   auth: `${apiBase}/${auth}`,
+  login: `${apiBase}/${auth}/login`,
   search: `${apiBase}/${search}`,
   profiles: `${apiBase}/${profiles}`,
   startups: `${apiBase}/${startups}`,
@@ -51,6 +52,8 @@ const client = {
   startups,
   rsvp,
   rsvps,
+  login: 'login',
+  register: 'register',
 };
 
 window.env = {

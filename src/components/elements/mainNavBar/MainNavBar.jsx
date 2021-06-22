@@ -1,11 +1,14 @@
 // react
 import React, { useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 // components
 import CenterNavGroup from './CenterNavGroup';
 import RightNavGroup from './RightNavGroup';
 import Logo from './Logo';
+import StyledTab from './StyledTab';
 // constants
 const useStyles = makeStyles(theme => ({
   container: {
@@ -27,6 +30,10 @@ const useStyles = makeStyles(theme => ({
     position: 'sticky',
     top: 0,
   },
+  tab: {
+    padding: `0 20px`,
+    marginRight: '20px',
+  },
 }));
 
 /**
@@ -36,6 +43,8 @@ const MainNavBar = () => {
   // init hooks
   const classes = useStyles();
   const ref1 = useRef(null);
+  // state
+  const activeProfileId = useSelector(s => s.auth.activeProfile._id);
   // effects
   useEffect(() => {
     console.log(ref1.current.getBoundingClientRect())
@@ -46,6 +55,11 @@ const MainNavBar = () => {
       <div className={`MainNavBar ${classes.root} flexrow`}>
         <Logo />
         <CenterNavGroup />
+        {!activeProfileId && (
+          <Link className={`${classes.tab} navBarLink`} to={`/${window.env.client.login}`}>
+            <StyledTab label="Log in" textColor="primary" />
+          </Link>
+        )}
         <RightNavGroup />
       </div>
     </div>

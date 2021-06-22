@@ -8,7 +8,7 @@ import LandingPage from './LandingPage';
 // main
 const Home = () => {
   // TODO: add route for logged in user
-  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
+  const isAuthenticated = useSelector(s => s.auth.activeProfile._id);
   if (isAuthenticated) {
     return <Redirect to="/feed" />;
   }

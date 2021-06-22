@@ -18,7 +18,7 @@ const CreateRSVP = () => {
   // init hooks
   const classes = useStyles();
   // state
-  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
+  const isAuthenticated = useSelector(s => s.auth.activeProfile._id);
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }

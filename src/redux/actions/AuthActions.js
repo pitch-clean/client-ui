@@ -10,10 +10,22 @@ export const updateLoginField = (formName, fieldName, value, error) => dispatch 
     error,
   });
 };
-export const updateLoginStatus = (isLoggedIn, profileObj = {}) => dispatch => {
+export const updateFormFieldValue = (field, payload) => dispatch => {
+  dispatch({
+    type: types.LOGIN_UPDATE_FORM_FIELD_VALUE,
+    field,
+    payload,
+  });
+};
+export const checkIfValidForm = (error) => dispatch => {
+  dispatch({
+    type: types.LOGIN_CHECK_IF_VALID_FORM,
+    error,
+  });
+};
+export const updateLoginStatus = profileObj => dispatch => {
   dispatch({
     type: types.UPDATE_LOGIN_STATUS,
-    isLoggedIn,
     profileObj,
   });
 };

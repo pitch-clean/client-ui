@@ -51,19 +51,18 @@ const ProfileView = () => {
   // state
   const viewProfile = useSelector(s => s.view.profile.viewProfile);
   const activeProfile = useSelector(s => s.auth.activeProfile);
+  const activeProfileId = useSelector(s => s.auth.activeProfile._id);
+  const activeProfileAlias = useSelector(s => s.auth.activeProfile.alias);
   let pageAlias = alias;
 
-  if (activeProfile) {
-    if (activeProfile._id) {
-      if (!alias) {
-        pageAlias = activeProfile.alias;
-      }
-      // if (activeProfile.alias === alias) {}
+  if (activeProfileId) {
+    if (!alias) {
+      pageAlias = activeProfileAlias;
     }
   }
   // effects
   useEffect(async () => {
-    const url = `${window.env.api.profiles}/${alias}?by=alias`;
+    const url = `${window.env.api.profiles}/${pageAlias}?by=alias`;
     const res = await Get(url, {}, true);
     dispatch(updateViewProfile(res));
     // depending on who's profile, get recommended connections
@@ -73,11 +72,11 @@ const ProfileView = () => {
     return () => {
       dispatch(clearViewProfile());
     };
-  }, [alias, viewProfile && viewProfile._id]);
+  }, [pageAlias, viewProfile && viewProfile._id]);
 
-  if (!pageAlias) {
-    return <Redirect to="/" />;
-  }
+  // if (!pageAlias) {
+  //   return <Redirect to="/" />;
+  // }
 
   if (!viewProfile || !viewProfile._id) {
     return <div>{`issue with redux state: <ProfileView /> > viewProfile `}</div>;
@@ -95,7 +94,7 @@ const ProfileView = () => {
           <Route exact path="/profile/:profileAlias/likes" render={p => <LikesView props={p} />} />
           {/* <Route exact path="/profile/:alias/network" render={p => <Network props={p} />} /> */}
           {/* <Route exact path="/profile/:alias/portfolio" render={p => <Portfolio props={p} />} /> */}
-          <Redirect to={`/profile/${alias}/posts`} />
+          <Redirect to={`/profile/${pageAlias}/posts`} />
         </Switch>
       </div>
       <Sidebar isLeft={false}>

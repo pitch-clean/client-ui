@@ -16,7 +16,7 @@ const useStyles = makeStyles({
  * @param {function} updateFxn
  * @param {object} updateFxnInputs
  */
-const TextFieldEdit = ({ value, updateFxn, updateFxnInputs }) => {
+const TextFieldEdit = ({ value, updateFxn, updateFxnInputs, placeholder }) => {
   // init hooks
   const classes = useStyles();
 
@@ -24,7 +24,7 @@ const TextFieldEdit = ({ value, updateFxn, updateFxnInputs }) => {
     <TextField
       className={`${classes.root} w100 f1`}
       variant="outlined"
-      placeholder="Highlight"
+      placeholder={placeholder}
       size="small"
       margin="dense"
       value={value}

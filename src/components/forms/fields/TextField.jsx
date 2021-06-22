@@ -35,6 +35,7 @@ const TextField = ({
   validCheckFxn,
   isUpdateOnChange,
   variant,
+  onKeyDown,
 }) => {
   // init hooks
   const dispatch = useDispatch();
@@ -56,8 +57,14 @@ const TextField = ({
   }
   const onchange = e => {
     if (reducerName === 'auth') {
-      const { error } = validator_.validate(e.target.value);
-      dispatch(updateFxn(formName, fieldName, e.target.value, error && error.message));
+      // for login only
+      if (formName === 'login') {
+        dispatch(updateFxn(fieldName, e.target.value));
+        dispatch(validCheckFxn(err));
+      } else {
+        const { error } = validator_.validate(e.target.value);
+        dispatch(updateFxn(formName, fieldName, e.target.value, error && error.message));
+      }
     } else {
       dispatch(updateFxn(formName, fieldName, e.target.value));
       if (isUpdateOnChange && updateErrorFxn && validCheckFxn) {
@@ -91,7 +98,9 @@ const TextField = ({
     }
   };
   const onblur = () => {
-    if (reducerName !== 'auth') {
+    if (reducerName === 'auth') {
+
+    } else {
       if (fieldName !== 'confirmPassword' && fieldName !== 'password') {
         const { error } = validator_.validate(val);
         if (updateErrorFxn) {
@@ -125,7 +134,7 @@ const TextField = ({
         classes={{}}
         variant={variant}
         id="margin-dense"
-
+        onKeyDown={onKeyDown}
       />
       <FormHelperText
         error={err}

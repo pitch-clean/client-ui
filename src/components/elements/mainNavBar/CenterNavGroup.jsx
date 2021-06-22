@@ -42,7 +42,6 @@ const CenterNavGroup = () => {
   const loc = useLocation();
   const dispatch = useDispatch();
   // state
-  const isAuthenticated = useSelector(s => s.auth.isAuthenticated);
   const l1Path = loc.pathname.split('/')[1];
   // effects
   useEffect(() => {
@@ -61,7 +60,7 @@ const CenterNavGroup = () => {
         <StyledTab label="Messages" textColor="primary" />
       </Link>
       <div className={`${classes.tab} navBarLink`} >
-        {isAuthenticated ? <ProfileNavButton /> : <LoginOrRegister />}
+        <ProfileNavButton />
       </div>
     </StyledTabs>
   );
