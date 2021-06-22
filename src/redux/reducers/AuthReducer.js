@@ -27,6 +27,10 @@ const MainReducer = (state = _.cloneDeep(initialStateMain), action) => {
     case types.RESET_LOGIN_FORM:
       newState.login.fields = _.cloneDeep(initialStateMain.login.fields);
       return newState;
+    case types.LOGOUT:
+      newState.activeProfile = null;
+      newState.isAuthenticated = false;
+      return newState;
     default:
       return newState;
   }

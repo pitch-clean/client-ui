@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
     '& .MuiFilledInput-root.Mui-focused': {
       backgroundColor: `rgba(248, 245, 245, 0.1)`,
     },
+    position: 'relative',
   },
   text: {
     '& *': {
@@ -121,9 +122,9 @@ const MainNavSearch = () => {
   const [input, setInput] = useState('');
 
   return (
-    <div className={`MainNavSearch ${classes.root} w100`}>
+    <div className={`MainNavSearch ${classes.root} `}>
       <CssTextField
-        className={`Search ${classes.text} f1 w100`}
+        className={`Search ${classes.text} f1`}
         margin="dense"
         label="Search"
         variant="filled"
@@ -131,7 +132,7 @@ const MainNavSearch = () => {
         value={input}
         onChange={updateInput(setInput)}
       />
-      <Button className={`searchButton ${classes.button}`} disableRipple onClick={clickSubmit(input, setInput, push, dispatch)}>
+      <Button className={`searchButton ${classes.button} f1`} disableRipple onClick={clickSubmit(input, setInput, push, dispatch)}>
         <SearchIcon />
       </Button>
     </div>

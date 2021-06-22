@@ -1,5 +1,6 @@
 // main
 export const UPDATE_LOGIN_STATUS = `UPDATE_LOGIN_STATUS`;
+export const LOGOUT = `LOGOUT`;
 export const UPDATE_PASSWORD = `UPDATE_PASSWORD`;
 export const UPDATE_USERNAME = `UPDATE_USERNAME`;
 export const UPDATE_LOGIN_FIELD = `UPDATE_LOGIN_FIELD`;

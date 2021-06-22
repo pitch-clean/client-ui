@@ -22,3 +22,8 @@ export const resetLoginForm = () => dispatch => {
     type: types.RESET_LOGIN_FORM,
   });
 };
+export const logout = () => dispatch => {
+  dispatch({
+    type: types.LOGOUT,
+  });
+};

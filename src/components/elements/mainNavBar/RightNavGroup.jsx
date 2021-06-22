@@ -1,10 +1,12 @@
 // react
 import React from 'react';
+import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 // components
 import Sidebar from '../SideBar';
 import MainNavSearch from './MainNavSearch';
+import Logout from './Logout';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,11 +28,14 @@ const useStyles = makeStyles(theme => ({
 const RightNavGroup = () => {
   // init hooks
   const classes = useStyles();
-
+  // state 
+  const activeProfile = useSelector(s => s.auth.activeProfile);
+  
   return (
     <Sidebar isNav isLeft={false}>
       <div className={`RightNavGroup ${classes.root} flexrow w100`}>
         <MainNavSearch />
+        {activeProfile && <Logout />}
       </div>
     </Sidebar>
   );
