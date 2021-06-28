@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import { CardHeader, Typography, Avatar, Tab } from '@material-ui/core';
-import { updateActiveConversation } from '../../../redux/actions/views/MessagesActions';
+import { updateActiveConversation, updateMessagesArr } from '../../../redux/actions/views/MessagesActions';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
     opacity: 1,
   },
   overflow: {
+    textAlign: 'start',
     flex: `1 1 auto`,
     width: `100%`,
     margin: 0,
@@ -24,9 +25,9 @@ const useStyles = makeStyles(theme => ({
     '& .MuiCardHeader-content': {
       textOverflow: 'ellipsis',
       overflow: 'hidden',
+      
     },
     '& .MuiTypography-root': {
-      textAlign: 'start',
       padding: 0,
     },
     '& *': {
@@ -87,10 +88,11 @@ const ConversationCard = ({ tabIdx }) => {
       classes={{
         root: activeConversationIdx === tabIdx ? classes.active : {},
       }}
-      onClick={() =>
+      onClick={() => {
+        // dispatch(updateMessagesArr([]));
         activeConversationIdx !== tabIdx &&
         dispatch(updateActiveConversation({ idx: tabIdx }))
-      }
+      }}
       style={{
         borderTop: tabIdx > 0 ? '1px solid #dfdfdf' : '',
         minWidth: `100%`,

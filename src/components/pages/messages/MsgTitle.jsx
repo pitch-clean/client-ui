@@ -8,14 +8,11 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
-    // minHeight: 100,
+    minHeight: 50,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  paper: {
-    // width: `100%`,
-    // height: `100%`,
-  },
+  wrapper: {},
   settingsContainer: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -40,53 +37,74 @@ const useStyles = makeStyles(theme => ({
 const MsgTitleNamesView = () => {
   // init hooks
   const classes = useStyles();
-  const activeConversationIdx = useSelector(s => s.view.messages.activeConversationIdx);
-  const activeConversationObj = useSelector(s => s.view.messages.conversationsArr[activeConversationIdx]);
+  const participants = useSelector(s => s.view.messages.activeConversationObj.participants);
   const activeProfileId = useSelector(s => s.auth.activeProfile._id);
-  const { participants } = activeConversationObj;
   const nonSelfParticipants = participants.filter(({ _id: participantId }) => participantId !== activeProfileId);
-  let allNamesStr = [];
-  const thumbnailArr = [];
-  console.log(nonSelfParticipants)
-  for (let i = 0; i < nonSelfParticipants.length; i += 1) {
-    const participantProfile = nonSelfParticipants[i];
-    const {
-      active: { organization, title },
-      pii: { firstName, lastName },
-      images: {
-        profile: { thumbnail },
-      },
-    } = participantProfile;
-    let fullName = '';
-    if (nonSelfParticipants.length > 1) {
+  let titleStr = '';
+  // if greater than 1 (direct message), print list of names.  Otherwize, proint name and position
+  if (nonSelfParticipants.length > 1) {
+    const allNamesArr = [];
+    const thumbnailArr = [];
+    for (let i = 0; i < nonSelfParticipants.length; i += 1) {
+      const participantProfile = nonSelfParticipants[i];
+      const {
+        active: { organization, title },
+        pii: { firstName, lastName },
+        images: {
+          profile: { thumbnail },
+        },
+      } = participantProfile;
+      let fullName = '';
       fullName = `${firstName} ${lastName}`;
-    } else {
-      fullName = `${firstName} ${lastName} - ${title} ${organization}`;
+      if (nonSelfParticipants.length > 1) {
+      } else {
+        fullName = `${firstName} ${lastName} - ${title} ${organization}`;
+      }
+      allNamesArr.push(fullName);
+      thumbnailArr.push(thumbnail);
     }
-    allNamesStr.push(fullName);
-    thumbnailArr.push(thumbnail);
+    titleStr = allNamesArr.join(', ');
+  } else {
+    const {
+      pii: {
+        firstName,
+        lastName,
+      },
+      active: {
+        position,
+        organization: {
+          pii: {
+            name: orgName,
+          },
+        },
+      },
+    } = nonSelfParticipants[0];
+    titleStr = `${firstName} ${lastName} - ${position} ${orgName}`;
   }
-  allNamesStr = allNamesStr.join(', ');
+  
   return (
-    <Typography className={classes.typography} variant="body1">
-      {allNamesStr}
-    </Typography>
+    <div className={`${classes.wrapper}`}>
+      {/* div for pictures here */}
+      <Typography className={classes.typography} variant="body1">
+        {titleStr}
+      </Typography>
+    </div>
   );
 };
+
 /**
  * main
- *
  */
 const MsgTitle = () => {
   // init hooks
   const classes = useStyles();
   // state
-  const conversationsCt = useSelector(s => s.view.messages.conversationsArr.length);
+  const activeConversationId = useSelector(s => s.view.messages.activeConversationObj._id);
 
   return (
     <Paper square background="primary" className={`MsgTitle ${classes.root} flexrow w100`}>
       <div className={`${classes.sub} flexcol h100`}>
-        {conversationsCt > 0 && <MsgTitleNamesView />}
+        {activeConversationId && <MsgTitleNamesView />}
       </div>
       <div className={`settings ${classes.settingsContainer} flexcol h100`}>
         <MoreHorizIcon />

@@ -45,21 +45,19 @@ const MessageCard = ({ idx }) => {
   // init hooks
   const classes = useStyles();
   // state
-  const messageProfile = useSelector(s => s.view.messages.activeConversationObj.messages[idx].profile);
-  const messageBody = useSelector(s => s.view.messages.activeConversationObj.messages[idx].msgBody);
-  const messageId = useSelector(s => s.view.messages.activeConversationObj.messages[idx]._id);
-  const dtCreated = useSelector(s => s.view.messages.activeConversationObj.messages[idx].dtCreated);
-  const {
-    alias,
-    pii: { firstName, lastName },
-    active: { title, organization },
-    images: {
-      profile: { thumbnail },
-    },
-  } = messageProfile;
+  const msgarr = useSelector(s => s.view.messages.messagesArr);
+  const msgProfileAlias = useSelector(s => s.view.messages.messagesArr[idx].profile.alias);
+  const thumbnail = useSelector(s => s.view.messages.messagesArr[idx].profile.images.profile.thumbnail);
+  const msgProfilePosition = useSelector(s => s.view.messages.messagesArr[idx].profile.active.position);
+  const msgProfileOrganization = useSelector(s => s.view.messages.messagesArr[idx].profile.active.organization);
+  const msgProfileFirstName = useSelector(s => s.view.messages.messagesArr[idx].profile.pii.firstName);
+  const msgProfileLastName = useSelector(s => s.view.messages.messagesArr[idx].profile.pii.lastName);
+  const messageBody = useSelector(s => s.view.messages.messagesArr[idx].msgBody);
+  // const messageId = useSelector(s => s.view.messages.messagesArr[idx]._id);
+  // const dtCreated = useSelector(s => s.view.messages.messagesArr[idx].dtCreated);
 
   return (
-    <Paper square elevation={0} className={`MessageCard ${classes.root}`}>
+    <Paper square elevation={0} className={`MessageCard ${classes.root} w100`}>
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="Profile" src={thumbnail} className={classes.avatar} />
@@ -69,28 +67,26 @@ const MessageCard = ({ idx }) => {
             <>
               <MuiLink
                 component={Link}
-                to={`/${envProfilePath}/${alias}`}
+                to={`/${envProfilePath}/${msgProfileAlias}`}
                 variant="body1"
                 color="textPrimary"
               >
-                {`${firstName} ${lastName}`}
+                {`${msgProfileFirstName} ${msgProfileLastName}`}
               </MuiLink>
               <Typography
-                component="span"
-                variant="caption"
                 className={classes.subtitle}
+                variant="caption"
                 color="textSecondary"
               >
-                {`${title} at ${organization}`}
+                {`${msgProfilePosition} at ${msgProfileOrganization.pii.name}`}
               </Typography>
             </>
           }
           secondary={
             <>
               <Typography
-                component="span"
-                variant="body2"
                 className={classes.body}
+                variant="body2"
                 color="textPrimary"
               >
                 {messageBody}

@@ -6,34 +6,33 @@ import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { onKeyDownBlurAll } from './utils/keybinds';
 import { updateLoginStatus } from './redux/actions/AuthActions';
 import { baseTheme } from './styling/themes';
+import { Get } from './utils/requests';
 // components
 import PageRouter from './components/pages/PageRouter';
 import MainNavBar from './components/elements/mainNavBar/MainNavBar';
 // styling
 import './App.css';
 import './config.dev.js';
-// seed
-import { Get } from './utils/requests';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: '#eaebe8',
     minHeight: '100vh',
+    height: '100vh',
     maxHeight: '100vh',
     justifyContent: 'flex-start',
   },
   navGroup: {
-    flexFlow: 'column',
+    position: 'sticky',
     justifyContent: 'flex-start',
     alignItems: 'start',
-    position: 'sticky',
     top: 0,
     zIndex: 1,
   },
 }));
 const getProfile = async window => {
-  const url = `${window.env.api.profiles}/333ccc`;
-  const profile = await Get(url, {}, true);
+  const url = `${window.env.api.profiles}/ccc333ccc333ccc333ccc333`;
+  const profile = await Get(url);
   return profile;
 };
 

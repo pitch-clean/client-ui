@@ -24,12 +24,6 @@ export const updateActiveConversationObj = payload => dispatch => {
     payload,
   });
 };
-export const updateProfileMap = payload => dispatch => {
-  dispatch({
-    type: types.MSG_UPDATE_PROFILE_MAP,
-    payload,
-  });
-};
 export const createConversation = conversationObject => dispatch => {
   const {userId, messageText} = conversationObject;
   const formData = new FormData();
@@ -54,11 +48,31 @@ export const createConversation = conversationObject => dispatch => {
     });
 };
 
-export const createMessage = () => dispatch => {};
-
 export const updateConversationsArr = payload => dispatch => {
   dispatch({
     type: types.MSG_UPDATE_CONVERSATIONS_ARR,
+    payload,
+  });
+};
+
+export const updateMessagesArr = payload => dispatch => {
+  dispatch({
+    type: types.MSG_UPDATE_MESSAGES_ARR,
+    payload,
+  });
+};
+
+export const addToMessagesArr = payload => dispatch => {
+  dispatch({
+    type: types.MSG_ADD_TO_MESSAGES_ARR,
+    payload,
+  });
+};
+
+export const updateActiveConversationParticipants = payload => dispatch => {
+  if (typeof payload !== typeof [0]) throw `Payload needs to be type array:  payload=${payload}`;
+  dispatch({
+    type: types.MSG_UPDATE_ACTIVE_CONVERSATION_PARTICIPANTS,
     payload,
   });
 };

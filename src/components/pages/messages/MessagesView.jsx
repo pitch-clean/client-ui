@@ -1,14 +1,11 @@
 // react
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { updateProfileMap } from '../../../redux/actions/views/MessagesActions';
 // components
 import MsgLS from './MsgLS';
 import MsgMain from './MsgMain';
-// seed
-import { users1 } from '../../../seed/queryUsersById';
+import MsgRS from './msgRS/MsgRS';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,23 +20,13 @@ const useStyles = makeStyles(theme => ({
 const MessagesView = () => {
   // init hooks
   const classes = useStyles();
-  const dispatch = useDispatch();
-  // state
-  const profileMap = useSelector(s => s.view.messages.profileMap);
-  // console.log('profileMapprofileMap', profileMap)
-  // effects
-  // get the mappings for profiles
-  useEffect(() => { // DEPRECATED
-    dispatch(updateProfileMap(users1)); // DEPRECATED
-  }, []); // DEPRECATED
 
-  return profileMap ? (
-    <div className={`MessagesView ${classes.root} flexrow h100`}>
+  return (
+    <div className={`MessagesView ${classes.root} page flexrow h100`}>
       <MsgLS />
       <MsgMain />
+      <MsgRS />
     </div>
-  ) : (
-    <div />
   );
 };
 

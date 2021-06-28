@@ -1,19 +1,19 @@
 // react
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Divider, Typography as TG } from '@material-ui/core';
+import {
+  Button,
+  Divider,
+  Typography as TG,
+} from '@material-ui/core';
 // components
-import Sidebar from '../../elements/SideBar';
-import CardHeaderProfile from '../../elements/CardHeaderProfile';
+import CardHeaderProfile from '../../../elements/CardHeaderProfile';
 // constants
 const useStyles = makeStyles(theme => ({
-  root: {
-    height: `100%`,
-    width: `100%`,
-  },
-  MemberCtrls: {
+  root: {},
+  mCtrls: {
     justifyContent: 'start',
   },
   AddParticipant: {
@@ -32,13 +32,17 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'start',
   },
 }));
+// fxns
+const clickOpenAddMember = isOpenSet => () => isOpenSet(true);
 
-const MemberCtrls = () => {
+/**
+ * data + display component
+ */
+ const MemberCtrls = ({ isOpenSet }) => {
   // init hooks
   const classes = useStyles();
   // state
-  const activeConversationObj = useSelector(s => s.view.messages.activeConversationObj) || {};
-  const participants = activeConversationObj.participants || [];
+  const participants = useSelector(s => s.view.messages.activeConversationObj.participants) || [];
   // build list
   const memberElemArr = [];
   for (let idx = 0; idx < participants.length; idx += 1) {
@@ -57,19 +61,23 @@ const MemberCtrls = () => {
         },
       },
       images: {
-        profile: { thumbnail }
-      }
+        profile: { thumbnail },
+      },
     } = participants[idx];
     const fullName = `${firstName} ${lastName}`;
     const subheader = `${position} at ${orgName}`;
-    memberElemArr.push(<CardHeaderProfile type="comments" thumbnail={thumbnail} alias={alias} title={fullName} subheader={subheader} />)
+    memberElemArr.push(<CardHeaderProfile type="sidebar" thumbnail={thumbnail} alias={alias} title={fullName} subheader={subheader} />)
   }
   return (
-    <div className={`MemberCtrls ${classes.MemberCtrls} flexcol w100`}>
-      <Button className={`AddParticipant ${classes.AddParticipant} flexcol w100`} fullWidth>
+    <div className={`MemberCtrls ${classes.mCtrls} flexcol w100`}>
+      <Button
+        className={`AddParticipant ${classes.AddParticipant} flexcol w100`}
+        onClick={clickOpenAddMember(isOpenSet)}
+        fullWidth
+      >
         <div className={`${classes.APTitle} flexrow w100`}>
           <TG className={`${classes.APTitleText} ${classes.plusSign} flexcol h100`}>+</TG>
-          <TG className={`${classes.APTitleText} flexcol h100`}>Add Member</TG>
+          <TG className={`${classes.APTitleText} flexcol h100`}>Add/Remove Members</TG>
         </div>
       </Button>
       <Divider variant="fullWidth" />
@@ -80,20 +88,5 @@ const MemberCtrls = () => {
   );
 };
 
-/**
- * main
- */
-const MsgConvCtrls = () => {
-  // init hooks
-  const classes = useStyles();
-  // state
-  // const conversationsCt = useSelector(s => s.view.messages.conversationsArr.length);
-
-  return (
-    <Sidebar h100 elevation={1}>
-      <MemberCtrls />
-    </Sidebar>
-  );
-};
-
-export default MsgConvCtrls;
+// export
+export default MemberCtrls;

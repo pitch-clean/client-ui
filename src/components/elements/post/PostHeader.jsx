@@ -22,6 +22,11 @@ const useStyles = makeStyles(theme => ({
   postHeaderContent: {
     marginTop: `22px`,
   },
+  link: {
+    '& *': {
+      textDecorationLine: 'none',
+    },
+  },
   avatar: {
     backgroundColor: 'lightblue',
     width: theme.spacing(9),
@@ -69,9 +74,9 @@ const PostHeader = ({ postObj, view }) => {
         content: classes.cardHeaderContent,
       }}
       avatar={
-        <Link to={`/profile/${alias}`}>
-          <Avatar aria-label="profile pic" src={thumbnail} className={classes.avatar} />
-        </Link>
+        <MuiLink className={classes.link} component={Link} underline="never" to={`/profile/${alias}`}>
+          <Avatar className={classes.avatar} aria-label="profile pic" src={thumbnail} />
+        </MuiLink>
       }
       action={
         <IconButton aria-label="settings">
@@ -84,6 +89,7 @@ const PostHeader = ({ postObj, view }) => {
           to={`/profile/${alias}`}
           color="inherit"
           variant="subtitle2"
+          underline="hover"
         >
           {getProfileNameFromPii(pii)}
         </MuiLink>

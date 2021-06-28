@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 /**
  * main
  */
-const Factory = ({ componentName, title, children }) => {
+const Factory = ({ componentName, title, noEdit, children }) => {
   // init hooks
   const classes = useStyles();
   // state
@@ -42,10 +42,13 @@ const Factory = ({ componentName, title, children }) => {
           className={`${classes.header} f1`}
           title={title}
         />
-        <CardHeader
-          className={`${classes.header}`}
-          title={profile === activeProfile._id && <Button className={isEditing ? classes.buttonActive : classes.buttonInactive} disableRipple size="small" onClick={() => isEditingSet(!isEditing)}><SettingsIcon /></Button>}
-        />
+        {
+          !noEdit && 
+          <CardHeader
+            className={`${classes.header}`}
+            title={profile === activeProfile._id && <Button className={isEditing ? classes.buttonActive : classes.buttonInactive} disableRipple size="small" onClick={() => isEditingSet(!isEditing)}><SettingsIcon /></Button>}
+          />
+        }
       </div>
       <Divider className="w100" variant="fullWidth"/>
       {React.cloneElement(children, { isEditing })}

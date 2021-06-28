@@ -4,10 +4,10 @@ import * as types from '../../types/ViewTypes';
 
 export const initState = {
   activeConversationIdx: 0,
-  activeConversationId: null,
-  activeConversationObj: null,
-  profileMap: null,
+  activeConversationId: -1,
+  activeConversationObj: {},
   conversationsArr: [],
+  messagesArr: [],
 };
 
 const MessagesReducer = (state = _.cloneDeep(initState), action) => {
@@ -26,16 +26,22 @@ const MessagesReducer = (state = _.cloneDeep(initState), action) => {
       }
       // newState.activeConversationId = payload.conversationId;
       newState.activeConversationIdx = payload.idx;
-      newState.activeConversationObj = null;
+      // newState.messagesArr = [];
       return newState;
     case types.MSG_UPDATE_ACTIVE_CONVERSATION_OBJ:
       newState.activeConversationObj = payload;
       return newState;
-    case types.MSG_UPDATE_PROFILE_MAP:
-      newState.profileMap = payload;
-      return newState;
     case types.MSG_UPDATE_CONVERSATIONS_ARR:
       newState.conversationsArr = payload;
+      return newState;
+    case types.MSG_UPDATE_MESSAGES_ARR:
+      newState.messagesArr = payload;
+      return newState;
+    case types.MSG_ADD_TO_MESSAGES_ARR:
+      newState.messagesArr = [...newState.messagesArr, payload];
+      return newState;
+    case types.MSG_UPDATE_ACTIVE_CONVERSATION_PARTICIPANTS:
+      newState.activeConversationObj.participants = payload;
       return newState;
     default:
       return newState;

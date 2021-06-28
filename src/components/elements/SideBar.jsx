@@ -23,7 +23,8 @@ const useStyles = makeStyles(theme => ({
     },
   },
   rootright: {
-    paddingRight: `10px`,
+    paddingLeft: `2px`,
+    paddingRight: `2px`,
     justifyContent: 'flex-start',
     // [theme.breakpoints.down('md')]: {},
     // [theme.breakpoints.down('sm')]: {},

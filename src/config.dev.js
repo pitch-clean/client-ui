@@ -34,6 +34,7 @@ const api = {
   comments: `${apiBase}/${social}/${comments}`,
   rsvps: `${apiBase}/${rsvps}`,
   conversations: `${apiBase}/messaging/conversations`,
+  messages: `${apiBase}/messaging/messages`,
 };
 
 

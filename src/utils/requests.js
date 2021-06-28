@@ -45,21 +45,21 @@ export const Put = async (url, body, additionalHeaders={}, isReturnJson=true) =>
   };
 
   // make request
-  try {
-    const response = await fetch(
-      url,
-      {
-        method      : 'PUT',
-        mode        : 'cors',
-        // TODO ADD CREDENTIALS
-        headers     : headers,
-        body        : JSON.stringify(body),
-      }
-    );
-    return isReturnJson ? await response.json(): response;
-  } catch (err) {
-    throw err;
-  }
+  const response = await fetch(
+    url,
+    {
+      method      : 'PUT',
+      mode        : 'cors',
+      // TODO ADD CREDENTIALS
+      headers     : headers,
+      body        : JSON.stringify(body),
+    }
+  );
+  return isReturnJson ? await response.json(): response;
+  // try {
+  // } catch (err) {
+  //   throw err;
+  // }
 };
 
 export const register = async (url, body) => {
