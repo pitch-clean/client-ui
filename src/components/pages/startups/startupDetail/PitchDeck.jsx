@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import PdfViewer from './PdfViewer';
 import PdfNavControls from './PdfNavControls';
 import PitchDeckEdit from './PitchDeckEdit';
+import { Put } from '../../../../utils/requests';
 // constants
 const useStyles = makeStyles({
   root: {
@@ -33,8 +34,11 @@ const PitchDeck = ({ isEditing }) => {
   // init hooks
   const classes = useStyles();
   // state
+  // const activeProfileId = useSelector(s => s.auth.activeProfile._id);
+  const activeStartupId = useSelector(s => s.view.startup.activeStartup._id);
   const [totalPages, totalPagesSet] = useState(null);
   const [currentPage, currentPageSet] = useState(1);
+  const [renderedPage, renderedPageSet] = useState(1);
   const [isRendering, isRenderingSet] = useState(false);
   // const pdfFile = useSelector(s => s.view.startup.activeStartup.content.pitchDeck);
   const pdfFile_ = require("/Users/matthias/work/pitchclean/pitchclean-client-ui/src/seed/1907.00235.pdf").default;
@@ -42,23 +46,45 @@ const PitchDeck = ({ isEditing }) => {
   // const pitchDeckUrl = require("/Users/matthias/work/pitchclean/pitchclean-client-ui/src/seed/1907.00235.pdf");
   // const pitchDeckUrl = "/Users/matthias/work/pitchclean/pitchclean-client-ui/src/seed/1907.00235.pdf";
   // const pitchDeckUrl = "https://natif.ai/wp-content/uploads/2021/02/2020-11-09-Senior-Machine-Learning_transformer.pdf";
+  
   // effects
   useEffect(async () => {
     if (process.env.NODE_ENV !== 'development') {
       pdfjs.GlobalWorkerOptions.workerSrc = 'pdf.worker.min.js';
     }
   }, []);
-  useEffect(() => {
-    if (pdfFile_ !== pdfFile) {
-      pdfFileSet(pdfFile_);
+  // when closing the form, update the database
+  useEffect(async () => {
+    console.log('edddit', isEditing)
+    if (!isEditing && JSON.stringify(pdfFile_) !== JSON.stringify(pdfFile)) {
+      const url = `${window.env.api.startups}/update/${activeStartupId}`;
+      const payload = { 'content.pitchDeck': pdfFile };
+      console.log('\n\nain the edit', url)
+      console.log('payload', payload)
+      try {
+        const { result, error } = await Put(url, payload);
+        console.log('response@@@@response', typeof result.content.pitchDeck.blob, '\n\ndone')
+        pdfFileSet(result.content.pitchDeck);
+      } catch (err) {
+        console.log('error updating pdf PitchDeck', err);
+      }
     }
-  }, [pdfFile_]);
+  }, [isEditing]);
+  let pdfValue;
+  if (typeof pdfFile === typeof {}) {
+    pdfValue = pdfFile.blob;
+  } else {
+    pdfValue = pdfFile;
+  }
 
   return !isEditing ? (
     <div className={`${classes.root} w100 h100`}>
       <PdfViewer
-        pdfFile={pdfFile}
+        pdfFile={pdfValue}
         currentPage={currentPage}
+        currentPageSet={currentPageSet}
+        renderedPage={renderedPage}
+        renderedPageSet={renderedPageSet}
         totalPagesSet={totalPagesSet}
         isRendering={isRendering}
         isRenderingSet={isRenderingSet}

@@ -1,10 +1,9 @@
 // react
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, CardHeader, Grid, CardMedia, Typography, Divider, Button } from '@material-ui/core';
-import Carousel from 'react-material-ui-carousel'
+import { Paper } from '@material-ui/core';
+import Carousel from 'react-material-ui-carousel';
 // constants
 const useStyles = makeStyles({
   carousel: {
@@ -19,6 +18,23 @@ const useStyles = makeStyles({
       alignItems: 'center',
       display: 'flex',
       flexFlow: 'row',
+      width: '100%',
+      maxWidth: '100%',
+      minWidth: '100%',
+      maxHeight: 500,
+      minHeight: 500,
+      height: 500,
+    },
+    '& .CarouselItem div': {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+      maxWidth: '100%',
+      minWidth: '100%',
+      maxHeight: 500,
+      minHeight: 500,
+      height: 500,
     },
     '& .CarouselItem > div': {
       maxHeight: `100%`,
@@ -37,7 +53,9 @@ const useStyles = makeStyles({
   },
   img: {
     maxHeight: '100%',
-    width: 'auto',
+    width: '100%',
+    minWidth: '100%',
+    maxWidth: '100%',
   },
 })
 const picturesArr = [

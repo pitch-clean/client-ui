@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
 })
 const fetchStartupObj = async (startupId, dispatch) => {
-  const endpoint = `${window.env.api.startups}/${startupId}`;
+  const endpoint = `${window.env.api.startups}/startup/${startupId}`;
   try {
     const resJSON = await Get(endpoint);
     const payload = resJSON;

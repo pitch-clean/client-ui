@@ -17,50 +17,93 @@ const useStyles = makeStyles({
   input: {},
   goNext: {},
 });
+const loadAPage = () => {
+  // 1 delete the worker
+  // 2 create new worker
+  // 3 render page
+};
 
 /**
  * pdf viewer
  */
- const PdfViewer = ({ pdfFile, currentPage, totalPagesSet, isRendering, isRenderingSet }) => {
+ const PdfViewer = ({ pdfFile, currentPage, totalPagesSet, isRendering, isRenderingSet, renderedPage, renderedPageSet }) => {
   // init hooks
   const classes = useStyles();
   const canvasRef = useRef();
   // state
+  const [finalOutput, finalOutputSet] = useState();
   const [pdfRef, pdfRefSet] = useState();
   const [allPdfPages, allPdfPagesSet] = useState([]);
 
   // fxns
-  const renderPage = useCallback(async (pageNum, pdf=pdfRef, pdfFile) => {
-    if (pdf) {
-      const preLoadedPdf = await pdfjs.getDocument(pdfFile);
-      const newPdf = await preLoadedPdf.promise;
-
+  const renderPage = useCallback(async (currentPage, pdfRef, isRenderingSet, renderedPageSet) => {
+    if (pdfRef) {
+      console.log('finalOutput', finalOutput)
+      try {
+        // finalOutput && console.log('asdf', await finalOutput.promise.cancel());
+        finalOutput && finalOutput._internalRenderTask && finalOutput._internalRenderTask.cancel && await finalOutput._internalRenderTask.cancel();
+      } catch (err) {
+        console.log('cancelling', err)
+      }
       const canvas = canvasRef.current;
+      let renderedPage;
+      try {
+        console.log('attempt 1')
+        renderedPage = await (await pdfRef.promise).getPage(currentPage);
+      } catch (error) {
+        throw error;
+      }
+      renderedPage.cleanupAfterRender = true;
       const context = canvas.getContext('2d');
       context.clearRect(0, 0, canvas.width, canvas.height);
       context.beginPath();
-      const renderedPage = await newPdf.getPage(pageNum);
-      const viewport = renderedPage.getViewport({ scale: 1.5 });
+      let viewport;
+      try {
+        console.log('attempt 2')
+        viewport = renderedPage.getViewport({ scale: 1.5 });
+        // console.log('renderedPage', renderedPage)
+
+      } catch (error) {
+        throw error;
+      }
       canvas.height = viewport.height;
       canvas.width = viewport.width;
       const renderContext = {
         canvasContext: context,
         viewport,
       };
-      await renderedPage.render(renderContext);
+      let output;
+      try {
+        console.log('attempt 3')
+        output = renderedPage.render(renderContext);
+        finalOutputSet(output);
+        // console.log(output)
+      } catch (error) {
+        throw error;
+      }
+      renderedPageSet(currentPage);
     }
-  }, [pdfRef]);
+  }, [currentPage, pdfRef]);
 
   // effects
   useLayoutEffect(() => {
-    renderPage(currentPage, pdfRef, pdfFile);
-  }, [pdfRef, currentPage, renderPage, pdfFile]);
+    // pdfRef && pdfRef.destroy();
+    if (currentPage === renderedPage && isRendering) {
+      // console.log('CLOSING THE LOOP currentPage = renderedPage  && rendering', currentPage, renderedPage, isRendering)
+      isRenderingSet(false);
+    }
+    // console.log('lol', isRendering, pdfRef)
+    if (!isRendering) {
+      isRenderingSet(true);
+      console.log('!isRendering && renderedPage !== currentPage', !isRendering, renderedPage !== currentPage)
+      renderPage(currentPage, pdfRef, isRenderingSet, renderedPageSet);
+    }
+  }, [pdfRef, currentPage, renderPage, pdfFile, renderedPage]);
   useEffect(async () => {
     try {
-      const preLoadedPdf = await pdfjs.getDocument(pdfFile);
-      const pdfPromise = await preLoadedPdf.promise;
+      const pdfPromise = pdfjs.getDocument(pdfFile);
       pdfRefSet(pdfPromise);
-      totalPagesSet(pdfPromise.numPages);
+      totalPagesSet((await pdfPromise.promise).numPages);
     } catch (err) {
       console.log(`${err.name}: ${err.message}`, '\n\n', err.stack)
     }
