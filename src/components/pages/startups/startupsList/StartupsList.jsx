@@ -7,12 +7,10 @@ import { updateStartupsArr } from '../../../../redux/actions/ViewActions';
 import { Get } from '../../../../utils/requests';
 // components
 import StartupCard from './StartupCard';
+import SearchFilter from './SearchFilter';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {},
-  searchFilter: {
-    justifyContent: 'start',
-  },
   listContainer: {
     flexFlow: 'row wrap',
     justifyContent: 'center',
@@ -60,7 +58,7 @@ const StartupsList = () => {
 
   return startupsArrLen > 0 ? (
     <div className={`StartupsList ${classes.root} page flexcol`}>
-      <div className={`search-filter ${classes.searchFilter} flexrow w100`}></div>
+      <SearchFilter />
       <div className={`listContainer ${classes.listContainer} flexrow w100`}>
         {startupsArrElem}
       </div>
