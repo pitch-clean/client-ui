@@ -34,6 +34,7 @@ const useStyles = makeStyles(theme => ({
   lowerListItem: {
     maxWidth: `100%`,
     flex: '1 1',
+    paddingBottom: 20,
   },
 }));
 
@@ -53,7 +54,7 @@ const StartupCard = ({ idx }) => {
       <ListItem className={`${classes.lowerListItem} flexcol`}>
         {cardBody}
       </ListItem>
-      <StartupCardBottomBar idx={idx} />
+      {/* <StartupCardBottomBar idx={idx} /> */}
     </Paper>
   );
 };

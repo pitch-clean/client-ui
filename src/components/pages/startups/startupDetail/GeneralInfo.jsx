@@ -1,6 +1,7 @@
 // react
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Avatar, Button } from '@material-ui/core';
@@ -81,6 +82,7 @@ const GeneralInfo = ({ isEditing }) => {
   const activeStartup_ = useSelector(s => s.view.startup.activeStartup);
   const [activeStartup, activeStartupSet] = useState(activeStartup_)
   const {
+    profile,
     images,
     title,
     location: { address },
@@ -93,7 +95,7 @@ const GeneralInfo = ({ isEditing }) => {
     employeeCt,
   } = activeStartup;
   const latestFundingRound = fundingRounds[fundingRounds.length - 1];
-
+  console.log('profileprofile', profile)
   return !isEditing ? (
     <div className={`flexrow`}>
       <div className={`${classes.avatarContainer}`}>
@@ -162,7 +164,7 @@ const GeneralInfo = ({ isEditing }) => {
           </div>
         </div>
         <div className={`linksContainer ${classes.row}`}>
-          <Button className={`linkButton`} variant="contained" onClick={() => {}}>
+          <Button className={`linkButton`} component={Link} to={`/messages/${9}`} variant="contained" onClick={() => {}}>
             Contact
           </Button>
           <Button className={`linkButton`} variant="contained" onClick={() => window.location.href = website }>

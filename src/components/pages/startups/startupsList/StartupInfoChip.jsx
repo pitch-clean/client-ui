@@ -6,14 +6,7 @@ import {
   Chip,
 } from '@material-ui/core';
 import {
-  MoreHoriz as MoreHorizIcon,
-  MoreVert as MoreVertIcon,
-  LinkedIn as LinkedInIcon,
-  Twitter as TwitterIcon,
-  AccountBalance as AccountBalanceIcon,
-  Description as DescriptionIcon,
   Group as GroupIcon,
-  AttachMoney as AttachMoneyIcon,
   Room as RoomIcon,
   Business as BusinessIcon,
 } from '@material-ui/icons';
@@ -31,7 +24,6 @@ const StartupInfoChip = ({ keyName, val }) => {
   // init hooks
   const classes = useStyles();
   // state
-  console.log('infoinfo', keyName, val)
   let outputKey;
   let iconElem;
   if (keyName === 'address') {

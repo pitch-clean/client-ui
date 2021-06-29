@@ -49,14 +49,14 @@ const StartupDetailView = ({ startupObj, activeProfile }) => {
   const classes = useStyles();
   // allow editing if logged in
   if (activeProfile) {
-    console.log('allow editing?', activeProfile._id, startupObj.profile, activeProfile._id === startupObj.profile)
+    // console.log('allow editing?', activeProfile._id, startupObj.profile, activeProfile._id === startupObj.profile)
   }
 
   return (
     <div className={`StartupDetail ${classes.root} page flexrow`}>
       <LeftSidebar />
       <div className={`${classes.content} flexcol`}>
-        <Factory
+        {/* <Factory
           componentName="GeneralInfo"
           title="Company Overview"
         >
@@ -79,7 +79,7 @@ const StartupDetailView = ({ startupObj, activeProfile }) => {
           title="Partners And Sponsors"
         >
           <PartnersAndSponsors />
-        </Factory>
+        </Factory> */}
         <Factory
           componentName="PitchDeck"
           title="Pitch Deck"

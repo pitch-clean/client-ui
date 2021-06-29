@@ -13,6 +13,7 @@ import MainNavBar from './components/elements/mainNavBar/MainNavBar';
 // styling
 import './App.css';
 import './config.dev.js';
+import SearchFilter from './components/pages/startups/startupsList/SearchFilter';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,11 +24,15 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
   },
   navGroup: {
-    position: 'sticky',
     justifyContent: 'flex-start',
     alignItems: 'start',
-    top: 0,
     zIndex: 1,
+    '& > * > *': {
+      maxWidth: 1300,
+      width: `100%`,
+      justifySelf: 'center',
+      height: `100%`,
+    },
   },
 }));
 const getProfile = async window => {
@@ -58,9 +63,10 @@ const App = () => {
   return (
     <ThemeProvider theme={baseTheme}>
       <div className={`App ${classes.root} flexcol`} ref={appRef}>
-        {/* <div className={`${classes.navGroup} flexcol w100`}> */}
+        <div className={`${classes.navGroup} flexcol w100`}>
           <MainNavBar />
-        {/* </div> */}
+          <SearchFilter />
+        </div>
         <PageRouter />
       </div>
     </ThemeProvider>

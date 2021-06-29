@@ -7,13 +7,12 @@ import { updateStartupsArr } from '../../../../redux/actions/ViewActions';
 import { Get } from '../../../../utils/requests';
 // components
 import StartupCard from './StartupCard';
-import SearchFilter from './SearchFilter';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {},
   listContainer: {
     flexFlow: 'row wrap',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   emptyList: {
     flexWrap: `wrap`,
@@ -27,7 +26,6 @@ const fetchStartupsArr = async (dispatch, page) => {
   try {
     const endpoint = `${window.env.api.startups}?page=${page}`;
     const startupsArr = await Get(endpoint, {}, true);
-    console.log('startupsArr', startupsArr)
     dispatch(updateStartupsArr(startupsArr || []));
   } catch (err) {
     console.log("ERROR: StartupsList.jsx > fetchStartupsArr()");
@@ -58,7 +56,6 @@ const StartupsList = () => {
 
   return startupsArrLen > 0 ? (
     <div className={`StartupsList ${classes.root} page flexcol`}>
-      <SearchFilter />
       <div className={`listContainer ${classes.listContainer} flexrow w100`}>
         {startupsArrElem}
       </div>
