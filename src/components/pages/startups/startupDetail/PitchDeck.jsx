@@ -37,7 +37,7 @@ const PitchDeck = ({ isEditing }) => {
   // const activeProfileId = useSelector(s => s.auth.activeProfile._id);
   const activeStartupId = useSelector(s => s.view.startup.activeStartup._id);
   const [totalPages, totalPagesSet] = useState(null);
-  const [currentPage, currentPageSet] = useState(1);
+  const [currentPage, currentPageSetter] = useState(1);
   const [renderedPage, renderedPageSet] = useState(1);
   const [isRendering, isRenderingSet] = useState(false);
   // const pdfFile = useSelector(s => s.view.startup.activeStartup.content.pitchDeck);
@@ -82,9 +82,10 @@ const PitchDeck = ({ isEditing }) => {
       <PdfViewer
         pdfFile={pdfValue}
         currentPage={currentPage}
-        currentPageSet={currentPageSet}
+        currentPageSetter={currentPageSetter}
         renderedPage={renderedPage}
         renderedPageSet={renderedPageSet}
+        totalPages={totalPages}
         totalPagesSet={totalPagesSet}
         isRendering={isRendering}
         isRenderingSet={isRenderingSet}
@@ -93,7 +94,7 @@ const PitchDeck = ({ isEditing }) => {
         <PdfNavControls
           totalPages={totalPages}
           currentPage={currentPage}
-          currentPageSet={currentPageSet}
+          currentPageSet={currentPageSetter}
           isRendering={isRendering}
           isRenderingSet={isRenderingSet}
         />
