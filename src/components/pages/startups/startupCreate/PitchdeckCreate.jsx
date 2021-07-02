@@ -1,14 +1,21 @@
 // react
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-// components
-import PdfViewer from './PdfViewer';
-import PdfNavControls from './PdfNavControls';
+import {
+  Button,
+  TextField as MuiTextField,
+} from '@material-ui/core';
+import {
+  updateFormFieldValue,
+  checkIfValidForm,
+} from '../../../../redux/actions/forms/CreateFundingPageActions';
 import TextFieldEdit from '../../../forms/fields/TextFieldEdit';
 // constants
-const useStyles = makeStyles({
-  root: {
+const useStyles = makeStyles(theme => ({
+  PitchdeckCreate: {
+    color: `black`,
     padding: `20px 0`,
   },
   inputLabel: {
@@ -26,10 +33,8 @@ const useStyles = makeStyles({
   inputButton: {
     display: 'none',
   },
-})
-const updatePdf = (pdfFileSet, e) => {
-  pdfFileSet(e.target.value);
-};
+}));
+// fxns
 const extractPdf = async (e, pdfFileSet) => {
   // default vars
   let mbLimit = 10;
@@ -60,23 +65,35 @@ const extractPdf = async (e, pdfFileSet) => {
   // process the pdf, run the callback
   reader.readAsDataURL(pdfObj);
 };
+const updatePdf = pdfFileSet => e => {
+  pdfFileSet(e.target.value);
+};
 
 /**
  * main
  */
-const PitchDeckEdit = ({ pdfFile, pdfFileSet }) => {
+const PitchdeckCreate = ({ reducerName, formName }) => {
   // init hooks
   const classes = useStyles();
+  const dispatch = useDispatch();
+  // state
+  const [pdfFile, pdfFileSet] = useState({ file: {} });
   let pdfValue;
   if (typeof pdfFile === typeof {}) {
     pdfValue = pdfFile.file.name;
   } else {
     pdfValue = pdfFile;
   }
+  // build
+  // effects
+  useEffect(() => {
+    dispatch(updateFormFieldValue(formName, 'pitchdeck', pdfFile));
+    dispatch(checkIfValidForm(formName, null));
+  }, [pdfFile]);
 
   return (
-    <div className={`PitchDeckEdit ${classes.root} w100 h100`}>
-      <TextFieldEdit value={pdfValue} updateFxn={updatePdf} updateFxnInputs={pdfFileSet} />
+    <div className={`PitchdeckCreate ${classes.PitchdeckCreate} w100 h100`}>
+      <TextFieldEdit value={pdfValue} updateFxn={updatePdf(pdfFileSet)} updateFxnInputs={pdfFileSet} />
       <label className={`${classes.inputLabel}`}>
         <input
           className={`${classes.inputButton}`}
@@ -89,5 +106,6 @@ const PitchDeckEdit = ({ pdfFile, pdfFileSet }) => {
     </div>
   );
 };
+
 // export
-export default PitchDeckEdit;
+export default PitchdeckCreate;

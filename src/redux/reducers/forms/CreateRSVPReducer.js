@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import * as types from '../types/CreateRSVPTypes';
-import { initialState } from '../initialStates/rsvp';
+import * as types from '../../types/CreateRSVPTypes';
+import { initialState } from '../../initialStates/rsvp';
 
 export default function CreateRSVPReducer(state = _.cloneDeep(initialState), action) {
   const newState = { ...state };

@@ -31,15 +31,16 @@ const LargeTextField = ({
   updateFxn,
   updateErrorFxn,
   validCheckFxn,
+  customClassName,
 }) => {
   // init hooks
   const dispatch = useDispatch();
   const classes = useStyles();
   // state
-  const val = useSelector(s => s[reducerName][formName].fields[fieldName].value);
-  const err = useSelector(s => s[reducerName][formName].fields[fieldName].error);
-  const validator = useSelector(s => s[reducerName][formName].fields[fieldName].validator);
-  const isOptional = useSelector(s => s[reducerName][formName].fields[fieldName].isOptional);
+  const val = useSelector(s => s.forms[reducerName][formName].fields[fieldName].value);
+  const err = useSelector(s => s.forms[reducerName][formName].fields[fieldName].error);
+  const validator = useSelector(s => s.forms[reducerName][formName].fields[fieldName].validator);
+  const isOptional = useSelector(s => s.forms[reducerName][formName].fields[fieldName].isOptional);
 
   const onchange = e => {
     dispatch(updateFxn(formName, fieldName, e.target.value));

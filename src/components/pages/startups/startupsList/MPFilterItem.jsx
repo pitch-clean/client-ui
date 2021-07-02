@@ -18,7 +18,7 @@ import {
 } from '@material-ui/icons';
 // constants
 const useStyles = makeStyles(theme => ({
-  base: {
+  MPFilterItem: {
     position: 'relative',
   },
   navIconHide: {
@@ -60,7 +60,7 @@ const handleClickAddRemove = (getter, setter) => e => {
 /**
  * main
  */
-const MPSearchItem = ({ label, menuItems, getter, setter }) => {
+const MPFilterItem = ({ label, menuItems, getter, setter }) => {
   // init hooks
   const classes = useStyles();
   // state
@@ -68,7 +68,7 @@ const MPSearchItem = ({ label, menuItems, getter, setter }) => {
 
   return (
     <ClickAwayListener onClickAway={() => isOpen && isOpenSetter(false)}>
-      <div className={`${classes.base} container flexcol h100`} onClick={() => isOpenSetter(!isOpen)}>
+      <div className={`${classes.MPFilterItem} container flexcol h100`} onClick={() => isOpenSetter(!isOpen)}>
         <AccordionSummary
           className={`${classes.misc} h100`}
           expandIcon={<ExpandMoreIcon />}
@@ -114,4 +114,4 @@ const MPSearchItem = ({ label, menuItems, getter, setter }) => {
 };
 
 // export
-export default MPSearchItem;
+export default MPFilterItem;

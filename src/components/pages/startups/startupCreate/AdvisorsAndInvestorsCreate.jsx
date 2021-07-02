@@ -1,6 +1,6 @@
 // react
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // utils
 import Joi from 'joi';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,13 +10,10 @@ import {
   FormHelperText,
   TextField as MuiTextField,
 } from '@material-ui/core';
-import _ from 'lodash';
 import {
   updateFormFieldValue,
   updateFormFieldError,
   checkIfValidForm,
-  loadInitState,
-  clearForm,
 } from '../../../../redux/actions/forms/CreateFundingPageActions';
 // constants
 const useStyles = makeStyles(theme => ({
@@ -52,7 +49,6 @@ const useStyles = makeStyles(theme => ({
 }));
 const validatorUrl = Joi.string().uri().allow('').max(256);
 const validatorName = Joi.string().allow('').max(128);
-const formName = 'advisorsAndInvestors';
 // fxns
 const updateAdvisorsInvestors = (arr, idx, field, setter, e) => {
   let newArr = [...arr];
@@ -98,22 +94,17 @@ const extractImage = async (arr, idx, setter, e) => {
   // process the pdf, run the callback
   reader.readAsDataURL(fileObj);
 };
-const isArrayEqual = function(x, y) {
-  return _(x).xorWith(y, _.isEqual).isEmpty();
-};
 
 /**
  * main
  */
-const AdvisorsAndInvestorsEdit = ({ advisors: advisors_, investors: investors_ }) => {
+const AdvisorsAndInvestorsCreate = ({ formName }) => {
   // init hooks
   const classes = useStyles();
   const dispatch = useDispatch();
   // state
-  const [advisors, advisorsSet] = useState(advisors_);
-  const [investors, investorsSet] = useState(investors_);
-  const [payload, payloadSetter] = useState({ advisors, investors });
-  const [isDisabled, isDisabledSetter] = useState(!isArrayEqual(advisors, advisors_) && !isArrayEqual(investors, investors_));
+  const [advisors, advisorsSet] = useState([]);
+  const [investors, investorsSet] = useState([]);
   // build validatorName
   const buildPSElem = (stateArr, stateArrSetter, idx, value = {name: '', homepage: '', image: { blob: '' }}, advisorOrInvestorStr, errorName, errorHomepage) => {
     
@@ -182,7 +173,6 @@ const AdvisorsAndInvestorsEdit = ({ advisors: advisors_, investors: investors_ }
   const buildList = (advisors, advisorsSet, investors, investorsSet) => {
     const itemElemArr = [];
     let isErrInner = false;
-    
     for (let idx = 0; idx < advisors.length; idx += 1) {
       const { error: errorHomepage } = validatorUrl.validate(advisors[idx].homepage);
       const { error: errorName } = validatorName.validate(advisors[idx].name);
@@ -195,11 +185,10 @@ const AdvisorsAndInvestorsEdit = ({ advisors: advisors_, investors: investors_ }
       if (errorHomepage) isErrInner = true;
       itemElemArr.push(buildPSElem(investors, investorsSet, idx, investors[idx], 'Investor', errorName, errorHomepage));
     }
-    
-    if (isErrInner && (advisors.length || investors.length)) {
-      advisors.length > 0 && dispatch(updateFormFieldError(formName, 'advisors', [true]));
+    if (isErrInner) {
+      dispatch(updateFormFieldError(formName, 'advisors', [true]));
     } else {
-      advisors.length > 0 && dispatch(updateFormFieldError(formName, 'advisors', null));
+      dispatch(updateFormFieldError(formName, 'advisors', null));
     }
     let isEmpty = false;
     if (advisors.length > 0) {
@@ -218,41 +207,22 @@ const AdvisorsAndInvestorsEdit = ({ advisors: advisors_, investors: investors_ }
     );
     return itemElemArr;
   };
-  const buildSubmit = (isDisabled, payload) => {
-    return (
-      <Button className={`${classes.updateButton} w100 flexcol`} onClick={() => submitUpdate(window, payload, activeStartupId)} disabled={!isDisabled} component="div" fullWidth variant="outlined">Update</Button>
-    );
-  };
   // effects
-  useEffect(() => {
-    // dispatch(updateFormFieldValue(formName, 'investors', investors));
-    dispatch(loadInitState());
-    // return () => {
-    //   dispatch(clearForm());
-    // };
-  }, []);
   useEffect(() => {
     dispatch(updateFormFieldValue(formName, 'advisors', advisors));
     dispatch(checkIfValidForm(formName, null));
-    isDisabledSetter(!isArrayEqual(advisors, advisors_));
-    const updatedPayload = { ...payload, advisors, investors };
-    payloadSetter(updatedPayload);
   }, [advisors]);
   useEffect(() => {
     dispatch(updateFormFieldValue(formName, 'investors', investors));
     dispatch(checkIfValidForm(formName, null));
-    isDisabledSetter(!isArrayEqual(investors, investors_));
-    const updatedPayload = { ...payload, advisors, investors };
-    payloadSetter(updatedPayload);
   }, [investors]);
 
   return (
     <div className={`AdvisorsAndInvestorsCreate ${classes.content} flexcol`}>
       {buildList(advisors, advisorsSet, investors, investorsSet)}
-      {buildSubmit(isDisabled, payload)}
     </div>
   );
 };
 
 // export
-export default AdvisorsAndInvestorsEdit;
+export default AdvisorsAndInvestorsCreate;

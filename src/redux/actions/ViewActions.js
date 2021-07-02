@@ -123,6 +123,12 @@ export const updateStartupReposts = payload => dispatch => {
     type: types.UPDATE_STARTUP_REPOSTS,
   });
 };
+export const updateStartupsFilters = payload => dispatch => {
+  dispatch({
+    payload,
+    type: types.UPDATE_STARTUPS_FILTERS,
+  });
+};
 export const clearActiveStartup = () => dispatch => {
   dispatch({
     type: types.CLEAR_ACTIVE_STARTUP,

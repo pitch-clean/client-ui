@@ -10,10 +10,10 @@ import { Get } from './utils/requests';
 // components
 import PageRouter from './components/pages/PageRouter';
 import MainNavBar from './components/elements/mainNavBar/MainNavBar';
+import MarketplaceNav from './components/pages/startups/startupsList/MarketplaceNav';
 // styling
 import './App.css';
 import './config.dev.js';
-import SearchFilter from './components/pages/startups/startupsList/SearchFilter';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,8 +24,8 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start',
   },
   navGroup: {
-    justifyContent: 'flex-start',
-    alignItems: 'start',
+    justifyContent: 'center',
+    alignItems: 'center',
     zIndex: 1,
     '& > * > *': {
       maxWidth: 1300,
@@ -65,7 +65,7 @@ const App = () => {
       <div className={`App ${classes.root} flexcol`} ref={appRef}>
         <div className={`${classes.navGroup} flexcol w100`}>
           <MainNavBar />
-          <SearchFilter />
+          <MarketplaceNav />
         </div>
         <PageRouter />
       </div>

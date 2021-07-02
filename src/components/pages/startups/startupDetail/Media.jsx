@@ -1,9 +1,11 @@
 // react
 import React from 'react';
+import { useSelector } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper } from '@material-ui/core';
 import Carousel from 'react-material-ui-carousel';
+import MediaEdit from './edit/MediaEdit';
 // constants
 const useStyles = makeStyles({
   carousel: {
@@ -69,9 +71,13 @@ const picturesArr = [
 /**
  * main
  */
-const Media = ({ isEditing }) => {
+const Media = ({ isEditing, isEditingSet }) => {
   // init hooks
   const classes = useStyles();
+  // state
+  const images = useSelector(s => s.view.startup.activeStartup.content.media.images);
+  console.log(images)
+  // build
   const buildItem = ({ imgUrl }) => {
     return (
       <Paper
@@ -82,9 +88,9 @@ const Media = ({ isEditing }) => {
       </Paper>
     );
   };
-  const elemList = picturesArr.map((item, idx) => buildItem({ imgUrl: item }));
+  const elemList = images.map(({ blob }, idx) => buildItem({ imgUrl: blob }));
 
-  return (
+  return !isEditing ? (
     <Carousel
       className={`Carousel ${classes.carousel} w100 f1 flexcol`}
       autoPlay={false}
@@ -95,6 +101,8 @@ const Media = ({ isEditing }) => {
     >
       {elemList}
     </Carousel>
+  ) : (
+    <MediaEdit isEditingSet={isEditingSet} />
   );
 };
 

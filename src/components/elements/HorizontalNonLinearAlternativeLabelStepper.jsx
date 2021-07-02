@@ -66,12 +66,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 // fxns
-const handleNext = (setActiveStep, activeStep, dispatch, formName, updateActiveForm_) => () => {
-  dispatch(updateActiveForm_(formName));
+const handleNext = (setActiveStep, activeStep, dispatch, formName, updateActiveForm) => () => {
+  dispatch(updateActiveForm(formName));
   setActiveStep(activeStep + 1);
 };
-const handleBack = (dispatch, formName, setActiveStep, updateActiveForm_) => () => {
-  dispatch(updateActiveForm_(formName));
+const handleBack = (dispatch, formName, setActiveStep, updateActiveForm) => () => {
+  dispatch(updateActiveForm(formName));
   setActiveStep(prevActiveStep => prevActiveStep - 1);
 };
 
@@ -81,9 +81,10 @@ const HorizontalNonLinearAlternativeLabelStepper = ({
   reducerName,
   redirectRoute,
   apiRoute,
-  updateActiveForm_,
-  checkIfAllValidForms_,
-  resetAllForms_,
+  updateActiveForm,
+  checkIfAllValidForms,
+  resetAllForms,
+  customSubmitComponent,
 }) => {
   // init hooks
   const classes = useStyles();
@@ -91,9 +92,9 @@ const HorizontalNonLinearAlternativeLabelStepper = ({
   const history = useHistory();
   // state
   const [activeStep, setActiveStep] = useState(0);
-  const isActiveFormValid = useSelector(s => s[reducerName].activeForm.isFormValid);
-  const areAllFormsValid = useSelector(s => s[reducerName].areAllFormsValid);
-  const validForms = useSelector(s => s[reducerName].validForms);
+  const isActiveFormValid = useSelector(s => s.forms[reducerName].activeForm.isFormValid);
+  const areAllFormsValid = useSelector(s => s.forms[reducerName].areAllFormsValid);
+  const validForms = useSelector(s => s.forms[reducerName].validForms);
   const stepCount = stepObjsArr.length;
   // callbacks
   const handleSubmit = (redirectRoute, apiRoute) => async () => {
@@ -117,11 +118,12 @@ const HorizontalNonLinearAlternativeLabelStepper = ({
   };
   // effects
   useEffect(() => {
-    dispatch(checkIfAllValidForms_());
+    console.log('is checkin all valid')
+    dispatch(checkIfAllValidForms());
   }, [isActiveFormValid]);
   useEffect(() => {
     return () => {
-      dispatch(resetAllForms_());
+      dispatch(resetAllForms());
     };
   }, []);
 
@@ -163,7 +165,7 @@ const HorizontalNonLinearAlternativeLabelStepper = ({
                 dispatch,
                 activeStep > 0 ? stepObjsArr[activeStep - 1].formName : '',
                 setActiveStep,
-                updateActiveForm_,
+                updateActiveForm,
               )}
               className={classes.backbutton}
             >
@@ -179,24 +181,27 @@ const HorizontalNonLinearAlternativeLabelStepper = ({
                 activeStep,
                 dispatch,
                 activeStep < stepCount - 1 ? stepObjsArr[activeStep + 1].formName : '',
-                updateActiveForm_,
+                updateActiveForm,
               )}
               className={classes.nextButton}
             >
               Next
             </Button>
           </div>
-          <Button
-            disabled={!areAllFormsValid}
-            variant="contained"
-            color="primary"
-            onClick={handleSubmit(redirectRoute, apiRoute)}
-            className={classes.submitButton}
-            endIcon={<SendIcon />}
-            size="large"
-          >
-            Submit
-          </Button>
+          {
+            customSubmitComponent ? customSubmitComponent : 
+            <Button
+              disabled={!areAllFormsValid}
+              variant="contained"
+              color="primary"
+              onClick={handleSubmit(redirectRoute, apiRoute)}
+              className={classes.submitButton}
+              endIcon={<SendIcon />}
+              size="large"
+            >
+              Submit
+            </Button>
+          }
         </Paper>
       </Grid>
     </div>

@@ -9,6 +9,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import { updateFormFieldError, checkIfValidForm } from '../../../redux/actions/RegisterActions';
 // constants
 const useStyles = makeStyles(() => ({
+  TextField: {},
   root: {
     '& .Mui-focused.Mui-focused': {
       color: '#333',
@@ -36,16 +37,17 @@ const TextField = ({
   isUpdateOnChange,
   variant,
   onKeyDown,
+  customClassName,
 }) => {
   // init hooks
   const dispatch = useDispatch();
   const classes = useStyles();
   // state
-  const val = useSelector(s => s[reducerName][formName].fields[fieldName].value);
-  const err = useSelector(s => s[reducerName][formName].fields[fieldName].error);
-  const reduxValidator = useSelector(s => s[reducerName][formName].fields[fieldName].validator);
-  const isOptional = useSelector(s => s[reducerName][formName].fields[fieldName].isOptional);
-  const passwordObj = useSelector(s => s[reducerName][formName].fields.password);
+  const val = useSelector(s => s.forms[reducerName][formName].fields[fieldName].value);
+  const err = useSelector(s => s.forms[reducerName][formName].fields[fieldName].error);
+  const reduxValidator = useSelector(s => s.forms[reducerName][formName].fields[fieldName].validator);
+  const isOptional = useSelector(s => s.forms[reducerName][formName].fields[fieldName].isOptional);
+  const passwordObj = useSelector(s => s.forms[reducerName][formName].fields.password);
   const validator_ = reduxValidator || validator;
   let passwordValue;
   if (passwordObj) {
@@ -118,9 +120,9 @@ const TextField = ({
   };
 
   return (
-    <>
+    <div className={`${classes.TextField} flexcol ${customClassName ? customClassName : ''}`}>
       <MuiTextField
-        className={classes.root}
+        className={`${classes.root}`}
         style={{ width: `100%` }}
         value={val}
         label={label}
@@ -144,7 +146,7 @@ const TextField = ({
       >
         {err || 'error text error text error text error text'}
       </FormHelperText>
-    </>
+    </div>
   );
 };
 

@@ -1,28 +1,17 @@
 // react
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  Button,
-} from '@material-ui/core';
-import MPSearchItem from './MPSearchItem';
+import { Button } from '@material-ui/core';
+import MPFilterItem from './MPFilterItem';
 import { updateStartupsArr } from '../../../../redux/actions/ViewActions';
 import { Get } from '../../../../utils/requests';
 // components
 // constants
 const useStyles = makeStyles(theme => ({
-  container: {
-    minHeight: 50,
-    backgroundColor: 'white',
-  },
-  root: {
+  MPFilter: {
     justifyContent: 'start',
-  },
-  item: {
-    padding: 5,
-    margin: 5,
   },
   navIconHide: {
     display: 'relative',
@@ -35,13 +24,16 @@ const useStyles = makeStyles(theme => ({
 /**
  * main
  */
-const SearchFilter = ({}) => {
+const MPFilter = ({}) => {
   // init hooks
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { pathname } = useLocation();
   // state
+  const currentPageNumber = useSelector(s => s.view.startup.currentPage) || 1;
   const startupsArr = useSelector(s => s.view.startup.startupsArr);
+  const fundingRounds = useSelector(s => s.view.startup.filters.fundingRounds) || [];
+  const fundingTypes = useSelector(s => s.view.startup.filters.fundingTypes) || [];
+  const sectors = useSelector(s => s.view.startup.filters.sectors) || [];
   const [filterFR, filterFRSet] = useState([]);
   const [filterFT, filterFTSet] = useState([]);
   const [filterSector, filterSectorSet] = useState([]);
@@ -65,50 +57,55 @@ const SearchFilter = ({}) => {
         const sectorQuery = filterSector.join(',');
         const url = `${window.env.api.startups}/filter?fundRound=${frQuery}&fundType=${ftQuery}&sector=${sectorQuery}`;
         const { response, error } = await Get(url);
-        dispatch(updateStartupsArr(res));
-        console.log('resres', res);
+        if (error) throw error;
+        // const { startupsArr } = response;
+        dispatch(updateStartupsArr(response));
+        console.log('resres', url, response);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      const url = `${window.env.api.startups}?page=${currentPageNumber}`;
+      try {
+        const { response, error } = await Get(url);
+        dispatch(updateStartupsArr(response));
       } catch (err) {
         console.log(err);
       }
     }
   }, [filterFR, filterFT, filterSector]);
 
-  return pathname === '/marketplace' ? (
-    <div className={`SearchFilter ${classes.container} flexrow w100`}>
-      <div className={`root ${classes.root} flexrow`}>
-        <Button
-          className={`container flexcol ${classes.navIconHide} nowrap`}
-          variant="contained"
-          disabled={filterFR.length + filterFT.length + filterSector.length === 0}
-          onClick={() => {filterSectorSet([]); filterFRSet([]); filterFTSet([])}}
-        >
-          Reset Filters
-        </Button>
-        <MPSearchItem
-          label={'Funding Round'}
-          menuItems={[...new Set([...fundingItems, ['Seed', 'Series A', 'Series B', 'Series C']])]}
-          getter={filterFR}
-          setter={filterFRSet}
-        />
-        <MPSearchItem
-          label={'Product Sector'}
-          menuItems={sectorItems}
-          getter={filterSector}
-          setter={filterSectorSet}
-        />
-        <MPSearchItem
-          label={'Financial Instrument'}
-          menuItems={finInstrumentItems}
-          getter={filterFT}
-          setter={filterFTSet}
-        />
-        {/* <ClickAwayListener>
-          <div className={`item ${classes.item} flexrow`}>{'search'}</div>
-        </ClickAwayListener> */}
-      </div>
+  return (
+    <div className={`${classes.MPFilter} flexrow`}>
+      <Button
+        className={`${classes.navIconHide} flexcol nowrap`}
+        variant="contained"
+        disabled={filterFR.length + filterFT.length + filterSector.length === 0}
+        onClick={() => {filterSectorSet([]); filterFRSet([]); filterFTSet([])}}
+      >
+        Reset Filters
+      </Button>
+      <MPFilterItem
+        label={'Funding Round'}
+        menuItems={fundingRounds}
+        getter={filterFR}
+        setter={filterFRSet}
+      />
+      <MPFilterItem
+        label={'Product Sector'}
+        menuItems={sectors}
+        getter={filterSector}
+        setter={filterSectorSet}
+      />
+      <MPFilterItem
+        label={'Financial Instrument'}
+        menuItems={fundingTypes}
+        getter={filterFT}
+        setter={filterFTSet}
+      />
     </div>
-  ): <div />;
+  );
 };
 
 // export
-export default SearchFilter;
+export default MPFilter;

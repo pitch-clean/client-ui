@@ -7,7 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { updateFormFieldError, updateFormFieldValue } from '../../../redux/actions/RegisterActions';
+// import { updateFormFieldError, updateFormFieldValue } from '../../../redux/actions/RegisterActions';
 // constants
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -20,26 +20,35 @@ const useStyles = makeStyles(theme => ({
 }));
 
 // main
-const SelectField = ({ formName, fieldName, label, valuesArr }) => {
+const SelectField = ({
+  reducerName,
+  formName,
+  fieldName,
+  label,
+  valuesArr,
+  updateFxn,
+  updateErrorFxn,
+  validCheckFxn,
+}) => {
   // init hooks
   const classes = useStyles();
   const dispatch = useDispatch();
   // state
-  const val = useSelector(s => s.register[formName].fields[fieldName].value);
-  const err = useSelector(s => s.register[formName].fields[fieldName].error);
-  const isOptional = useSelector(s => s.register[formName].fields[fieldName].isOptional);
-  dispatch(
-    updateFormFieldError(formName, fieldName, !isOptional && !val ? 'Field cannot be empty' : ''),
-  );
+  const val = useSelector(s => s.forms[reducerName][formName].fields[fieldName].value);
+  const err = useSelector(s => s.forms[reducerName][formName].fields[fieldName].error);
+  const isOptional = useSelector(s => s.forms[reducerName][formName].fields[fieldName].isOptional);
+  // dispatch(
+  //   updateErrorFxn(formName, fieldName, !isOptional && !val ? 'Field cannot be empty' : ''),
+  // );
 
   // event handlers
   const handleChange = e => {
-    dispatch(updateFormFieldValue(formName, fieldName, e.target.value));
+    dispatch(updateFxn(formName, fieldName, e.target.value));
   };
   const optionArr = [<option aria-label="None" value="" />];
   for (let idx = 0; idx < valuesArr.length; idx += 1) {
     const element = valuesArr[idx];
-    optionArr.push(<option value={element.code}>{element.name}</option>);
+    optionArr.push(<option value={element.value}>{element.label}</option>);
   }
 
   return (
@@ -48,14 +57,14 @@ const SelectField = ({ formName, fieldName, label, valuesArr }) => {
       <Select
         native
         error={err}
-        value={fieldName === 'country' ? 'USA' : val}
+        // value={fieldName === 'country' ? 'USA' : val}
         onChange={handleChange}
         label={label}
         inputProps={{
           name: fieldName,
           id: 'outlined-age-native-simple',
         }}
-        disabled={fieldName === 'country'}
+        // disabled={fieldName === 'country'}
         required={!isOptional}
       >
         {optionArr}

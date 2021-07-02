@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // utils
 import { makeStyles } from '@material-ui/core/styles';
-import { updateStartupsArr } from '../../../../redux/actions/ViewActions';
+import { updateStartupsArr, updateStartupsFilters } from '../../../../redux/actions/ViewActions';
 import { Get } from '../../../../utils/requests';
 // components
 import StartupCard from './StartupCard';
@@ -24,9 +24,16 @@ const useStyles = makeStyles(theme => ({
 // fxns
 const fetchStartupsArr = async (dispatch, page) => {
   try {
-    const endpoint = `${window.env.api.startups}?page=${page}`;
-    const startupsArr = await Get(endpoint, {}, true);
-    dispatch(updateStartupsArr(startupsArr || []));
+    const urlStartups = `${window.env.api.startups}?page=${page}`;
+    const urlFilters = `${window.env.api.startups}/filters`;
+    const { response: startups, error: errorStartups } = await Get(urlStartups);
+    const { response: filters, error: errorFilters } = await Get(urlFilters);
+    if (errorStartups) throw errorStartups;
+    if (errorFilters) throw errorFilters;
+    // console.log('startups', startups)
+    // console.log({filters})
+    dispatch(updateStartupsArr(startups || []));
+    dispatch(updateStartupsFilters(filters));
   } catch (err) {
     console.log("ERROR: StartupsList.jsx > fetchStartupsArr()");
     console.log(err);

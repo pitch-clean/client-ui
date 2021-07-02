@@ -30,7 +30,7 @@ const onDocumentLoadSuccess = totalPagesSetter => e => {
 
   return (
     <Document className={`PdfViewer ${classes.root} w100 h100`} file={pdfFile} onLoadSuccess={onDocumentLoadSuccess(totalPagesSet)}>
-      <Page pageNumber={currentPage} />
+      <Page className={`subviewer w100`} pageNumber={currentPage} width={'100'} height={200} scale={2} />
     </Document>
   );
 };

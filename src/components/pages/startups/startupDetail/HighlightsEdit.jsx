@@ -27,7 +27,8 @@ const useStyles = makeStyles({
   input: {
     paddingLeft: 20,
   },
-})
+});
+// fxns
 const updateHighlight = (arr, idx, highlightsSet, e) => {
   let newHighlights = [...arr];
   newHighlights[idx] = e.target.value;
@@ -36,7 +37,7 @@ const updateHighlight = (arr, idx, highlightsSet, e) => {
 const addHighlight = (arr, highlightsSet) => {
   const newHighlights = [...arr, ''];
   highlightsSet(newHighlights);
-}
+};
 
 /**
  * main

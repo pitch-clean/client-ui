@@ -70,7 +70,7 @@ const useStyles = makeStyles({
     paddingRight: 40,
     lineHeight: 1.5,
   },
-})
+});
 
 /**
  * main

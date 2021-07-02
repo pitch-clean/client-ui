@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     marginBottom: '5px',
     minWidth: 30,
   },
-  title: {
+  role: {
     paddingTop: 1,
     paddingBottom: 5,
   },
@@ -60,12 +60,12 @@ const updateLeadershipTeam = ({ arr, idx, field, setter }, e) => {
   const newArr = [...arr];
   if (field === 'name') {
     newArr[idx].name = e.target.value;
-  } else if (field === 'title') {
-    newArr[idx].title = e.target.value;
+  } else if (field === 'role') {
+    newArr[idx].role = e.target.value;
   } else if (field === 'linkedin') {
     newArr[idx].linkedin = e.target.value;
-  } else if (field === 'text') {
-    newArr[idx].text = e.target.value;
+  } else if (field === 'bio') {
+    newArr[idx].bio = e.target.value;
   }
   setter(newArr);
 };
@@ -91,10 +91,10 @@ const LeadershipTeamEdit = ({
   const buildCard = (idx, entity) => {
     const {
       name,
-      title,
+      role,
       image,
       linkedin,
-      text,
+      bio,
     } = entity;
     const updateFxnInputs = {
       idx,
@@ -109,8 +109,8 @@ const LeadershipTeamEdit = ({
             <div className={`headerRight ${classes.headerRight} flexcol f1`}>
               <TextFieldEdit value={name} updateFxn={updateLeadershipTeam} updateFxnInputs={{ field: 'name', ...updateFxnInputs}} />
               <TextFieldEdit value={linkedin} updateFxn={updateLeadershipTeam} updateFxnInputs={{ field: 'linkedin', ...updateFxnInputs}} />
-              <TextFieldEdit value={title} updateFxn={updateLeadershipTeam} updateFxnInputs={{ field: 'title', ...updateFxnInputs}} />
-              <TextFieldEdit value={text} updateFxn={updateLeadershipTeam} updateFxnInputs={{ field: 'text', ...updateFxnInputs}} />
+              <TextFieldEdit value={role} updateFxn={updateLeadershipTeam} updateFxnInputs={{ field: 'role', ...updateFxnInputs}} />
+              <TextFieldEdit value={bio} updateFxn={updateLeadershipTeam} updateFxnInputs={{ field: 'bio', ...updateFxnInputs}} />
             </div>
           </div>
         </div>

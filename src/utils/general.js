@@ -42,3 +42,36 @@ export const onChangePdf = (e, pdfFileSet) => {
     reader.readAsDataURL(imgObj);
   }
 };
+
+export const extractImage = async (e, formName, fieldName, updateFormFieldValue, dispatch) => {
+  // default vars
+  let mbLimit = 10;
+  let byteLimit = mbLimit * 1000000;
+  // destructure
+  const fileObj = e.target.files[0];
+  const {
+    name, size: fileSize, type,
+  } = fileObj;
+  if (fileSize > byteLimit) {
+    alert("Please select files under 10MB");
+    return;
+  }
+  // load the bytecode for uploading
+  let reader = new FileReader();
+  reader.onloadend = e => {
+    console.log('fileObjfileObj', fileObj)
+    console.log('\n\nresult', e.target.result, '\n\nresultdun')
+    const result = {
+      blob: e.target.result,
+      file: {
+        name: fileObj.name,
+        lastModified: fileObj.lastModified,
+        size: fileObj.size,
+        type: fileObj.type,
+      },
+    };
+    dispatch(updateFormFieldValue(formName, fieldName, result));
+  };
+  // process the pdf, run the callback
+  reader.readAsDataURL(fileObj);
+};

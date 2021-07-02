@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     marginBottom: '5px',
     minWidth: 30,
   },
-  title: {
+  role: {
     paddingTop: 1,
     paddingBottom: 5,
   },
@@ -49,6 +49,7 @@ const AdvisorsAndInvestors = ({ isEditing }) => {
   // init hooks
   const classes = useStyles();
   // state
+  const as = useSelector(s => s.view.startup.activeStartup);
   const investors_ = useSelector(s => s.view.startup.activeStartup.investors);
   const advisors_ = useSelector(s => s.view.startup.activeStartup.advisors);
   const [investors, investorsSet] = useState(investors_);
@@ -58,10 +59,10 @@ const AdvisorsAndInvestors = ({ isEditing }) => {
     const {
       profile,
       name,
-      title,
+      role,
       image,
       linkedin,
-      text,
+      bio,
     } = entity;
 
     return (
@@ -77,11 +78,11 @@ const AdvisorsAndInvestors = ({ isEditing }) => {
                 <LinkedInIcon/>
               </Button>
             </Typography>
-            <Typography className={classes.title} variant="caption2" color="textPrimary">
-              {title}
+            <Typography className={classes.role} variant="caption2" color="textPrimary">
+              {role}
             </Typography>
             <Typography className={classes.textBody} variant="caption1" color="textPrimary">
-              {text}
+              {bio}
             </Typography>
           </div>
         </div>

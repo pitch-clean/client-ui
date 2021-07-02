@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, CardHeader, Typography, Divider, Button } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { blue } from '@material-ui/core/colors';
 // constants
 const useStyles = makeStyles({
   root: {
@@ -16,7 +15,7 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
   },
   buttonActive: {
-    color: `blue`,
+    color: `#67b1ff`,
   },
   buttonInactive: {
     color: `black`,
@@ -51,7 +50,7 @@ const Factory = ({ componentName, title, noEdit, children }) => {
         }
       </div>
       <Divider className="w100" variant="fullWidth"/>
-      {React.cloneElement(children, { isEditing })}
+      {React.cloneElement(children, { isEditing, isEditingSet })}
     </Paper>
   );
 };

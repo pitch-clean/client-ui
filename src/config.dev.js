@@ -56,6 +56,7 @@ const client = {
   rsvps,
   login: 'login',
   register: 'register',
+  createStartup: 'new/startup',
 };
 
 window.env = {

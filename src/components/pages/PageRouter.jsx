@@ -7,12 +7,12 @@ import { makeStyles } from '@material-ui/core/styles';
 // components
 import StartupsList from './startups/startupsList/StartupsList';
 import StartupDetail from './startups/startupDetail/StartupDetail';
+import CreateFundingPage from './startups/startupCreate/CreateFundingPage';
 import NotFound from './home/NotFound';
 import LoginView from './login/LoginView';
 import FeedView from './feed/FeedView';
 import Home from './home/Home';
 import CreateProfile from './profile/CreateProfile';
-// import CreateOffering from './offerings/CreateOffering';
 import ProfileView from './profile/ProfileView';
 import MessagesView from './messages/MessagesView';
 import PostDetail from './post/PostDetail';
@@ -68,7 +68,7 @@ const PageRouter = () => {
         {isAuthenticated && <Route exact path="/feed" render={p => <FeedView props={p} />} />}
         {isAuthenticated && <Route exact path="/messages" render={p => <MessagesView props={p} />} />}
         {!isAuthenticated && <Route exact path="/login" render={p => <LoginView props={p} />} />}
-        {isAuthenticated && <Route exact path="/new/startup" render={p => <CreateStartup props={p} />} />}
+        <Route exact path={`/${window.env.client.createStartup}`} render={p => <CreateFundingPage props={p} />} />
         {!isAuthenticated && <Route exact path="/new/profile" render={p => <CreateProfile props={p} />} />}
         <Route exact path="/" render={p => <Home props={p} />} />
         {/* <Route

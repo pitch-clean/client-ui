@@ -40,12 +40,12 @@ const PitchDeck = ({ isEditing }) => {
   const [currentPage, currentPageSetter] = useState(1);
   const [renderedPage, renderedPageSet] = useState(1);
   const [isRendering, isRenderingSet] = useState(false);
-  // const pdfFile = useSelector(s => s.view.startup.activeStartup.content.pitchDeck);
+  // const pdfFile = useSelector(s => s.view.startup.activeStartup.content.pitchdeck);
   const pdfFile_ = require("/Users/matthias/work/pitchclean/pitchclean-client-ui/src/seed/1907.00235.pdf").default;
   const [pdfFile, pdfFileSet] = useState(pdfFile_);
-  // const pitchDeckUrl = require("/Users/matthias/work/pitchclean/pitchclean-client-ui/src/seed/1907.00235.pdf");
-  // const pitchDeckUrl = "/Users/matthias/work/pitchclean/pitchclean-client-ui/src/seed/1907.00235.pdf";
-  // const pitchDeckUrl = "https://natif.ai/wp-content/uploads/2021/02/2020-11-09-Senior-Machine-Learning_transformer.pdf";
+  // const pitchdeckUrl = require("/Users/matthias/work/pitchclean/pitchclean-client-ui/src/seed/1907.00235.pdf");
+  // const pitchdeckUrl = "/Users/matthias/work/pitchclean/pitchclean-client-ui/src/seed/1907.00235.pdf";
+  // const pitchdeckUrl = "https://natif.ai/wp-content/uploads/2021/02/2020-11-09-Senior-Machine-Learning_transformer.pdf";
   
   // effects
   useEffect(async () => {
@@ -58,13 +58,13 @@ const PitchDeck = ({ isEditing }) => {
     console.log('edddit', isEditing)
     if (!isEditing && JSON.stringify(pdfFile_) !== JSON.stringify(pdfFile)) {
       const url = `${window.env.api.startups}/update/${activeStartupId}`;
-      const payload = { 'content.pitchDeck': pdfFile };
+      const payload = { 'content.pitchdeck': pdfFile };
       console.log('\n\nain the edit', url)
       console.log('payload', payload)
       try {
         const { result, error } = await Put(url, payload);
-        console.log('response@@@@response', typeof result.content.pitchDeck.blob, '\n\ndone')
-        pdfFileSet(result.content.pitchDeck);
+        console.log('response@@@@response', typeof result.content.pitchdeck.blob, '\n\ndone')
+        pdfFileSet(result.content.pitchdeck);
       } catch (err) {
         console.log('error updating pdf PitchDeck', err);
       }

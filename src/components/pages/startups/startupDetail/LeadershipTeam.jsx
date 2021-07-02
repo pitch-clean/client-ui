@@ -40,7 +40,7 @@ const useStyles = makeStyles({
     marginBottom: '5px',
     minWidth: 30,
   },
-  title: {
+  role: {
     paddingTop: 1,
     paddingBottom: 5,
   },
@@ -67,10 +67,10 @@ const LeadershipTeam = () => {
   const buildCard = entity => {
     const {
       name,
-      title,
+      role,
       image,
       linkedin,
-      text,
+      bio,
     } = entity;
 
     return (
@@ -85,13 +85,13 @@ const LeadershipTeam = () => {
                   <LinkedInIcon/>
                 </Button>
               </Typography>
-              <Typography className={classes.title} variant="subtitle2" color="textPrimary">
-              {title}
+              <Typography className={classes.role} variant="subtitle2" color="textPrimary">
+              {role}
             </Typography>
             </div>
           </div>
           <Typography className={classes.textBody} variant="caption" color="textPrimary">
-            {text}
+            {bio}
           </Typography>
         </div>
         <Divider className="w100" variant="fullWidth"/>

@@ -13,7 +13,7 @@ import Highlights from './Highlights';
 import RecentNews from './RecentNews';
 import PartnersAndSponsors from './PartnersAndSponsors';
 import PitchDeck from './PitchDeck';
-import Media from './media/Media';
+import Media from './Media';
 import AdvisorsAndInvestors from './AdvisorsAndInvestors';
 import LeadershipTeam from './LeadershipTeam';
 import LeftSidebar from '../../feed/LeftSidebar';
@@ -32,6 +32,7 @@ const fetchStartupObj = async (startupId, dispatch) => {
   try {
     const resJSON = await Get(endpoint);
     const payload = resJSON;
+    console.log(resJSON)
     dispatch(updateActiveStartupObj(payload));
   } catch (err) {
     console.log('ERROR: startupdetail.jsx > fetchStartupObj GET')

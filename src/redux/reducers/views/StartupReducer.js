@@ -6,6 +6,7 @@ import * as types from '../../types/ViewTypes';
 const initState = {
   startupsArr: [],
   activeStartup: {},
+  filters: {},
 };
 let idx;
 
@@ -34,6 +35,9 @@ const StartupReducer = (state = _.cloneDeep(initState), action) => {
     case types.UPDATE_STARTUP_REPOSTS:
       idx = newState.startupsArr.findIndex(startup => startup._id === action.payload._id);
       newState.startupsArr[idx].reposts = action.payload.reposts;
+      return newState;
+    case types.UPDATE_STARTUPS_FILTERS:
+      newState.filters = action.payload;
       return newState;
     case types.CLEAR_ACTIVE_STARTUP:
       return _.cloneDeep(initState);
