@@ -31,6 +31,9 @@ const MessagesReducer = (state = _.cloneDeep(initState), action) => {
     case types.MSG_UPDATE_ACTIVE_CONVERSATION_OBJ:
       newState.activeConversationObj = payload;
       return newState;
+    case types.MSG_ADD_CONVERSATION_TO_CONVERSATIONSARR:
+      newState.conversationsArr.push(payload);
+      return newState;
     case types.MSG_UPDATE_CONVERSATIONS_ARR:
       newState.conversationsArr = payload;
       return newState;

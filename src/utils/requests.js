@@ -16,7 +16,11 @@ export const Post = async (url, body, additionalHeaders={}, isReturnJson=true) =
       body        : JSON.stringify(body),
     }
   );
-  return isReturnJson ? await response.json(): response;
+  if (response.ok) {
+    return isReturnJson ? await response.json(): response;
+  } else {
+    return { status: response.status, statusText: response.statusText, json: response.json() };
+  }
 };
 
 export const Get = async (url, additionalHeaders={}, isReturnJson=true) => {

@@ -55,6 +55,13 @@ export const updateConversationsArr = payload => dispatch => {
   });
 };
 
+export const addConversationToConversationsArr = payload => dispatch => {
+  dispatch({
+    type: types.MSG_ADD_CONVERSATION_TO_CONVERSATIONSARR,
+    payload,
+  });
+};
+
 export const updateMessagesArr = payload => dispatch => {
   dispatch({
     type: types.MSG_UPDATE_MESSAGES_ARR,

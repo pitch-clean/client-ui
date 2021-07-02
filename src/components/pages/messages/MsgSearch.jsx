@@ -1,19 +1,21 @@
 // react
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 // utils
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Grid, TextField, IconButton } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import AddIcon from '@material-ui/icons/Add';
+import { Post } from '../../../utils/requests';
 // components
+import AddConversationModal from './msgLS/AddConversationModal';
 // constants
 const useStyles = makeStyles(theme => ({
-  root: {
+  MsgSearch: {
     margin: 5,
   },
   text: {},
-  button: {
+  CreateConversation: {
     // borderRadius: `50%`,
   },
 }));
@@ -38,6 +40,30 @@ const CssTextField = withStyles({
     },
   },
 })(TextField);
+// fxns
+const clickAddConversation = async (window, body) => {
+  const url = `${window.env.api.conversations}`;
+  try {
+    const { response, error } = await Post(url, body);
+  } catch (err) {
+    console.log('error adding conversation', err);
+  }
+};
+
+// the circle button
+const CreateConversation = ({ isOpenSet }) => {
+  // init hooks
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  // state
+  const conversationsArr = useSelector(s => s.view.messages.conversationsArr)
+
+  return (
+    <IconButton className={`CreateConversation ${classes.CreateConversation}`} onClick={() => isOpenSet(true)}>
+      <AddCircleOutlineIcon />
+    </IconButton>
+  );
+};
 
 /**
  * main
@@ -46,17 +72,20 @@ const CssTextField = withStyles({
 const MsgSearch = () => {
   // init hooks
   const classes = useStyles();
+  // state
+  const activeConversationId = useSelector(s => s.view.messages.activeConversationObj._id);
+  const [isOpen, isOpenSet] = useState(false);
+
   return (
-    <Grid container className={`MsgSearch ${classes.root} w100`}>
+    <Grid container className={`${classes.MsgSearch} w100`}>
       <CssTextField
         className={`textField ${classes.text} f1`}
         margin="dense"
         label="Filter messages"
         variant="outlined"
       />
-      <IconButton className={`CreateConversation ${classes.button}`}>
-        <AddCircleOutlineIcon />
-      </IconButton>
+      <CreateConversation isOpen={isOpen} isOpenSet={isOpenSet} />
+      {activeConversationId && <AddConversationModal isOpen={isOpen} isOpenSet={isOpenSet} />}
     </Grid>
   );
 };

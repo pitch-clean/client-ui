@@ -9,15 +9,15 @@ import {
   Button,
 } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { Get, Put } from '../../../../utils/requests';
-import { updateActiveConversationParticipants } from '../../../../redux/actions/views/MessagesActions';
+import { Get, Post, Put } from '../../../../utils/requests';
+import { addConversationToConversationsArr, updateConversationsArr } from '../../../../redux/actions/views/MessagesActions';
 // components
 import ModalSelectedMembers from '../ModalSelectedMembers';
 import Factory from '../../startups/startupDetail/Factory';
 // constants
 const useStyles = makeStyles(theme => ({
   root: {},
-  AddMemberModal: {
+  AddConversationModal: {
     position: 'absolute',
     width: 800,
     backgroundColor: theme.palette.background.paper,
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 // fxns
-const clickCloseAddMember = isOpenSet => () => isOpenSet(false);
+const clickCloseAddConvo = isOpenSet => () => isOpenSet(false);
 const getModalStyle = () => {
   return {
     top: `30%`,
@@ -54,18 +54,17 @@ const updateSelectedProfiles = (selectedProfiles, selectedProfilesSet, textSet) 
   textSet(e.target.value)
   profile && profile._id && selectedProfilesSet([...selectedProfiles, profile]);
 };
-const clickAddMembers = (stagedProfiles, conversationId, activeProfileId, dispatch, isOpenSet) => async e => {
+const clickAddMembers = (stagedProfiles, activeProfileId, dispatch, isOpenSet) => async e => {
   try {
-    const url = `${window.env.api.conversations}/participants`;
+    const url = `${window.env.api.conversations}`;
     const part = [...new Set([...stagedProfiles.map(p => p._id)])];
     const body = {
-      conversationId,
       participants: part,
       activeProfileId,
     };
-    const { response, error } = await Put(url, body);
+    const { response, error } = await Post(url, body);
     if (error) throw error;
-    dispatch(updateActiveConversationParticipants(response));
+    dispatch(addConversationToConversationsArr(response));
     isOpenSet(false);
   } catch (err) {
     console.log(err)
@@ -75,19 +74,34 @@ const clickAddMembers = (stagedProfiles, conversationId, activeProfileId, dispat
 /**
  * main
  */
-const AddMemberModal = ({ isOpen, isOpenSet }) => {
+const AddConversationModal = ({ isOpen, isOpenSet }) => {
   // init hooks
   const classes = useStyles();
   const dispatch = useDispatch();
   // state
+  const xxx = useSelector(s => s.view.messages);
+  // console.log('xxx', xxx)
   const activeProfileId = useSelector(s => s.auth.activeProfile._id);
-  const activeConversationId = useSelector(s => s.view.messages.activeConversationObj._id);
-  const participants = useSelector(s => s.view.messages.activeConversationObj.participants);
   const [text, textSet] = useState('');
   const [connections, connectionsSet] = useState([]);
   const [filteredConnections, filteredConnectionsSet] = useState(connections);
-  const [selectedProfiles, selectedProfilesSet] = useState(participants);
+  const [selectedProfiles, selectedProfilesSet] = useState([]);
   const [modalStyle] = useState(getModalStyle);
+  useEffect(() => {
+    const selectedIdsArr = selectedProfiles.map(profile => profile._id);
+    const filteredIds = [];
+    const filteredProfiles = [];
+    for (let idx = 0; idx < connections.length; idx += 1) {
+      const profile = connections[idx];
+      if (!selectedIdsArr.includes(profile._id) && !filteredIds.includes(profile._id)) {
+        filteredIds.push(profile._id);
+        filteredProfiles.push(profile);
+      }
+    }
+    filteredConnectionsSet(filteredProfiles);
+    textSet('');
+  }, [connections.length, selectedProfiles.length]);
+  
   // effects
   useEffect(async () => {
     // load all personal connections
@@ -100,30 +114,15 @@ const AddMemberModal = ({ isOpen, isOpenSet }) => {
     }
     if (!isOpen) {
       filteredConnectionsSet(connections);
-      selectedProfilesSet(participants);
     }
   }, [activeProfileId, isOpen]);
-  useEffect(() => {
-    const selectedIdsArr = selectedProfiles.map(profile => profile._id);
-    const filteredIds = [];
-    const filteredProfiles = [];
-    for (let idx = 0; idx < [...connections, ...participants].length; idx += 1) {
-      const profile = [...connections, ...participants][idx];
-      if (!selectedIdsArr.includes(profile._id) && !filteredIds.includes(profile._id)) {
-        filteredIds.push(profile._id);
-        filteredProfiles.push(profile);
-      }
-    }
-    filteredConnectionsSet(filteredProfiles);
-    textSet('');
-  }, [connections.length, selectedProfiles.length]);
-
+  // console.log(filteredConnections)
   return filteredConnections.length > 0 ? (
     <Modal
       open={isOpen}
-      onClose={clickCloseAddMember(isOpenSet)}
+      onClose={clickCloseAddConvo(isOpenSet)}
     >
-      <div className={`${classes.AddMemberModal}`} style={modalStyle}>
+      <div className={`${classes.AddConversationModal}`} style={modalStyle}>
         <Factory
             componentName="AddMembers"
             title="Add Members to group"
@@ -144,7 +143,7 @@ const AddMemberModal = ({ isOpen, isOpenSet }) => {
                   style={{ width: 300 }}
                   renderInput={p => <TextField {...p} label="Search for profiles" variant="outlined" />}
                 />
-                <Button className={`${classes.addButton} w100`} onClick={clickAddMembers(selectedProfiles, activeConversationId, activeProfileId, dispatch, isOpenSet)} variant="outlined" disabled={selectedProfiles.length === 0}>Add members</Button>
+                <Button className={`${classes.addButton} w100`} onClick={clickAddMembers(selectedProfiles, activeProfileId, dispatch, isOpenSet)} variant="outlined" disabled={selectedProfiles.length === 0}>Add members</Button>
               </div>
               <ModalSelectedMembers
                 selectedProfiles={selectedProfiles}
@@ -152,11 +151,10 @@ const AddMemberModal = ({ isOpen, isOpenSet }) => {
               />
             </div>
         </Factory>
-          {/* <GeneralInfo /> */}
       </div>
     </Modal>
   ) : <div></div>;
 };
 
 // export
-export default AddMemberModal;
+export default AddConversationModal;
