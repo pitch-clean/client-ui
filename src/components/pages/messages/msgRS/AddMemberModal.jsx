@@ -54,18 +54,19 @@ const updateSelectedProfiles = (selectedProfiles, selectedProfilesSet, textSet) 
   textSet(e.target.value)
   profile && profile._id && selectedProfilesSet([...selectedProfiles, profile]);
 };
-const clickAddMembers = (stagedProfiles, conversationId, activeProfileId, dispatch) => async e => {
+const clickAddMembers = (stagedProfiles, conversationId, activeProfileId, dispatch, isOpenSet) => async e => {
   try {
     const url = `${window.env.api.conversations}/participants`;
-    const part = [...stagedProfiles.map(p => p._id), activeProfileId];
+    const part = [...new Set([...stagedProfiles.map(p => p._id)])];
     const body = {
       conversationId,
-      participants: [...new Set(part)],
+      participants: part,
+      activeProfileId,
     };
     const { response, error } = await Put(url, body);
     if (error) throw error;
-    console.log(response);
     dispatch(updateActiveConversationParticipants(response));
+    isOpenSet(false);
   } catch (err) {
     console.log(err)
   }
@@ -142,7 +143,7 @@ const AddMemberModal = ({ isOpen, isOpenSet }) => {
                   style={{ width: 300 }}
                   renderInput={p => <TextField {...p} label="Search for profiles" variant="outlined" />}
                 />
-                <Button className={`${classes.addButton} w100`} onClick={clickAddMembers(selectedProfiles, activeConversationId, activeProfileId, dispatch)} variant="outlined" disabled={selectedProfiles.length === 0}>Add members</Button>
+                <Button className={`${classes.addButton} w100`} onClick={clickAddMembers(selectedProfiles, activeConversationId, activeProfileId, dispatch, isOpenSet)} variant="outlined" disabled={selectedProfiles.length === 0}>Add members</Button>
               </div>
               <ModalSelectedMembers
                 selectedProfiles={selectedProfiles}
